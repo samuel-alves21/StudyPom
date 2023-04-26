@@ -1,0 +1,11 @@
+.firebase
+.vscode
+build
+node_modules
+public
+.firebaserc
+.gitignore
+firebase.json
+package-lock.json
+package.json
+README.md
