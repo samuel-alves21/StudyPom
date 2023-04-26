@@ -5,7 +5,9 @@ import styled from 'styled-components'
 import { TimerToggleButton } from './TimerToggleButton'
 
 export const Timer = () => {
-  const { timeState: { timeOnDisplay },} = useContext(TimerContext) as MyTimerContext
+  const {
+    timeState: { timeOnDisplay },
+  } = useContext(TimerContext) as MyTimerContext
 
   return (
     <TimerWrapper>

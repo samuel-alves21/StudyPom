@@ -5,6 +5,7 @@ export type TimerActionType =
   | 'SET_CYCLES'
   | 'DECREASE_TIME'
   | 'SET_TIME_COUNTING'
+  | 'SET_TIME_ON_DISPLAY'
 
 export interface TimerAction {
   type: TimerActionType
@@ -17,11 +18,11 @@ type Reducer = (
 ) => typeof initialState
 
 export const initialState = {
-  pomodoroTimer: 1500,
-  shortRestTime: 300,
+  pomodoroTime: 5,
+  shortRestTime: 3,
   longRestTime: 900,
   cycles: 0,
-  timeOnDisplay: 1500,
+  timeOnDisplay: 5,
   timeCounting: false,
 }
 
@@ -30,7 +31,7 @@ export const reducer: Reducer = (state, action) => {
     case 'SET_POMODORO_TIME':
       return {
         ...state,
-        timeOnDisplay: state.pomodoroTimer,
+        timeOnDisplay: state.pomodoroTime,
       }
     case 'SET_SHORT_TIME':
       return {
@@ -59,6 +60,12 @@ export const reducer: Reducer = (state, action) => {
       return {
         ...state,
         timeCounting: action.payload,
+      }
+    case 'SET_TIME_ON_DISPLAY':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        timeOnDisplay: action.payload,
       }
     default:
       return state

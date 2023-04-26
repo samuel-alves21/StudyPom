@@ -4,7 +4,10 @@ import { useInterval } from '../hooks/useInterval'
 import { useContext } from 'react'
 
 export const TimerToggleButton = () => {
-  const { timeState: { timeCounting }, timeDispatch } = useContext(TimerContext) as MyTimerContext
+  const {
+    timeState: { timeCounting },
+    timeDispatch,
+  } = useContext(TimerContext) as MyTimerContext
 
   useInterval(
     () => {
@@ -14,7 +17,11 @@ export const TimerToggleButton = () => {
   )
 
   return (
-    <ToggleButton onClick={() => timeDispatch({type: 'SET_TIME_COUNTING', payload: !timeCounting})}>
+    <ToggleButton
+      onClick={() =>
+        timeDispatch({ type: 'SET_TIME_COUNTING', payload: !timeCounting })
+      }
+    >
       {timeCounting ? 'Pause' : 'Start'}
     </ToggleButton>
   )

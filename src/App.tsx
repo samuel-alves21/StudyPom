@@ -17,7 +17,7 @@ const App = () => {
 
 const MainContainer = styled.div`
   min-height: 100vh;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +27,7 @@ const MainContainer = styled.div`
   position: relative;
 
   &::before {
-    content: "";
+    content: '';
     background: url(${backgrundDefault}) center center no-repeat;
     background-size: cover;
     width: 100%;
@@ -38,7 +38,6 @@ const MainContainer = styled.div`
     filter: blur(0.8px);
     z-index: -1;
   }
-
 `
 
 export default App

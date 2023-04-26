@@ -15,8 +15,6 @@ export type ButtonActionType = 'POMODORO' | 'SHORT' | 'LONG'
 export type ButtonAction = { type: ButtonActionType }
 type Reducer = (state: InicialState, action: ButtonAction) => InicialState
 
-
-
 export const reducer: Reducer = (state, action) => {
   switch (action.type) {
     case 'POMODORO':
