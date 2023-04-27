@@ -33,6 +33,10 @@ export const Pomodoro = () => {
           type: 'SET_TIME_ON_DISPLAY',
           payload: timeState.pomodoroTime,
         })
+        timeDispatch({
+          type: 'SET_CYCLES_FINISHED',
+          payload: 1,
+        })
         if (buttonState.short) setCycles(cycles + 1)
         buttonDispatch({ type: 'POMODORO' })
       }

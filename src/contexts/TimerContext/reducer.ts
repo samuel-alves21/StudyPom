@@ -6,6 +6,7 @@ export type TimerActionType =
   | 'DECREASE_TIME'
   | 'SET_TIME_COUNTING'
   | 'SET_TIME_ON_DISPLAY'
+  | 'SET_CYCLES_FINISHED'
 
 export interface TimerAction {
   type: TimerActionType
@@ -24,6 +25,7 @@ export const initialState = {
   cycles: 4,
   timeOnDisplay: 5,
   timeCounting: false,
+  cyclesFinished: 0,
 }
 
 export const reducer: Reducer = (state, action) => {
@@ -67,6 +69,12 @@ export const reducer: Reducer = (state, action) => {
         ...state,
         timeOnDisplay: action.payload,
       }
+      case 'SET_CYCLES_FINISHED':
+        if (typeof action.payload !== 'number') return state
+        return {
+          ...state,
+          cyclesFinished: state.cyclesFinished + action.payload,
+        }
     default:
       return state
   }

@@ -5,6 +5,7 @@ import { GlobalStyles } from './globalStyles'
 import { Pomodoro } from './components/Pomodoro'
 import { Heading } from './components/Heading'
 import { ButtonsContext, MyContext } from './contexts/ButtonsContext'
+import { Details } from './components/Details'
 
 const App = () => {
   const { buttonState } = useContext(ButtonsContext) as MyContext
@@ -13,18 +14,21 @@ const App = () => {
     <>
       <GlobalStyles />
       <MainContainer>
-        <Heading
-          text={
-            !buttonState.wasClicked
-              ? 'Are you Ready?'
-              : buttonState.pomodoro
-              ? 'Working'
-              : buttonState.short
-              ? 'Short Break'
-              : 'Long Break'
-          }
-        />
-        <Pomodoro />
+        <PomodoroWrapper>
+          <Heading
+            text={
+              !buttonState.wasClicked
+                ? 'Are you Ready?'
+                : buttonState.pomodoro
+                ? 'Working'
+                : buttonState.short
+                ? 'Short Break' 
+                : 'Long Break'
+            }
+          />
+          <Pomodoro />
+          <Details />
+        </PomodoroWrapper>
       </MainContainer>
     </>
   )
@@ -34,9 +38,8 @@ const MainContainer = styled.div`
   min-height: 100vh;
 
   display: flex;
-  flex-direction: column;
+
   justify-content: center;
-  align-items: center;
 
   padding-bottom: 400px;
   position: relative;
@@ -53,6 +56,15 @@ const MainContainer = styled.div`
     filter: blur(0.8px);
     z-index: -1;
   }
+`
+
+const PomodoroWrapper = styled.div`
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export default App

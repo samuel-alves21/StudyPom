@@ -27,4 +27,8 @@ export const GlobalStyles = createGlobalStyle`
   h2 {
     font-size: 3rem;
   }
+
+  h4 {
+    font-size: 2rem;
+  }
 `
