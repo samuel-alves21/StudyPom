@@ -20,8 +20,8 @@ type Reducer = (
 export const initialState = {
   pomodoroTime: 5,
   shortRestTime: 3,
-  longRestTime: 900,
-  cycles: 0,
+  longRestTime: 4,
+  cycles: 4,
   timeOnDisplay: 5,
   timeCounting: false,
 }

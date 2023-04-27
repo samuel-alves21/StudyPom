@@ -1,14 +1,29 @@
 import styled from 'styled-components'
 import backgrundDefault from './img/default-backgrund.jpg'
+import { useContext } from 'react'
 import { GlobalStyles } from './globalStyles'
 import { Pomodoro } from './components/Pomodoro'
+import { Heading } from './components/Heading'
+import { ButtonsContext, MyContext } from './contexts/ButtonsContext'
 
 const App = () => {
+  const { buttonState } = useContext(ButtonsContext) as MyContext
+
   return (
     <>
       <GlobalStyles />
       <MainContainer>
-        <h1>Wellcome User</h1>
+        <Heading
+          text={
+            !buttonState.wasClicked
+              ? 'Are you Ready?'
+              : buttonState.pomodoro
+              ? 'Working'
+              : buttonState.short
+              ? 'Short Break'
+              : 'Long Break'
+          }
+        />
         <Pomodoro />
       </MainContainer>
     </>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { ButtonsContext, MyContext } from '../contexts/ButtonsContext'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { TimerActionType } from '../contexts/TimerContext/reducer'
@@ -14,41 +14,11 @@ interface StyledProps {
 }
 
 export const Button = (props: Props) => {
-  const { timeState, timeDispatch } = useContext(TimerContext) as MyTimerContext
+  const { timeDispatch } = useContext(TimerContext) as MyTimerContext
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
   ) as MyContext
-
-  useEffect(() => {
-    if (timeState.timeOnDisplay === 0) {
-      if (buttonState.pomodoro) {
-        timeDispatch({
-          type: 'SET_TIME_ON_DISPLAY',
-          payload: timeState.shortRestTime,
-        })
-
-        buttonDispatch({ type: 'SHORT' })
-      }
-      if (buttonState.short) {
-        timeDispatch({
-          type: 'SET_TIME_ON_DISPLAY',
-          payload: timeState.pomodoroTime,
-        })
-
-        buttonDispatch({ type: 'POMODORO' })
-      }
-    }
-  }, [
-    timeState.timeOnDisplay,
-    timeState.shortRestTime,
-    timeDispatch,
-    props.text,
-    buttonState.pomodoro,
-    buttonDispatch,
-    buttonState.short,
-    timeState.pomodoroTime,
-  ])
 
   const handleClick = (text: string) => {
     timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionType })

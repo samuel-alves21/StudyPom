@@ -1,13 +1,18 @@
 import styled from 'styled-components'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { useInterval } from '../hooks/useInterval'
-import { useContext } from 'react'
+import { useContext, useCallback } from 'react'
+import { ButtonsContext, MyContext } from '../contexts/ButtonsContext'
 
 export const TimerToggleButton = () => {
   const {
     timeState: { timeCounting },
     timeDispatch,
   } = useContext(TimerContext) as MyTimerContext
+
+  const { buttonState, buttonDispatch } = useContext(
+    ButtonsContext
+  ) as MyContext
 
   useInterval(
     () => {
@@ -16,12 +21,15 @@ export const TimerToggleButton = () => {
     timeCounting ? 1000 : null
   )
 
+  const handleClick = useCallback(() => {
+    timeDispatch({ type: 'SET_TIME_COUNTING', payload: !timeCounting })
+    if (!buttonState.wasClicked) {
+      buttonDispatch({ type: 'POMODORO' })
+    }
+  }, [timeCounting, timeDispatch, buttonState, buttonDispatch])
+
   return (
-    <ToggleButton
-      onClick={() =>
-        timeDispatch({ type: 'SET_TIME_COUNTING', payload: !timeCounting })
-      }
-    >
+    <ToggleButton onClick={handleClick}>
       {timeCounting ? 'Pause' : 'Start'}
     </ToggleButton>
   )

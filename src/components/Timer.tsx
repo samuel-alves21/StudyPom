@@ -1,7 +1,7 @@
+import styled from 'styled-components'
 import { useContext } from 'react'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
-import styled from 'styled-components'
 import { TimerToggleButton } from './TimerToggleButton'
 
 export const Timer = () => {
