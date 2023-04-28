@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { ButtonsContext, MyContext } from '../contexts/ButtonsContext'
+import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { TimerActionType } from '../contexts/TimerContext/reducer'
 import { ButtonActionType } from '../contexts/ButtonsContext/reducer'
@@ -18,7 +18,7 @@ export const Button = (props: Props) => {
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
-  ) as MyContext
+  ) as MyButtonContext
 
   const handleClick = (text: string) => {
     timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionType })

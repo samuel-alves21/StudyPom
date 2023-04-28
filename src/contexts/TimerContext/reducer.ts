@@ -2,11 +2,13 @@ export type TimerActionType =
   | 'SET_POMODORO_TIME'
   | 'SET_SHORT_TIME'
   | 'SET_LONG_TIME'
-  | 'SET_CYCLES'
   | 'DECREASE_TIME'
   | 'SET_TIME_COUNTING'
   | 'SET_TIME_ON_DISPLAY'
+  | 'SET_CYCLES_TEMP'
   | 'SET_CYCLES_FINISHED'
+  | 'SET_WORKED_TIME'
+  | 'RESET_ALL'
 
 export interface TimerAction {
   type: TimerActionType
@@ -23,9 +25,11 @@ export const initialState = {
   shortRestTime: 3,
   longRestTime: 4,
   cycles: 4,
+  cyclesTemp: 0,
+  cyclesFinished: 0,
   timeOnDisplay: 5,
   timeCounting: false,
-  cyclesFinished: 0,
+  workedTime: 0,
 }
 
 export const reducer: Reducer = (state, action) => {
@@ -45,12 +49,6 @@ export const reducer: Reducer = (state, action) => {
         ...state,
         timeOnDisplay: state.longRestTime,
       }
-    case 'SET_CYCLES':
-      if (typeof action.payload !== 'number') return state
-      return {
-        ...state,
-        cycles: action.payload,
-      }
     case 'DECREASE_TIME':
       if (typeof action.payload !== 'number') return state
       return {
@@ -69,12 +67,33 @@ export const reducer: Reducer = (state, action) => {
         ...state,
         timeOnDisplay: action.payload,
       }
-      case 'SET_CYCLES_FINISHED':
-        if (typeof action.payload !== 'number') return state
-        return {
-          ...state,
-          cyclesFinished: state.cyclesFinished + action.payload,
-        }
+    case 'SET_CYCLES_TEMP':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        cyclesTemp: action.payload,
+      }
+    case 'SET_CYCLES_FINISHED':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        cyclesFinished: state.cyclesFinished + action.payload,
+      }
+    case 'SET_WORKED_TIME':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        workedTime: state.workedTime + action.payload,
+      }
+    case 'RESET_ALL':
+      return {
+        ...state,
+        workedTime: 0,
+        cyclesFinished: 0,
+        timeOnDisplay: state.pomodoroTime,
+        timeCounting: false,
+        cyclesTemp: 0,
+      }
     default:
       return state
   }

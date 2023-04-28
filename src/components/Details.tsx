@@ -1,11 +1,11 @@
-import styled from "styled-components"
-import { DetailsType } from "./DetailsType"
+import styled from 'styled-components'
+import { DetailsType } from './DetailsType'
 
 export const Details = () => {
   return (
     <DetailsWrapper>
-      <DetailsType text="time worked"/>
-      <DetailsType text="cycles finished"/>
+      <DetailsType text='time worked' />
+      <DetailsType text='cycles finished' />
     </DetailsWrapper>
   )
 }

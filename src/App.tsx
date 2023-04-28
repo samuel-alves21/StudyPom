@@ -4,11 +4,11 @@ import { useContext } from 'react'
 import { GlobalStyles } from './globalStyles'
 import { Pomodoro } from './components/Pomodoro'
 import { Heading } from './components/Heading'
-import { ButtonsContext, MyContext } from './contexts/ButtonsContext'
+import { ButtonsContext, MyButtonContext } from './contexts/ButtonsContext'
 import { Details } from './components/Details'
 
 const App = () => {
-  const { buttonState } = useContext(ButtonsContext) as MyContext
+  const { buttonState } = useContext(ButtonsContext) as MyButtonContext
 
   return (
     <>
@@ -22,7 +22,7 @@ const App = () => {
                 : buttonState.pomodoro
                 ? 'Working'
                 : buttonState.short
-                ? 'Short Break' 
+                ? 'Short Break'
                 : 'Long Break'
             }
           />

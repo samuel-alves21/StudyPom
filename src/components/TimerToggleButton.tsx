@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { useInterval } from '../hooks/useInterval'
 import { useContext, useCallback } from 'react'
-import { ButtonsContext, MyContext } from '../contexts/ButtonsContext'
+import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
 
 export const TimerToggleButton = () => {
   const {
@@ -12,11 +12,13 @@ export const TimerToggleButton = () => {
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
-  ) as MyContext
+  ) as MyButtonContext
 
   useInterval(
     () => {
       timeDispatch({ type: 'DECREASE_TIME', payload: 1 })
+      if (buttonState.pomodoro)
+        timeDispatch({ type: 'SET_WORKED_TIME', payload: 1 })
     },
     timeCounting ? 1000 : null
   )
@@ -35,7 +37,7 @@ export const TimerToggleButton = () => {
   )
 }
 
-const ToggleButton = styled.button`
+export const ToggleButton = styled.button`
   padding: 10px 40px;
   border: white solid 1px;
   border-radius: 20px;
