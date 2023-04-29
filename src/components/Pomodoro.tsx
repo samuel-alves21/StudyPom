@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useEffect, useContext } from 'react'
 import { Buttons } from './Buttons'
 import { Timer } from './Timer'
+import { TimerToggleButton } from './TimerToggleButton'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
 import { ResetButton } from './ResetButton'
@@ -13,24 +14,35 @@ const startSong = new Audio(startBellSong)
 const finishSong = new Audio(finishBellSong)
 
 export const Pomodoro = () => {
-  const { timeState, timeDispatch } = useContext(TimerContext) as MyTimerContext
+  const {
+    timeState: {
+      cycles,
+      cyclesTemp,
+      timeOnDisplay,
+      timeCounting,
+      pomodoroTime,
+      shortRestTime,
+      longRestTime,
+    },
+    timeDispatch,
+  } = useContext(TimerContext) as MyTimerContext
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
   ) as MyButtonContext
 
   useEffect(() => {
-    if (timeState.timeOnDisplay === 0) {
-      if (buttonState.pomodoro && timeState.cyclesTemp + 1 < timeState.cycles) {
+    if (timeOnDisplay === 0) {
+      if (buttonState.pomodoro && cyclesTemp + 1 < cycles) {
         timeDispatch({
           type: 'SET_TIME_ON_DISPLAY',
-          payload: timeState.shortRestTime,
+          payload: shortRestTime,
         })
 
         buttonDispatch({ type: 'SHORT' })
       } else {
         timeDispatch({
           type: 'SET_TIME_ON_DISPLAY',
-          payload: timeState.longRestTime,
+          payload: longRestTime,
         })
 
         buttonDispatch({ type: 'LONG' })
@@ -39,7 +51,7 @@ export const Pomodoro = () => {
       if (buttonState.short || buttonState.long) {
         timeDispatch({
           type: 'SET_TIME_ON_DISPLAY',
-          payload: timeState.pomodoroTime,
+          payload: pomodoroTime,
         })
         timeDispatch({
           type: 'SET_CYCLES_FINISHED',
@@ -48,7 +60,7 @@ export const Pomodoro = () => {
         if (buttonState.short) {
           timeDispatch({
             type: 'SET_CYCLES_TEMP',
-            payload: timeState.cyclesTemp + 1,
+            payload: cyclesTemp + 1,
           })
         }
         buttonDispatch({ type: 'POMODORO' })
@@ -56,39 +68,36 @@ export const Pomodoro = () => {
     }
     if (
       buttonState.pomodoro &&
-      timeState.timeOnDisplay === timeState.pomodoroTime &&
-      timeState.timeCounting
+      timeOnDisplay === pomodoroTime &&
+      timeCounting
     ) {
       finishSong.play()
     }
     if (
-      (buttonState.short &&
-        timeState.timeOnDisplay === timeState.shortRestTime &&
-        timeState.timeCounting) ||
-      (buttonState.long &&
-        timeState.timeOnDisplay === timeState.longRestTime &&
-        timeState.timeCounting)
+      (buttonState.short && timeOnDisplay === shortRestTime && timeCounting) ||
+      (buttonState.long && timeOnDisplay === longRestTime && timeCounting)
     ) {
       startSong.play()
     }
   }, [
     timeDispatch,
     buttonDispatch,
-    timeState.timeOnDisplay,
-    timeState.shortRestTime,
+    timeOnDisplay,
+    shortRestTime,
     buttonState.pomodoro,
     buttonState.short,
-    timeState.pomodoroTime,
-    timeState.longRestTime,
-    timeState.cycles,
+    pomodoroTime,
+    longRestTime,
+    cycles,
     buttonState.long,
-    timeState.timeCounting,
-    timeState.cyclesTemp,
+    timeCounting,
+    cyclesTemp,
   ])
   return (
     <PomodoroWrapper>
       <Buttons />
       <Timer />
+      <TimerToggleButton />
       <ResetButton />
     </PomodoroWrapper>
   )
@@ -98,6 +107,7 @@ const PomodoroWrapper = styled.div`
   max-width: 600px;
 
   display: flex;
+  gap: 20px;
   flex-direction: column;
   align-items: center;
 

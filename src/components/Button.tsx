@@ -22,6 +22,7 @@ export const Button = (props: Props) => {
 
   const handleClick = (text: string) => {
     timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionType })
+
     timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })
 
     buttonDispatch({
@@ -34,7 +35,7 @@ export const Button = (props: Props) => {
       onClick={() => handleClick(props.text)}
       isSelected={buttonState[props.text.toLowerCase()]}
     >
-      <strong>{props.text}</strong>
+      {props.text}
     </StyledButton>
   )
 }
@@ -49,7 +50,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: background-color 5s;
   transition: color 0.5s;
-
+  font-weight: 600;
   &:hover {
     background-color: white;
     color: black;

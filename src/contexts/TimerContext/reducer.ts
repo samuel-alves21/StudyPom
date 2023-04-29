@@ -27,7 +27,7 @@ export const initialState = {
   cycles: 4,
   cyclesTemp: 0,
   cyclesFinished: 0,
-  timeOnDisplay: 5,
+  timeOnDisplay: 0,
   timeCounting: false,
   workedTime: 0,
 }

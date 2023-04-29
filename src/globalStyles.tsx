@@ -8,6 +8,10 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  ::selection {
+    background: #ae83ff;
+  }
   
   :root {
     font-size: 62.5%;
@@ -20,15 +24,19 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
   }
 
+  h1, h2, h3, h4 {
+    text-align: center;
+  }
+
   h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 
-  h2 {
-    font-size: 3rem;
+  p, span {
+    font-size: 1.6rem;
   }
 
-  h4 {
-    font-size: 2rem;
+  span {
+    font-weight: bold;
   }
 `

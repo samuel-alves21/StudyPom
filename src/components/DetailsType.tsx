@@ -26,7 +26,6 @@ export const DetailsType = (props: Props) => {
 }
 
 const P = styled.p`
-  font-size: 1.5rem;
   font-weight: bold;
 
   & span {

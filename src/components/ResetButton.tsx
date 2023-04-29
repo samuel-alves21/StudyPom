@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { ToggleButton } from './TimerToggleButton'
 import { useContext } from 'react'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
@@ -13,9 +12,5 @@ export const ResetButton = () => {
     buttonDispatch({ type: 'POMODORO' })
   }
 
-  return <Btn onClick={handleClick}>Reset</Btn>
+  return <ToggleButton onClick={handleClick}>Reset</ToggleButton>
 }
-
-const Btn = styled(ToggleButton)`
-  margin-top: 20px;
-`
