@@ -3,11 +3,11 @@ import backgrundDefault from './img/default-backgrund.jpg'
 import { useContext, useEffect } from 'react'
 import { GlobalStyles } from './globalStyles'
 import { Pomodoro } from './components/Pomodoro'
-import { Heading } from './components/Heading'
+import { PomodoroHeading } from './components/PomodoroHeading'
 import { ButtonsContext, MyButtonContext } from './contexts/ButtonsContext'
 import { Details } from './components/Details'
-import { ConfigDescription } from './components/ConfigsDescription.'
 import { MyTimerContext, TimerContext } from './contexts/TimerContext'
+import { Configs } from './components/Configs'
 
 const App = () => {
   const { buttonState, buttonDispatch } = useContext(
@@ -30,7 +30,7 @@ const App = () => {
       <MainContainer>
         <Wrapper>
           <div>
-            <Heading
+            <PomodoroHeading
               text={
                 !buttonState.wasClicked
                   ? 'Are you Ready?'
@@ -44,7 +44,7 @@ const App = () => {
             <Pomodoro />
             <Details />
           </div>
-          <ConfigDescription />
+          <Configs />
         </Wrapper>
       </MainContainer>
     </>

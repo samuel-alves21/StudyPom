@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { secondsToMinutes } from '../functions/secondsToMinutes'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
+import { secondsToTime } from '../functions/secondsToTime'
 
 export const Timer = () => {
   const {
     timeState: { timeOnDisplay },
   } = useContext(TimerContext) as MyTimerContext
 
-  return <Display>{secondsToMinutes(timeOnDisplay)}</Display>
+  return <Display>{secondsToTime(timeOnDisplay)}</Display>
 }
 
 const Display = styled.h1`

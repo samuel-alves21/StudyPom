@@ -26,6 +26,7 @@ export const Pomodoro = () => {
     },
     timeDispatch,
   } = useContext(TimerContext) as MyTimerContext
+
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
   ) as MyButtonContext

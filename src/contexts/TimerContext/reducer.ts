@@ -9,6 +9,10 @@ export type TimerActionType =
   | 'SET_CYCLES_FINISHED'
   | 'SET_WORKED_TIME'
   | 'RESET_ALL'
+  | 'CONFIG_POMODORO_TIME'
+  | 'CONFIG_SHORT_TIME'
+  | 'CONFIG_LONG_TIME'
+  | 'CONFIG_CYCLES'
 
 export interface TimerAction {
   type: TimerActionType
@@ -34,6 +38,30 @@ export const initialState = {
 
 export const reducer: Reducer = (state, action) => {
   switch (action.type) {
+    case 'CONFIG_CYCLES':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        cycles: action.payload,
+      }
+    case 'CONFIG_POMODORO_TIME':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        pomodoroTime: action.payload,
+      }
+    case 'CONFIG_SHORT_TIME':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        shortRestTime: action.payload,
+      }
+    case 'CONFIG_LONG_TIME':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        longRestTime: action.payload,
+      }
     case 'SET_POMODORO_TIME':
       return {
         ...state,

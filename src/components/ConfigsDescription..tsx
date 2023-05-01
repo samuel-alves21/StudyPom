@@ -1,17 +1,17 @@
-import { useContext } from 'react'
 import styled from 'styled-components'
+import { useContext } from 'react'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
+import { secondsToTime } from '../functions/secondsToTime'
 
 export const ConfigDescription = () => {
   const { timeState } = useContext(TimerContext) as MyTimerContext
 
   return (
     <ConfigDescriptionWrapper>
-      <h1>your config</h1>
       <div>
         <p>Pomodoro Time: </p>
-        <span>&nbsp;{secondsToMinutes(timeState.pomodoroTime)}</span>
+        <span>&nbsp;{secondsToTime(timeState.pomodoroTime)}</span>
       </div>
       <div>
         <p>Short Rest Time: </p>
