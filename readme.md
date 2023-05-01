@@ -12,9 +12,6 @@ Set a custom timer duration for pomodoro sessions and breaks
 Start, pause, and reset the timer
 Get visual and audio notifications when the timer ends
 Keep track of completed pomodoro sessions and total study time
-Customize the app theme and colors to your liking
-Save your settings and session history in your browser's local storage
-Responsive design that works on desktop and mobile devices
 
 ## Getting Started
 
@@ -23,11 +20,11 @@ To run the app locally, follow these steps:
   .Clone this repository to your local machine.
   .Install the dependencies using npm install.
   .Start the development server using npm start.
-  .Open the app in your browser at http://localhost:3000.
+  .Open the app in your browser at http://localhost:5173.
 
 ## Contributing
 
 If you want to contribute to this project, feel free to fork the repository and submit a pull request. You can also open an issue if you find a bug or have a feature request.
-License
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
