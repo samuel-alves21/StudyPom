@@ -13,4 +13,8 @@ export const Timer = () => {
 
 const Display = styled.h1`
   font-size: 7rem;
+
+  @media (max-width: 430px) {
+    font-size: 5rem;
+  }
 `

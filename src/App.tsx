@@ -70,6 +70,10 @@ const MainContainer = styled.div`
     filter: blur(1.5px);
     z-index: -1;
   }
+
+  @media (max-width: 430px) {
+    padding: 15px 0;
+  }
 `
 
 const Wrapper = styled.div`
@@ -79,6 +83,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  @media (max-width: 430px) {
+    gap: 100px;
+  }
 `
 
 export default App

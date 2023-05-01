@@ -32,15 +32,15 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-size: 3.5rem;
+    font-size: calc(3.3rem + 0.2vw);
   }
 
   p, span {
-    font-size: 1.6rem;
+    font-size: calc(1.4rem + 0.2vw);
   }
 
   label {
-    font-size: 1.8rem;
+    font-size: calc(1.6rem);
   }
 
   span {
@@ -50,7 +50,7 @@ export const GlobalStyles = createGlobalStyle`
   input {
     outline: none;
     border: none;
-    font-size: 1.3rem;
+    font-size: calc(1.1rem + 0.2vw);
     padding: 0 0.5rem;
     font-family: 'montserrat', sans-serif;
   }

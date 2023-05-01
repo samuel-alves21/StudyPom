@@ -27,7 +27,4 @@ export const DetailsType = (props: Props) => {
 
 const P = styled.p`
   font-weight: bold;
-
-  & span {
-  }
 `

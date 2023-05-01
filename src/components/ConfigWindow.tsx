@@ -45,8 +45,9 @@ const Window = styled.div`
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  min-height: 500px;
-  min-width: 330px;
+  min-height: 400px;
+  min-width: 320px;
+  max-width: 400px;
   transition: opacity 0.2s ease-in-out;
   top: 60px;
   opacity: ${(props: WrapperProps) => (props.display ? '1' : '0')};
