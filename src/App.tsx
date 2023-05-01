@@ -85,7 +85,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   @media (max-width: 430px) {
-    gap: 100px;
+    gap: 50px;
   }
 `
 

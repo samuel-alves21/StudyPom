@@ -14,9 +14,4 @@ export const Buttons = () => {
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 10px;
-
-  @media (max-width: 430px) {
-    flex-direction: column;
-    gap: 20px;
-  }
 `

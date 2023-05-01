@@ -55,4 +55,9 @@ export const StyledButton = styled.button`
     background-color: white;
     color: black;
   }
+
+  @media (max-width: 430px) {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
 `

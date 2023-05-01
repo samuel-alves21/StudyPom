@@ -45,8 +45,11 @@ export const ConfigArrows = (props: Props) => {
 const Arrows = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: var(--color-primary);
-  padding: 0 5px;
+  padding: 0 8px;
+  font-size: 12px;
 
   &:hover {
     cursor: pointer;
@@ -54,6 +57,6 @@ const Arrows = styled.div`
 
   & .bi-caret-up-fill:hover,
   & .bi-caret-down-fill:hover {
-    transform: scale(1.2) !important;
+    transform: scale(1.3) !important;
   }
 `

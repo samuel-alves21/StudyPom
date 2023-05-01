@@ -40,7 +40,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   label {
-    font-size: calc(1.6rem);
+    font-size: calc(1.8rem);
   }
 
   span {
@@ -50,7 +50,7 @@ export const GlobalStyles = createGlobalStyle`
   input {
     outline: none;
     border: none;
-    font-size: calc(1.1rem + 0.2vw);
+    font-size: 1.3rem;
     padding: 0 0.5rem;
     font-family: 'montserrat', sans-serif;
   }

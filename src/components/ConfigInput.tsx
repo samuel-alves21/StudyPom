@@ -131,4 +131,5 @@ const InputAndArrows = styled.div`
 const Input = styled.input`
   width: 70px;
   border-radius: 5px 0 0 5px;
+  height: 35px;
 `
