@@ -29,6 +29,7 @@ const App = () => {
       <GlobalStyles />
       <MainContainer>
         <Wrapper>
+        <Title>StudyPom</Title>
           <div>
             <PomodoroHeading
               text={
@@ -83,9 +84,19 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+`
+
+const Title = styled.h1`
+  font-family: 'Indie Flower', cursive;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  font-size: 5rem;
 
   @media (max-width: 430px) {
-    gap: 50px;
+    top: 0%;
+    left: calc(50% - 90px);
+    font-size: 4rem;
   }
 `
 

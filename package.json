@@ -2,7 +2,7 @@
   "name": "pomodoro-app",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://samuel-alves21.github.io/pomodoro-app/",
+  "homepage": "https://samuel-alves21.github.io/StudyPom/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
