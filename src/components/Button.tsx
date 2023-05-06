@@ -4,9 +4,10 @@ import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { TimerActionType } from '../contexts/TimerContext/reducer'
 import { ButtonActionType } from '../contexts/ButtonsContext/reducer'
+import { Id } from '../types/types'
 
 interface Props {
-  text: string
+  text: Id
 }
 
 interface StyledProps {
@@ -35,7 +36,7 @@ export const Button = (props: Props) => {
       onClick={() => handleClick(props.text)}
       isSelected={buttonState[props.text.toLowerCase()]}
     >
-      {props.text}
+      {props.text.replace(props.text[0], props.text[0].toUpperCase())}
     </StyledButton>
   )
 }

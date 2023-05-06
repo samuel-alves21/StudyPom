@@ -29,7 +29,7 @@ const App = () => {
       <GlobalStyles />
       <MainContainer>
         <Wrapper>
-        <Title>StudyPom</Title>
+          <Title>StudyPom</Title>
           <div>
             <PomodoroHeading
               text={

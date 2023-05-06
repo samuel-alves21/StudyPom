@@ -4,9 +4,9 @@ import { Button } from './Button'
 export const Buttons = () => {
   return (
     <ButtonsWrapper>
-      <Button text='Pomodoro' />
-      <Button text='Short' />
-      <Button text='Long' />
+      <Button text='pomodoro' />
+      <Button text='short' />
+      <Button text='long' />
     </ButtonsWrapper>
   )
 }

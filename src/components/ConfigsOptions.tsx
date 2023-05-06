@@ -2,8 +2,6 @@ import styled from 'styled-components'
 import { ConfigInput } from './ConfigInput'
 import { useState } from 'react'
 
-export type Id = 'pomodoro' | 'short' | 'long' | 'cycles'
-
 export const ConfigsOptions = () => {
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState('25')
   const [shortConfigTime, setShortConfigTime] = useState('5')

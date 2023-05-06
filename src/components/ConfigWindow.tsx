@@ -48,7 +48,11 @@ const Window = styled.div`
   min-height: 400px;
   min-width: 320px;
   max-width: 400px;
-  transition: opacity ${(props: WrapperProps) => props.display ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
+  transition: opacity
+    ${(props: WrapperProps) =>
+      props.display
+        ? '0.2s ease-in-out'
+        : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
   top: 60px;
   opacity: ${(props: WrapperProps) => (props.display ? '1' : '0')};
   pointer-events: ${(props: WrapperProps) => (props.display ? 'all' : 'none')};
@@ -56,7 +60,11 @@ const Window = styled.div`
   left: calc(50% - 165px);
   z-index: 5;
   margin-inline: auto;
-  animation: ${(props: WrapperProps) =>  props.display ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)'} 0.5s forwards;
+  animation: ${(props: WrapperProps) =>
+      props.display
+        ? 'slide-in ease-in-out'
+        : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)'}
+    0.5s forwards;
 
   @keyframes slide-in {
     0% {
