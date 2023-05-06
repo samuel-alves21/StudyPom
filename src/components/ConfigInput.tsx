@@ -112,20 +112,20 @@ export const ConfigInput = (props: Props) => {
   return (
     <InputAndArrows>
         <ReactScrollWheelHandler timeout={1} upHandler={handleUpScroll} downHandler={handleDownScroll}>
-        <Input
-          type='text'
-          value={
-            props.id === 'pomodoro'
-              ? secondsToTime(minutesToSeconds(Number(props.state)))
-              : props.id !== 'cycles'
-              ? secondsToMinutes(minutesToSeconds(Number(props.state)))
-              : props.state
-          }
-          onKeyDown={(e) => handleChange(e)}
-          id={props.id}
-          onBlur={handleBlur}
-          readOnly={true}
-        />
+          <Input
+            type='text'
+            value={
+              props.id === 'pomodoro'
+                ? secondsToTime(minutesToSeconds(Number(props.state)))
+                : props.id !== 'cycles'
+                ? secondsToMinutes(minutesToSeconds(Number(props.state)))
+                : props.state
+            }
+            onKeyDown={(e) => handleChange(e)}
+            id={props.id}
+            onBlur={handleBlur}
+            readOnly={true}
+          />
         </ReactScrollWheelHandler>
       <ConfigArrows
         pomodoroConfigTime={props.state}
@@ -138,16 +138,11 @@ export const ConfigInput = (props: Props) => {
 
 const InputAndArrows = styled.div`
   display: flex;
-
-  & div {
-    height: 35px;
-    overflow: auto;
-  }
 `
 
 const Input = styled.input`
   width: 70px;
   border-radius: 5px 0 0 5px;
-  height: 100%;
+  height: 35px;
   pointer-events: none;
 `
