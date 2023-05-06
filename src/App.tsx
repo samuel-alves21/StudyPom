@@ -84,6 +84,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  gap: 30px;
 `
 
 const Title = styled.h1`
