@@ -29,7 +29,7 @@ export const ConfigsOptions = () => {
         />
       </InputContainer>
       <InputContainer>
-        <label htmlFor='long'>Short Rest Time:</label>
+        <label htmlFor='long'>Long Rest Time:</label>
         <ConfigInput
           id='long'
           state={longConfigTime}
