@@ -9,7 +9,6 @@ import { TimerActionType } from '../contexts/TimerContext/reducer'
 import { Id } from '../types/types'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
 import { secondsToTime } from '../functions/secondsToTime'
-import ReactScrollWheelHandler from 'react-scroll-wheel-handler'
 
 interface Props {
   id: Id
@@ -19,14 +18,6 @@ interface Props {
 
 export const ConfigInput = (props: Props) => {
   const { timeDispatch } = useContext(TimerContext) as MyTimerContext
-
-  const handleUpScroll = () => {
-    props.setState(acrementTime(Number(props.state), props.id).toString())
-  }
-
-  const handleDownScroll = () => {
-    props.setState(decrementTime(Number(props.state), props.id).toString())
-  }
 
   const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const regexNumbers = /[0-9]/
@@ -111,7 +102,6 @@ export const ConfigInput = (props: Props) => {
 
   return (
     <InputAndArrows>
-        <ReactScrollWheelHandler timeout={1} upHandler={handleUpScroll} downHandler={handleDownScroll}>
           <Input
             type='text'
             value={
@@ -126,7 +116,6 @@ export const ConfigInput = (props: Props) => {
             onBlur={handleBlur}
             readOnly={true}
           />
-        </ReactScrollWheelHandler>
       <ConfigArrows
         pomodoroConfigTime={props.state}
         setPomodoroConfigTime={props.setState}
