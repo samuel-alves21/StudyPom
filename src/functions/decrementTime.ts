@@ -1,4 +1,4 @@
-import { Id } from '../components/ConfigsOptions'
+import { Id } from '../types/types'
 
 export const decrementTime = (time: number, setting: Id) => {
   if (setting === 'pomodoro') {

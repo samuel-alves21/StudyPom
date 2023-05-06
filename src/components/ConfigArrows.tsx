@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { acrementTime } from '../functions/acrementTime'
 import { decrementTime } from '../functions/decrementTime'
-import { Id } from './ConfigsOptions'
+import { Id } from '../types/types'
 
 interface Props {
   pomodoroConfigTime: string
