@@ -199,7 +199,7 @@ Error generating stack: `+o.message+`
   width: 70px;
   border-radius: 5px 0 0 5px;
   height: 35px;
-`,S0=()=>{const[e,t]=F.useState("25"),[n,r]=F.useState("5"),[l,o]=F.useState("10"),[i,u]=F.useState("4");return C.jsxs(w0,{children:[C.jsxs(al,{children:[C.jsx("label",{htmlFor:"pomodoro",children:"Pomodoro Time:"}),C.jsx(sl,{id:"pomodoro",state:e,setState:t})]}),C.jsxs(al,{children:[C.jsx("label",{htmlFor:"short",children:"Short Rest Time:"}),C.jsx(sl,{id:"short",state:n,setState:r})]}),C.jsxs(al,{children:[C.jsx("label",{htmlFor:"long",children:"Short Rest Time:"}),C.jsx(sl,{id:"long",state:l,setState:o})]}),C.jsxs(al,{children:[C.jsx("label",{htmlFor:"cycles",children:"Cycles:"}),C.jsx(sl,{id:"cycles",state:i,setState:u})]})]})},w0=he.div`
+`,S0=()=>{const[e,t]=F.useState("25"),[n,r]=F.useState("5"),[l,o]=F.useState("10"),[i,u]=F.useState("4");return C.jsxs(w0,{children:[C.jsxs(al,{children:[C.jsx("label",{htmlFor:"pomodoro",children:"Pomodoro Time:"}),C.jsx(sl,{id:"pomodoro",state:e,setState:t})]}),C.jsxs(al,{children:[C.jsx("label",{htmlFor:"short",children:"Short Rest Time:"}),C.jsx(sl,{id:"short",state:n,setState:r})]}),C.jsxs(al,{children:[C.jsx("label",{htmlFor:"long",children:"Long Rest Time:"}),C.jsx(sl,{id:"long",state:l,setState:o})]}),C.jsxs(al,{children:[C.jsx("label",{htmlFor:"cycles",children:"Cycles:"}),C.jsx(sl,{id:"cycles",state:i,setState:u})]})]})},w0=he.div`
   display: flex;
   flex-direction: column;
   align-items: center;
