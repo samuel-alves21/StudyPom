@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useContext } from 'react'
-import { Buttons } from './Buttons'
+import { Buttons } from './TimerButtons'
 import { Timer } from './Timer'
 import { TimerToggleButton } from './TimerToggleButton'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'

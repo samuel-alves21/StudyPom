@@ -1,69 +1,82 @@
 import styled from 'styled-components'
+import { ConfigArrows } from './ConfigArrows'
+import { formatConfigInput } from '../functions/formatConfigInput'
 import { useContext, useEffect } from 'react'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
-import { minutesToSeconds } from '../functions/minutesToSeconds'
-import { ConfigArrows } from './ConfigArrows'
 import { TimerActionType } from '../contexts/TimerContext/reducer'
-import { secondsToMinutes } from '../functions/secondsToMinutes'
-import { secondsToTime } from '../functions/secondsToTime'
+import { minutesToSeconds } from '../functions/minutesToSeconds'
 import { Id } from '../types/types'
-
+import { limitValues } from '../utilities/limitValues'
+import { verifyLimit } from '../functions/verifyLimit'
 
 interface Props {
   id: Id
   state: string
-  setState: React.Dispatch<React.SetStateAction<string>>
+  setState: (value: string) => void
 }
 
-export const ConfigInput = (props: Props) => {
+export const ConfigInput = ({ state, setState, id }: Props) => {
   const { timeDispatch } = useContext(TimerContext) as MyTimerContext
 
   useEffect(() => {
-    if (props.id === 'cycles') {
+    if (id !== 'cycles') {
       timeDispatch({
-        type: 'CONFIG_CYCLES',
-        payload: Number(props.state),
+        type: `CONFIG_${id.toUpperCase()}_TIME` as TimerActionType,
+        payload: minutesToSeconds(verifyLimit(Number(state), id)),
       })
     } else {
       timeDispatch({
-        type: `CONFIG_${props.id.toUpperCase()}_TIME` as TimerActionType,
-        payload: minutesToSeconds(Number(props.state)),
+        type: 'CONFIG_CYCLES',
+        payload: verifyLimit(Number(state), id),
       })
     }
 
     timeDispatch({ type: 'RESET_ALL' })
-  }, [props.state, timeDispatch, props.id])
+  }, [state, id, timeDispatch])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const thisElement = e.target as HTMLElement
+    if (e.key === 'Backspace') setState('')
+    if (e.key === 'Enter') {
+      if (state === '') {
+        setState(limitValues.min[id].toString())
+        thisElement.blur()
+        return
+      }
+      setState(Number(state).toString())
+      thisElement.blur()
+    }
+    if (state.length === 2) return
+    if (state.length === 1 && id === 'cycles') return
+    if (!/^[0-9]+$/.test(e.key)) return
+    setState(Number(state + e.key).toString())
+  }
 
   return (
     <InputAndArrows>
-          <Input
-            type='text'
-            value={
-              props.id === 'pomodoro'
-                ? secondsToTime(minutesToSeconds(Number(props.state)))
-                : props.id !== 'cycles'
-                ? secondsToMinutes(minutesToSeconds(Number(props.state)))
-                : props.state
-            }
-            id={props.id}
-            readOnly={true}
-          />
-      <ConfigArrows
-        pomodoroConfigTime={props.state}
-        setPomodoroConfigTime={props.setState}
-        id={props.id}
+      <Input
+        onKeyDown={(e) => handleKeyDown(e)}
+        onFocus={() => setState('')}
+        type='text'
+        value={formatConfigInput(verifyLimit(Number(state), id), id)}
+        id={id}
+        readOnly={false}
       />
+      <ConfigArrows state={state} setState={setState} id={id} />
     </InputAndArrows>
   )
 }
 
 const InputAndArrows = styled.div`
   display: flex;
+
+  & > div {
+    border-radius: 0 5px 5px 0;
+  }
 `
 
 const Input = styled.input`
   width: 70px;
   border-radius: 5px 0 0 5px;
   height: 35px;
-  pointer-events: none;
 `

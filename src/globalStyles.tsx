@@ -54,4 +54,9 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0 0.5rem;
     font-family: 'montserrat', sans-serif;
   }
+
+  button {
+    outline: none;
+    border: none;
+  }
 `

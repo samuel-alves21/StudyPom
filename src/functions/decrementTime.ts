@@ -1,23 +1,25 @@
 import { Id } from '../types/types'
+import { limitValues } from '../utilities/limitValues'
 
 export const decrementTime = (time: number, setting: Id) => {
+  const step = 1
   if (setting === 'pomodoro') {
-    if (time - 5 <= 15) return 15
-    return time - 5
+    if (time - step <= limitValues.min.pomodoro) return limitValues.min.pomodoro
+    return time - step
   }
 
   if (setting === 'short') {
-    if (time - 5 <= 5) return 5
-    return time - 5
+    if (time - step <= limitValues.min.short) return limitValues.min.short
+    return time - step
   }
 
   if (setting === 'long') {
-    if (time - 5 <= 10) return 10
-    return time - 5
+    if (time - step <= limitValues.min.long) return limitValues.min.long
+    return time - step
   }
 
   if (setting === 'cycles') {
-    if (time - 1 <= 0) return 1
+    if (time - step <= limitValues.min.cycles) return limitValues.min.cycles
     return time - 1
   }
 

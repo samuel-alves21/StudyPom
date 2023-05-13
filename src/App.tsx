@@ -8,6 +8,7 @@ import { ButtonsContext, MyButtonContext } from './contexts/ButtonsContext'
 import { Details } from './components/Details'
 import { MyTimerContext, TimerContext } from './contexts/TimerContext'
 import { Configs } from './components/Configs'
+import { breakpoints } from './breakpoints'
 
 const App = () => {
   const { buttonState, buttonDispatch } = useContext(
@@ -72,7 +73,7 @@ const MainContainer = styled.div`
     z-index: -1;
   }
 
-  @media (max-width: 430px) {
+  @media (max-width: ${breakpoints.mobile}) {
     padding: 15px 0;
   }
 `
@@ -94,7 +95,7 @@ const Title = styled.h1`
   left: 5%;
   font-size: 5rem;
 
-  @media (max-width: 430px) {
+  @media (max-width: ${breakpoints.mobile}) {
     top: 0%;
     left: calc(50% - 90px);
     font-size: 4rem;

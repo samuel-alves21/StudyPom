@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useContext } from 'react'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { secondsToTime } from '../functions/secondsToTime'
+import { breakpoints } from '../breakpoints'
 
 export const Timer = () => {
   const {
@@ -14,7 +15,7 @@ export const Timer = () => {
 const Display = styled.h1`
   font-size: 7rem;
 
-  @media (max-width: 430px) {
+  @media (max-width: ${breakpoints.mobile}) {
     font-size: 5rem;
   }
 `

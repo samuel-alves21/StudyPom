@@ -1,5 +1,5 @@
-import { useRef } from 'react'
 import styled from 'styled-components'
+import { useRef } from 'react'
 import { ConfigsOptions } from './ConfigsOptions'
 
 interface ConfigWindowProps {
@@ -12,23 +12,26 @@ interface WrapperProps {
   display: boolean
 }
 
-export const ConfigWindow = (props: ConfigWindowProps) => {
+export const ConfigWindow = ({
+  gear,
+  setShouldDisplay,
+  shouldDisplay,
+}: ConfigWindowProps) => {
   const settingsBox = useRef<HTMLDivElement | null>(null)
 
   window.onclick = (event: MouseEvent) => {
     const box = settingsBox.current as HTMLDivElement
-    if (box.contains(event.target as Node) || event.target === props.gear)
-      return
-    if (props.shouldDisplay === false) return
-    props.setShouldDisplay(false)
+    if (box.contains(event.target as Node) || event.target === gear) return
+    if (shouldDisplay === false) return
+    setShouldDisplay(false)
   }
 
   window.onkeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') props.setShouldDisplay(false)
+    if (event.key === 'Escape') setShouldDisplay(false)
   }
 
   return (
-    <Window ref={settingsBox} display={props.shouldDisplay}>
+    <Window ref={settingsBox} display={shouldDisplay}>
       <h1>Settings</h1>
       <ConfigsOptions />
     </Window>
@@ -36,7 +39,7 @@ export const ConfigWindow = (props: ConfigWindowProps) => {
 }
 
 const Window = styled.div`
-  padding: 20px 0;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(8px);
@@ -49,19 +52,19 @@ const Window = styled.div`
   min-width: 320px;
   max-width: 400px;
   transition: opacity
-    ${(props: WrapperProps) =>
-      props.display
+    ${({ display }: WrapperProps) =>
+      display
         ? '0.2s ease-in-out'
         : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
   top: 60px;
-  opacity: ${(props: WrapperProps) => (props.display ? '1' : '0')};
-  pointer-events: ${(props: WrapperProps) => (props.display ? 'all' : 'none')};
+  opacity: ${({ display }: WrapperProps) => (display ? '1' : '0')};
+  pointer-events: ${({ display }: WrapperProps) => (display ? 'all' : 'none')};
   position: absolute;
   left: calc(50% - 165px);
   z-index: 5;
   margin-inline: auto;
-  animation: ${(props: WrapperProps) =>
-      props.display
+  animation: ${({ display }: WrapperProps) =>
+      display
         ? 'slide-in ease-in-out'
         : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)'}
     0.5s forwards;

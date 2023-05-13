@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ConfigInput } from './ConfigInput'
 import { useState } from 'react'
+import { ConfigLimitValues } from './configLimitValues'
 
 export const ConfigsOptions = () => {
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState('25')
@@ -17,6 +18,7 @@ export const ConfigsOptions = () => {
           state={pomodoroConfigTime}
           setState={setPomodoroConfigTime}
         />
+        <ConfigLimitValues id={'pomodoro'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='short'>Short Rest Time:</label>
@@ -25,6 +27,7 @@ export const ConfigsOptions = () => {
           state={shortConfigTime}
           setState={setShortConfigTime}
         />
+        <ConfigLimitValues id={'short'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='long'>Long Rest Time:</label>
@@ -33,6 +36,7 @@ export const ConfigsOptions = () => {
           state={longConfigTime}
           setState={setLongConfigTime}
         />
+        <ConfigLimitValues id={'long'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='cycles'>Cycles:</label>
@@ -41,6 +45,7 @@ export const ConfigsOptions = () => {
           state={configCycles}
           setState={setConfigCycles}
         />
+        <ConfigLimitValues id={'cycles'} />
       </InputContainer>
     </Wrapper>
   )

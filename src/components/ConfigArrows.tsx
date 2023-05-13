@@ -4,41 +4,35 @@ import { decrementTime } from '../functions/decrementTime'
 import { Id } from '../types/types'
 
 interface Props {
-  pomodoroConfigTime: string
-  setPomodoroConfigTime: React.Dispatch<React.SetStateAction<string>>
+  state: string
+  setState: (value: string) => void
   id: Id
 }
 
-export const ConfigArrows = (props: Props) => {
+export const ConfigArrows = ({ id, setState, state }: Props) => {
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const thisElement = e.target as HTMLElement
 
     if (thisElement.id === 'acrement') {
-      props.setPomodoroConfigTime(
-        acrementTime(Number(props.pomodoroConfigTime), props.id).toString()
-      )
+      setState(acrementTime(Number(state), id).toString())
     } else {
-      props.setPomodoroConfigTime(
-        decrementTime(Number(props.pomodoroConfigTime), props.id).toString()
-      )
+      setState(decrementTime(Number(state), id).toString())
     }
   }
 
   return (
-    <>
-      <Arrows>
-        <i
-          id='acrement'
-          onClick={(e) => handleClick(e)}
-          className='bi bi-caret-up-fill'
-        ></i>
-        <i
-          id='decrement'
-          onClick={(e) => handleClick(e)}
-          className='bi bi-caret-down-fill'
-        ></i>
-      </Arrows>
-    </>
+    <Arrows>
+      <i
+        id='acrement'
+        onClick={(e) => handleClick(e)}
+        className='bi bi-caret-up-fill'
+      ></i>
+      <i
+        id='decrement'
+        onClick={(e) => handleClick(e)}
+        className='bi bi-caret-down-fill'
+      ></i>
+    </Arrows>
   )
 }
 

@@ -7,12 +7,12 @@ interface Props {
   text: string
 }
 
-export const DetailsType = (props: Props) => {
+export const DetailsType = ({ text }: Props) => {
   const { timeState } = useContext(TimerContext) as MyTimerContext
 
   return (
     <div>
-      {props.text === 'time worked' ? (
+      {text === 'time worked' ? (
         <P>
           Time worked: <span>{secondsToTime(timeState.workedTime)}</span>
         </P>
