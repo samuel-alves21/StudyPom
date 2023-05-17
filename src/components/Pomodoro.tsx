@@ -98,8 +98,10 @@ export const Pomodoro = () => {
     <PomodoroWrapper>
       <Buttons />
       <Timer />
-      <TimerToggleButton />
-      <ResetButton />
+      <ButtonsWrapper>
+        <TimerToggleButton />
+        <ResetButton />
+      </ButtonsWrapper>
     </PomodoroWrapper>
   )
 }
@@ -113,4 +115,11 @@ const PomodoroWrapper = styled.div`
   align-items: center;
 
   margin: 20px 0;
+`
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: color 0.3s ease-in-out;
 `

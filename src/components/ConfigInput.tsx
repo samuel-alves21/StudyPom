@@ -24,12 +24,12 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
-    
+
     if (Number(state) < limitValues.min[id]) {
       setState(limitValues.min[id].toString())
       thisElement.blur()
       return
-    } 
+    }
     if (Number(state) > limitValues.max[id]) {
       setState(limitValues.max[id].toString())
       thisElement.blur()
@@ -37,6 +37,14 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
     }
     setState(Number(state).toString())
     thisElement.blur()
+  }
+
+  const handleWhell = (e: React.WheelEvent<HTMLInputElement>) => {
+    if (e.deltaY < 0) {
+      setState(acrementTime(Number(state), id).toString())
+    } else {
+      setState(decrementTime(Number(state), id).toString())
+    }
   }
 
   useEffect(() => {
@@ -84,6 +92,7 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
         value={formatConfigInput(Number(state), id)}
         id={id}
         readOnly={false}
+        onWheel={(e) => handleWhell(e)}
       />
       <ConfigArrows state={state} setState={setState} id={id} />
     </InputAndArrows>

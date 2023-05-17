@@ -8,21 +8,24 @@ interface FilterProps {
 
 interface IconProps {
   shouldRotate: boolean
+  animate: boolean
 }
 
 export const ConfigsHeading = () => {
   const gear = useRef<HTMLElement | null>(null)
 
   const [shouldDisplay, setShouldDisplay] = useState(false)
+  const [animate, setAnimate] = useState(false)
+
+  const handleClick = () => {
+    setShouldDisplay(!shouldDisplay)
+    setAnimate(true)
+  }
 
   return (
-    <Wrapper shouldRotate={shouldDisplay}>
+    <Wrapper shouldRotate={shouldDisplay} animate={animate}>
       <h1>Your Config</h1>
-      <i
-        className='bi bi-gear-fill'
-        ref={gear}
-        onClick={() => setShouldDisplay(!shouldDisplay)}
-      ></i>
+      <i className='bi bi-gear-fill' ref={gear} onClick={handleClick}></i>
       <ConfigWindow
         gear={gear.current as HTMLElement}
         shouldDisplay={shouldDisplay}
@@ -45,8 +48,8 @@ const Wrapper = styled.div`
     transition: transform 0.03s ease-in-out;
     transition: color 0.2s ease-in-out;
 
-    animation: ${(props: IconProps) =>
-        props.shouldRotate ? 'spin' : 'spin-reverse'}
+    animation: ${({ animate, shouldRotate }: IconProps) =>
+        shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none'}
       0.5s forwards ease-in-out;
 
     @keyframes spin {
@@ -79,7 +82,7 @@ const Wrapper = styled.div`
 const Filter = styled.div`
   pointer-events: none;
   transition: opacity 0.2s ease-in-out;
-  opacity: ${(props: FilterProps) => (props.shouldDisplay ? '1' : '0')};
+  opacity: ${({ shouldDisplay }: FilterProps) => (shouldDisplay ? '1' : '0')};
   background-color: #00000029;
   position: absolute;
   min-width: 100%;
