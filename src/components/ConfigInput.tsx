@@ -22,6 +22,23 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
   const { timeDispatch } = useContext(TimerContext) as MyTimerContext
   const { buttonDispatch } = useContext(ButtonsContext) as MyButtonContext
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    const thisElement = e.target as HTMLElement
+    
+    if (Number(state) < limitValues.min[id]) {
+      setState(limitValues.min[id].toString())
+      thisElement.blur()
+      return
+    } 
+    if (Number(state) > limitValues.max[id]) {
+      setState(limitValues.max[id].toString())
+      thisElement.blur()
+      return
+    }
+    setState(Number(state).toString())
+    thisElement.blur()
+  }
+
   useEffect(() => {
     if (id !== 'cycles') {
       timeDispatch({
@@ -43,12 +60,6 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
     const thisElement = e.target as HTMLElement
     if (e.key === 'Backspace') setState('')
     if (e.key === 'Enter') {
-      if (state === '') {
-        setState(limitValues.min[id].toString())
-        thisElement.blur()
-        return
-      }
-      setState(Number(state).toString())
       thisElement.blur()
     }
     if (e.key === 'ArrowUp') {
@@ -67,9 +78,10 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
     <InputAndArrows>
       <Input
         onKeyDown={(e) => handleKeyDown(e)}
-        onFocus={() => setState(limitValues.min[id].toString())}
+        onFocus={() => setState('')}
+        onBlur={(e) => handleBlur(e)}
         type='text'
-        value={formatConfigInput(verifyLimit(Number(state), id), id)}
+        value={formatConfigInput(Number(state), id)}
         id={id}
         readOnly={false}
       />
