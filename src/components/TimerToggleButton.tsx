@@ -25,10 +25,8 @@ export const TimerToggleButton = () => {
 
   const handleClick = useCallback(() => {
     timeDispatch({ type: 'SET_TIME_COUNTING', payload: !timeCounting })
-    if (!buttonState.wasClicked) {
-      buttonDispatch({ type: 'POMODORO' })
-    }
-  }, [timeCounting, timeDispatch, buttonState, buttonDispatch])
+    buttonDispatch({ type: 'CLICKED', payload: true })
+  }, [timeCounting, timeDispatch, buttonDispatch])
 
   return (
     <ToggleButton onClick={handleClick}>

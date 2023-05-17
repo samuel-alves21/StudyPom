@@ -5,9 +5,12 @@ import { useContext, useEffect } from 'react'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { TimerActionType } from '../contexts/TimerContext/reducer'
 import { minutesToSeconds } from '../functions/minutesToSeconds'
-import { Id } from '../types/types'
 import { limitValues } from '../utilities/limitValues'
 import { verifyLimit } from '../functions/verifyLimit'
+import { acrementTime } from '../functions/acrementTime'
+import { decrementTime } from '../functions/decrementTime'
+import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
+import { Id } from '../types/types'
 
 interface Props {
   id: Id
@@ -17,6 +20,7 @@ interface Props {
 
 export const ConfigInput = ({ state, setState, id }: Props) => {
   const { timeDispatch } = useContext(TimerContext) as MyTimerContext
+  const { buttonDispatch } = useContext(ButtonsContext) as MyButtonContext
 
   useEffect(() => {
     if (id !== 'cycles') {
@@ -32,7 +36,8 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
     }
 
     timeDispatch({ type: 'RESET_ALL' })
-  }, [state, id, timeDispatch])
+    buttonDispatch({ type: 'CLICKED', payload: false })
+  }, [state, id, timeDispatch, buttonDispatch])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLElement
@@ -46,6 +51,12 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
       setState(Number(state).toString())
       thisElement.blur()
     }
+    if (e.key === 'ArrowUp') {
+      setState(acrementTime(Number(state), id).toString())
+    }
+    if (e.key === 'ArrowDown') {
+      setState(decrementTime(Number(state), id).toString())
+    }
     if (state.length === 2) return
     if (state.length === 1 && id === 'cycles') return
     if (!/^[0-9]+$/.test(e.key)) return
@@ -56,7 +67,7 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
     <InputAndArrows>
       <Input
         onKeyDown={(e) => handleKeyDown(e)}
-        onFocus={() => setState('')}
+        onFocus={() => setState(limitValues.min[id].toString())}
         type='text'
         value={formatConfigInput(verifyLimit(Number(state), id), id)}
         id={id}

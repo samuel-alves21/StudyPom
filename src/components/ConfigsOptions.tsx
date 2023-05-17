@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ConfigInput } from './ConfigInput'
 import { useState } from 'react'
-import { ConfigLimitValues } from './configLimitValues'
+import { ConfigLimitValues } from './ConfigLimitValues'
 
 export const ConfigsOptions = () => {
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState('25')

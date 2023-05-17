@@ -10,6 +10,7 @@ export const ResetButton = () => {
   const handleClick = () => {
     timeDispatch({ type: 'RESET_ALL' })
     buttonDispatch({ type: 'POMODORO' })
+    buttonDispatch({ type: 'CLICKED', payload: false })
   }
 
   return <ToggleButton onClick={handleClick}>Reset</ToggleButton>

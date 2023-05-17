@@ -13,8 +13,8 @@ export const initialState: InicialState = {
   wasClicked: false,
 }
 
-export type ButtonActionType = 'POMODORO' | 'SHORT' | 'LONG'
-export type ButtonAction = { type: ButtonActionType }
+export type ButtonActionType = 'POMODORO' | 'SHORT' | 'LONG' | 'CLICKED'
+export type ButtonAction = { type: ButtonActionType; payload?: boolean }
 type Reducer = (state: InicialState, action: ButtonAction) => InicialState
 
 export const reducer: Reducer = (state, action) => {
@@ -25,7 +25,6 @@ export const reducer: Reducer = (state, action) => {
         pomodoro: true,
         short: false,
         long: false,
-        wasClicked: true,
       }
     case 'SHORT':
       return {
@@ -33,7 +32,6 @@ export const reducer: Reducer = (state, action) => {
         pomodoro: false,
         short: true,
         long: false,
-        wasClicked: true,
       }
     case 'LONG':
       return {
@@ -41,7 +39,12 @@ export const reducer: Reducer = (state, action) => {
         pomodoro: false,
         short: false,
         long: true,
-        wasClicked: true,
+      }
+    case 'CLICKED':
+      if (typeof action.payload === 'undefined') return state
+      return {
+        ...state,
+        wasClicked: action.payload,
       }
     default:
       return state
