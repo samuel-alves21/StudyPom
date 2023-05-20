@@ -9,14 +9,16 @@ import { Details } from './components/Details'
 import { MyTimerContext, TimerContext } from './contexts/TimerContext'
 import { Configs } from './components/Configs'
 import { breakpoints } from './breakpoints'
+import { secondsToMinutes } from './functions/secondsToMinutes'
 
 const App = () => {
-  const { buttonState, buttonDispatch } = useContext(
-    ButtonsContext
-  ) as MyButtonContext
+  const {
+    buttonState: { long, short, pomodoro, wasClicked },
+    buttonDispatch,
+  } = useContext(ButtonsContext) as MyButtonContext
 
   const {
-    timeState: { pomodoroTime },
+    timeState: { pomodoroTime, timeCounting, timeOnDisplay },
     timeDispatch,
   } = useContext(TimerContext) as MyTimerContext
 
@@ -24,6 +26,24 @@ const App = () => {
     buttonDispatch({ type: 'POMODORO' })
     timeDispatch({ type: 'SET_POMODORO_TIME', payload: pomodoroTime })
   }, [pomodoroTime, timeDispatch, buttonDispatch])
+
+  useEffect(() => {
+    if (wasClicked) {
+      if (timeCounting) {
+        if (pomodoro) {
+          document.title = `Working: ${secondsToMinutes(timeOnDisplay)}`
+        }
+        if (short) {
+          document.title = `Short break: ${secondsToMinutes(timeOnDisplay)}`
+        }
+        if (long) {
+          document.title = `Long break: ${secondsToMinutes(timeOnDisplay)}`
+        }
+      } else {
+        document.title = 'Paused'
+      }
+    }
+  }, [wasClicked, pomodoro, short, long, timeCounting, timeOnDisplay])
 
   return (
     <>
@@ -34,11 +54,11 @@ const App = () => {
           <div>
             <PomodoroHeading
               text={
-                !buttonState.wasClicked
+                !wasClicked
                   ? 'Are you Ready?'
-                  : buttonState.pomodoro
+                  : pomodoro
                   ? 'Working'
-                  : buttonState.short
+                  : short
                   ? 'Short Break'
                   : 'Long Break'
               }
