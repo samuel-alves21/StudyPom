@@ -66,7 +66,7 @@ const App = () => {
             />
             <Pomodoro />
             <Details />
-          </div>
+          </div>  
           <Configs />
         </Wrapper>
       </MainContainer>
