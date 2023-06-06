@@ -10,6 +10,7 @@ import { MyTimerContext, TimerContext } from './contexts/TimerContext'
 import { Configs } from './components/Configs'
 import { breakpoints } from './breakpoints'
 import { secondsToMinutes } from './functions/secondsToMinutes'
+import { Logo } from './components/Logo'
 
 const App = () => {
   const {
@@ -50,7 +51,7 @@ const App = () => {
       <GlobalStyles />
       <MainContainer>
         <Wrapper>
-          <Title>StudyPom</Title>
+          <Logo />
           <div>
             <PomodoroHeading
               text={
@@ -106,20 +107,6 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   gap: 30px;
-`
-
-const Title = styled.h1`
-  font-family: 'Indie Flower', cursive;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  font-size: 5rem;
-
-  @media (max-width: ${breakpoints.mobile}) {
-    top: 0%;
-    left: calc(50% - 90px);
-    font-size: 4rem;
-  }
 `
 
 export default App
