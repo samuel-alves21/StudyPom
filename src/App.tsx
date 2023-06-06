@@ -2,15 +2,13 @@ import styled from 'styled-components'
 import backgrundDefault from './img/default-backgrund.jpg'
 import { useContext, useEffect } from 'react'
 import { GlobalStyles } from './globalStyles'
-import { Pomodoro } from './components/Pomodoro'
-import { PomodoroHeading } from './components/PomodoroHeading'
 import { ButtonsContext, MyButtonContext } from './contexts/ButtonsContext'
-import { Details } from './components/Details'
 import { MyTimerContext, TimerContext } from './contexts/TimerContext'
 import { Configs } from './components/Configs'
 import { breakpoints } from './breakpoints'
 import { secondsToMinutes } from './functions/secondsToMinutes'
 import { Logo } from './components/Logo'
+import { Timer } from './components/Timer'
 
 const App = () => {
   const {
@@ -52,21 +50,7 @@ const App = () => {
       <MainContainer>
         <Wrapper>
           <Logo />
-          <div>
-            <PomodoroHeading
-              text={
-                !wasClicked
-                  ? 'Are you Ready?'
-                  : pomodoro
-                  ? 'Working'
-                  : short
-                  ? 'Short Break'
-                  : 'Long Break'
-              }
-            />
-            <Pomodoro />
-            <Details />
-          </div>  
+          <Timer />
           <Configs />
         </Wrapper>
       </MainContainer>
