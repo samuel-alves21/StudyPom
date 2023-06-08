@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react'
-import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
-import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
+import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
+import { ButtonsContext, MyButtonContext } from '../../../contexts/ButtonsContext'
 import styled from 'styled-components'
 
 interface StyledProps {
   animate: boolean
 }
 
-export const ResetButton = () => {
+export const CounterResetBtn = () => {
   const [animate, setAnimate] = useState(false)
 
   const { timeDispatch } = useContext(TimerContext) as MyTimerContext

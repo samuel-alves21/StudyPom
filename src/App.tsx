@@ -1,49 +1,17 @@
 import styled from 'styled-components'
 import backgrundDefault from './img/default-backgrund.jpg'
-import { useContext, useEffect } from 'react'
 import { GlobalStyles } from './globalStyles'
-import { ButtonsContext, MyButtonContext } from './contexts/ButtonsContext'
-import { MyTimerContext, TimerContext } from './contexts/TimerContext'
 import { Configs } from './components/Configs'
 import { breakpoints } from './breakpoints'
-import { secondsToMinutes } from './functions/secondsToMinutes'
 import { Logo } from './components/Logo'
 import { Timer } from './components/Timer'
+import { useSetWindow } from './hooks/useSetWindow'
+import { useInit } from './hooks/useInit'
 
 const App = () => {
-  const {
-    buttonState: { long, short, pomodoro, wasClicked },
-    buttonDispatch,
-  } = useContext(ButtonsContext) as MyButtonContext
-
-  const {
-    timeState: { pomodoroTime, timeCounting, timeOnDisplay },
-    timeDispatch,
-  } = useContext(TimerContext) as MyTimerContext
-
-  useEffect(() => {
-    buttonDispatch({ type: 'POMODORO' })
-    timeDispatch({ type: 'SET_POMODORO_TIME', payload: pomodoroTime })
-  }, [pomodoroTime, timeDispatch, buttonDispatch])
-
-  useEffect(() => {
-    if (wasClicked) {
-      if (timeCounting) {
-        if (pomodoro) {
-          document.title = `Working: ${secondsToMinutes(timeOnDisplay)}`
-        }
-        if (short) {
-          document.title = `Short break: ${secondsToMinutes(timeOnDisplay)}`
-        }
-        if (long) {
-          document.title = `Long break: ${secondsToMinutes(timeOnDisplay)}`
-        }
-      } else {
-        document.title = 'Paused'
-      }
-    }
-  }, [wasClicked, pomodoro, short, long, timeCounting, timeOnDisplay])
-
+  useSetWindow()
+  useInit()
+ 
   return (
     <>
       <GlobalStyles />

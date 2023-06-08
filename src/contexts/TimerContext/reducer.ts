@@ -1,3 +1,5 @@
+import { standardValues } from "../../utilities/standardValues"
+
 export type TimerActionType =
   | 'SET_POMODORO_TIME'
   | 'SET_SHORT_TIME'
@@ -25,10 +27,10 @@ type Reducer = (
 ) => typeof initialState
 
 export const initialState = {
-  pomodoroTime: 5,
-  shortRestTime: 3,
-  longRestTime: 4,
-  cycles: 4,
+  pomodoroTime: standardValues.pomodoro,
+  shortRestTime: standardValues.shortBreak,
+  longRestTime: standardValues.longBreak,
+  cycles: standardValues.cycles,
   cyclesTemp: 0,
   cyclesFinished: 0,
   timeOnDisplay: 0,

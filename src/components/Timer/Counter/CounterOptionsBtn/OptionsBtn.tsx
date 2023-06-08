@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
-import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
-import { TimerActionType } from '../contexts/TimerContext/reducer'
-import { ButtonActionType } from '../contexts/ButtonsContext/reducer'
-import { breakpoints } from '../breakpoints'
-import { Id } from '../types/types'
+import { ButtonsContext, MyButtonContext } from '../../../../contexts/ButtonsContext'
+import { MyTimerContext, TimerContext } from '../../../../contexts/TimerContext'
+import { TimerActionType } from '../../../../contexts/TimerContext/reducer'
+import { ButtonActionType } from '../../../../contexts/ButtonsContext/reducer'
+import { breakpoints } from '../../../../breakpoints'
+import { Id } from '../../../../types/types'
 
 interface Props {
   text: Id
@@ -15,7 +15,7 @@ interface StyledProps {
   isSelected: boolean
 }
 
-export const Button = ({ text }: Props) => {
+export const OptionsBtn = ({ text }: Props) => {
   const { timeDispatch } = useContext(TimerContext) as MyTimerContext
 
   const { buttonState, buttonDispatch } = useContext(

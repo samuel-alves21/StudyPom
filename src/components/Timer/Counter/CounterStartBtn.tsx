@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
-import { useInterval } from '../hooks/useInterval'
+import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
+import { useInterval } from '../../../hooks/useInterval'
 import { useContext, useCallback } from 'react'
-import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
+import { ButtonsContext, MyButtonContext } from '../../../contexts/ButtonsContext'
 
-export const TimerToggleButton = () => {
+export const CounterStartBtn = () => {
   const {
     timeState: { timeCounting },
     timeDispatch,

@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import { useEffect, useContext } from 'react'
-import { Buttons } from '../../TimerButtons'
-import { Display } from '../../Timer/Display'
-import { TimerToggleButton } from '../../TimerToggleButton'
+import { Display } from './Display'
 import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
 import { ButtonsContext, MyButtonContext } from '../../../contexts/ButtonsContext'
-import { ResetButton } from '../../ResetButton'
+import finishBellSong from '../../../sounds/src_sounds_bell-finish.mp3'
+import startBellSong from '../../../sounds/src_sounds_bell-start.mp3'
+import { CounterOptionsBtn } from './CounterOptionsBtn'
+import { CounterStartBtn } from './CounterStartBtn'
+import { CounterResetBtn } from './CounterResetBtn'
 
-import finishBellSong from '../sounds/src_sounds_bell-finish.mp3'
-import startBellSong from '../sounds/src_sounds_bell-start.mp3'
 
 const startSong = new Audio(startBellSong)
 const finishSong = new Audio(finishBellSong)
@@ -95,18 +95,18 @@ export const Counter = () => {
     cyclesTemp,
   ])
   return (
-    <PomodoroWrapper>
-      <Buttons />
+    <CounterWrapper>
+      <CounterOptionsBtn />
       <Display />
       <ButtonsWrapper>
-        <TimerToggleButton />
-        <ResetButton />
+        <CounterStartBtn />
+        <CounterResetBtn />
       </ButtonsWrapper>
-    </PomodoroWrapper>
+    </CounterWrapper>
   )
 }
 
-const PomodoroWrapper = styled.div`
+const CounterWrapper = styled.div`
   max-width: 600px;
 
   display: flex;

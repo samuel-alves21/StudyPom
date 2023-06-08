@@ -1,29 +1,13 @@
-import { useContext } from "react"
-import { ButtonsContext, MyButtonContext } from "../../contexts/ButtonsContext"
-import { Details } from "../Details"
-import { Counter } from "../Counter"
-import { PomodoroHeading } from "../PomodoroHeading"
+import { TimerDetails } from "./TimerDetails"
+import { Counter } from "./Counter"
+import { CurrentTimerOption } from "./CurrentTimerOption"
 
 export const Timer = () => {
-  const {
-    buttonState: { short, pomodoro, wasClicked },
-  } = useContext(ButtonsContext) as MyButtonContext
-
   return (
     <div>
-      <PomodoroHeading
-        text={
-          !wasClicked
-            ? 'Are you Ready?'
-            : pomodoro
-            ? 'Working'
-            : short
-            ? 'Short Break'
-            : 'Long Break'
-        }
-      />
+      <CurrentTimerOption />
       <Counter />
-      <Details />
+      <TimerDetails />
     </div>  
   )
 }
