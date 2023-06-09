@@ -1,10 +1,10 @@
 import { ConfigDescription } from './ConfigsDescription.'
-import { ConfigsHeading } from './ConfigsHeading'
+import { ConfigHeading } from './ConfigHeading'
 
-export const Configs = () => {
+export const TimerConfig = () => {
   return (
     <div>
-      <ConfigsHeading />
+      <ConfigHeading />
       <ConfigDescription />
     </div>
   )

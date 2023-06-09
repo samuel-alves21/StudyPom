@@ -62,8 +62,11 @@ export const ConfigInput = ({ state, setState, id }: Props) => {
 
     timeDispatch({ type: 'RESET_ALL' })
     buttonDispatch({ type: 'CLICKED', payload: false })
-    timeDispatch({type: 'SET_TIME_ON_DISPLAY', payload: minutesToSeconds(verifyLimit(Number(state), id))})
-  } , [state, id, timeDispatch, buttonDispatch])
+    timeDispatch({
+      type: 'SET_TIME_ON_DISPLAY',
+      payload: minutesToSeconds(verifyLimit(Number(state), id)),
+    })
+  }, [state, id, timeDispatch, buttonDispatch])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLElement

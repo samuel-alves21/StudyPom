@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { useState, useRef } from 'react'
-import { ConfigWindow } from './ConfigWindow'
+import { useState, useRef, useEffect } from 'react'
+import { ConfigWindow } from '../ConfigWindow'
 
 interface FilterProps {
   shouldDisplay: boolean
@@ -11,7 +11,7 @@ interface IconProps {
   animate: boolean
 }
 
-export const ConfigsHeading = () => {
+export const ConfigHeading = () => {
   const gear = useRef<HTMLElement | null>(null)
 
   const [shouldDisplay, setShouldDisplay] = useState(false)
@@ -21,6 +21,16 @@ export const ConfigsHeading = () => {
     setShouldDisplay(!shouldDisplay)
     setAnimate(true)
   }
+
+  useEffect(() => {
+    if (shouldDisplay) {
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+      document.getElementsByTagName('body')[0].style.height = '100%'
+    } else {
+      document.getElementsByTagName('body')[0].style.overflow = 'auto'
+      document.getElementsByTagName('body')[0].style.height = 'initial'
+    }
+  }, [shouldDisplay])
 
   return (
     <Wrapper shouldRotate={shouldDisplay} animate={animate}>
@@ -83,7 +93,7 @@ const Filter = styled.div`
   pointer-events: none;
   transition: opacity 0.2s ease-in-out;
   opacity: ${({ shouldDisplay }: FilterProps) => (shouldDisplay ? '1' : '0')};
-  background-color: #00000029;
+  background-color: #0000006d;
   position: absolute;
   min-width: 100%;
   min-height: 100%;

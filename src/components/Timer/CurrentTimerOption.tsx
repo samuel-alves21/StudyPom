@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react"
-import { ButtonsContext, MyButtonContext } from "../../contexts/ButtonsContext"
+import { useContext, useEffect, useState } from 'react'
+import { ButtonsContext, MyButtonContext } from '../../contexts/ButtonsContext'
 
 export const CurrentTimerOption = () => {
   const {
@@ -10,11 +10,13 @@ export const CurrentTimerOption = () => {
 
   useEffect(() => {
     if (wasClicked) {
-      setCurrentOption(pomodoro ? 'Working' : short ? 'Short Break' : 'Long Break')
+      setCurrentOption(
+        pomodoro ? 'Working' : short ? 'Short Break' : 'Long Break'
+      )
     } else {
       setCurrentOption('Are you Ready?')
     }
   }, [wasClicked, pomodoro, short])
 
-  return (<h1>{currentOption}</h1>)
+  return <h1>{currentOption}</h1>
 }

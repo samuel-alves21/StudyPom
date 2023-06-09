@@ -1,14 +1,22 @@
 import styled from 'styled-components'
-import { ConfigInput } from './ConfigInput'
+import { ConfigInput } from '../../ConfigInput'
 import { useState } from 'react'
-import { ConfigLimitValues } from './ConfigLimitValues'
-import { standardValues } from '../utilities/standardValues'
+import { ConfigLimitValues } from '../../ConfigLimitValues'
+import { standardValues } from '../../../utilities/standardValues'
 
 export const ConfigsOptions = () => {
-  const [pomodoroConfigTime, setPomodoroConfigTime] = useState(String(standardValues.pomodoro))
-  const [shortConfigTime, setShortConfigTime] = useState(String(standardValues.shortBreak))
-  const [longConfigTime, setLongConfigTime] = useState(String(standardValues.longBreak))
-  const [configCycles, setConfigCycles] = useState(String(standardValues.cycles))
+  const [pomodoroConfigTime, setPomodoroConfigTime] = useState(
+    String(standardValues.pomodoro)
+  )
+  const [shortConfigTime, setShortConfigTime] = useState(
+    String(standardValues.shortBreak)
+  )
+  const [longConfigTime, setLongConfigTime] = useState(
+    String(standardValues.longBreak)
+  )
+  const [configCycles, setConfigCycles] = useState(
+    String(standardValues.cycles)
+  )
 
   return (
     <Wrapper>

@@ -1,4 +1,4 @@
-import { standardValues } from "../../utilities/standardValues"
+import { standardValues } from '../../utilities/standardValues'
 
 export type TimerActionType =
   | 'SET_POMODORO_TIME'

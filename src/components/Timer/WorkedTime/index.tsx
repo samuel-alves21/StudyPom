@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Details } from './Details'
 
-export const TimerDetails = () => {
+export const WorkedTime = () => {
   return (
     <DetailsWrapper>
       <Details text='time worked' />

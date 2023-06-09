@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { ButtonsContext, MyButtonContext } from '../../../../contexts/ButtonsContext'
+import {
+  ButtonsContext,
+  MyButtonContext,
+} from '../../../../contexts/ButtonsContext'
 import { MyTimerContext, TimerContext } from '../../../../contexts/TimerContext'
 import { TimerActionType } from '../../../../contexts/TimerContext/reducer'
 import { ButtonActionType } from '../../../../contexts/ButtonsContext/reducer'
-import { breakpoints } from '../../../../breakpoints'
+import { breakpoints } from '../../../../utilities/breakpoints'
 import { Id } from '../../../../types/types'
 
 interface Props {

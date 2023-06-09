@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import backgrundDefault from './img/default-backgrund.jpg'
 import { GlobalStyles } from './globalStyles'
-import { Configs } from './components/Configs'
-import { breakpoints } from './breakpoints'
+import { TimerConfig } from './components/TimerConfig'
+import { breakpoints } from './utilities/breakpoints'
 import { Logo } from './components/Logo'
 import { Timer } from './components/Timer'
 import { useSetWindow } from './hooks/useSetWindow'
@@ -11,7 +11,7 @@ import { useInit } from './hooks/useInit'
 const App = () => {
   useSetWindow()
   useInit()
- 
+
   return (
     <>
       <GlobalStyles />
@@ -19,7 +19,7 @@ const App = () => {
         <Wrapper>
           <Logo />
           <Timer />
-          <Configs />
+          <TimerConfig />
         </Wrapper>
       </MainContainer>
     </>

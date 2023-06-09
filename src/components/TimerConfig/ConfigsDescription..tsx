@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
-import { secondsToMinutes } from '../functions/secondsToMinutes'
-import { secondsToTime } from '../functions/secondsToTime'
+import { MyTimerContext, TimerContext } from '../../contexts/TimerContext'
+import { secondsToMinutes } from '../../functions/secondsToMinutes'
+import { secondsToTime } from '../../functions/secondsToTime'
 
 export const ConfigDescription = () => {
   const { timeState } = useContext(TimerContext) as MyTimerContext

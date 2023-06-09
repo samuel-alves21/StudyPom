@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useContext } from 'react'
 import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
 import { secondsToTime } from '../../../functions/secondsToTime'
-import { breakpoints } from '../../../breakpoints'
+import { breakpoints } from '../../../utilities/breakpoints'
 
 export const Display = () => {
   const {

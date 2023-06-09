@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useRef } from 'react'
-import { ConfigsOptions } from './ConfigsOptions'
+import { ConfigsOptions } from './ConfigOptions'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void

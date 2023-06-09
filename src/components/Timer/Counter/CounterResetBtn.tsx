@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react'
 import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
-import { ButtonsContext, MyButtonContext } from '../../../contexts/ButtonsContext'
+import {
+  ButtonsContext,
+  MyButtonContext,
+} from '../../../contexts/ButtonsContext'
 import styled from 'styled-components'
 
 interface StyledProps {

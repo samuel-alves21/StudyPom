@@ -2,13 +2,15 @@ import styled from 'styled-components'
 import { useEffect, useContext } from 'react'
 import { Display } from './Display'
 import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
-import { ButtonsContext, MyButtonContext } from '../../../contexts/ButtonsContext'
+import {
+  ButtonsContext,
+  MyButtonContext,
+} from '../../../contexts/ButtonsContext'
 import finishBellSong from '../../../sounds/src_sounds_bell-finish.mp3'
 import startBellSong from '../../../sounds/src_sounds_bell-start.mp3'
 import { CounterOptionsBtn } from './CounterOptionsBtn'
 import { CounterStartBtn } from './CounterStartBtn'
 import { CounterResetBtn } from './CounterResetBtn'
-
 
 const startSong = new Audio(startBellSong)
 const finishSong = new Audio(finishBellSong)
