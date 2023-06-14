@@ -3,7 +3,7 @@ import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
 import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
 
-export const useSetWindow = () => {
+export const useSetWindow = (wasReseted?: boolean) => {
   const {
     buttonState: { long, short, pomodoro, wasClicked },
   } = useContext(ButtonsContext) as MyButtonContext
@@ -13,6 +13,9 @@ export const useSetWindow = () => {
   } = useContext(TimerContext) as MyTimerContext
 
   useEffect(() => {
+    if (wasReseted) {
+      document.title = 'StudyPom'
+    }
     if (wasClicked) {
       if (timeCounting) {
         if (pomodoro) {
@@ -28,5 +31,13 @@ export const useSetWindow = () => {
         document.title = 'Paused'
       }
     }
-  }, [wasClicked, pomodoro, short, long, timeCounting, timeOnDisplay])
+  }, [
+    wasClicked,
+    pomodoro,
+    short,
+    long,
+    timeCounting,
+    timeOnDisplay,
+    wasReseted,
+  ])
 }

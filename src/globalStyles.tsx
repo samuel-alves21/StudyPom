@@ -9,11 +9,6 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     animation: {}
   }
-
-  ::selection {
-    background: var(--color-primary);
-    color: #fff;
-  }
   
   :root {
     font-size: 62.5%;
@@ -23,9 +18,16 @@ export const GlobalStyles = createGlobalStyle`
     --color-primary: #ae83ff;
   }
 
+  ::selection {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+
   .img-full-cover {
     object-fit: cover;
     width: 100%;
+    height: 100%;
   }
 
   h1, h2, h3, h4 {

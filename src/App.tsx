@@ -1,25 +1,34 @@
 import styled from 'styled-components'
-import backgrundDefault from './img/default-backgrund.jpg'
 import { GlobalStyles } from './globalStyles'
-import { TimerConfig } from './components/TimerConfig'
+import { UserConfig } from './components/UserConfig'
 import { breakpoints } from './utilities/breakpoints'
 import { Logo } from './components/Logo'
 import { Timer } from './components/Timer'
 import { useSetWindow } from './hooks/useSetWindow'
 import { useInit } from './hooks/useInit'
+import { useContext } from 'react'
+import { StylesContext, StylesContextType } from './contexts/StylesContext'
+
+interface MainContainerProps {
+  background: string
+}
 
 const App = () => {
+  const {
+    stylesState: { background },
+  } = useContext(StylesContext) as StylesContextType
+
   useSetWindow()
   useInit()
 
   return (
     <>
       <GlobalStyles />
-      <MainContainer>
+      <MainContainer background={background}>
         <Wrapper>
           <Logo />
           <Timer />
-          <TimerConfig />
+          <UserConfig />
         </Wrapper>
       </MainContainer>
     </>
@@ -31,11 +40,12 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  padding: 50px 0;
+  padding: 30px 0;
 
   &::before {
     content: '';
-    background: url(${backgrundDefault}) center center no-repeat;
+    background: url(${({ background }: MainContainerProps) => background})
+      center center no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;

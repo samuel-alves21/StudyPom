@@ -5,6 +5,7 @@ import {
   MyButtonContext,
 } from '../../../contexts/ButtonsContext'
 import styled from 'styled-components'
+import { useSetWindow } from '../../../hooks/useSetWindow'
 
 interface StyledProps {
   animate: boolean
@@ -22,6 +23,8 @@ export const CounterResetBtn = () => {
     buttonDispatch({ type: 'CLICKED', payload: false })
     setAnimate(true)
   }
+
+  useSetWindow(true)
 
   return (
     <Wrapper animate={animate} onAnimationEnd={() => setAnimate(false)}>
