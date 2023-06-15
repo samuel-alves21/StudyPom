@@ -1,42 +1,15 @@
-import { standardValues } from '../../utilities/standardValues'
+import {  State } from "./initialState"
+import { TimerActionType } from "./types"
 
-export type TimerActionType =
-  | 'SET_POMODORO_TIME'
-  | 'SET_SHORT_TIME'
-  | 'SET_LONG_TIME'
-  | 'DECREASE_TIME'
-  | 'SET_TIME_COUNTING'
-  | 'SET_TIME_ON_DISPLAY'
-  | 'SET_CYCLES_TEMP'
-  | 'SET_CYCLES_FINISHED'
-  | 'SET_WORKED_TIME'
-  | 'RESET_ALL'
-  | 'CONFIG_POMODORO_TIME'
-  | 'CONFIG_SHORT_TIME'
-  | 'CONFIG_LONG_TIME'
-  | 'CONFIG_CYCLES'
-
-export interface TimerAction {
+export interface ReducerAction {
   type: TimerActionType
   payload?: number | boolean
 }
 
 type Reducer = (
-  state: typeof initialState,
-  action: TimerAction
-) => typeof initialState
-
-export const initialState = {
-  pomodoroTime: standardValues.pomodoro,
-  shortRestTime: standardValues.shortBreak,
-  longRestTime: standardValues.longBreak,
-  cycles: standardValues.cycles,
-  cyclesTemp: 0,
-  cyclesFinished: 0,
-  timeOnDisplay: 0,
-  timeCounting: false,
-  workedTime: 0,
-}
+  state: State,
+  action: ReducerAction
+) => State
 
 export const reducer: Reducer = (state, action) => {
   switch (action.type) {

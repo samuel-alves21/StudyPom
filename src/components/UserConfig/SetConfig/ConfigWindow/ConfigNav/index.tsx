@@ -1,4 +1,8 @@
 import styled from 'styled-components'
+import { TimerContext } from '../../../../../contexts/TimerContext'
+import { useContext } from 'react'
+
+
 
 interface ConfigNavProps {
   setOption: (option: 'timer' | 'background' | 'sounds') => void
@@ -10,14 +14,8 @@ interface StyledProps {
   isSelected: boolean
 }
 
-export const ConfigNav = ({
-  setOption,
-  option,
-  setShouldDisplay,
-}: ConfigNavProps) => {
-  const handleClick = (
-    e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
-  ) => {
+export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
+  const handleClick = ( e: React.MouseEvent<HTMLParagraphElement, MouseEvent> ) => {
     setOption(e.currentTarget.innerText.toLowerCase() as typeof option)
   }
 

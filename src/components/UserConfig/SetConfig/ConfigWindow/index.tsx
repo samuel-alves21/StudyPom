@@ -31,6 +31,16 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
     if (event.key === 'Escape') setShouldDisplay(false)
   }
 
+  const handleMouseEnter = () => {
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+    document.getElementsByTagName('body')[0].style.height = '100%'
+  }
+
+  const handleMouseLeave = () => {
+    document.getElementsByTagName('body')[0].style.overflow = 'auto'
+    document.getElementsByTagName('body')[0].style.height = 'initial'
+  }
+
   useEffect(() => {
     if (!shouldDisplay) {
       setTimeout(() => setOption('timer'), 500)
@@ -38,7 +48,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   }, [shouldDisplay])
 
   return (
-    <Wrapper>
+    <Wrapper display={shouldDisplay} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Window ref={thisWindow} display={shouldDisplay}>
         <ConfigNav
           setOption={setOption}
@@ -60,6 +70,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
 }
 
 const Wrapper = styled.div`
+  overflow-y: ${({ display }: ThisWindownsProps) => (display ? 'auto' : 'hidden')};
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -72,7 +83,7 @@ const Wrapper = styled.div`
 `
 
 const Window = styled.div`
-  margin-top: 100px;
+  margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(8px);
@@ -80,8 +91,8 @@ const Window = styled.div`
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: fit-content;
   min-height: 400px;
-  max-height: 500px;
   min-width: 500px;
   transition: opacity
     ${({ display }: ThisWindownsProps) =>

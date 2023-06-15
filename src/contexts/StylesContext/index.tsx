@@ -1,12 +1,13 @@
 import { createContext, useReducer } from 'react'
-import { initialState, reducer } from './reducer'
+import { reducer } from './reducer'
+import { State, initialState } from './initialState'
 
 interface Props {
   children: React.ReactNode
 }
 
 export interface StylesContextType {
-  stylesState: typeof initialState
+  stylesState: State
   stylesDispatch: React.Dispatch<{ type: 'CHANGE_BACKGROUND'; payload: string }>
 }
 

@@ -1,13 +1,10 @@
-import { backgroundArray } from '../../utilities/backgroundArray'
+import { State } from './initialState';
+import { ActionTypes } from './types';
 
 export type StylesReducer = (
-  state: typeof initialState,
-  action: { type: 'CHANGE_BACKGROUND'; payload: string }
-) => typeof initialState
-
-export const initialState = {
-  background: backgroundArray[0],
-}
+  state: State,
+  action: { type: ActionTypes; payload: string }
+) => State
 
 export const reducer: StylesReducer = (state, action) => {
   switch (action.type) {

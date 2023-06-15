@@ -1,16 +1,17 @@
 import { createContext, useReducer } from 'react'
-import { ButtonAction, initialState, reducer } from './reducer'
+import { ReducerAction, reducer } from './reducer'
+import { State, initialState } from './initialState'
 
-export interface MyButtonContext {
-  buttonState: typeof initialState
-  buttonDispatch: React.Dispatch<ButtonAction>
+export interface ButtonContext {
+  buttonState: State
+  buttonDispatch: React.Dispatch<ReducerAction>
 }
 
 interface Props {
   children: React.ReactNode
 }
 
-export const ButtonsContext = createContext<MyButtonContext | null>(null)
+export const ButtonsContext = createContext<ButtonContext | null>(null)
 
 export const ButtonsProvider = (props: Props) => {
   const [buttonState, buttonDispatch] = useReducer(reducer, initialState)

@@ -1,21 +1,8 @@
-type InicialState = {
-  pomodoro: boolean
-  short: boolean
-  long: boolean
-  wasClicked: boolean
-  [key: string]: boolean
-}
+import { State } from "./initialState";
+import { ActionTypes } from "./types";
 
-export const initialState: InicialState = {
-  pomodoro: true,
-  short: false,
-  long: false,
-  wasClicked: false,
-}
-
-export type ButtonActionType = 'POMODORO' | 'SHORT' | 'LONG' | 'CLICKED'
-export type ButtonAction = { type: ButtonActionType; payload?: boolean }
-type Reducer = (state: InicialState, action: ButtonAction) => InicialState
+export interface ReducerAction { type: ActionTypes; payload?: boolean }
+type Reducer = (state: State, action: ReducerAction) => State
 
 export const reducer: Reducer = (state, action) => {
   switch (action.type) {

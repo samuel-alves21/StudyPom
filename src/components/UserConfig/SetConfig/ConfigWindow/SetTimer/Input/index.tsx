@@ -2,21 +2,15 @@ import styled from 'styled-components'
 import { Arrows } from './Arrows'
 import { formatConfigInput } from '../../../../../../functions/formatConfigInput'
 import { useContext, useEffect } from 'react'
-import {
-  MyTimerContext,
-  TimerContext,
-} from '../../../../../../contexts/TimerContext'
-import { TimerActionType } from '../../../../../../contexts/TimerContext/reducer'
+import { TimerContext } from '../../../../../../contexts/TimerContext'
 import { minutesToSeconds } from '../../../../../../functions/minutesToSeconds'
 import { limitValues } from '../../../../../../utilities/limitValues'
 import { verifyLimit } from '../../../../../../functions/verifyLimit'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import {
-  ButtonsContext,
-  MyButtonContext,
-} from '../../../../../../contexts/ButtonsContext'
+import { ButtonsContext, ButtonContext } from '../../../../../../contexts/ButtonsContext'
 import { Id } from '../../../../../../types/types'
+import { TimerActionType } from '../../../../../../contexts/TimerContext/types'
 
 interface Props {
   id: Id
@@ -25,8 +19,8 @@ interface Props {
 }
 
 export const Input = ({ state, setState, id }: Props) => {
-  const { timeDispatch } = useContext(TimerContext) as MyTimerContext
-  const { buttonDispatch } = useContext(ButtonsContext) as MyButtonContext
+  const { timeDispatch } = useContext(TimerContext) as TimerContext
+  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContext
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
@@ -57,7 +51,7 @@ export const Input = ({ state, setState, id }: Props) => {
     if (id !== 'cycles') {
       timeDispatch({
         type: `CONFIG_${id.toUpperCase()}_TIME` as TimerActionType,
-        payload: minutesToSeconds(verifyLimit(Number(state), id)),
+        payload: verifyLimit(Number(state), id),
       })
     } else {
       timeDispatch({
@@ -68,7 +62,7 @@ export const Input = ({ state, setState, id }: Props) => {
     timeDispatch({ type: 'RESET_ALL' })
     buttonDispatch({ type: 'CLICKED', payload: false })
     buttonDispatch({ type: 'POMODORO' })
-  }, [state, id, timeDispatch, buttonDispatch])
+  }, [state, id, timeDispatch, buttonDispatch ])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLElement

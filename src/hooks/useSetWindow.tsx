@@ -1,16 +1,16 @@
 import { useContext, useEffect } from 'react'
-import { ButtonsContext, MyButtonContext } from '../contexts/ButtonsContext'
-import { MyTimerContext, TimerContext } from '../contexts/TimerContext'
+import { ButtonContext, ButtonsContext } from '../contexts/ButtonsContext'
+import { TimerContext } from '../contexts/TimerContext'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
 
 export const useSetWindow = (wasReseted?: boolean) => {
   const {
     buttonState: { long, short, pomodoro, wasClicked },
-  } = useContext(ButtonsContext) as MyButtonContext
+  } = useContext(ButtonsContext) as ButtonContext
 
   const {
     timeState: { timeCounting, timeOnDisplay },
-  } = useContext(TimerContext) as MyTimerContext
+  } = useContext(TimerContext) as TimerContext
 
   useEffect(() => {
     if (wasReseted) {

@@ -1,9 +1,7 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { ButtonsContext, MyButtonContext } from '../../../../contexts/ButtonsContext'
-import { MyTimerContext, TimerContext } from '../../../../contexts/TimerContext'
-import { TimerActionType } from '../../../../contexts/TimerContext/reducer'
-import { ButtonActionType } from '../../../../contexts/ButtonsContext/reducer'
+import { ButtonsContext } from '../../../../contexts/ButtonsContext'
+import { TimerContext } from '../../../../contexts/TimerContext'
 import { breakpoints } from '../../../../utilities/breakpoints'
 import { Id } from '../../../../types/types'
 
@@ -16,7 +14,7 @@ interface StyledProps {
 }
 
 export const OptionsBtn = ({ text }: Props) => {
-  const { timeDispatch } = useContext(TimerContext) as MyTimerContext
+  const { timeDispatch } = useContext(TimerContext) as TimerContext
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext

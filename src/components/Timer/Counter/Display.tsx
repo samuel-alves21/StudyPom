@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
+import { TimerContext } from '../../../contexts/TimerContext'
 import { secondsToTime } from '../../../functions/secondsToTime'
 import { breakpoints } from '../../../utilities/breakpoints'
+import { secondsToMinutes } from '../../../functions/secondsToMinutes'
+import { minutesToSeconds } from '../../../functions/minutesToSeconds'
 
 export const Display = () => {
+
   const {
     timeState: { timeOnDisplay },
-  } = useContext(TimerContext) as MyTimerContext
-
-  return <H1>{secondsToTime(timeOnDisplay)}</H1>
+  } = useContext(TimerContext) as TimerContext
+  console.log(timeOnDisplay)
+  return <H1>{secondsToTime(minutesToSeconds(timeOnDisplay))}</H1>
 }
 
 const H1 = styled.h1`

@@ -1,22 +1,17 @@
 import styled from 'styled-components'
 import { Input } from './Input'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { LimitValues } from './LimitValues'
 import { standardValues } from '../../../../../utilities/standardValues'
+import { TimerContext } from '../../../../../contexts/TimerContext'
 
 export const SetTimer = () => {
-  const [pomodoroConfigTime, setPomodoroConfigTime] = useState(
-    String(standardValues.pomodoro)
-  )
-  const [shortConfigTime, setShortConfigTime] = useState(
-    String(standardValues.shortBreak)
-  )
-  const [longConfigTime, setLongConfigTime] = useState(
-    String(standardValues.longBreak)
-  )
-  const [configCycles, setConfigCycles] = useState(
-    String(standardValues.cycles)
-  )
+  const { timeState: { pomodoroTime, shortRestTime, longRestTime, cycles} } = useContext(TimerContext) as TimerContext
+
+  const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
+  const [shortConfigTime, setShortConfigTime] = useState<string>(String(shortRestTime))
+  const [longConfigTime, setLongConfigTime] = useState<string>(String(longRestTime))
+  const [configCycles, setConfigCycles] = useState<string>(String(cycles))
 
   return (
     <Wrapper>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { ConfigWindow } from './ConfigWindow'
 
 interface FilterProps {
@@ -21,16 +21,6 @@ export const ConfigHeading = () => {
     setShouldDisplay(!shouldDisplay)
     setAnimate(true)
   }
-
-  useEffect(() => {
-    if (shouldDisplay) {
-      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
-      document.getElementsByTagName('body')[0].style.height = '100%'
-    } else {
-      document.getElementsByTagName('body')[0].style.overflow = 'auto'
-      document.getElementsByTagName('body')[0].style.height = 'initial'
-    }
-  }, [shouldDisplay])
 
   return (
     <Wrapper shouldRotate={shouldDisplay} animate={animate}>
