@@ -1,0 +1,1 @@
+export type ActionTypes = 'CHANGE_BACKGROUND'
