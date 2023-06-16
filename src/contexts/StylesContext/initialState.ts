@@ -5,5 +5,5 @@ export interface State {
 }
 
 export const initialState = {
-  background: backgroundArray[0],
+  background: backgroundArray[0].path,
 }

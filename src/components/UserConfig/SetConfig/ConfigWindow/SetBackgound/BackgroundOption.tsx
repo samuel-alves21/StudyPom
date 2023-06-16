@@ -3,27 +3,26 @@ import { StylesContext, StylesContextType } from '../../../../../contexts/Styles
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import styled from 'styled-components'
 
-
 interface Props {
-  background: string
+  background: {
+    path: string
+    name: string
+  }
 }
 
 export const BackgroundOption = ({ background }: Props) => {
   const { stylesDispatch } = useContext(StylesContext) as StylesContextType
 
-  let title = background.split('/').slice(-1).join('').split('.')[0].replaceAll('-', ' ')
-  title = title.charAt(0).toUpperCase() + title.slice(1)
-
   const handleClick = () => {
-    stylesDispatch({ type: 'CHANGE_BACKGROUND', payload: background })
+    stylesDispatch({ type: 'CHANGE_BACKGROUND', payload: background.path })
   }
 
   return (
     <Wrapper onClick={handleClick}>
-      <BackgroundTitle>{title}</BackgroundTitle>
+      <BackgroundTitle>{background.name}</BackgroundTitle>
       <img
         className='img-full-cover'
-        src={background}
+        src={background.path}
         alt='background-option'
       />
     </Wrapper>

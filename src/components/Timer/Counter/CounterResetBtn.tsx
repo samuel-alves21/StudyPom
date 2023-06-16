@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   & .bi-arrow-clockwise:hover {
     color: var(--color-primary);
     cursor: pointer;
-  }
+    }
 
   animation: ${({ animate }: StyledProps) =>
     animate ? 'full-rotate 0.7s linear forwards' : 'none'};

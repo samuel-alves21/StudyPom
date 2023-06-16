@@ -14,9 +14,7 @@ interface MainContainerProps {
 }
 
 const App = () => {
-  const {
-    stylesState: { background },
-  } = useContext(StylesContext) as StylesContextType
+  const { stylesState: { background } } = useContext(StylesContext) as StylesContextType
 
   useSetWindow()
   useInit()
