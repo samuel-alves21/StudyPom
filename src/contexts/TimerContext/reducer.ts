@@ -1,8 +1,8 @@
 import {  State } from "./initialState"
-import { TimerActionType } from "./types"
+import { TimerActionTypes } from "./types"
 
 export interface ReducerAction {
-  type: TimerActionType
+  type: TimerActionTypes
   payload?: number | boolean
 }
 

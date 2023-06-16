@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
-import { ButtonsContext, MyButtonContext } from '../../contexts/ButtonsContext'
+import { ButtonsContext, ButtonContext } from '../../contexts/ButtonsContext'
 
 export const CurrentTimerOption = () => {
   const {
     buttonState: { short, pomodoro, wasClicked },
-  } = useContext(ButtonsContext) as MyButtonContext
+  } = useContext(ButtonsContext) as ButtonContext
 
   const [currentOption, setCurrentOption] = useState('Are you Ready?')
 

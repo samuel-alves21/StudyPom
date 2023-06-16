@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import { Input } from './Input'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { LimitValues } from './LimitValues'
-import { standardValues } from '../../../../../utilities/standardValues'
 import { TimerContext } from '../../../../../contexts/TimerContext'
 
 export const SetTimer = () => {

@@ -1,1 +1,1 @@
-export type ActionTypes = 'CHANGE_BACKGROUND'
+export type StylesActionTypes = 'CHANGE_BACKGROUND'

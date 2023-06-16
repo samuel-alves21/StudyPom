@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { MyTimerContext, TimerContext } from '../../contexts/TimerContext'
+import { TimerContext } from '../../contexts/TimerContext'
 import { secondsToMinutes } from '../../functions/secondsToMinutes'
 import { secondsToTime } from '../../functions/secondsToTime'
 
 export const SetConfig = () => {
-  const { timeState } = useContext(TimerContext) as MyTimerContext
+  const { timeState } = useContext(TimerContext) as TimerContext
 
   return (
     <ConfigDescriptionWrapper>

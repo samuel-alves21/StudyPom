@@ -1,14 +1,14 @@
 export const limitValues = {
   max: {
-    pomodoro: 60,
-    short: 10,
-    long: 20,
+    pomodoro: 3600,
+    short: 600,
+    long: 1200,
     cycles: 8,
   },
   min: {
-    pomodoro: 25,
-    short: 5,
-    long: 10,
+    pomodoro: 1500,
+    short: 300,
+    long: 600,
     cycles: 4,
   },
 }

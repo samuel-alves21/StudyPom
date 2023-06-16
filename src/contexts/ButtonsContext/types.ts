@@ -1,1 +1,1 @@
-export type ActionTypes = 'POMODORO' | 'SHORT' | 'LONG' | 'CLICKED'
+export type ButtonsActionTypes = 'POMODORO' | 'SHORT' | 'LONG' | 'CLICKED'

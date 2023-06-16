@@ -1,8 +1,4 @@
 import styled from 'styled-components'
-import { TimerContext } from '../../../../../contexts/TimerContext'
-import { useContext } from 'react'
-
-
 
 interface ConfigNavProps {
   setOption: (option: 'timer' | 'background' | 'sounds') => void

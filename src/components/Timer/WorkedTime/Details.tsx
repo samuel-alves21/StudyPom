@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { secondsToTime } from '../../../functions/secondsToTime'
-import { MyTimerContext, TimerContext } from '../../../contexts/TimerContext'
+import { TimerContext } from '../../../contexts/TimerContext'
 import { useContext } from 'react'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Details = ({ text }: Props) => {
-  const { timeState } = useContext(TimerContext) as MyTimerContext
+  const { timeState } = useContext(TimerContext) as TimerContext
 
   return (
     <div>

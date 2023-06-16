@@ -1,16 +1,11 @@
 import styled from 'styled-components'
 import { Arrows } from './Arrows'
 import { formatConfigInput } from '../../../../../../functions/formatConfigInput'
-import { useContext, useEffect } from 'react'
-import { TimerContext } from '../../../../../../contexts/TimerContext'
-import { minutesToSeconds } from '../../../../../../functions/minutesToSeconds'
 import { limitValues } from '../../../../../../utilities/limitValues'
-import { verifyLimit } from '../../../../../../functions/verifyLimit'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import { ButtonsContext, ButtonContext } from '../../../../../../contexts/ButtonsContext'
 import { Id } from '../../../../../../types/types'
-import { TimerActionType } from '../../../../../../contexts/TimerContext/types'
+import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
 
 interface Props {
   id: Id
@@ -19,8 +14,7 @@ interface Props {
 }
 
 export const Input = ({ state, setState, id }: Props) => {
-  const { timeDispatch } = useContext(TimerContext) as TimerContext
-  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContext
+  useTimerConfig(state, id)
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
@@ -46,23 +40,6 @@ export const Input = ({ state, setState, id }: Props) => {
       setState(decrementTime(Number(state), id).toString())
     }
   }
-
-  useEffect(() => {
-    if (id !== 'cycles') {
-      timeDispatch({
-        type: `CONFIG_${id.toUpperCase()}_TIME` as TimerActionType,
-        payload: verifyLimit(Number(state), id),
-      })
-    } else {
-      timeDispatch({
-        type: 'CONFIG_CYCLES',
-        payload: verifyLimit(Number(state), id),
-      })
-    }
-    timeDispatch({ type: 'RESET_ALL' })
-    buttonDispatch({ type: 'CLICKED', payload: false })
-    buttonDispatch({ type: 'POMODORO' })
-  }, [state, id, timeDispatch, buttonDispatch ])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLElement

@@ -1,7 +1,8 @@
-import styled from 'styled-components'
-import { StylesContext, StylesContextType } from '../../../../../contexts/StylesContext'
 import { useContext } from 'react'
+import { StylesContext, StylesContextType } from '../../../../../contexts/StylesContext'
 import { breakpoints } from '../../../../../utilities/breakpoints'
+import styled from 'styled-components'
+
 
 interface Props {
   background: string

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { limitValues } from '../../../../../utilities/limitValues'
 import { Id } from '../../../../../types/types'
+import { secondsToMinutes } from '../../../../../functions/secondsToMinutes'
 
 interface Props {
   id: Id
@@ -10,10 +11,10 @@ export const LimitValues = ({ id }: Props) => {
   return (
     <Wrapper>
       <p>
-        Min: <strong>{limitValues.min[id]}</strong>
+        Min: <strong>{secondsToMinutes(limitValues.min[id])}</strong>
       </p>
       <p>
-        Max: <strong>{limitValues.max[id]}</strong>
+        Max: <strong>{secondsToMinutes(limitValues.max[id])}</strong>
       </p>
     </Wrapper>
   )

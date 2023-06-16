@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { ButtonsContext } from '../../../../contexts/ButtonsContext'
+import { ButtonContext, ButtonsContext } from '../../../../contexts/ButtonsContext'
 import { TimerContext } from '../../../../contexts/TimerContext'
 import { breakpoints } from '../../../../utilities/breakpoints'
 import { Id } from '../../../../types/types'
+import { TimerActionTypes } from '../../../../contexts/TimerContext/types'
+import { ButtonsActionTypes } from '../../../../contexts/ButtonsContext/types'
 
 interface Props {
   text: Id
@@ -18,15 +20,15 @@ export const OptionsBtn = ({ text }: Props) => {
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
-  ) as MyButtonContext
+  ) as ButtonContext
 
   const handleClick = (text: string) => {
-    timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionType })
+    timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
 
     timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })
 
     buttonDispatch({
-      type: text.toUpperCase() as ButtonActionType,
+      type: text.toUpperCase() as ButtonsActionTypes,
     })
   }
 

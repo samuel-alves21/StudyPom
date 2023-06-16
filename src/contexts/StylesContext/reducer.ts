@@ -1,9 +1,9 @@
 import { State } from './initialState';
-import { ActionTypes } from './types';
+import { StylesActionTypes } from './types';
 
 export type StylesReducer = (
   state: State,
-  action: { type: ActionTypes; payload: string }
+  action: { type: StylesActionTypes; payload: string }
 ) => State
 
 export const reducer: StylesReducer = (state, action) => {

@@ -1,11 +1,8 @@
 import { useContext, useState } from 'react'
 import { TimerContext } from '../../../contexts/TimerContext'
-import {
-  ButtonContext,
-  ButtonsContext,
-} from '../../../contexts/ButtonsContext'
-import styled from 'styled-components'
+import { ButtonContext, ButtonsContext } from '../../../contexts/ButtonsContext'
 import { useSetWindow } from '../../../hooks/useSetWindow'
+import styled from 'styled-components'
 
 interface StyledProps {
   animate: boolean

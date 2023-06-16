@@ -1,4 +1,4 @@
-export type TimerActionType =
+export type TimerActionTypes =
   | 'SET_POMODORO_TIME'
   | 'SET_SHORT_TIME'
   | 'SET_LONG_TIME'
