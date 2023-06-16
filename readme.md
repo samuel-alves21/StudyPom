@@ -17,10 +17,10 @@ Keep track of completed pomodoro sessions and total study time
 
 To run the app locally, follow these steps:
 
-  .Clone this repository to your local machine.
-  .Install the dependencies using npm install.
-  .Start the development server using npm start.
-  .Open the app in your browser at http://localhost:5173.
+  - Clone this repository to your local machine.
+  - Install the dependencies using npm install.
+  - Start the development server using npm start.
+  - Open the app in your browser at http://localhost:5173.
 
 ## Contributing
 
