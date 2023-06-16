@@ -2,7 +2,7 @@ import { ButtonContext, ButtonsContext } from "../contexts/ButtonsContext"
 import { TimerContext } from "../contexts/TimerContext"
 import { useContext, useEffect } from 'react'
 import finishBellSong from '../sounds/src_sounds_bell-finish.mp3'
-import startBellSong from '../sounds/src_sounds_bell-finish.mp3'
+import startBellSong from '../sounds/src_sounds_bell-start.mp3'
 
 const startSong = new Audio(startBellSong)
 const finishSong = new Audio(finishBellSong)

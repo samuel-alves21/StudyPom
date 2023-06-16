@@ -2,7 +2,8 @@ import { Id } from '../types/types'
 import { limitValues } from '../utilities/limitValues'
 
 export const acrementTime = (time: number, setting: Id) => {
-  const step = 60
+  const step = setting === 'cycles' ? 1 : 60
+
   if (setting === 'pomodoro') {
     if (time + step >= limitValues.max.pomodoro) return limitValues.max.pomodoro
     return time + step
@@ -19,9 +20,10 @@ export const acrementTime = (time: number, setting: Id) => {
   }
 
   if (setting === 'cycles') {
-    if (time + 1 >= limitValues.max.cycles) return limitValues.max.cycles
+    if (time + step <= limitValues.min.cycles) return limitValues.min.cycles
     return time + 1
   }
+
 
   return time
 }
