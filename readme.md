@@ -19,7 +19,7 @@ To run the app locally, follow these steps:
 
   - Clone this repository to your local machine.
   - Install the dependencies using npm install.
-  - Start the development server using npm start.
+  - Start the development server using npm run dev.
   - Open the app in your browser at http://localhost:5173.
 
 ## Contributing
