@@ -211,7 +211,7 @@ Error generating stack: `+l.message+`
     animation: slide 0.3s ease-in-out forwards;
     opacity: ${e=>e.isSelected?1:0};
   }
-`,qt={mobile:"480px",tablet:"748px"},y0="/StudyPom/assets/lonely-city-d31df277.jpg",v0="/StudyPom/assets/lands-between-ba77f285.jpeg",g0="/StudyPom/assets/tokyo-night-27eac680.jpg",wd=[y0,v0,g0],S0=(e,t)=>{switch(t.type){case"CHANGE_BACKGROUND":return{...e,background:t.payload};default:return e}},w0={background:wd[0]},_s=L.createContext(null),k0=({children:e})=>{const[t,n]=L.useReducer(S0,w0);return g.jsx(_s.Provider,{value:{stylesState:t,stylesDispatch:n},children:e})},x0=({background:e})=>{const{stylesDispatch:t}=L.useContext(_s);let n=e.split("/").slice(-1).join("").split(".")[0].replaceAll("-"," ");n=n.charAt(0).toUpperCase()+n.slice(1);const r=()=>{t({type:"CHANGE_BACKGROUND",payload:e})};return g.jsxs(E0,{onClick:r,children:[g.jsx(C0,{children:n}),g.jsx("img",{className:"img-full-cover",src:e,alt:"background-option"})]})},C0=Y.p`
+`,qt={mobile:"480px",tablet:"748px"},y0="/StudyPom/assets/lonely-city-d31df277.jpg",v0="/StudyPom/assets/lands-between-ba77f285.jpeg",g0="/StudyPom/assets/tokyo-night-27eac680.jpg",wd=[{path:y0,name:"lonely-city"},{path:v0,name:"lands-between"},{path:g0,name:"tokyo-night"}],S0=(e,t)=>{switch(t.type){case"CHANGE_BACKGROUND":return{...e,background:t.payload};default:return e}},w0={background:wd[0].path},_s=L.createContext(null),k0=({children:e})=>{const[t,n]=L.useReducer(S0,w0);return g.jsx(_s.Provider,{value:{stylesState:t,stylesDispatch:n},children:e})},x0=({background:e})=>{const{stylesDispatch:t}=L.useContext(_s),n=()=>{t({type:"CHANGE_BACKGROUND",payload:e.path})};return g.jsxs(E0,{onClick:n,children:[g.jsx(C0,{children:e.name}),g.jsx("img",{className:"img-full-cover",src:e.path,alt:"background-option"})]})},C0=Y.p`
   width: 100%;
   padding: 7px;
   background-color: var(--color-primary);
@@ -430,7 +430,7 @@ Error generating stack: `+l.message+`
   & .bi-arrow-clockwise:hover {
     color: var(--color-primary);
     cursor: pointer;
-  }
+    }
 
   animation: ${({animate:e})=>e?"full-rotate 0.7s linear forwards":"none"};
 
