@@ -38,8 +38,8 @@ const BackgroundTitle = styled.p`
 `
 
 const Wrapper = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   transition: transform 0.3s ease-in-out;
 
   &:hover {

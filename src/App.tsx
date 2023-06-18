@@ -11,10 +11,11 @@ import { StylesContext, StylesContextType } from './contexts/StylesContext'
 
 interface MainContainerProps {
   background: string
+  blur: string
 }
 
 const App = () => {
-  const { stylesState: { background } } = useContext(StylesContext) as StylesContextType
+  const { stylesState: { background, blur } } = useContext(StylesContext) as StylesContextType
 
   useSetWindow()
   useInit()
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <MainContainer background={background}>
+      <MainContainer background={background} blur={blur}>
         <Wrapper>
           <Logo />
           <Timer />
@@ -50,7 +51,7 @@ const MainContainer = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    filter: blur(1.5px);
+    filter: blur(${({ blur }: MainContainerProps ) => blur}px);
     z-index: -1;
   }
 
