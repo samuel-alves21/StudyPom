@@ -218,8 +218,8 @@ Error generating stack: `+l.message+`
   border-radius: 10px 10px 0 0;
   text-align: center;
 `,E0=H.div`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   transition: transform 0.3s ease-in-out;
 
   &:hover {
