@@ -12,10 +12,11 @@ import { StylesContext, StylesContextType } from './contexts/StylesContext'
 interface MainContainerProps {
   background: string
   blur: string
+  bright: string
 }
 
 const App = () => {
-  const { stylesState: { background, blur } } = useContext(StylesContext) as StylesContextType
+  const { stylesState: { background, blur, bright } } = useContext(StylesContext) as StylesContextType
 
   useSetWindow()
   useInit()
@@ -23,7 +24,7 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <MainContainer background={background} blur={blur}>
+      <MainContainer background={background} blur={blur} bright={bright}>
         <Wrapper>
           <Logo />
           <Timer />
@@ -52,7 +53,19 @@ const MainContainer = styled.div`
     top: 0;
     left: 0;
     filter: blur(${({ blur }: MainContainerProps ) => blur}px);
+    opacity: ${({ bright }: MainContainerProps ) => bright};
     z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    background: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
   }
 
   @media (max-width: ${breakpoints.mobile}) {

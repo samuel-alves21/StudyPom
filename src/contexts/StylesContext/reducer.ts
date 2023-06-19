@@ -18,6 +18,11 @@ export const reducer: StylesReducer = (state, action) => {
           ...state,
           blur: action.payload,
         }
+        case 'CHANGE_BRIGHT':
+          return {
+            ...state,
+            bright: action.payload,
+          }
     default:
       return state
   }
