@@ -1,14 +1,14 @@
 import { useContext, useEffect } from 'react'
-import { TimerContext } from '../contexts/TimerContext'
-import { ButtonsContext, ButtonContext } from '../contexts/ButtonsContext'
+import { TimerContext, TimerContextType } from '../contexts/TimerContext'
+import { ButtonsContext, ButtonContextType } from '../contexts/ButtonsContext'
 
 export const useInit = () => {
-  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContext
+  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const {
     timeState: { pomodoroTime },
     timeDispatch,
-  } = useContext(TimerContext) as TimerContext
+  } = useContext(TimerContext) as TimerContextType
 
   useEffect(() => {
     buttonDispatch({ type: 'POMODORO' })

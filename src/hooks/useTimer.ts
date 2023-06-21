@@ -1,5 +1,5 @@
-import { ButtonContext, ButtonsContext } from "../contexts/ButtonsContext"
-import { TimerContext } from "../contexts/TimerContext"
+import { ButtonContextType, ButtonsContext } from "../contexts/ButtonsContext"
+import { TimerContext, TimerContextType } from "../contexts/TimerContext"
 import { useContext, useEffect } from 'react'
 import finishBellSong from '../sounds/src_sounds_bell-finish.mp3'
 import startBellSong from '../sounds/src_sounds_bell-start.mp3'
@@ -8,7 +8,7 @@ const startSong = new Audio(startBellSong)
 const finishSong = new Audio(finishBellSong)
 
 export const useTimer = () => {
-  const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContext
+  const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const {
     timeState: {
@@ -21,7 +21,7 @@ export const useTimer = () => {
       longRestTime,
     },
     timeDispatch,
-  } = useContext(TimerContext) as TimerContext
+  } = useContext(TimerContext) as TimerContextType
 
   useEffect(() => {
     if (timeOnDisplay === 0) {

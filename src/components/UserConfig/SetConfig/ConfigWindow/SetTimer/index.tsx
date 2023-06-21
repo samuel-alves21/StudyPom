@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import { Input } from './Input'
 import { useState, useContext } from 'react'
 import { LimitValues } from './LimitValues'
-import { TimerContext } from '../../../../../contexts/TimerContext'
+import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
 
 export const SetTimer = () => {
-  const { timeState: { pomodoroTime, shortRestTime, longRestTime, cycles} } = useContext(TimerContext) as TimerContext
+  const { timeState: { pomodoroTime, shortRestTime, longRestTime, cycles} } = useContext(TimerContext) as TimerContextType
 
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
   const [shortConfigTime, setShortConfigTime] = useState<string>(String(shortRestTime))

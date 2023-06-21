@@ -1,18 +1,18 @@
 import styled from 'styled-components'
-import { TimerContext } from '../../../contexts/TimerContext'
+import { TimerContext, TimerContextType } from '../../../contexts/TimerContext'
 import { useInterval } from '../../../hooks/useInterval'
 import { useContext, useCallback } from 'react'
-import { ButtonsContext, ButtonContext } from '../../../contexts/ButtonsContext'
+import { ButtonsContext, ButtonContextType } from '../../../contexts/ButtonsContext'
 
 export const CounterStartBtn = () => {
   const {
     timeState: { timeCounting },
     timeDispatch,
-  } = useContext(TimerContext) as TimerContext
+  } = useContext(TimerContext) as TimerContextType
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
-  ) as ButtonContext
+  ) as ButtonContextType
 
   useInterval(
     () => {

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
-import { TimerContext } from '../../../contexts/TimerContext'
-import { ButtonContext, ButtonsContext } from '../../../contexts/ButtonsContext'
+import { TimerContext, TimerContextType } from '../../../contexts/TimerContext'
+import { ButtonsContext, ButtonContextType } from '../../../contexts/ButtonsContext'
 import { useSetWindow } from '../../../hooks/useSetWindow'
 import styled from 'styled-components'
 
@@ -11,8 +11,8 @@ interface StyledProps {
 export const CounterResetBtn = () => {
   const [animate, setAnimate] = useState(false)
 
-  const { timeDispatch } = useContext(TimerContext) as TimerContext
-  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContext
+  const { timeDispatch } = useContext(TimerContext) as TimerContextType
+  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const handleClick = () => {
     timeDispatch({ type: 'RESET_ALL' })

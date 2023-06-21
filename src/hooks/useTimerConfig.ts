@@ -1,13 +1,13 @@
 import { useEffect, useContext } from 'react'
-import { TimerContext } from '../contexts/TimerContext'
-import { ButtonContext, ButtonsContext } from '../contexts/ButtonsContext'
+import { TimerContext,TimerContextType } from '../contexts/TimerContext'
+import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
 import { verifyLimit } from '../functions/verifyLimit'
 import { TimerActionTypes } from '../contexts/TimerContext/types'
 import { Id } from '../types/types'
 
 export const useTimerConfig = (state: string, id: Id) => {
-  const { timeState: {pomodoroTime, shortRestTime, longRestTime, cycles}, timeDispatch } = useContext(TimerContext) as TimerContext
-  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContext
+  const { timeState: {pomodoroTime, shortRestTime, longRestTime, cycles}, timeDispatch } = useContext(TimerContext) as TimerContextType
+  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
   
   useEffect(() => {
     const timerValues = [pomodoroTime, shortRestTime, longRestTime, cycles]

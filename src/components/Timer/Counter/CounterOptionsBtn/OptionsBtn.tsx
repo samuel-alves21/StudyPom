@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { ButtonContext, ButtonsContext } from '../../../../contexts/ButtonsContext'
-import { TimerContext } from '../../../../contexts/TimerContext'
+import { ButtonContextType, ButtonsContext } from '../../../../contexts/ButtonsContext'
+import { TimerContext, TimerContextType } from '../../../../contexts/TimerContext'
 import { breakpoints } from '../../../../utilities/breakpoints'
 import { Id } from '../../../../types/types'
 import { TimerActionTypes } from '../../../../contexts/TimerContext/types'
@@ -16,11 +16,11 @@ interface StyledProps {
 }
 
 export const OptionsBtn = ({ text }: Props) => {
-  const { timeDispatch } = useContext(TimerContext) as TimerContext
+  const { timeDispatch } = useContext(TimerContext) as TimerContextType
 
   const { buttonState, buttonDispatch } = useContext(
     ButtonsContext
-  ) as ButtonContext
+  ) as ButtonContextType
 
   const handleClick = (text: string) => {
     timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
