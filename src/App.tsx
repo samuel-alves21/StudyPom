@@ -37,7 +37,7 @@ const App = () => {
   )
 }
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<MainContainerProps>`
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -46,15 +46,15 @@ const MainContainer = styled.div`
 
   &::before {
     content: '';
-    background: url(${({ background }: MainContainerProps) => background}) center center no-repeat;
+    background: url(${({ background }) => background}) center center no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    filter: blur(${({ blur }: MainContainerProps) => blur}px);
-    opacity: ${({ bright }: MainContainerProps) => bright};
+    filter: blur(${({ blur }) => blur}px);
+    opacity: ${({ bright }) => bright};
     z-index: -1;
   }
 

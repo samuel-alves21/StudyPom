@@ -20,7 +20,7 @@ export const acrementTime = (time: number, setting: Id) => {
   }
 
   if (setting === 'cycles') {
-    if (time + step <= limitValues.min.cycles) return limitValues.min.cycles
+    if (time + step >= limitValues.max.cycles) return limitValues.max.cycles
     return time + 1
   }
 

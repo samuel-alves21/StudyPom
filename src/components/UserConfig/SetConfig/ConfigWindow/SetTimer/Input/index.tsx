@@ -6,6 +6,7 @@ import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
 import { Id } from '../../../../../../types/types'
 import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
+import { useState } from 'react'
 
 interface Props {
   id: Id
@@ -14,19 +15,27 @@ interface Props {
 }
 
 export const Input = ({ state, setState, id }: Props) => {
+  const [isOnFocus, setIsOnFocus] = useState(false)
+
   useTimerConfig(state, id)
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
-
+    setIsOnFocus(false)
+    if (Number(state) < limitValues.min[id]) {
+      setState(limitValues.min[id].toString())
+      return
+    }
+    if (Number(state) > limitValues.max[id]) {
+      setState(limitValues.max[id].toString())
+      return
+    }
     if (Number(state) * 60 < limitValues.min[id]) {
       setState(limitValues.min[id].toString())
-      thisElement.blur()
       return
     }
     if (Number(state) * 60 > limitValues.max[id]) {
       setState(limitValues.max[id].toString())
-      thisElement.blur()
       return
     }
     setState((Number(state) * 60).toString())
@@ -56,17 +65,22 @@ export const Input = ({ state, setState, id }: Props) => {
     if (state.length === 2) return
     if (state.length === 1 && id === 'cycles') return
     if (!/^[0-9]+$/.test(e.key)) return
-    setState(Number(state + e.key).toString())
+    setState(state + e.key)
+  }
+
+  const handleFocus = () => {
+    setIsOnFocus(true)
+    setState('')
   }
 
   return (
     <InputAndArrows>
       <InputField
         onKeyDown={(e) => handleKeyDown(e)}
-        onFocus={() => setState('')}
+        onFocus={() => handleFocus()}
         onBlur={(e) => handleBlur(e)}
         type='text'
-        value={formatConfigInput(Number(state), id)}
+        value={isOnFocus ? state : formatConfigInput(Number(state), id)}
         id={id}
         readOnly={false}
         onWheel={(e) => handleWhell(e)}
