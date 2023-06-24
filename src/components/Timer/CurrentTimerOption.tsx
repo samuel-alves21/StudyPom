@@ -10,9 +10,7 @@ export const CurrentTimerOption = () => {
 
   useEffect(() => {
     if (wasClicked) {
-      setCurrentOption(
-        pomodoro ? 'Working' : short ? 'Short Break' : 'Long Break'
-      )
+      setCurrentOption(pomodoro ? 'Working' : short ? 'Short Break' : 'Long Break')
     } else {
       setCurrentOption('Are you Ready?')
     }

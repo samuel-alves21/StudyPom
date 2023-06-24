@@ -24,6 +24,5 @@ export const acrementTime = (time: number, setting: Id) => {
     return time + 1
   }
 
-
   return time
 }

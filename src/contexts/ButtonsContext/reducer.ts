@@ -1,7 +1,10 @@
-import { State } from "./initialState";
-import { ButtonsActionTypes } from "./types";
+import { State } from './initialState'
+import { ButtonsActionTypes } from './types'
 
-export interface ReducerAction { type: ButtonsActionTypes; payload?: boolean }
+export interface ReducerAction {
+  type: ButtonsActionTypes
+  payload?: boolean
+}
 type Reducer = (state: State, action: ReducerAction) => State
 
 export const reducer: Reducer = (state, action) => {

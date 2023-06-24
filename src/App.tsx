@@ -7,7 +7,7 @@ import { Timer } from './components/Timer'
 import { useSetWindow } from './hooks/useSetWindow'
 import { useInit } from './hooks/useInit'
 import { useContext } from 'react'
-import { StylesContext, StylesContextType } from './contexts/StylesContext'
+import { CustomizationContext, CustomizationContextType } from './contexts/CustomizationContext'
 
 interface MainContainerProps {
   background: string
@@ -16,7 +16,9 @@ interface MainContainerProps {
 }
 
 const App = () => {
-  const { stylesState: { background, blur, bright } } = useContext(StylesContext) as StylesContextType
+  const {
+    customizationState: { background, blur, bright },
+  } = useContext(CustomizationContext) as CustomizationContextType
 
   useSetWindow()
   useInit()
@@ -44,16 +46,15 @@ const MainContainer = styled.div`
 
   &::before {
     content: '';
-    background: url(${({ background }: MainContainerProps) => background})
-      center center no-repeat;
+    background: url(${({ background }: MainContainerProps) => background}) center center no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    filter: blur(${({ blur }: MainContainerProps ) => blur}px);
-    opacity: ${({ bright }: MainContainerProps ) => bright};
+    filter: blur(${({ blur }: MainContainerProps) => blur}px);
+    opacity: ${({ bright }: MainContainerProps) => bright};
     z-index: -1;
   }
 

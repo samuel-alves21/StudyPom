@@ -10,15 +10,12 @@ export const CounterStartBtn = () => {
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
-  const { buttonState, buttonDispatch } = useContext(
-    ButtonsContext
-  ) as ButtonContextType
+  const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   useInterval(
     () => {
       timeDispatch({ type: 'DECREASE_TIME', payload: 1 })
-      if (buttonState.pomodoro)
-        timeDispatch({ type: 'SET_WORKED_TIME', payload: 1 })
+      if (buttonState.pomodoro) timeDispatch({ type: 'SET_WORKED_TIME', payload: 1 })
     },
     timeCounting ? 1000 : null
   )
@@ -28,20 +25,12 @@ export const CounterStartBtn = () => {
     buttonDispatch({ type: 'CLICKED', payload: true })
   }, [timeCounting, timeDispatch, buttonDispatch])
 
-  return (
-    <ToggleButton onClick={handleClick}>
-      {timeCounting ? 'Pause' : 'Start'}
-    </ToggleButton>
-  )
+  return <ToggleButton onClick={handleClick}>{timeCounting ? 'Pause' : 'Start'}</ToggleButton>
 }
 
 export const ToggleButton = styled.button`
-  padding: 10px 40px;
-  border: white solid 1px;
-  border-radius: 20px;
   background-color: white;
   color: black;
-  cursor: pointer;
   transition: background-color 5s;
   transition: color 0.05s;
 

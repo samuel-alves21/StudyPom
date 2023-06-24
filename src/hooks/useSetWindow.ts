@@ -31,13 +31,5 @@ export const useSetWindow = (wasReseted?: boolean) => {
         document.title = 'Paused'
       }
     }
-  }, [
-    wasClicked,
-    pomodoro,
-    short,
-    long,
-    timeCounting,
-    timeOnDisplay,
-    wasReseted,
-  ])
+  }, [wasClicked, pomodoro, short, long, timeCounting, timeOnDisplay, wasReseted])
 }

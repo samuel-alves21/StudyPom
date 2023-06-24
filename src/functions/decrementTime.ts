@@ -3,7 +3,7 @@ import { limitValues } from '../utilities/limitValues'
 
 export const decrementTime = (time: number, setting: Id) => {
   const step = setting === 'cycles' ? 1 : 60
-  
+
   if (setting === 'pomodoro') {
     if (time - step <= limitValues.min.pomodoro) return limitValues.min.pomodoro
     return time - step

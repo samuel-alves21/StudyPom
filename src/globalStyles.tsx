@@ -16,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     color: #fff;   
     
     --color-primary: #ae83ff;
+    --color-primary-light: #ae83ff61;
   }
 
   ::selection {
@@ -38,12 +39,16 @@ export const GlobalStyles = createGlobalStyle`
     font-size: calc(3.3rem + 0.2vw);
   }
 
+  h3 {
+    font-size: calc(1.6rem + 0.2vw);
+  }
+
   p, span {
     font-size: calc(1.4rem + 0.2vw);
   }
 
   label {
-    font-size: calc(1.8rem);
+    font-size: calc(1.6rem);
   }
 
   span {
@@ -61,6 +66,13 @@ export const GlobalStyles = createGlobalStyle`
   button {
     outline: none;
     border: none;
+    padding: 10px 40px;
+    border: white solid 1px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 5s;
+    transition: color 0.5s;
+    font-weight: 500;
   }
 
   input[type="range"] {

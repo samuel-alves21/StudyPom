@@ -36,7 +36,7 @@ export const ConfigHeading = () => {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<IconProps>`
   display: flex;
   align-items: center;
   gap: 15px;
@@ -47,10 +47,8 @@ const Wrapper = styled.div`
     top: 4px;
     transition: transform 0.03s ease-in-out;
     transition: color 0.2s ease-in-out;
-
-    animation: ${({ animate, shouldRotate }: IconProps) =>
-        shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none'}
-      0.5s forwards ease-in-out;
+    animation: ${({ animate, shouldRotate }) => (shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none')} 0.5s
+      forwards ease-in-out;
 
     @keyframes spin {
       0% {
@@ -79,10 +77,10 @@ const Wrapper = styled.div`
   }
 `
 
-const Filter = styled.div`
+const Filter = styled.div<FilterProps>`
   pointer-events: none;
   transition: opacity 0.2s ease-in-out;
-  opacity: ${({ shouldDisplay }: FilterProps) => (shouldDisplay ? '1' : '0')};
+  opacity: ${({ shouldDisplay }) => (shouldDisplay ? '1' : '0')};
   background-color: #0000006d;
   position: absolute;
   min-width: 100%;

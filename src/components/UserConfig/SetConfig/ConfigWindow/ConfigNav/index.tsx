@@ -11,7 +11,7 @@ interface StyledProps {
 }
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
-  const handleClick = ( e: React.MouseEvent<HTMLParagraphElement, MouseEvent> ) => {
+  const handleClick = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     setOption(e.currentTarget.innerText.toLowerCase() as typeof option)
   }
 
@@ -21,16 +21,10 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
         <Option onClick={(e) => handleClick(e)} isSelected={'timer' === option}>
           Timer
         </Option>
-        <Option
-          onClick={(e) => handleClick(e)}
-          isSelected={'sounds' === option}
-        >
+        <Option onClick={(e) => handleClick(e)} isSelected={'sounds' === option}>
           Sounds
         </Option>
-        <Option
-          onClick={(e) => handleClick(e)}
-          isSelected={'background' === option}
-        >
+        <Option onClick={(e) => handleClick(e)} isSelected={'background' === option}>
           Background
         </Option>
       </Options>
@@ -65,7 +59,7 @@ const Options = styled.div`
   flex-grow: 1;
 `
 
-const Option = styled.p`
+const Option = styled.p<StyledProps>`
   position: relative;
 
   &:hover {
@@ -82,6 +76,6 @@ const Option = styled.p`
     width: 100%;
     background-color: white;
     animation: slide 0.3s ease-in-out forwards;
-    opacity: ${(props: StyledProps) => (props.isSelected ? 1 : 0)};
+    opacity: ${(props) => (props.isSelected ? 1 : 0)};
   }
 `

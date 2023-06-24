@@ -12,15 +12,13 @@ interface Props {
 }
 
 interface StyledProps {
-  isSelected: boolean
+  isSelected?: boolean
 }
 
 export const OptionsBtn = ({ text }: Props) => {
   const { timeDispatch } = useContext(TimerContext) as TimerContextType
 
-  const { buttonState, buttonDispatch } = useContext(
-    ButtonsContext
-  ) as ButtonContextType
+  const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const handleClick = (text: string) => {
     timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
@@ -33,29 +31,18 @@ export const OptionsBtn = ({ text }: Props) => {
   }
 
   return (
-    <StyledButton
-      onClick={() => handleClick(text)}
-      isSelected={buttonState[text.toLowerCase()]}
-    >
+    <StyledButton onClick={() => handleClick(text)} isSelected={buttonState[text.toLowerCase()]}>
       {text.replace(text[0], text[0].toUpperCase())}
     </StyledButton>
   )
 }
 
-export const StyledButton = styled.button`
-  padding: 10px 40px;
-  border: white solid 1px;
-  border-radius: 20px;
-  background-color: ${({ isSelected }: StyledProps) =>
-    isSelected ? 'white' : 'transparent'};
-  color: ${({ isSelected }: StyledProps) => (isSelected ? 'black' : 'white')};
-  cursor: pointer;
-  transition: background-color 5s;
-  transition: color 0.5s;
-  font-weight: 600;
+export const StyledButton = styled.button<StyledProps>`
+  background-color: ${({ isSelected }) => (isSelected ? 'white' : 'transparent')};
+  color: ${({ isSelected }) => (isSelected ? 'black' : 'white')};
   &:hover {
     background-color: white;
-    color: black;
+    color: #1d1d1d;
   }
 
   @media (max-width: ${breakpoints.mobile}) {

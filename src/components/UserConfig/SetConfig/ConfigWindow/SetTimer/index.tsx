@@ -5,7 +5,9 @@ import { LimitValues } from './LimitValues'
 import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
 
 export const SetTimer = () => {
-  const { timeState: { pomodoroTime, shortRestTime, longRestTime, cycles} } = useContext(TimerContext) as TimerContextType
+  const {
+    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
+  } = useContext(TimerContext) as TimerContextType
 
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
   const [shortConfigTime, setShortConfigTime] = useState<string>(String(shortRestTime))
@@ -16,20 +18,12 @@ export const SetTimer = () => {
     <Wrapper>
       <InputContainer>
         <label htmlFor='pomodoro'>Pomodoro Time:</label>
-        <Input
-          id='pomodoro'
-          state={pomodoroConfigTime}
-          setState={setPomodoroConfigTime}
-        />
+        <Input id='pomodoro' state={pomodoroConfigTime} setState={setPomodoroConfigTime} />
         <LimitValues id={'pomodoro'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='short'>Short Rest Time:</label>
-        <Input
-          id='short'
-          state={shortConfigTime}
-          setState={setShortConfigTime}
-        />
+        <Input id='short' state={shortConfigTime} setState={setShortConfigTime} />
         <LimitValues id={'short'} />
       </InputContainer>
       <InputContainer>

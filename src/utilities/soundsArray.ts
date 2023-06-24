@@ -7,6 +7,9 @@ import endPinSong from '../sounds/pin-stop.mp3'
 
 export const soundsArray = [
   { name: 'bell', sounds: { start: startBellSong, end: endBellSong } },
-  { name: 'notification', sounds: { start: startNotificationSong, end: endNotificationSong } },
+  {
+    name: 'notification',
+    sounds: { start: startNotificationSong, end: endNotificationSong },
+  },
   { name: 'pin', sounds: { start: startPinSong, end: endPinSong } },
 ]

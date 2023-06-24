@@ -22,16 +22,8 @@ export const Arrows = ({ id, setState, state }: Props) => {
 
   return (
     <ArrowIcon>
-      <i
-        id='acrement'
-        onClick={(e) => handleClick(e)}
-        className='bi bi-caret-up-fill'
-      ></i>
-      <i
-        id='decrement'
-        onClick={(e) => handleClick(e)}
-        className='bi bi-caret-down-fill'
-      ></i>
+      <i id='acrement' onClick={(e) => handleClick(e)} className='bi bi-caret-up-fill'></i>
+      <i id='decrement' onClick={(e) => handleClick(e)} className='bi bi-caret-down-fill'></i>
     </ArrowIcon>
   )
 }

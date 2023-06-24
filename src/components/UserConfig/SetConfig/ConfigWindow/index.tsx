@@ -4,6 +4,7 @@ import { SetTimer } from './SetTimer'
 import { ConfigNav } from './ConfigNav'
 import { breakpoints } from '../../../../utilities/breakpoints'
 import { SetBackground } from './SetBackgound'
+import { SetAudio } from './SetAudio'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -50,18 +51,13 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   return (
     <Wrapper display={shouldDisplay} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Window ref={thisWindow} display={shouldDisplay}>
-        <ConfigNav
-          setOption={setOption}
-          option={option}
-          setShouldDisplay={setShouldDisplay}
-        />
+        <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow>
-          <SelectedConfig>
-            {option.replace(option[0], option[0].toUpperCase())}
-          </SelectedConfig>
+          <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
           <ConfigsWindows>
             {option === 'timer' && <SetTimer />}
             {option === 'background' && <SetBackground />}
+            {option === 'sounds' && <SetAudio />}
           </ConfigsWindows>
         </CurrentOptionWindow>
       </Window>
@@ -69,8 +65,8 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   )
 }
 
-const Wrapper = styled.div`
-  overflow-y: ${({ display }: ThisWindownsProps) => (display ? 'auto' : 'hidden')};
+const Wrapper = styled.div<ThisWindownsProps>`
+  overflow-y: ${({ display }) => (display ? 'auto' : 'hidden')};
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -82,7 +78,7 @@ const Wrapper = styled.div`
   pointer-events: none;
 `
 
-const Window = styled.div`
+const Window = styled.div<ThisWindownsProps>`
   margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -94,19 +90,10 @@ const Window = styled.div`
   height: fit-content;
   min-height: 400px;
   min-width: 500px;
-  transition: opacity
-    ${({ display }: ThisWindownsProps) =>
-      display
-        ? '0.2s ease-in-out'
-        : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
-
-  opacity: ${({ display }: ThisWindownsProps) => (display ? '1' : '0')};
-  pointer-events: ${({ display }: ThisWindownsProps) =>
-    display ? 'all' : 'none'};
-  animation: ${({ display }: ThisWindownsProps) =>
-      display
-        ? 'slide-in ease-in-out'
-        : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)'}
+  transition: opacity ${({ display }) => (display ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
+  opacity: ${({ display }) => (display ? '1' : '0')};
+  pointer-events: ${({ display }) => (display ? 'all' : 'none')};
+  animation: ${({ display }) => (display ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)')}
     0.5s forwards;
 
   @keyframes slide-in {

@@ -19,12 +19,12 @@ export const Input = ({ state, setState, id }: Props) => {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
 
-    if (Number(state) * 60  < limitValues.min[id]) {
+    if (Number(state) * 60 < limitValues.min[id]) {
       setState(limitValues.min[id].toString())
       thisElement.blur()
       return
     }
-    if (Number(state) * 60  > limitValues.max[id]) {
+    if (Number(state) * 60 > limitValues.max[id]) {
       setState(limitValues.max[id].toString())
       thisElement.blur()
       return

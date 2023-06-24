@@ -1,28 +1,24 @@
-import { ButtonContextType, ButtonsContext } from "../contexts/ButtonsContext"
-import { TimerContext, TimerContextType } from "../contexts/TimerContext"
-import { useContext, useEffect } from 'react'
-import finishBellSong from '../sounds/pin-start.mp3'
-import startBellSong from '../sounds/pin-stop.mp3'
-
-const startSong = new Audio(startBellSong)
-const finishSong = new Audio(finishBellSong)
+import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
+import { TimerContext, TimerContextType } from '../contexts/TimerContext'
+import { useContext, useEffect, useMemo } from 'react'
+import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 
 export const useTimer = () => {
-  console.log(startSong)
   const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const {
-    timeState: {
-      cycles,
-      cyclesTemp,
-      timeOnDisplay,
-      timeCounting,
-      pomodoroTime,
-      shortRestTime,
-      longRestTime,
+    customizationState: {
+      sound: { start, end },
     },
+  } = useContext(CustomizationContext) as CustomizationContextType
+
+  const {
+    timeState: { cycles, cyclesTemp, timeOnDisplay, timeCounting, pomodoroTime, shortRestTime, longRestTime },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
+
+  const startSong = useMemo(() => new Audio(start), [start])
+  const finishSong = useMemo(() => new Audio(end), [end])
 
   useEffect(() => {
     if (timeOnDisplay === 0) {
@@ -60,11 +56,7 @@ export const useTimer = () => {
         buttonDispatch({ type: 'POMODORO' })
       }
     }
-    if (
-      buttonState.pomodoro &&
-      timeOnDisplay === pomodoroTime &&
-      timeCounting
-    ) {
+    if (buttonState.pomodoro && timeOnDisplay === pomodoroTime && timeCounting) {
       finishSong.play()
     }
     if (
@@ -86,5 +78,7 @@ export const useTimer = () => {
     buttonState.long,
     timeCounting,
     cyclesTemp,
+    startSong,
+    finishSong,
   ])
 }

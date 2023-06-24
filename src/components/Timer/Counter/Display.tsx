@@ -5,8 +5,10 @@ import { secondsToTime } from '../../../functions/secondsToTime'
 import { breakpoints } from '../../../utilities/breakpoints'
 
 export const Display = () => {
-  const { timeState: { timeOnDisplay } } = useContext(TimerContext) as TimerContextType
-  
+  const {
+    timeState: { timeOnDisplay },
+  } = useContext(TimerContext) as TimerContextType
+
   return <H1>{secondsToTime(timeOnDisplay)}</H1>
 }
 

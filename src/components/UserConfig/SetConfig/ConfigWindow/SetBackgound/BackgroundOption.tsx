@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { StylesContext, StylesContextType } from '../../../../../contexts/StylesContext'
+import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import styled from 'styled-components'
 
@@ -11,20 +11,16 @@ interface Props {
 }
 
 export const BackgroundOption = ({ background }: Props) => {
-  const { stylesDispatch } = useContext(StylesContext) as StylesContextType
+  const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
 
   const handleClick = () => {
-    stylesDispatch({ type: 'CHANGE_BACKGROUND', payload: background.path })
+    customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: background.path })
   }
 
   return (
     <Wrapper onClick={handleClick}>
       <BackgroundTitle>{background.name}</BackgroundTitle>
-      <img
-        className='img-full-cover'
-        src={background.path}
-        alt='background-option'
-      />
+      <img className='img-full-cover' src={background.path} alt='background-option' />
     </Wrapper>
   )
 }
@@ -47,7 +43,8 @@ const Wrapper = styled.div`
     transform: scale(1.05);
   }
 
-  &, & img {
+  &,
+  & img {
     border-radius: 0 0 10px 10px;
   }
 

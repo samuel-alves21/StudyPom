@@ -30,7 +30,7 @@ export const CounterResetBtn = () => {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<StyledProps>`
   & .bi-arrow-clockwise {
     font-size: 3.5rem;
   }
@@ -38,10 +38,9 @@ const Wrapper = styled.div`
   & .bi-arrow-clockwise:hover {
     color: var(--color-primary);
     cursor: pointer;
-    }
+  }
 
-  animation: ${({ animate }: StyledProps) =>
-    animate ? 'full-rotate 0.7s linear forwards' : 'none'};
+  animation: ${({ animate }) => (animate ? 'full-rotate 0.7s linear forwards' : 'none')};
 
   @keyframes full-rotate {
     0% {

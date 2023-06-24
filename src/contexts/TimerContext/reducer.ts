@@ -1,15 +1,12 @@
-import {  State } from "./initialState"
-import { TimerActionTypes } from "./types"
+import { State } from './initialState'
+import { TimerActionTypes } from './types'
 
 export interface ReducerAction {
   type: TimerActionTypes
   payload?: number | boolean
 }
 
-type Reducer = (
-  state: State,
-  action: ReducerAction
-) => State
+type Reducer = (state: State, action: ReducerAction) => State
 
 export const reducer: Reducer = (state, action) => {
   switch (action.type) {
