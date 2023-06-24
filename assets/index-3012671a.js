@@ -312,6 +312,8 @@ Error generating stack: `+l.message+`
   flex-direction: column;
   justify-content: space-evenly;
 `,R0=H.div`
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
