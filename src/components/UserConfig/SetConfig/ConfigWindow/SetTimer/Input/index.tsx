@@ -20,14 +20,19 @@ export const Input = ({ state, setState, id }: Props) => {
   useTimerConfig(state, id)
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    console.log(state)
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
-    if (Number(state) < limitValues.min[id]) {
+    if (Number(state) < limitValues.min[id] && id === 'cycles') {
       setState(limitValues.min[id].toString())
       return
     }
-    if (Number(state) > limitValues.max[id]) {
+    if (Number(state) > limitValues.max[id] && id === 'cycles') {
       setState(limitValues.max[id].toString())
+      return
+    }
+    if (id === 'cycles') {
+      setState((Number(state)).toString())
       return
     }
     if (Number(state) * 60 < limitValues.min[id]) {
