@@ -62,4 +62,62 @@ export const GlobalStyles = createGlobalStyle`
     outline: none;
     border: none;
   }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    height: 7px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    margin-top: -3.5px; 
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    margin-top: -3.5px; 
+
+  }
+
+  input[type="range"]::-ms-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    margin-top: -3.5px; 
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 7px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+  }
+
+  input[type="range"]::-moz-range-track {
+    height: 7px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+  }
+
+  input[type="range"]::-ms-track {
+    height: 7px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+  }
 `
