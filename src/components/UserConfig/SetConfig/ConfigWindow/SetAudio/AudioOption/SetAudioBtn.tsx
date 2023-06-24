@@ -16,13 +16,20 @@ interface ButtonProps {
 }
 
 export const SetAudioBtn = ({ sounds: { start, end, name } }: Props) => {
-  const { customizationDispatch, customizationState: { sound } } = useContext(CustomizationContext) as CustomizationContextType
+  const {
+    customizationDispatch,
+    customizationState: { sound },
+  } = useContext(CustomizationContext) as CustomizationContextType
 
   const isSelected = name === sound.name
-  console.log(isSelected)
 
   return (
-    <Button isSelected={isSelected} onClick={() => customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })}>set sound</Button>
+    <Button
+      isSelected={isSelected}
+      onClick={() => customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })}
+    >
+      set sound
+    </Button>
   )
 }
 

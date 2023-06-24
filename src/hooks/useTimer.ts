@@ -57,13 +57,13 @@ export const useTimer = () => {
       }
     }
     if (buttonState.pomodoro && timeOnDisplay === pomodoroTime && timeCounting) {
-      finishSong.play()
+      startSong.play()
     }
     if (
       (buttonState.short && timeOnDisplay === shortRestTime && timeCounting) ||
       (buttonState.long && timeOnDisplay === longRestTime && timeCounting)
     ) {
-      startSong.play()
+      finishSong.play()
     }
   }, [
     timeDispatch,
