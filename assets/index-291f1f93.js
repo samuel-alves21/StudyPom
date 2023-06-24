@@ -365,7 +365,7 @@ Error generating stack: `+l.message+`
     padding: 10px 20px;
     font-size: 12px;
   }
-`,V0=({sounds:{start:e,end:t,name:n}})=>{const{customizationDispatch:r,customizationState:{sound:o}}=P.useContext(Xn),l=n===o.name;return console.log(l),y.jsx(Q0,{isSelected:l,onClick:()=>r({type:"CHANGE_SOUND",payload:{start:e,end:t,name:n}}),children:"set sound"})},Q0=B(_d)`
+`,V0=({sounds:{start:e,end:t,name:n}})=>{const{customizationDispatch:r,customizationState:{sound:o}}=P.useContext(Xn),l=n===o.name;return y.jsx(Q0,{isSelected:l,onClick:()=>r({type:"CHANGE_SOUND",payload:{start:e,end:t,name:n}}),children:"set sound"})},Q0=B(_d)`
   padding: 0.6rem;
   font-size: 1.25rem;
   display: block;
@@ -594,7 +594,7 @@ Error generating stack: `+l.message+`
       transform: rotate(360deg);
     }
   }
-`,wy=()=>{const{buttonState:e,buttonDispatch:t}=P.useContext(Rt),{customizationState:{sound:{start:n,end:r}}}=P.useContext(Xn),{timeState:{cycles:o,cyclesTemp:l,timeOnDisplay:i,timeCounting:u,pomodoroTime:s,shortRestTime:c,longRestTime:h},timeDispatch:p}=P.useContext(lt),m=P.useMemo(()=>new Audio(n),[n]),S=P.useMemo(()=>new Audio(r),[r]);P.useEffect(()=>{i===0&&(e.pomodoro&&l+1<o?(p({type:"SET_TIME_ON_DISPLAY",payload:c}),t({type:"SHORT"})):(p({type:"SET_TIME_ON_DISPLAY",payload:h}),t({type:"LONG"}),p({type:"SET_CYCLES_TEMP",payload:0})),(e.short||e.long)&&(p({type:"SET_TIME_ON_DISPLAY",payload:s}),p({type:"SET_CYCLES_FINISHED",payload:1}),e.short&&p({type:"SET_CYCLES_TEMP",payload:l+1}),t({type:"POMODORO"}))),e.pomodoro&&i===s&&u&&S.play(),(e.short&&i===c&&u||e.long&&i===h&&u)&&m.play()},[p,t,i,c,e.pomodoro,e.short,s,h,o,e.long,u,l,m,S])},Sy=()=>(wy(),y.jsxs(xy,{children:[y.jsx(dy,{}),y.jsx(cy,{}),y.jsxs(ky,{children:[y.jsx(hy,{}),y.jsx(gy,{})]})]})),xy=B.div`
+`,wy=()=>{const{buttonState:e,buttonDispatch:t}=P.useContext(Rt),{customizationState:{sound:{start:n,end:r}}}=P.useContext(Xn),{timeState:{cycles:o,cyclesTemp:l,timeOnDisplay:i,timeCounting:u,pomodoroTime:s,shortRestTime:c,longRestTime:h},timeDispatch:p}=P.useContext(lt),m=P.useMemo(()=>new Audio(n),[n]),S=P.useMemo(()=>new Audio(r),[r]);P.useEffect(()=>{i===0&&(e.pomodoro&&l+1<o?(p({type:"SET_TIME_ON_DISPLAY",payload:c}),t({type:"SHORT"})):(p({type:"SET_TIME_ON_DISPLAY",payload:h}),t({type:"LONG"}),p({type:"SET_CYCLES_TEMP",payload:0})),(e.short||e.long)&&(p({type:"SET_TIME_ON_DISPLAY",payload:s}),p({type:"SET_CYCLES_FINISHED",payload:1}),e.short&&p({type:"SET_CYCLES_TEMP",payload:l+1}),t({type:"POMODORO"}))),e.pomodoro&&i===s&&u&&m.play(),(e.short&&i===c&&u||e.long&&i===h&&u)&&S.play()},[p,t,i,c,e.pomodoro,e.short,s,h,o,e.long,u,l,m,S])},Sy=()=>(wy(),y.jsxs(xy,{children:[y.jsx(dy,{}),y.jsx(cy,{}),y.jsxs(ky,{children:[y.jsx(hy,{}),y.jsx(gy,{})]})]})),xy=B.div`
   max-width: 600px;
 
   display: flex;
