@@ -9,6 +9,7 @@ export interface State {
 }
 
 export interface SoundObject {
+  name: string
   start: string
   end: string
 }
@@ -18,6 +19,7 @@ export const initialState = {
   blur: '1',
   bright: '1',
   sound: {
+    name: soundsArray[0].name,
     start: soundsArray[0].sounds.start,
     end: soundsArray[0].sounds.end,
   },

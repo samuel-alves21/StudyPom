@@ -68,7 +68,7 @@ export const AudioOption = ({
           startSoundCurrentTime={startSoundCurrentTime}
         />
       </InputWrapper>
-      <SetAudioBtn sounds={{ start, end }} />
+      <SetAudioBtn sounds={{ start, end, name }} />
     </Wrapper>
   )
 }
