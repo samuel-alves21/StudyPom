@@ -5,6 +5,7 @@ import { ConfigNav } from './ConfigNav'
 import { breakpoints } from '../../../../utilities/breakpoints'
 import { SetBackground } from './SetBackgound'
 import { SetAudio } from './SetAudio'
+import { SetColor } from './SetColor'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -19,7 +20,7 @@ interface ThisWindownsProps {
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const thisWindow = useRef<HTMLDivElement | null>(null)
 
-  const [option, setOption] = useState<'timer' | 'background' | 'sounds'>('timer')
+  const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
   window.onclick = (event: MouseEvent) => {
     const box = thisWindow.current as HTMLDivElement
@@ -58,6 +59,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
             {option === 'timer' && <SetTimer />}
             {option === 'background' && <SetBackground />}
             {option === 'sounds' && <SetAudio />}
+            {option === 'color' && <SetColor />}
           </ConfigsWindows>
         </CurrentOptionWindow>
       </Window>

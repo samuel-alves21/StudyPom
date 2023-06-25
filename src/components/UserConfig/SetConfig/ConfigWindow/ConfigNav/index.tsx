@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 interface ConfigNavProps {
-  setOption: (option: 'timer' | 'background' | 'sounds') => void
-  option: 'timer' | 'background' | 'sounds'
+  setOption: (option: 'timer' | 'background' | 'sounds' | 'color') => void
+  option: 'timer' | 'background' | 'sounds' | 'color'
   setShouldDisplay: (shouldDisplay: boolean) => void
 }
 
@@ -23,6 +23,9 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
         </Option>
         <Option onClick={(e) => handleClick(e)} isSelected={'sounds' === option}>
           Sounds
+        </Option>
+        <Option onClick={(e) => handleClick(e)} isSelected={'color' === option}>
+          Color
         </Option>
         <Option onClick={(e) => handleClick(e)} isSelected={'background' === option}>
           Background
