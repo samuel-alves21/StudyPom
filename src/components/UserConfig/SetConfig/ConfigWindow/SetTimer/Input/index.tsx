@@ -20,7 +20,6 @@ export const Input = ({ state, setState, id }: Props) => {
   useTimerConfig(state, id)
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    console.log(state)
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
     if (Number(state) < limitValues.min[id] && id === 'cycles') {
