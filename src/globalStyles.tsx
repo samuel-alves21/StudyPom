@@ -1,13 +1,19 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyles = createGlobalStyle`
+interface Props {
+  colors: {
+    primary: string
+    secundary?: string
+  }
+}
+
+export const GlobalStyles = createGlobalStyle<Props>`
   *,
   *::before,
   *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    animation: {}
   }
   
   :root {
@@ -15,7 +21,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     color: #fff;   
     
-    --color-primary: #ae83ff;
+    --color-primary: ${(props) => props.colors.primary};
     --color-primary-light: #ae83ff61;
   }
 

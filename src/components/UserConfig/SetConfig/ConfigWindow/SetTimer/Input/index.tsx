@@ -31,7 +31,7 @@ export const Input = ({ state, setState, id }: Props) => {
       return
     }
     if (id === 'cycles') {
-      setState((Number(state)).toString())
+      setState(Number(state).toString())
       return
     }
     if (Number(state) * 60 < limitValues.min[id]) {

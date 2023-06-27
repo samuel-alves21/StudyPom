@@ -17,7 +17,7 @@ interface MainContainerProps {
 
 const App = () => {
   const {
-    customizationState: { background, blur, bright },
+    customizationState: { background, blur, bright, color },
   } = useContext(CustomizationContext) as CustomizationContextType
 
   useSetWindow()
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <>
-      <GlobalStyles />
+      <GlobalStyles colors={{ primary: color }} />
       <MainContainer background={background} blur={blur} bright={bright}>
         <Wrapper>
           <Logo />
