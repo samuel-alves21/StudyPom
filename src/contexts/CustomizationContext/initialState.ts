@@ -6,7 +6,8 @@ export interface State {
   blur: string
   bright: string
   sound: SoundObject
-  color: string
+  mainColor: string
+  secundaryColor: string
 }
 
 export interface SoundObject {
@@ -15,7 +16,7 @@ export interface SoundObject {
   end: string
 }
 
-export const initialState = {
+export const initialState: State = {
   background: backgroundArray[0].path,
   blur: '1',
   bright: '1',
@@ -24,5 +25,6 @@ export const initialState = {
     start: soundsArray[0].sounds.start,
     end: soundsArray[0].sounds.end,
   },
-  color: '#ae83ff',
+  mainColor: '#ae83ff',
+  secundaryColor: '#ae83ff61'
 }

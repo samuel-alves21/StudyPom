@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 
 interface Props {
   colors: {
-    primary: string
-    secundary?: string
+    mainColor: string
+    secundaryColor: string
   }
 }
 
@@ -21,8 +21,8 @@ export const GlobalStyles = createGlobalStyle<Props>`
     font-family: 'Roboto', sans-serif;
     color: #fff;   
     
-    --color-primary: ${(props) => props.colors.primary};
-    --color-primary-light: #ae83ff61;
+    --color-primary: ${(props) => props.colors.mainColor};
+    --color-primary-light: ${(props) => props.colors.secundaryColor};
   }
 
   ::selection {

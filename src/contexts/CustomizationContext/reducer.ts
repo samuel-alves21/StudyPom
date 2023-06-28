@@ -31,12 +31,18 @@ export const reducer: CustomizationReducer = (state, action) => {
         ...state,
         sound: action.payload as SoundObject,
       }
-    case 'CHANGE_COLOR':
+    case 'CHANGE_MAIN_COLOR':
       if (typeof action.payload !== 'string') return state
       return {
         ...state,
-        color: action.payload,
+        mainColor: action.payload,
       }
+      case 'CHANGE_SECUNDARY_COLOR':
+        if (typeof action.payload !== 'string') return state
+        return {
+          ...state,
+          secundaryColor: action.payload,
+        }
     default:
       return state
   }
