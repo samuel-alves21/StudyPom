@@ -68,7 +68,6 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
 }
 
 const Wrapper = styled.div<ThisWindownsProps>`
-  overflow-y: ${({ display }) => (display ? 'auto' : 'hidden')};
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -81,6 +80,7 @@ const Wrapper = styled.div<ThisWindownsProps>`
 `
 
 const Window = styled.div<ThisWindownsProps>`
+  overflow-y: ${({ display }) => (display ? 'auto' : 'hidden')};
   margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -91,6 +91,7 @@ const Window = styled.div<ThisWindownsProps>`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: fit-content;
   min-height: 400px;
+  max-height: 70%;
   min-width: 500px;
   transition: opacity ${({ display }) => (display ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
   opacity: ${({ display }) => (display ? '1' : '0')};

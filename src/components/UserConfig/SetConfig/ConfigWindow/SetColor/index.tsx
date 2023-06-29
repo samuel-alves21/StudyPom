@@ -3,6 +3,7 @@ import { CustomizationContext, CustomizationContextType } from '../../../../../c
 import { ColorPicker } from './ColorPicker'
 import { CheckBox } from './CheckBox'
 import styled from 'styled-components'
+import { breakpoints } from '../../../../../utilities/breakpoints'
 
 export const SetColor = () => {
   const {
@@ -80,5 +81,8 @@ const ColorOptionsWrapper = styled.div`
   & label,
   & input {
     cursor: pointer;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 0 10px;
   }
 `
