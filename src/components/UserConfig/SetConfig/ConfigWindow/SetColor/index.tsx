@@ -1,7 +1,8 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
-import styled from 'styled-components'
 import { ColorPicker } from './ColorPicker'
+import { CheckBox } from './CheckBox'
+import styled from 'styled-components'
 
 export const SetColor = () => {
   const {
@@ -10,43 +11,16 @@ export const SetColor = () => {
 
   const [mainColorIsChecked, setMainColorIsChecked] = useState(true)
   const [secundaryColorIsChecked, setSecundaryColorIsChecked] = useState(false)
-  const [theClickedOne, setTheClikedOne] = useState<'main' | 'secundary' | null>(null)
 
   const mainColorBox = useRef<null | HTMLInputElement>(null)
   const secundaryColorBox = useRef<null | HTMLInputElement>(null)
 
   useEffect(() => {
     if (mainColorBox.current && secundaryColorBox.current) {
-      if (!mainColorIsChecked && !secundaryColorIsChecked) {
-        theClickedOne === 'main'
-          ? setMainColorIsChecked(true)
-          : setSecundaryColorIsChecked(true)
-      }
       mainColorBox.current.checked = mainColorIsChecked
       secundaryColorBox.current.checked = secundaryColorIsChecked
     }
-  }, [mainColorIsChecked, secundaryColorIsChecked, theClickedOne])
-
-  // const checkBoxHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.id === 'main-color') {
-  //     if (!mainColorBox.current?.checked) {
-  //       setMainColorIsChecked(false)
-  //       setTheClikedOne('main')
-  //     } else {
-  //       setMainColorIsChecked(true)
-  //       setSecundaryColorIsChecked(false)
-  //     }
-  //   } 
-  //   else {
-  //     if (!secundaryColorBox.current?.checked) {
-  //       setTheClikedOne('secundary')
-  //       setSecundaryColorIsChecked(false)
-  //     } else {
-  //       setMainColorIsChecked(false)
-  //       setSecundaryColorIsChecked(true)
-  //     }
-  //   }
-  // }
+  }, [mainColorIsChecked, secundaryColorIsChecked])
 
   const color = mainColorIsChecked ? mainColor : secundaryColor
 
@@ -55,21 +29,28 @@ export const SetColor = () => {
       <ColorOptionsWrapper>
         <div>
           <label htmlFor='main-color'>main color</label>
-          <CheckBox setMainColorIsChecked={setMainColorIsChecked}/>
-          {/* <CheckBox type='checkbox' id='main-color' ref={mainColorBox} onChange={(e) => checkBoxHandleChange(e)} /> */}
+          <CheckBox
+            setMainColorIsChecked={setMainColorIsChecked}
+            setSecundaryColorIsChecked={setSecundaryColorIsChecked}
+            mainColorIsChecked={mainColorIsChecked}
+            secundaryColorIsChecked={secundaryColorIsChecked}
+            ref={mainColorBox}
+            id='main-color'
+          />
         </div>
         <div>
           <label htmlFor='secundary-color'>secundary color</label>
-          <CheckBox />
-          {/* <CheckBox
-            type='checkbox'
-            id='secundary-color'
+          <CheckBox
+            setMainColorIsChecked={setMainColorIsChecked}
+            setSecundaryColorIsChecked={setSecundaryColorIsChecked}
+            mainColorIsChecked={mainColorIsChecked}
+            secundaryColorIsChecked={secundaryColorIsChecked}
             ref={secundaryColorBox}
-            onChange={(e) => checkBoxHandleChange(e)}
-          /> */}
+            id='secundary-color'
+          />
         </div>
       </ColorOptionsWrapper>
-      <ColorPicker color={color} mainColorIsChecked={mainColorIsChecked}/>
+      <ColorPicker color={color} mainColorIsChecked={mainColorIsChecked} />
     </Wrapper>
   )
 }
@@ -100,8 +81,4 @@ const ColorOptionsWrapper = styled.div`
   & input {
     cursor: pointer;
   }
-`
-
-const CheckBox = styled.input`
-  margin-left: 5px;
 `

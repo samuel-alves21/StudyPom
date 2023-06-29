@@ -26,5 +26,5 @@ export const initialState: State = {
     end: soundsArray[0].sounds.end,
   },
   mainColor: '#ae83ff',
-  secundaryColor: '#ae83ff61'
+  secundaryColor: '#ae83ff61',
 }
