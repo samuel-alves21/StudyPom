@@ -5,17 +5,15 @@ import { useContext } from 'react'
 interface Props {
   color: string
   mainColorIsChecked: boolean
+  secundaryColorIsChecked: boolean
 }
 
-export const ColorPicker = ({ color, mainColorIsChecked }: Props) => {
+export const ColorPicker = ({ color, mainColorIsChecked, secundaryColorIsChecked }: Props) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
 
   const handleChange = (color: ColorResult) => {
-    if (mainColorIsChecked) {
-      customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
-    } else {
-      customizationDispatch({ type: 'CHANGE_SECUNDARY_COLOR', payload: color.hex + '61' })
-    }
+    mainColorIsChecked && customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
+    secundaryColorIsChecked && customizationDispatch({ type: 'CHANGE_SECUNDARY_COLOR', payload: color.hex + '61' })
   }
 
   return <ChromePicker disableAlpha={true} color={color} onChange={(color) => handleChange(color)} />

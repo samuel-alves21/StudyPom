@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useContext } from 'react'
 import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
+import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
 
 interface Props {
   sounds: {
@@ -28,6 +29,10 @@ export const AudioOption = ({
   const [endSoundDuration, setEndSoundDuration] = useState<number>(endSound.duration)
   const [endSoundCurrentTime, setEndSoundCurrentTime] = useState<number>(0)
 
+  const {
+    customizationState: { volume },
+  } = useContext(CustomizationContext) as CustomizationContextType
+
   useSounds(
     endSound,
     endSoundDuration,
@@ -38,6 +43,9 @@ export const AudioOption = ({
     setEndSoundDuration,
     setEndSoundCurrentTime
   )
+
+  startSound.volume = Number(volume)
+  endSound.volume = Number(volume)
 
   return (
     <Wrapper>

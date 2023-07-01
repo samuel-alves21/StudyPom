@@ -47,6 +47,8 @@ export const Input = ({ state, setState, id }: Props) => {
   }
 
   const handleWhell = (e: React.WheelEvent<HTMLInputElement>) => {
+    if (isOnFocus) return
+    console.log(e.target)
     if (e.deltaY < 0) {
       setState(acrementTime(Number(state), id).toString())
     } else {

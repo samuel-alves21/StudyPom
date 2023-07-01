@@ -51,7 +51,11 @@ export const SetColor = () => {
           />
         </div>
       </ColorOptionsWrapper>
-      <ColorPicker color={color} mainColorIsChecked={mainColorIsChecked} />
+      <ColorPicker
+        color={color}
+        mainColorIsChecked={mainColorIsChecked}
+        secundaryColorIsChecked={secundaryColorIsChecked}
+      />
     </Wrapper>
   )
 }

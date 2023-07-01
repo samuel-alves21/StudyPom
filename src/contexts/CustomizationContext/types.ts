@@ -3,5 +3,6 @@ export type CustomizationActionTypes =
   | 'CHANGE_BLUR'
   | 'CHANGE_BRIGHT'
   | 'CHANGE_SOUND'
+  | 'CHANGE_VOLUME'
   | 'CHANGE_MAIN_COLOR'
   | 'CHANGE_SECUNDARY_COLOR'

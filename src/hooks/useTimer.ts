@@ -9,6 +9,7 @@ export const useTimer = () => {
   const {
     customizationState: {
       sound: { start, end },
+      volume,
     },
   } = useContext(CustomizationContext) as CustomizationContextType
 
@@ -19,6 +20,9 @@ export const useTimer = () => {
 
   const startSong = useMemo(() => new Audio(start), [start])
   const finishSong = useMemo(() => new Audio(end), [end])
+
+  startSong.volume = Number(volume)
+  finishSong.volume = Number(volume)
 
   useEffect(() => {
     if (timeOnDisplay === 0) {

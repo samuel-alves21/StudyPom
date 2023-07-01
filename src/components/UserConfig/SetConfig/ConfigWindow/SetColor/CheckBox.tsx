@@ -10,13 +10,10 @@ interface Props {
 }
 
 export const CheckBox = forwardRef<HTMLInputElement, Props>(
-  ({ setMainColorIsChecked, id, setSecundaryColorIsChecked, mainColorIsChecked, secundaryColorIsChecked }, ref) => {
+  ({ setMainColorIsChecked, id, setSecundaryColorIsChecked }, ref) => {
     const checkBoxHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.id === 'main-color') {
         if (e.target.checked) {
-          if (secundaryColorIsChecked) {
-            setSecundaryColorIsChecked(false)
-          }
           setMainColorIsChecked(true)
         } else {
           setMainColorIsChecked(false)
@@ -24,9 +21,6 @@ export const CheckBox = forwardRef<HTMLInputElement, Props>(
         }
       } else {
         if (e.target.checked) {
-          if (mainColorIsChecked) {
-            setMainColorIsChecked(false)
-          }
           setSecundaryColorIsChecked(true)
         } else {
           setMainColorIsChecked(true)

@@ -6,6 +6,7 @@ export interface State {
   blur: string
   bright: string
   sound: SoundObject
+  volume: string
   mainColor: string
   secundaryColor: string
 }
@@ -25,6 +26,7 @@ export const initialState: State = {
     start: soundsArray[0].sounds.start,
     end: soundsArray[0].sounds.end,
   },
+  volume: '1',
   mainColor: '#ae83ff',
   secundaryColor: '#ae83ff61',
 }
