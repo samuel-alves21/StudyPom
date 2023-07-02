@@ -14,7 +14,7 @@ interface ConfigWindowProps {
 }
 
 interface ThisWindownsProps {
-  display: boolean
+  shouldDisplay: boolean
 }
 
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
@@ -50,8 +50,8 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   }, [shouldDisplay])
 
   return (
-    <Wrapper display={shouldDisplay} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Window ref={thisWindow} display={shouldDisplay}>
+    <Wrapper shouldDisplay={shouldDisplay} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <Window ref={thisWindow} shouldDisplay={shouldDisplay}>
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
@@ -80,7 +80,7 @@ const Wrapper = styled.div<ThisWindownsProps>`
 `
 
 const Window = styled.div<ThisWindownsProps>`
-  overflow-y: ${({ display }) => (display ? 'auto' : 'hidden')};
+  overflow-y: ${({ shouldDisplay }) => (shouldDisplay ? 'auto' : 'hidden')};
   margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -93,10 +93,10 @@ const Window = styled.div<ThisWindownsProps>`
   min-height: 400px;
   max-height: 70%;
   min-width: 500px;
-  transition: opacity ${({ display }) => (display ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
-  opacity: ${({ display }) => (display ? '1' : '0')};
-  pointer-events: ${({ display }) => (display ? 'all' : 'none')};
-  animation: ${({ display }) => (display ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)')}
+  transition: opacity ${({ shouldDisplay }) => (shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
+  opacity: ${({ shouldDisplay }) => (shouldDisplay ? '1' : '0')};
+  pointer-events: ${({ shouldDisplay }) => (shouldDisplay ? 'all' : 'none')};
+  animation: ${({ shouldDisplay }) => (shouldDisplay ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)')}
     0.5s forwards;
 
   @keyframes slide-in {

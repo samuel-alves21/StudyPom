@@ -48,7 +48,6 @@ export const Input = ({ state, setState, id }: Props) => {
 
   const handleWhell = (e: React.WheelEvent<HTMLInputElement>) => {
     if (isOnFocus) return
-    console.log(e.target)
     if (e.deltaY < 0) {
       setState(acrementTime(Number(state), id).toString())
     } else {
@@ -79,9 +78,14 @@ export const Input = ({ state, setState, id }: Props) => {
     setState('')
   }
 
+  const handleChange = () => {
+    return
+  }
+
   return (
     <InputAndArrows>
       <InputField
+        onChange={() => handleChange}
         onKeyDown={(e) => handleKeyDown(e)}
         onFocus={() => handleFocus()}
         onBlur={(e) => handleBlur(e)}
