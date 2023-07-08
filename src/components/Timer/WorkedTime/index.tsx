@@ -3,7 +3,7 @@ import { Details } from './Details'
 
 export const WorkedTime = () => {
   return (
-    <DetailsWrapper>
+    <DetailsWrapper className='worked-time'>
       <Details text='time worked' />
       <Details text='cycles finished' />
     </DetailsWrapper>

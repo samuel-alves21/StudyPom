@@ -44,6 +44,8 @@ const MainContainer = styled.div<MainContainerProps>`
   position: relative;
   padding: 30px 0;
 
+  overflow-x: hidden;
+
   &::before {
     content: '';
     background: url(${({ background }) => background}) center center no-repeat;

@@ -16,5 +16,5 @@ export const CurrentTimerOption = () => {
     }
   }, [wasClicked, pomodoro, short])
 
-  return <h1>{currentOption}</h1>
+  return <h1 className='current-timer-option'>{currentOption}</h1>
 }

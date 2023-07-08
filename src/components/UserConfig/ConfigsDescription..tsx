@@ -8,21 +8,21 @@ export const SetConfig = () => {
   const { timeState } = useContext(TimerContext) as TimerContextType
 
   return (
-    <ConfigDescriptionWrapper>
+    <ConfigDescriptionWrapper className="config-description">
       <div>
-        <p>Pomodoro Time: </p>
+        <p className='pomodoro-time'>Pomodoro Time: </p>
         <span>&nbsp;{secondsToTime(timeState.pomodoroTime)}</span>
       </div>
       <div>
-        <p>Short Rest Time: </p>
+        <p className='short-rest-time'>Short Rest Time: </p>
         <span> &nbsp;{secondsToMinutes(timeState.shortRestTime)}</span>
       </div>
       <div>
-        <p>Long Rest Time: </p>
+        <p className='long-rest-time'>Long Rest Time: </p>
         <span>&nbsp;{secondsToMinutes(timeState.longRestTime)}</span>
       </div>
       <div>
-        <p>Cycles:</p> <span>&nbsp;{timeState.cycles}</span>
+        <p className='cycles'>Cycles:</p> <span>&nbsp;{timeState.cycles}</span>
       </div>
     </ConfigDescriptionWrapper>
   )

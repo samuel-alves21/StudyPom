@@ -11,13 +11,13 @@ export const Details = ({ text }: Props) => {
   const { timeState } = useContext(TimerContext) as TimerContextType
 
   return (
-    <div>
+    <div className="details">
       {text === 'time worked' ? (
-        <P>
+        <P className="time-worked">
           Time worked: <span>{secondsToTime(timeState.workedTime)}</span>
         </P>
       ) : (
-        <P>
+        <P className="cycles-finished">
           Cycles finished: <span>{timeState.cyclesFinished}</span>
         </P>
       )}

@@ -3,7 +3,7 @@ import { ConfigHeading } from './SetConfig'
 
 export const UserConfig = () => {
   return (
-    <div>
+    <div className='user-config'>
       <ConfigHeading />
       <SetConfig />
     </div>

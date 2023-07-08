@@ -25,7 +25,7 @@ export const CounterStartBtn = () => {
     buttonDispatch({ type: 'CLICKED', payload: true })
   }, [timeCounting, timeDispatch, buttonDispatch])
 
-  return <ToggleButton onClick={handleClick}>{timeCounting ? 'Pause' : 'Start'}</ToggleButton>
+  return <ToggleButton className='counter-start-btn' onClick={handleClick}>{timeCounting ? 'Pause' : 'Start'}</ToggleButton>
 }
 
 export const ToggleButton = styled.button`

@@ -9,10 +9,10 @@ export const Counter = () => {
   useTimer()
 
   return (
-    <CounterWrapper>
+    <CounterWrapper className='counter-wrapper'>
       <CounterOptionsBtn />
       <Display />
-      <ButtonsWrapper>
+      <ButtonsWrapper className='buttons-wrapper'>
         <CounterStartBtn />
         <CounterResetBtn />
       </ButtonsWrapper>

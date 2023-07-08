@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { breakpoints } from '../../utilities/breakpoints'
 
 export const Logo = () => {
-  return <Wrapper>StudyPom</Wrapper>
+  return <Wrapper className='logo'>StudyPom</Wrapper>
 }
 
 const Wrapper = styled.h1`

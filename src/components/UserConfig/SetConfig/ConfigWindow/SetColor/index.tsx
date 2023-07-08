@@ -4,6 +4,7 @@ import { ColorPicker } from './ColorPicker'
 import { CheckBox } from './CheckBox'
 import styled from 'styled-components'
 import { breakpoints } from '../../../../../utilities/breakpoints'
+import { MobileColorPicker } from './MobileColorPicker'
 
 export const SetColor = () => {
   const {
@@ -11,7 +12,7 @@ export const SetColor = () => {
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const [mainColorIsChecked, setMainColorIsChecked] = useState(true)
-  const [secundaryColorIsChecked, setSecundaryColorIsChecked] = useState(false)
+  const [secundaryColorIsChecked, setSecundaryColorIsChecked] = useState(true)
 
   const mainColorBox = useRef<null | HTMLInputElement>(null)
   const secundaryColorBox = useRef<null | HTMLInputElement>(null)
@@ -56,6 +57,10 @@ export const SetColor = () => {
         mainColorIsChecked={mainColorIsChecked}
         secundaryColorIsChecked={secundaryColorIsChecked}
       />
+      <MobileColorPicker 
+      mainColorIsChecked={mainColorIsChecked}
+      secundaryColorIsChecked={secundaryColorIsChecked}
+      />
     </Wrapper>
   )
 }
@@ -68,6 +73,18 @@ const Wrapper = styled.div`
   & .chrome-picker {
     font-family: 'Roboto', sans-serif !important;
     border-radius: 5px !important;
+    display: none !important;
+    
+    @media (min-width: ${(Number(breakpoints.tablet.slice(0, 3)) + 1).toString()}px) {
+      display: initial !important;
+    }
+  }
+
+  & .circle-picker {
+    display: none !important;
+      @media (max-width: ${breakpoints.tablet}) {
+      display: flex !important;
+    }
   }
 
   & .chrome-picker > div {
@@ -80,7 +97,7 @@ const ColorOptionsWrapper = styled.div`
   width: 100%;
   justify-content: space-around;
   padding: 0 100px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   & label,
   & input {

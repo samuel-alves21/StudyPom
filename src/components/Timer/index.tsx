@@ -4,7 +4,7 @@ import { CurrentTimerOption } from './CurrentTimerOption'
 
 export const Timer = () => {
   return (
-    <div>
+    <div className='timer'>
       <CurrentTimerOption />
       <Counter />
       <WorkedTime />

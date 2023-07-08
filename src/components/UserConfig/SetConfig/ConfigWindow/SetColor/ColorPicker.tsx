@@ -16,5 +16,7 @@ export const ColorPicker = ({ color, mainColorIsChecked, secundaryColorIsChecked
     secundaryColorIsChecked && customizationDispatch({ type: 'CHANGE_SECUNDARY_COLOR', payload: color.hex + '61' })
   }
 
-  return <ChromePicker disableAlpha={true} color={color.slice(0, 7)} onChange={(color) => handleChange(color)} />
+  return (
+    <ChromePicker disableAlpha={true} color={color.slice(0, 7)} onChange={(color) => handleChange(color)} />
+  )
 }

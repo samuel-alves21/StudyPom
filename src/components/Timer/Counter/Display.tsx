@@ -9,7 +9,7 @@ export const Display = () => {
     timeState: { timeOnDisplay },
   } = useContext(TimerContext) as TimerContextType
 
-  return <H1>{secondsToTime(timeOnDisplay)}</H1>
+  return <H1 className='display'>{secondsToTime(timeOnDisplay)}</H1>
 }
 
 const H1 = styled.h1`

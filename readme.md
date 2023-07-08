@@ -8,10 +8,10 @@ You can access the official version by clicking [here](https://samuel-alves21.gi
 
 ## Features
 
-Set a custom timer duration for pomodoro sessions and breaks
-Start, pause, and reset the timer
-Get visual and audio notifications when the timer ends
-Keep track of completed pomodoro sessions and total study time
+  - Set a custom timer duration for pomodoro sessions and breaks
+  - Start, pause, and reset the timer
+  - Get visual and audio notifications when the timer ends
+  - Keep track of completed pomodoro sessions and total study time
 
 ## Getting Started
 

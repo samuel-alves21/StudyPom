@@ -33,16 +33,6 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
     if (event.key === 'Escape') setShouldDisplay(false)
   }
 
-  const handleMouseEnter = () => {
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden'
-    document.getElementsByTagName('body')[0].style.height = '100%'
-  }
-
-  const handleMouseLeave = () => {
-    document.getElementsByTagName('body')[0].style.overflow = 'auto'
-    document.getElementsByTagName('body')[0].style.height = 'initial'
-  }
-
   useEffect(() => {
     if (!shouldDisplay) {
       setTimeout(() => setOption('timer'), 500)
@@ -50,7 +40,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   }, [shouldDisplay])
 
   return (
-    <Wrapper shouldDisplay={shouldDisplay} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <Wrapper shouldDisplay={shouldDisplay} >
       <Window ref={thisWindow} shouldDisplay={shouldDisplay}>
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow>

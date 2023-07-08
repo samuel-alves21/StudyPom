@@ -3,7 +3,7 @@ import { OptionsBtn } from './OptionsBtn'
 
 export const CounterOptionsBtn = () => {
   return (
-    <ButtonsWrapper>
+    <ButtonsWrapper className='buttons-wrapper'>
       <OptionsBtn text='pomodoro' />
       <OptionsBtn text='short' />
       <OptionsBtn text='long' />

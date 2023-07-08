@@ -30,6 +30,9 @@ export const GlobalStyles = createGlobalStyle<Props>`
     color: #fff;
   }
 
+  body {
+    min-height: 100vh;
+  }
 
   .img-full-cover {
     object-fit: cover;

@@ -23,15 +23,15 @@ export const ConfigHeading = () => {
   }
 
   return (
-    <Wrapper shouldRotate={shouldDisplay} animate={animate}>
-      <h1>Your Config</h1>
+    <Wrapper className='config-wrapper' shouldRotate={shouldDisplay} animate={animate}>
+      <h1 className='config-heading'> Your Config</h1>
       <i className='bi bi-gear-fill' ref={gear} onClick={handleClick}></i>
       <ConfigWindow
         gear={gear.current as HTMLElement}
         shouldDisplay={shouldDisplay}
         setShouldDisplay={setShouldDisplay}
       />
-      <Filter shouldDisplay={shouldDisplay}></Filter>
+      <Filter className='filter' shouldDisplay={shouldDisplay}></Filter>
     </Wrapper>
   )
 }
@@ -84,7 +84,7 @@ const Filter = styled.div<FilterProps>`
   background-color: #0000006d;
   position: absolute;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   z-index: 2;
   top: 0;
   left: 0;

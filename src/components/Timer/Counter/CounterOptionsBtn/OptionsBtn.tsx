@@ -31,7 +31,7 @@ export const OptionsBtn = ({ text }: Props) => {
   }
 
   return (
-    <StyledButton onClick={() => handleClick(text)} isSelected={buttonState[text.toLowerCase()]}>
+    <StyledButton className='options-btn' onClick={() => handleClick(text)} isSelected={buttonState[text.toLowerCase()]}>
       {text.replace(text[0], text[0].toUpperCase())}
     </StyledButton>
   )
