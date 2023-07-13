@@ -12,4 +12,9 @@ export const ColorStyle = createGlobalStyle<Props>`
     --color-primary: ${(props) => props.colors.mainColor};
     --color-primary-light: ${(props) => props.colors.secundaryColor};
   }
+
+  ::selection {
+    background: var(--color-primary);
+    color: #fff;
+  }
 `

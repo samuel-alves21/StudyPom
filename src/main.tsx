@@ -12,7 +12,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <CustomizationProvider>
         <GlobalStyles />
         <Pages />
-        {/* <RouterProvider router={router} /> */}
       </CustomizationProvider>
     </TimerProvider>
   </ButtonsProvider>

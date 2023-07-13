@@ -15,11 +15,6 @@ export const GlobalStyles = createGlobalStyle`
     color: #fff;   
   }
 
-  ::selection {
-    background: var(--color-primary);
-    color: #fff;
-  }
-
   body {
     min-height: 100vh;
   }
@@ -36,6 +31,10 @@ export const GlobalStyles = createGlobalStyle`
 
   h1 {
     font-size: calc(3.3rem + 0.2vw);
+  }
+
+  h2 {
+    font-size: calc(2.3rem + 0.2vw);
   }
 
   h3 {
