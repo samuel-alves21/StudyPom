@@ -8,7 +8,7 @@ export const SetConfig = () => {
   const { timeState } = useContext(TimerContext) as TimerContextType
 
   return (
-    <ConfigDescriptionWrapper className="config-description">
+    <ConfigDescriptionWrapper className='config-description'>
       <div>
         <p className='pomodoro-time'>Pomodoro Time: </p>
         <span>&nbsp;{secondsToTime(timeState.pomodoroTime)}</span>

@@ -40,7 +40,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   }, [shouldDisplay])
 
   return (
-    <Wrapper shouldDisplay={shouldDisplay} >
+    <Wrapper shouldDisplay={shouldDisplay}>
       <Window ref={thisWindow} shouldDisplay={shouldDisplay}>
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow>
@@ -83,10 +83,12 @@ const Window = styled.div<ThisWindownsProps>`
   min-height: 400px;
   max-height: 70%;
   min-width: 500px;
-  transition: opacity ${({ shouldDisplay }) => (shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
+  transition: opacity
+    ${({ shouldDisplay }) => (shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
   opacity: ${({ shouldDisplay }) => (shouldDisplay ? '1' : '0')};
   pointer-events: ${({ shouldDisplay }) => (shouldDisplay ? 'all' : 'none')};
-  animation: ${({ shouldDisplay }) => (shouldDisplay ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)')}
+  animation: ${({ shouldDisplay }) =>
+      shouldDisplay ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)'}
     0.5s forwards;
 
   @keyframes slide-in {

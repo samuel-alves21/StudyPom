@@ -1,26 +1,21 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 type UseSounds = (
   endSound: HTMLAudioElement,
-  endSoundDuration: number,
-  startSound: HTMLAudioElement,
-  startSoundDuration: number,
-  setStartSoundDuration: React.Dispatch<React.SetStateAction<number>>,
-  setStartSoundCurrentTime: React.Dispatch<React.SetStateAction<number>>,
-  setEndSoundDuration: React.Dispatch<React.SetStateAction<number>>,
-  setEndSoundCurrentTime: React.Dispatch<React.SetStateAction<number>>
-) => void
-
-export const useSounds: UseSounds = (
-  endSound,
-  endSoundDuration,
-  startSound,
-  startSoundDuration,
-  setStartSoundDuration,
-  setStartSoundCurrentTime,
-  setEndSoundDuration,
-  setEndSoundCurrentTime
+  startSound: HTMLAudioElement
 ) => {
+  startSoundDuration: number
+  startSoundCurrentTime: number
+  endSoundDuration: number
+  endSoundCurrentTime: number
+}
+
+export const useSounds: UseSounds = (endSound, startSound) => {
+  const [startSoundDuration, setStartSoundDuration] = useState<number>(startSound.duration)
+  const [startSoundCurrentTime, setStartSoundCurrentTime] = useState<number>(0)
+  const [endSoundDuration, setEndSoundDuration] = useState<number>(endSound.duration)
+  const [endSoundCurrentTime, setEndSoundCurrentTime] = useState<number>(0)
+
   useEffect(() => {
     startSound.onloadedmetadata = () => {
       setStartSoundDuration(startSound.duration)
@@ -63,4 +58,11 @@ export const useSounds: UseSounds = (
     setEndSoundDuration,
     setStartSoundDuration,
   ])
+
+  return {
+    startSoundDuration,
+    startSoundCurrentTime,
+    endSoundDuration,
+    endSoundCurrentTime,
+  }
 }

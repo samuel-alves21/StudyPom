@@ -1,27 +1,17 @@
-import styled from 'styled-components'
-import { breakpoints } from '../../utilities/breakpoints'
+import styled from "styled-components"
+import logo from "../../img/logo.png"
 
 export const Logo = () => {
-  return <Wrapper className='logo'>StudyPom</Wrapper>
+  return (
+    <ImgContainer>
+      <img src={logo} alt="" className="img-full-cover"/>
+    </ImgContainer>
+  )
 }
 
-const Wrapper = styled.h1`
-  font-family: 'Indie Flower', cursive;
+const ImgContainer = styled.div`
   position: absolute;
-  top: 5%;
-  left: 5%;
-  font-size: 5rem;
-
-  @media (max-width: ${breakpoints.tablet}) {
-    top: 0;
-    left: 0;
-    font-size: 4rem;
-    position: relative;
-    margin-top: -40px;
-    text-align: center;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    margin-top: 0%;
-  }
+  top: 25px;
+  left: 25px;
+  width: 200px;
 `

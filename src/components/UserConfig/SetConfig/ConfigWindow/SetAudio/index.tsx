@@ -9,9 +9,9 @@ export const SetAudio = () => {
     <Wrapper>
       <VolumeBar />
       <SoundsWrapper>
-      {soundsArray.map((value, index) => (
-        <AudioOption key={index} sounds={value} />
-      ))}
+        {soundsArray.map((value, index) => (
+          <AudioOption key={index} sounds={value} />
+        ))}
       </SoundsWrapper>
     </Wrapper>
   )

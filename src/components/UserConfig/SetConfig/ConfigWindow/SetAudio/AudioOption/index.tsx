@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useMemo, useState, useContext } from 'react'
+import { useMemo, useContext } from 'react'
 import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
@@ -24,24 +24,13 @@ export const AudioOption = ({
   const startSound = useMemo(() => new Audio(start), [start])
   const endSound = useMemo(() => new Audio(end), [end])
 
-  const [startSoundDuration, setStartSoundDuration] = useState<number>(startSound.duration)
-  const [startSoundCurrentTime, setStartSoundCurrentTime] = useState<number>(0)
-  const [endSoundDuration, setEndSoundDuration] = useState<number>(endSound.duration)
-  const [endSoundCurrentTime, setEndSoundCurrentTime] = useState<number>(0)
-
   const {
     customizationState: { volume },
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  useSounds(
+  const { startSoundDuration, startSoundCurrentTime, endSoundDuration, endSoundCurrentTime } = useSounds(
     endSound,
-    endSoundDuration,
-    startSound,
-    startSoundDuration,
-    setStartSoundDuration,
-    setStartSoundCurrentTime,
-    setEndSoundDuration,
-    setEndSoundCurrentTime
+    startSound
   )
 
   startSound.volume = Number(volume)

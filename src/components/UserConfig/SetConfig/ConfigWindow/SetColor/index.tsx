@@ -57,10 +57,7 @@ export const SetColor = () => {
         mainColorIsChecked={mainColorIsChecked}
         secundaryColorIsChecked={secundaryColorIsChecked}
       />
-      <MobileColorPicker 
-      mainColorIsChecked={mainColorIsChecked}
-      secundaryColorIsChecked={secundaryColorIsChecked}
-      />
+      <MobileColorPicker mainColorIsChecked={mainColorIsChecked} secundaryColorIsChecked={secundaryColorIsChecked} />
     </Wrapper>
   )
 }
@@ -74,7 +71,7 @@ const Wrapper = styled.div`
     font-family: 'Roboto', sans-serif !important;
     border-radius: 5px !important;
     display: none !important;
-    
+
     @media (min-width: ${(Number(breakpoints.tablet.slice(0, 3)) + 1).toString()}px) {
       display: initial !important;
     }
@@ -82,7 +79,7 @@ const Wrapper = styled.div`
 
   & .circle-picker {
     display: none !important;
-      @media (max-width: ${breakpoints.tablet}) {
+    @media (max-width: ${breakpoints.tablet}) {
       display: flex !important;
     }
   }

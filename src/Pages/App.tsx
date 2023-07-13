@@ -1,13 +1,15 @@
 import styled from 'styled-components'
-import { GlobalStyles } from './globalStyles'
-import { UserConfig } from './components/UserConfig'
-import { breakpoints } from './utilities/breakpoints'
-import { Logo } from './components/Logo'
-import { Timer } from './components/Timer'
-import { useSetWindow } from './hooks/useSetWindow'
-import { useInit } from './hooks/useInit'
-import { useContext } from 'react'
-import { CustomizationContext, CustomizationContextType } from './contexts/CustomizationContext'
+import { UserConfig } from '../components/UserConfig'
+import { breakpoints } from '../utilities/breakpoints'
+import { Logo } from '../components/Logo'
+import { Timer } from '../components/Timer'
+import { useSetWindow } from '../hooks/useSetWindow'
+import { useInit } from '../hooks/useInit'
+import { useContext, useEffect, useRef } from 'react'
+import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
+import { useNavigate } from 'react-router-dom'
+import { Spinner } from '../components/Spinner'
+import { ColorStyle } from '../components/ColorStyle'
 
 interface MainContainerProps {
   background: string
@@ -15,24 +17,45 @@ interface MainContainerProps {
   bright: string
 }
 
+const user = false
+
 const App = () => {
   const {
     customizationState: { background, blur, bright, mainColor, secundaryColor },
   } = useContext(CustomizationContext) as CustomizationContextType
+
+  const navigate = useNavigate()
+
+  const myTimer = useRef<number>()
+
+  useEffect(() => {
+    if (!user) {
+      myTimer.current = setTimeout(() => {
+        navigate('/login')
+      }, 2000)
+    }
+    return () => clearTimeout(myTimer.current)
+  }, [navigate])
 
   useSetWindow()
   useInit()
 
   return (
     <>
-      <GlobalStyles colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-      <MainContainer background={background} blur={blur} bright={bright}>
-        <Wrapper>
-          <Logo />
-          <Timer />
-          <UserConfig />
-        </Wrapper>
-      </MainContainer>
+      {!user ? (
+        <Spinner mainColor={mainColor} />
+      ) : (
+        <>
+          <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
+          <MainContainer background={background} blur={blur} bright={bright}>
+            <Wrapper>
+              <Logo />
+              <Timer />
+              <UserConfig />
+            </Wrapper>
+          </MainContainer>
+        </>
+      )}
     </>
   )
 }
