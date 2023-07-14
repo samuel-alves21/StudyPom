@@ -21,8 +21,8 @@ export const Login = () => {
 const Wrapper = styled.div`
   min-height: 100vh;
   width: 100%;
-  background: rgb(214,78,219);
-  background: radial-gradient(circle, rgba(214,78,219,1) 21%, rgba(176,50,233,1) 97%); 
+  background: rgb(214, 78, 219);
+  background: radial-gradient(circle, rgba(214, 78, 219, 1) 21%, rgba(176, 50, 233, 1) 97%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,11 +35,10 @@ const GlassBox = styled.div`
   height: 75vh;
   width: 80%;
 
-  background: rgba( 17, 17, 17, 0.65 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 3.5px );
-  -webkit-backdrop-filter: blur( 3.5px );
-
+  background: rgba(17, 17, 17, 0.65);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
 
   border-radius: 50px;
   padding: 50px;

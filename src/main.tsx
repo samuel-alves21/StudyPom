@@ -5,7 +5,6 @@ import { CustomizationProvider } from './contexts/CustomizationContext/index.tsx
 import { GlobalStyles } from './globalStyles.tsx'
 import { Pages } from './Pages/index.tsx'
 
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ButtonsProvider>
     <TimerProvider>

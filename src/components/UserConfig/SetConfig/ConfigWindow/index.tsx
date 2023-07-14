@@ -6,6 +6,7 @@ import { breakpoints } from '../../../../utilities/breakpoints'
 import { SetBackground } from './SetBackgound'
 import { SetAudio } from './SetAudio'
 import { SetColor } from './SetColor'
+import { useDisplay } from '../../../../hooks/useDisplay'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -20,18 +21,9 @@ interface ThisWindownsProps {
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const thisWindow = useRef<HTMLDivElement | null>(null)
 
+  useDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
+
   const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
-
-  window.onclick = (event: MouseEvent) => {
-    const box = thisWindow.current as HTMLDivElement
-    if (box.contains(event.target as Node) || event.target === gear) return
-    if (shouldDisplay === false) return
-    setShouldDisplay(false)
-  }
-
-  window.onkeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') setShouldDisplay(false)
-  }
 
   useEffect(() => {
     if (!shouldDisplay) {
