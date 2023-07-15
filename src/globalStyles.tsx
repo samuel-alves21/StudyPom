@@ -53,6 +53,15 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: bold;
   }
 
+  a {
+    text-decoration: none;
+    color: #b032e9;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
   input {
     outline: none;
     border: none;

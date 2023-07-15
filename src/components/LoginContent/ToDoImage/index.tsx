@@ -10,9 +10,9 @@ export const ToDoImage = () => {
 }
 
 const Wrapper = styled.div`
-  width: 500px;
-  height: 500px;
-  background-color: rgba(176, 50, 233, 0.35);
+  width: 480px;
+  height: 480px;
+  background-color: rgba(175, 50, 233, 0.425);
   border-radius: 350px;
 
   & img {

@@ -12,8 +12,9 @@ export const LoginContent = () => {
 }
 
 const Wrapper = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 100%;
+  text-align: center;
 `

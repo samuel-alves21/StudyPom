@@ -9,30 +9,32 @@ export const Login = () => {
   }, [])
 
   return (
-    <Wrapper>
-      <GlassBox>
-        <Logo />
-        <LoginContent />
-      </GlassBox>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <GlassBox>
+          <Logo />
+          <LoginContent />
+        </GlassBox>
+      </Wrapper>
+    </>
   )
 }
 
 const Wrapper = styled.div`
   min-height: 100vh;
   width: 100%;
-  background: rgb(214, 78, 219);
-  background: radial-gradient(circle, rgba(214, 78, 219, 1) 21%, rgba(176, 50, 233, 1) 97%);
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgb(214, 78, 219);
+  background: radial-gradient(circle, rgba(214, 78, 219, 1) 21%, rgba(176, 50, 233, 1) 97%);
 `
 
 const GlassBox = styled.div`
   display: flex;
   align-items: center;
 
-  height: 75vh;
+  height: 90vh;
   width: 80%;
 
   background: rgba(17, 17, 17, 0.65);
