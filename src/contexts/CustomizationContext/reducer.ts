@@ -1,10 +1,4 @@
-import { SoundObject, State } from './initialState'
-import { CustomizationActionTypes } from './types'
-
-export type CustomizationReducer = (
-  state: State,
-  action: { type: CustomizationActionTypes; payload: string | SoundObject }
-) => State
+import { CustomizationReducer, SoundObject } from '../../types/types'
 
 export const reducer: CustomizationReducer = (state, action) => {
   switch (action.type) {

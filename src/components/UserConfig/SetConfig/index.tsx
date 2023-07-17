@@ -1,15 +1,8 @@
 import styled from 'styled-components'
 import { useState, useRef } from 'react'
 import { ConfigWindow } from './ConfigWindow'
-
-interface FilterProps {
-  shouldDisplay: boolean
-}
-
-interface IconProps {
-  shouldRotate: boolean
-  animate: boolean
-}
+import { GearIconProps } from '../../../types/types'
+import { Filter } from './Filter'
 
 export const ConfigHeading = () => {
   const gear = useRef<HTMLElement | null>(null)
@@ -36,7 +29,7 @@ export const ConfigHeading = () => {
   )
 }
 
-const Wrapper = styled.div<IconProps>`
+const Wrapper = styled.div<GearIconProps>`
   display: flex;
   align-items: center;
   gap: 15px;
@@ -75,17 +68,4 @@ const Wrapper = styled.div<IconProps>`
     color: var(--color-primary);
     cursor: pointer;
   }
-`
-
-const Filter = styled.div<FilterProps>`
-  pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
-  opacity: ${({ shouldDisplay }) => (shouldDisplay ? '1' : '0')};
-  background-color: #0000006d;
-  position: absolute;
-  min-width: 100%;
-  min-height: 100vh;
-  z-index: 2;
-  top: 0;
-  left: 0;
 `

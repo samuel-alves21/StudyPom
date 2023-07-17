@@ -4,23 +4,14 @@ import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
 import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
-
-interface Props {
-  sounds: {
-    name: string
-    sounds: {
-      start: string
-      end: string
-    }
-  }
-}
+import { AudioOptionProps } from '../../../../../../types/types'
 
 export const AudioOption = ({
   sounds: {
     name,
     sounds: { start, end },
   },
-}: Props) => {
+}: AudioOptionProps) => {
   const startSound = useMemo(() => new Audio(start), [start])
   const endSound = useMemo(() => new Audio(end), [end])
 

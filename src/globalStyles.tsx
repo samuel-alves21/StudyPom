@@ -12,7 +12,8 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
-    color: #fff;   
+    color: #fff; 
+    --color-error: #ff3939  
   }
 
   body {

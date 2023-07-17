@@ -1,23 +1,8 @@
+import { CustomizationContextState } from '../../types/types'
 import { backgroundArray } from '../../utilities/backgroundArray'
 import { soundsArray } from '../../utilities/soundsArray'
 
-export interface State {
-  background: string
-  blur: string
-  bright: string
-  sound: SoundObject
-  volume: string
-  mainColor: string
-  secundaryColor: string
-}
-
-export interface SoundObject {
-  name: string
-  start: string
-  end: string
-}
-
-export const initialState: State = {
+export const initialState: CustomizationContextState = {
   background: backgroundArray[0].path,
   blur: '1',
   bright: '1',

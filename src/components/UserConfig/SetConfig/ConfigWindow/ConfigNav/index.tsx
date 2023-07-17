@@ -1,14 +1,5 @@
 import styled from 'styled-components'
-
-interface ConfigNavProps {
-  setOption: (option: 'timer' | 'background' | 'sounds' | 'color') => void
-  option: 'timer' | 'background' | 'sounds' | 'color'
-  setShouldDisplay: (shouldDisplay: boolean) => void
-}
-
-interface StyledProps {
-  isSelected: boolean
-}
+import { ConfigNavProps, ConfigNavStyledProps } from '../../../../../types/types'
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
   const handleClick = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
@@ -62,7 +53,7 @@ const Options = styled.div`
   flex-grow: 1;
 `
 
-const Option = styled.p<StyledProps>`
+const Option = styled.p<ConfigNavStyledProps>`
   position: relative;
 
   &:hover {

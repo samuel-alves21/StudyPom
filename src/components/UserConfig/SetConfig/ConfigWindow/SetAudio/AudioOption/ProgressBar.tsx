@@ -1,18 +1,6 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-
-interface Props {
-  id: 'start' | 'end'
-  startSoundDuration: number
-  startSoundCurrentTime: number
-  endSoundDuration: number
-  endSoundCurrentTime: number
-}
-
-interface SpanProps {
-  currentTime: number
-  duration: number
-}
+import { ProgressBarProps, SpanBarSoundProps } from '../../../../../../types/types'
 
 export const ProgressBar = ({
   id,
@@ -20,7 +8,7 @@ export const ProgressBar = ({
   startSoundDuration,
   endSoundCurrentTime,
   endSoundDuration,
-}: Props) => {
+}: ProgressBarProps) => {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
 
@@ -37,7 +25,7 @@ export const ProgressBar = ({
   return <Span currentTime={currentTime} duration={duration}></Span>
 }
 
-const Span = styled.span<SpanProps>`
+const Span = styled.span<SpanBarSoundProps>`
   width: 60%;
   border-radius: 5px;
   height: 7px;

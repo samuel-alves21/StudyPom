@@ -1,13 +1,9 @@
 import { useContext } from 'react'
 import { CirclePicker, ColorResult } from 'react-color'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import { MobileColorPickerProps } from '../../../../../types/types'
 
-interface Props {
-  mainColorIsChecked: boolean
-  secundaryColorIsChecked: boolean
-}
-
-export const MobileColorPicker = ({ mainColorIsChecked, secundaryColorIsChecked }: Props) => {
+export const MobileColorPicker = ({ mainColorIsChecked, secundaryColorIsChecked }: MobileColorPickerProps) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
 
   const handleOnChangeComplete = (color: ColorResult) => {

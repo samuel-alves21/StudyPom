@@ -3,10 +3,7 @@ import { TimerContext, TimerContextType } from '../../../contexts/TimerContext'
 import { ButtonsContext, ButtonContextType } from '../../../contexts/ButtonsContext'
 import { useSetWindow } from '../../../hooks/useSetWindow'
 import styled from 'styled-components'
-
-interface StyledProps {
-  animate: boolean
-}
+import { CounterResetBtnProps } from '../../../types/types'
 
 export const CounterResetBtn = () => {
   const [animate, setAnimate] = useState(false)
@@ -30,7 +27,7 @@ export const CounterResetBtn = () => {
   )
 }
 
-const Wrapper = styled.div<StyledProps>`
+const Wrapper = styled.div<CounterResetBtnProps>`
   & .bi-arrow-clockwise {
     font-size: 3.5rem;
   }

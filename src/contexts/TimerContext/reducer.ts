@@ -1,14 +1,6 @@
-import { State } from './initialState'
-import { TimerActionTypes } from './types'
+import { TimerReducer } from '../../types/types'
 
-export interface ReducerAction {
-  type: TimerActionTypes
-  payload?: number | boolean
-}
-
-type Reducer = (state: State, action: ReducerAction) => State
-
-export const reducer: Reducer = (state, action) => {
+export const reducer: TimerReducer = (state, action) => {
   switch (action.type) {
     case 'CONFIG_CYCLES':
       if (typeof action.payload !== 'number') return state

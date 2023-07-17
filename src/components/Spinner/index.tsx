@@ -1,9 +1,6 @@
 import { SpinnerCircular } from 'spinners-react'
 import styled from 'styled-components'
-
-interface SpinnerProps {
-  mainColor: string
-}
+import { SpinnerProps } from '../../types/types'
 
 export const Spinner = ({ mainColor }: SpinnerProps) => {
   return (

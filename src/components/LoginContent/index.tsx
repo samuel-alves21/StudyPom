@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 import { ToDoImage } from './ToDoImage'
 import { Form } from './Form'
+import { FormProvider } from '../../contexts/FormContext'
 
 export const LoginContent = () => {
   return (
     <Wrapper>
       <ToDoImage />
-      <Form />
+      <FormProvider>
+        <Form />
+      </FormProvider>
     </Wrapper>
   )
 }

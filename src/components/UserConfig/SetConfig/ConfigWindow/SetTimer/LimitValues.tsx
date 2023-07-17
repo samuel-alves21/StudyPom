@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 import { limitValues } from '../../../../../utilities/limitValues'
-import { Id } from '../../../../../types/types'
+import { LimitValuesProps } from '../../../../../types/types'
 import { secondsToMinutes } from '../../../../../functions/secondsToMinutes'
 import { secondsToTime } from '../../../../../functions/secondsToTime'
 
-interface Props {
-  id: Id
-}
-
-export const LimitValues = ({ id }: Props) => {
+export const LimitValues = ({ id }: LimitValuesProps) => {
   return (
     <Wrapper>
       <p>

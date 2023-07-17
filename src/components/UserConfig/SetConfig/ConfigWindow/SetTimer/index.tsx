@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Input } from './Input'
+import { TimerConfigInput } from './TimerConfigInput'
 import { useState, useContext } from 'react'
 import { LimitValues } from './LimitValues'
 import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
@@ -18,22 +18,22 @@ export const SetTimer = () => {
     <Wrapper>
       <InputContainer>
         <label htmlFor='pomodoro'>Pomodoro Time:</label>
-        <Input id='pomodoro' state={pomodoroConfigTime} setState={setPomodoroConfigTime} />
+        <TimerConfigInput id='pomodoro' state={pomodoroConfigTime} setState={setPomodoroConfigTime} />
         <LimitValues id={'pomodoro'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='short'>Short Rest Time:</label>
-        <Input id='short' state={shortConfigTime} setState={setShortConfigTime} />
+        <TimerConfigInput id='short' state={shortConfigTime} setState={setShortConfigTime} />
         <LimitValues id={'short'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='long'>Long Rest Time:</label>
-        <Input id='long' state={longConfigTime} setState={setLongConfigTime} />
+        <TimerConfigInput id='long' state={longConfigTime} setState={setLongConfigTime} />
         <LimitValues id={'long'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='cycles'>Cycles:</label>
-        <Input id='cycles' state={configCycles} setState={setConfigCycles} />
+        <TimerConfigInput id='cycles' state={configCycles} setState={setConfigCycles} />
         <LimitValues id={'cycles'} />
       </InputContainer>
     </Wrapper>

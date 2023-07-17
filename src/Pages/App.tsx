@@ -10,12 +10,7 @@ import { CustomizationContext, CustomizationContextType } from '../contexts/Cust
 import { useNavigate } from 'react-router-dom'
 import { Spinner } from '../components/Spinner'
 import { ColorStyle } from '../components/ColorStyle'
-
-interface MainContainerProps {
-  background: string
-  blur: string
-  bright: string
-}
+import { MainContainerProps } from '../types/types'
 
 const user = false
 

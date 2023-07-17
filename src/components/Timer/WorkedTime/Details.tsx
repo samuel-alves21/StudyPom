@@ -2,12 +2,9 @@ import styled from 'styled-components'
 import { secondsToTime } from '../../../functions/secondsToTime'
 import { TimerContext, TimerContextType } from '../../../contexts/TimerContext'
 import { useContext } from 'react'
+import { DetailsProps } from '../../../types/types'
 
-interface Props {
-  text: string
-}
-
-export const Details = ({ text }: Props) => {
+export const Details = ({ text }: DetailsProps) => {
   const { timeState } = useContext(TimerContext) as TimerContextType
 
   return (

@@ -3,19 +3,11 @@ import { useContext } from 'react'
 import { ButtonContextType, ButtonsContext } from '../../../../contexts/ButtonsContext'
 import { TimerContext, TimerContextType } from '../../../../contexts/TimerContext'
 import { breakpoints } from '../../../../utilities/breakpoints'
-import { Id } from '../../../../types/types'
+import { OptionsBtnProps, StyledButtonProps } from '../../../../types/types'
 import { TimerActionTypes } from '../../../../contexts/TimerContext/types'
 import { ButtonsActionTypes } from '../../../../contexts/ButtonsContext/types'
 
-interface Props {
-  text: Id
-}
-
-interface StyledProps {
-  isSelected?: boolean
-}
-
-export const OptionsBtn = ({ text }: Props) => {
+export const OptionsBtn = ({ text }: OptionsBtnProps) => {
   const { timeDispatch } = useContext(TimerContext) as TimerContextType
 
   const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
@@ -41,7 +33,7 @@ export const OptionsBtn = ({ text }: Props) => {
   )
 }
 
-export const StyledButton = styled.button<StyledProps>`
+export const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ isSelected }) => (isSelected ? 'white' : 'transparent')};
   color: ${({ isSelected }) => (isSelected ? 'black' : 'white')};
   &:hover {

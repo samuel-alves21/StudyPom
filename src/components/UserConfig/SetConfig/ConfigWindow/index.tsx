@@ -7,16 +7,7 @@ import { SetBackground } from './SetBackgound'
 import { SetAudio } from './SetAudio'
 import { SetColor } from './SetColor'
 import { useDisplay } from '../../../../hooks/useDisplay'
-
-interface ConfigWindowProps {
-  setShouldDisplay: (shouldDisplay: boolean) => void
-  shouldDisplay: boolean
-  gear: HTMLElement
-}
-
-interface ThisWindownsProps {
-  shouldDisplay: boolean
-}
+import { ConfigWindowProps, StyledConfingWindow } from '../../../../types/types'
 
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const thisWindow = useRef<HTMLDivElement | null>(null)
@@ -49,7 +40,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   )
 }
 
-const Wrapper = styled.div<ThisWindownsProps>`
+const Wrapper = styled.div<StyledConfingWindow>`
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -61,7 +52,7 @@ const Wrapper = styled.div<ThisWindownsProps>`
   pointer-events: none;
 `
 
-const Window = styled.div<ThisWindownsProps>`
+const Window = styled.div<StyledConfingWindow>`
   overflow-y: ${({ shouldDisplay }) => (shouldDisplay ? 'auto' : 'hidden')};
   margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);

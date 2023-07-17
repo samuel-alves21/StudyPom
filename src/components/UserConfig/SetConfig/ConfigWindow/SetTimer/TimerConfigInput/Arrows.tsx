@@ -1,15 +1,9 @@
 import styled from 'styled-components'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import { Id } from '../../../../../../types/types'
+import { ArrowsProps } from '../../../../../../types/types'
 
-interface Props {
-  state: string
-  setState: (value: string) => void
-  id: Id
-}
-
-export const Arrows = ({ id, setState, state }: Props) => {
+export const Arrows = ({ id, setState, state }: ArrowsProps) => {
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const thisElement = e.target as HTMLElement
 

@@ -1,11 +1,5 @@
 import { useEffect } from 'react'
-
-type UseDisplayProps = (
-  gear: HTMLElement,
-  setShouldDisplay: (shouldDisplay: boolean) => void,
-  shouldDisplay: boolean,
-  optionsWindowRef: HTMLDivElement | null
-) => void
+import { UseDisplayProps } from '../types/types'
 
 export const useDisplay: UseDisplayProps = (gear, setShouldDisplay, shouldDisplay, optionsWindowRef) => {
   useEffect(() => {

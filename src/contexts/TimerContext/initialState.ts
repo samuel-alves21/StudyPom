@@ -1,6 +1,6 @@
 import { standardValues } from '../../utilities/standardValues'
 
-export type State = typeof initialState
+export type TimerState = typeof initialState
 
 export const initialState = {
   pomodoroTime: standardValues.pomodoro,

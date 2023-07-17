@@ -4,17 +4,11 @@ import { formatConfigInput } from '../../../../../../functions/formatConfigInput
 import { limitValues } from '../../../../../../utilities/limitValues'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import { Id } from '../../../../../../types/types'
+import { TimerConfigInputProps } from '../../../../../../types/types'
 import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
 import { useState } from 'react'
 
-interface Props {
-  id: Id
-  state: string
-  setState: (value: string) => void
-}
-
-export const Input = ({ state, setState, id }: Props) => {
+export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
 
   useTimerConfig(state, id)

@@ -1,12 +1,6 @@
-export interface State {
-  pomodoro: boolean
-  short: boolean
-  long: boolean
-  wasClicked: boolean
-  [key: string]: boolean
-}
+import { ButtonsState } from '../../types/types'
 
-export const initialState: State = {
+export const initialState: ButtonsState = {
   pomodoro: true,
   short: false,
   long: false,

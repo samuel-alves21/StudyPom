@@ -1,14 +1,9 @@
 import { ChromePicker, ColorResult } from 'react-color'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { useContext } from 'react'
+import { ColorPickerProp } from '../../../../../types/types'
 
-interface Props {
-  color: string
-  mainColorIsChecked: boolean
-  secundaryColorIsChecked: boolean
-}
-
-export const ColorPicker = ({ color, mainColorIsChecked, secundaryColorIsChecked }: Props) => {
+export const ColorPicker = ({ color, mainColorIsChecked, secundaryColorIsChecked }: ColorPickerProp) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
 
   const handleChange = (color: ColorResult) => {
