@@ -1,9 +1,8 @@
 import { useEffect, useContext } from 'react'
-import { TimerContext, TimerContextType } from '../contexts/TimerContext'
-import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
+import { TimerContext } from '../contexts/TimerContext'
+import { ButtonsContext } from '../contexts/ButtonsContext'
 import { verifyLimit } from '../functions/verifyLimit'
-import { TimerActionTypes } from '../contexts/TimerContext/types'
-import { Id } from '../types/types'
+import { ButtonContextType, Id, TimerActionTypes, TimerContextType } from '../types/types'
 
 export const useTimerConfig = (state: string, id: Id) => {
   const {

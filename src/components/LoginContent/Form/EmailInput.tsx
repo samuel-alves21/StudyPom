@@ -5,28 +5,16 @@ import { useContext } from 'react'
 import { FormContext } from '../../../contexts/FormContext'
 import { Error } from './Error'
 
-export const EmailInput = ({ handleKeyDown, IconHandleClick }: FormInputProps) => {
+export const EmailInput = ({ handleKeyDown, IconHandleClick, id }: FormInputProps) => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const error = formValidation.email(e.target.value)
-    if (error) {
-      formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'invalid' } })
-    } else {
-      formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: false, setCurrentError: 'none' } })
-    }
-  }
-
-  const handleBlur = (e: React.FocusEvent<HTMLElement, Element>) => {
-    if (formState.email.hasError) {
-      return
-    }
     const thisElement = e.target as HTMLInputElement
-    if (thisElement.value === '') {
-      formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'empty' } })
-    } else {
-      formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: false, setCurrentError: 'none' } })
-    }
+    const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, id)
+    if (isEmpty) return
+
+    const isInvalid = formValidation.emailVerify(e.target.value, formDispatch)
+    if (isInvalid) return
   }
 
   return (
@@ -34,14 +22,14 @@ export const EmailInput = ({ handleKeyDown, IconHandleClick }: FormInputProps) =
       <InputFieldWrapper type='email'>
         <i className='bi bi-envelope-fill' onClick={(e) => IconHandleClick(e)}></i>
         <input
-          onBlur={(e) => handleBlur(e)}
           onChange={(e) => handleChange(e)}
           type='email'
           placeholder='email'
           onKeyDown={(e) => handleKeyDown(e)}
           autoComplete='off'
+          id={id}
         />
-        {formState.email.hasError && <Error errorField='email' errorType={formState.email.currentError} />}
+        {formState[id].hasError && <Error errorField={id} errorType={formState[id].currentError} />}
       </InputFieldWrapper>
     </>
   )

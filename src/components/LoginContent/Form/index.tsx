@@ -8,13 +8,12 @@ import { PasswordInput } from './PasswordInput'
 import { ConfirmedPasswordInput } from './ConfirmedPasswordInput'
 import { FormContext } from '../../../contexts/FormContext'
 import { FormContextType, FormInputType } from '../../../types/types'
+import { formValidation } from '../../../functions/formValidation'
 
 export const Form = () => {
-  const { formState } = useContext(FormContext) as FormContextType
+  const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
   const [shouldSendform, setShouldSend] = useState<boolean>(false)
-  const [shouldShowPassword, setShouldShowPassword] = useState<boolean>(false)
-  const [shouldShowConfirmedPassword, setShouldShowConfirmedPassword] = useState<boolean>(false)
 
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
 
@@ -28,7 +27,10 @@ export const Form = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
-    const type = thisElement.type as FormInputType
+    const type = thisElement.id as FormInputType
+
+    const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, type)
+    if (isEmpty) return
 
     if (formState[type].hasError) return
     if (e.key === 'Enter') {
@@ -64,20 +66,10 @@ export const Form = () => {
   return (
     <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
       <Text />
-      <Username IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} />
-      <EmailInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} />
-      <PasswordInput
-        IconHandleClick={IconHandleClick}
-        handleKeyDown={handleKeyDown}
-        shouldShowPassword={shouldShowPassword}
-        setShouldShowPassword={setShouldShowPassword}
-      />
-      <ConfirmedPasswordInput
-        IconHandleClick={IconHandleClick}
-        handleKeyDown={handleKeyDown}
-        shouldShowConfirmedPassword={shouldShowConfirmedPassword}
-        setShouldShowConfirmedPassword={setShouldShowConfirmedPassword}
-      />
+      <Username IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='username' />
+      <EmailInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='email' />
+      <PasswordInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='password' />
+      <ConfirmedPasswordInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='confirmedPassword' />
       <FormButton shouldSendform={shouldSendform} />
       <p>
         Already have an account? <a href='#'>Sign in</a>

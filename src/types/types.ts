@@ -1,22 +1,64 @@
 import { initialState } from '../contexts/TimerContext/initialState'
 
-export type FormsError = 'empty' | 'invalid' | 'none'
+export interface FormErrorProps {
+  errorField: FormInputType
+  errorType: FormsError
+}
+
+export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
+
+export interface FormInputWrapper {
+  type: FormInputType
+}
+
+export type FormsError = 'none' | 'empty' | 'invalid' | 'exists' | 'weakLength' | 'weakCase' | 'weakChar' | 'mismatch'
 
 interface FormErrorsObj {
   hasError: boolean
   currentError: FormsError
+}
+
+interface EmailErrorObj extends FormErrorsObj {
   errorTypes: {
     empty: string
     invalid: string
+    exists: string
+    none: null
+  }
+}
+
+interface UsernameErrorObj extends FormErrorsObj {
+  errorTypes: {
+    empty: string
+    invalid: string
+    exists: string
+    none: null
+  }
+}
+
+interface PasswordErrorObj extends FormErrorsObj {
+  errorTypes: {
+    empty: string
+    weakLength: string
+    weakCase: string
+    weakChar: string
+    none: null
+  }
+}
+
+interface ConfirmedPasswordErrorObj extends FormErrorsObj {
+  errorTypes: {
+    empty: string
+    mismatch: string
     none: null
   }
 }
 
 export interface FormState {
-  email: FormErrorsObj
-  username: FormErrorsObj
-  password: FormErrorsObj
-  confirmedPassword: FormErrorsObj
+  email: EmailErrorObj
+  username: UsernameErrorObj
+  password: PasswordErrorObj
+  confirmedPassword: ConfirmedPasswordErrorObj
 }
 
 export interface FormContextType {
@@ -34,7 +76,11 @@ export interface FormReducerAction {
 
 export type FormReducer = (state: FormState, action: FormReducerAction) => FormState
 
-export type FormContextTypes = 'SET_EMAIL_ERROR'
+export type FormContextTypes =
+  | 'SET_EMAIL_ERROR'
+  | 'SET_USERNAME_ERROR'
+  | 'SET_PASSWORD_ERROR'
+  | 'SET_CONFIRMED_PASSWORD_ERROR'
 
 export interface TimerContextType {
   timeState: TimerState
@@ -133,16 +179,7 @@ export interface ReactChildrenProps {
 export interface FormInputProps {
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
   IconHandleClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
-}
-
-export interface PasswordFormProps extends FormInputProps {
-  shouldShowPassword: boolean
-  setShouldShowPassword: (shouldShowPassword: boolean) => void
-}
-
-export interface PasswordConfirmedFormProps extends FormInputProps {
-  shouldShowConfirmedPassword: boolean
-  setShouldShowConfirmedPassword: (shouldShowConfirmedPassword: boolean) => void
+  id: FormInputType
 }
 
 export interface ColorStyleProps {
@@ -287,15 +324,4 @@ export type UseSounds = (
   startSoundCurrentTime: number
   endSoundDuration: number
   endSoundCurrentTime: number
-}
-
-export interface FormErrorProps {
-  errorField: FormInputType
-  errorType: FormsError
-}
-
-export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
-
-export interface FormInputWrapper {
-  type: FormInputType
 }
