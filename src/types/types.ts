@@ -11,7 +11,16 @@ export interface FormInputWrapper {
   type: FormInputType
 }
 
-export type FormsError = 'none' | 'empty' | 'invalid' | 'exists' | 'weakLength' | 'weakCase' | 'weakChar' | 'mismatch'
+export type FormsError =
+  | 'none'
+  | 'empty'
+  | 'invalid'
+  | 'exists'
+  | 'invalidLength'
+  | 'uppercaseRequired'
+  | 'lowercaseRequired'
+  | 'mismatch'
+  | 'specialCharRequired'
 
 interface FormErrorsObj {
   hasError: boolean
@@ -39,9 +48,10 @@ interface UsernameErrorObj extends FormErrorsObj {
 interface PasswordErrorObj extends FormErrorsObj {
   errorTypes: {
     empty: string
-    weakLength: string
-    weakCase: string
-    weakChar: string
+    invalidLength: string
+    uppercaseRequired: string
+    lowercaseRequired: string
+    specialCharRequired: string
     none: null
   }
 }
@@ -180,6 +190,15 @@ export interface FormInputProps {
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
   IconHandleClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
   id: FormInputType
+  clearText: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void
+}
+
+export interface PasswordInputProps extends FormInputProps {
+  setPasswordValue: (value: string) => void
+}
+
+export interface ConfirmedPasswordInputProps extends FormInputProps {
+  passwordValue: string
 }
 
 export interface ColorStyleProps {

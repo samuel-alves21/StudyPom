@@ -5,7 +5,7 @@ import { Error } from './Error'
 import { InputFieldWrapper } from './InputFieldWrapper'
 import { useContext } from 'react'
 
-export const Username = ({ IconHandleClick, handleKeyDown, id }: FormInputProps) => {
+export const Username = ({ IconHandleClick, handleKeyDown, id, clearText }: FormInputProps) => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +25,7 @@ export const Username = ({ IconHandleClick, handleKeyDown, id }: FormInputProps)
         onChange={(e) => handleChange(e)}
         id={id}
       />
+      <i className='bi bi-x' onClick={(e) => clearText(e)}></i>
       {formState[id].hasError && <Error errorField={id} errorType={formState[id].currentError} />}
     </InputFieldWrapper>
   )

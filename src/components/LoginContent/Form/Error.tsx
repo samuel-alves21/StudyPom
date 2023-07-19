@@ -5,8 +5,9 @@ import styled from 'styled-components'
 
 export const Error = ({ errorField, errorType }: FormErrorProps) => {
   const { formState } = useContext(FormContext) as FormContextType
+  const obj = formState[errorField]
 
-  return <ErrorMsg>* {formState[errorField].errorTypes[errorType]}</ErrorMsg>
+  return <ErrorMsg>* {formState[errorField].errorTypes[errorType as keyof typeof obj.errorTypes]}</ErrorMsg>
 }
 
 const ErrorMsg = styled.p`
@@ -14,7 +15,8 @@ const ErrorMsg = styled.p`
   width: fit-content;
   padding: 0;
   position: absolute;
-  left: -110px;
+  bottom: -23px;
+  left: 0px;
   text-align: left;
   color: var(--color-error);
 `

@@ -17,12 +17,18 @@ const Wrapper = styled.div<{ error: boolean }>`
   border-radius: 5px;
   color: white;
   border: 0.5px solid ${({ error }) => (error ? 'var(--color-error)' : '#fff')};
+  margin-bottom: ${({ error }) => (error ? '15px' : '0')};
   position: relative;
 
   & > .bi {
     font-size: 25px;
     cursor: pointer;
     color: ${({ error }) => (error ? 'var(--color-error)' : '#fff')};
+  }
+
+  & > .bi-eye-fill,
+  & > .bi-eye-slash-fill {
+    margin-left: 5px;
   }
 
   & input {

@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { FormContext } from '../../../contexts/FormContext'
 import { Error } from './Error'
 
-export const EmailInput = ({ handleKeyDown, IconHandleClick, id }: FormInputProps) => {
+export const EmailInput = ({ handleKeyDown, IconHandleClick, id, clearText }: FormInputProps) => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +29,7 @@ export const EmailInput = ({ handleKeyDown, IconHandleClick, id }: FormInputProp
           autoComplete='off'
           id={id}
         />
+        <i className='bi bi-x' onClick={(e) => clearText(e)}></i>
         {formState[id].hasError && <Error errorField={id} errorType={formState[id].currentError} />}
       </InputFieldWrapper>
     </>

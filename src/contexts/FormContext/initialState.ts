@@ -34,9 +34,10 @@ export const initialState: FormState = {
     hasError: false,
     currentError: 'none',
     errorTypes: {
-      weakCase: 'password need to contain at least one uppercase letter',
-      weakChar: 'password need to contain at least one special character',
-      weakLength: 'password need to be at least 8 characters long',
+      uppercaseRequired: 'at least one uppercase letter required',
+      lowercaseRequired: 'at least one lowercase  letter required',
+      specialCharRequired: 'at least one special character required',
+      invalidLength: 'at least 8 characters long required',
       empty: 'empty field!',
       none: null,
     },

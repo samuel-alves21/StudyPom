@@ -14,6 +14,7 @@ export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
   const [shouldSendform, setShouldSend] = useState<boolean>(false)
+  const [passwordValue, setPasswordValue] = useState<string>('')
 
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
 
@@ -25,10 +26,26 @@ export const Form = () => {
     nextElement.focus()
   }
 
+  const clearText = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const thisElement = e.target as HTMLElement
+    const previousElement = thisElement.previousElementSibling as HTMLInputElement
+    previousElement.value = ''
+    formValidation.EmptyVerify(previousElement.value, formDispatch, previousElement.id as FormInputType)
+  }
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
     const type = thisElement.id as FormInputType
+    const keys = ['Shift', 'Control', 'Alt', 'AltGraph', 'Escape']
 
+    if (e.key === 'Escape') {
+      e.preventDefault()
+      thisElement.blur()
+    }
+    if (keys.includes(e.key)) {
+      e.preventDefault()
+      return
+    }
     const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, type)
     if (isEmpty) return
 
@@ -66,10 +83,22 @@ export const Form = () => {
   return (
     <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
       <Text />
-      <Username IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='username' />
-      <EmailInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='email' />
-      <PasswordInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='password' />
-      <ConfirmedPasswordInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='confirmedPassword' />
+      <Username IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='username' clearText={clearText} />
+      <EmailInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='email' clearText={clearText} />
+      <PasswordInput
+        IconHandleClick={IconHandleClick}
+        handleKeyDown={handleKeyDown}
+        id='password'
+        setPasswordValue={setPasswordValue}
+        clearText={clearText}
+      />
+      <ConfirmedPasswordInput
+        IconHandleClick={IconHandleClick}
+        handleKeyDown={handleKeyDown}
+        id='confirmedPassword'
+        passwordValue={passwordValue}
+        clearText={clearText}
+      />
       <FormButton shouldSendform={shouldSendform} />
       <p>
         Already have an account? <a href='#'>Sign in</a>

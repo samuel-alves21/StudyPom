@@ -1,11 +1,17 @@
 import { FormContext } from '../../../contexts/FormContext'
 import { formValidation } from '../../../functions/formValidation'
-import { FormContextType, FormInputProps } from '../../../types/types'
+import { ConfirmedPasswordInputProps, FormContextType } from '../../../types/types'
 import { Error } from './Error'
 import { InputFieldWrapper } from './InputFieldWrapper'
 import { useState, useContext } from 'react'
 
-export const ConfirmedPasswordInput = ({ IconHandleClick, handleKeyDown, id }: FormInputProps) => {
+export const ConfirmedPasswordInput = ({
+  IconHandleClick,
+  handleKeyDown,
+  id,
+  passwordValue,
+  clearText,
+}: ConfirmedPasswordInputProps) => {
   const [shouldShowConfirmedPassword, setShouldShowConfirmedPassword] = useState<boolean>(false)
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
@@ -17,6 +23,8 @@ export const ConfirmedPasswordInput = ({ IconHandleClick, handleKeyDown, id }: F
     const thisElement = e.target as HTMLInputElement
     const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, id)
     if (isEmpty) return
+    const isInvalid = formValidation.confirmedPasswordVerify(thisElement.value, passwordValue, formDispatch)
+    if (isInvalid) return
   }
 
   return (
@@ -30,6 +38,7 @@ export const ConfirmedPasswordInput = ({ IconHandleClick, handleKeyDown, id }: F
         type={shouldShowConfirmedPassword ? 'text' : 'password'}
         id={id}
       />
+      <i className='bi bi-x' onClick={(e) => clearText(e)}></i>
       {shouldShowConfirmedPassword ? (
         <i className='bi bi-eye-fill' onClick={handleClick}></i>
       ) : (
