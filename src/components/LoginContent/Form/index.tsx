@@ -15,6 +15,7 @@ export const Form = () => {
 
   const [shouldSendform, setShouldSend] = useState<boolean>(false)
   const [passwordValue, setPasswordValue] = useState<string>('')
+  const [confirmedPasswordValue, setConfirmedPasswordValue] = useState<string>('')
 
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
 
@@ -45,7 +46,8 @@ export const Form = () => {
     if (keys.includes(e.key)) {
       e.preventDefault()
       return
-    }
+    } 
+
     const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, type)
     if (isEmpty) return
 
@@ -61,6 +63,7 @@ export const Form = () => {
           }
         }
       })
+      
     }
   }
 
@@ -90,6 +93,7 @@ export const Form = () => {
         handleKeyDown={handleKeyDown}
         id='password'
         setPasswordValue={setPasswordValue}
+        confirmedPasswordValue={confirmedPasswordValue}
         clearText={clearText}
       />
       <ConfirmedPasswordInput
@@ -97,6 +101,7 @@ export const Form = () => {
         handleKeyDown={handleKeyDown}
         id='confirmedPassword'
         passwordValue={passwordValue}
+        setConfirmedPasswordValue={setConfirmedPasswordValue}
         clearText={clearText}
       />
       <FormButton shouldSendform={shouldSendform} />

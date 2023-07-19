@@ -195,10 +195,12 @@ export interface FormInputProps {
 
 export interface PasswordInputProps extends FormInputProps {
   setPasswordValue: (value: string) => void
+  confirmedPasswordValue: string
 }
 
 export interface ConfirmedPasswordInputProps extends FormInputProps {
   passwordValue: string
+  setConfirmedPasswordValue: (value: string) => void
 }
 
 export interface ColorStyleProps {

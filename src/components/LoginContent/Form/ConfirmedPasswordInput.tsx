@@ -10,6 +10,7 @@ export const ConfirmedPasswordInput = ({
   handleKeyDown,
   id,
   passwordValue,
+  setConfirmedPasswordValue,
   clearText,
 }: ConfirmedPasswordInputProps) => {
   const [shouldShowConfirmedPassword, setShouldShowConfirmedPassword] = useState<boolean>(false)
@@ -21,6 +22,7 @@ export const ConfirmedPasswordInput = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
+    setConfirmedPasswordValue(thisElement.value)
     const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, id)
     if (isEmpty) return
     const isInvalid = formValidation.confirmedPasswordVerify(thisElement.value, passwordValue, formDispatch)
