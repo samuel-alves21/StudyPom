@@ -3,9 +3,17 @@ import { useContext } from 'react'
 import { ButtonContextType, ButtonsContext } from '../../../../contexts/ButtonsContext'
 import { TimerContext, TimerContextType } from '../../../../contexts/TimerContext'
 import { breakpoints } from '../../../../utilities/breakpoints'
-import { OptionsBtnProps, StyledButtonProps } from '../../../../types/types'
 import { TimerActionTypes } from '../../../../contexts/TimerContext/types'
 import { ButtonsActionTypes } from '../../../../contexts/ButtonsContext/types'
+import { Id } from '.'
+
+interface OptionsBtnProps {
+  text: Id
+}
+
+export interface StyledButtonProps {
+  isSelected?: boolean
+}
 
 export const OptionsBtn = ({ text }: OptionsBtnProps) => {
   const { timeDispatch } = useContext(TimerContext) as TimerContextType

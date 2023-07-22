@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
-import { ColorStyleProps } from '../../types/types'
+
+interface ColorStyleProps {
+  colors: {
+    mainColor: string
+    secundaryColor: string
+  }
+}
 
 export const ColorStyle = createGlobalStyle<ColorStyleProps>`
   :root {

@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 import { forwardRef } from 'react'
-import { ColorCheckBoxProps } from '../../../../../types/types'
+
+export interface ColorCheckBoxProps {
+  setMainColorIsChecked: (value: boolean) => void
+  setSecundaryColorIsChecked: (value: boolean) => void
+  mainColorIsChecked: boolean
+  secundaryColorIsChecked: boolean
+  id: 'main-color' | 'secundary-color'
+}
 
 export const CheckBox = forwardRef<HTMLInputElement, ColorCheckBoxProps>(
   ({ setMainColorIsChecked, id, setSecundaryColorIsChecked }, ref) => {

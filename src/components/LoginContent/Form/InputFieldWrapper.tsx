@@ -1,9 +1,14 @@
 import styled from 'styled-components'
-import { FormContextType, FormInputWrapper, ReactChildrenProps } from '../../../types/types'
 import { useContext } from 'react'
-import { FormContext } from '../../../contexts/FormContext'
+import { FormContext, FormContextType } from '../../../contexts/FormContext'
+import { FormInputType } from '.'
 
-export const InputFieldWrapper = ({ children, type }: ReactChildrenProps & FormInputWrapper) => {
+interface FormInputWrapperProps {
+  children: React.ReactNode
+  type: FormInputType
+}
+
+export const InputFieldWrapper = ({ children, type }: FormInputWrapperProps) => {
   const { formState } = useContext(FormContext) as FormContextType
 
   return <Wrapper error={formState[type].hasError}>{children}</Wrapper>
@@ -28,7 +33,7 @@ const Wrapper = styled.div<{ error: boolean }>`
 
   & > .bi-eye-fill,
   & > .bi-eye-slash-fill {
-    margin-left: 5px;
+    margin-right: 5px;
   }
 
   & input {

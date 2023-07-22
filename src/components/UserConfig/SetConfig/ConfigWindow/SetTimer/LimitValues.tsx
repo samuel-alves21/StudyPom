@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 import { limitValues } from '../../../../../utilities/limitValues'
-import { LimitValuesProps } from '../../../../../types/types'
 import { secondsToMinutes } from '../../../../../functions/secondsToMinutes'
 import { secondsToTime } from '../../../../../functions/secondsToTime'
+import { Id } from '../../../../Timer/Counter/CounterOptionsBtn'
+
+interface LimitValuesProps {
+  id: Id
+}
 
 export const LimitValues = ({ id }: LimitValuesProps) => {
   return (

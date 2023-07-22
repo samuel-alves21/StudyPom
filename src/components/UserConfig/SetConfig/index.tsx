@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 import { useState, useRef } from 'react'
 import { ConfigWindow } from './ConfigWindow'
-import { GearIconProps } from '../../../types/types'
 import { Filter } from './Filter'
+
+interface GearIconProps {
+  shouldRotate: boolean
+  animate: boolean
+}
 
 export const ConfigHeading = () => {
   const gear = useRef<HTMLElement | null>(null)

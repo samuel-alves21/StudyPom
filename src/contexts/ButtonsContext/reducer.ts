@@ -1,4 +1,12 @@
-import { ButtonsReducer } from '../../types/types'
+import { ButtonsState } from './initialState'
+import { ButtonsActionTypes } from './types'
+
+export interface ButtonsReducerAction {
+  type: ButtonsActionTypes
+  payload?: boolean
+}
+
+export type ButtonsReducer = (state: ButtonsState, action: ButtonsReducerAction) => ButtonsState
 
 export const reducer: ButtonsReducer = (state, action) => {
   switch (action.type) {

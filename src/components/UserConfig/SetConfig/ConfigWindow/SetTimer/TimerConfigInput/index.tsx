@@ -1,12 +1,18 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 import { Arrows } from './Arrows'
 import { formatConfigInput } from '../../../../../../functions/formatConfigInput'
 import { limitValues } from '../../../../../../utilities/limitValues'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import { TimerConfigInputProps } from '../../../../../../types/types'
 import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
-import { useState } from 'react'
+import { Id } from '../../../../../Timer/Counter/CounterOptionsBtn'
+
+interface TimerConfigInputProps {
+  id: Id
+  state: string
+  setState: (value: string) => void
+}
 
 export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps) => {
   const [isOnFocus, setIsOnFocus] = useState(false)

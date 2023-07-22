@@ -1,0 +1,5 @@
+export type FormContextTypes =
+  | 'SET_EMAIL_ERROR'
+  | 'SET_USERNAME_ERROR'
+  | 'SET_PASSWORD_ERROR'
+  | 'SET_CONFIRMED_PASSWORD_ERROR'

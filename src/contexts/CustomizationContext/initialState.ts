@@ -1,8 +1,7 @@
-import { CustomizationContextState } from '../../types/types'
 import { backgroundArray } from '../../utilities/backgroundArray'
 import { soundsArray } from '../../utilities/soundsArray'
 
-export const initialState: CustomizationContextState = {
+export const initialState = {
   background: backgroundArray[0].path,
   blur: '1',
   bright: '1',
@@ -15,3 +14,5 @@ export const initialState: CustomizationContextState = {
   mainColor: '#ae83ff',
   secundaryColor: '#ae83ff61',
 }
+
+export type CustomizationState = typeof initialState

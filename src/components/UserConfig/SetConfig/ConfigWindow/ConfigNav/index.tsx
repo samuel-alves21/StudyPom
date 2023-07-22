@@ -1,5 +1,14 @@
 import styled from 'styled-components'
-import { ConfigNavProps, ConfigNavStyledProps } from '../../../../../types/types'
+
+interface ConfigNavProps {
+  setOption: (option: 'timer' | 'background' | 'sounds' | 'color') => void
+  option: 'timer' | 'background' | 'sounds' | 'color'
+  setShouldDisplay: (shouldDisplay: boolean) => void
+}
+
+export interface ConfigNavStyledProps {
+  isSelected: boolean
+}
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
   const handleClick = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {

@@ -1,7 +1,13 @@
-import { useContext } from 'react'
-import { FormContext } from '../../../contexts/FormContext'
-import { FormContextType, FormErrorProps } from '../../../types/types'
 import styled from 'styled-components'
+import { useContext } from 'react'
+import { FormContext, FormContextType } from '../../../contexts/FormContext'
+import { FormsError } from '../../../contexts/FormContext/reducer'
+import { FormInputType } from '.'
+
+interface FormErrorProps {
+  errorField: FormInputType
+  errorType: FormsError
+}
 
 export const Error = ({ errorField, errorType }: FormErrorProps) => {
   const { formState } = useContext(FormContext) as FormContextType

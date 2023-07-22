@@ -1,4 +1,6 @@
-import { FormContextTypes, FormInputType, FormReducerAction } from '../types/types'
+import { FormInputType } from "../components/LoginContent/Form"
+import { FormReducerAction } from "../contexts/FormContext/reducer"
+import { FormContextTypes } from "../contexts/FormContext/types"
 
 const idParser = (id: FormInputType) => {
   let parsedId = ''
@@ -11,7 +13,6 @@ const idParser = (id: FormInputType) => {
   }
   return parsedId
 }
-
 export const formValidation = {
   emailVerify(email: string, formDispatch: (value: FormReducerAction) => void) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -41,7 +42,7 @@ export const formValidation = {
     }
   },
 
-  PasswordVerify(password: string, formDispatch: (value: FormReducerAction) => void) {
+  passwordVerify(password: string, formDispatch: (value: FormReducerAction) => void) {
     if (password.length < 8) {
       formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: true, setCurrentError: 'invalidLength' } })
       return true
@@ -54,7 +55,7 @@ export const formValidation = {
       formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: true, setCurrentError: 'lowercaseRequired' } })
       return true
     }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    if (!/[!@#$%^&*()/+,.?":{}|<>]/.test(password)) {
       formDispatch({
         type: 'SET_PASSWORD_ERROR',
         payload: { setHasError: true, setCurrentError: 'specialCharRequired' },
@@ -75,11 +76,33 @@ export const formValidation = {
         type: 'SET_CONFIRMED_PASSWORD_ERROR',
         payload: { setHasError: true, setCurrentError: 'mismatch' },
       })
-      console.log('here')
+
       return true
     } else {
       formDispatch({ type: 'SET_CONFIRMED_PASSWORD_ERROR', payload: { setHasError: false, setCurrentError: 'none' } })
       return false
     }
   },
+}
+
+export const formValidator = (
+  value: string,
+  id: FormInputType,
+  passwordValue: string,
+  formDispatch: (value: FormReducerAction) => void
+) => {
+  const isEmpty = formValidation.EmptyVerify(value, formDispatch, id)
+  if (isEmpty) return
+  if (id === 'email') {
+    const isEmailInvalid = formValidation.emailVerify(value, formDispatch)
+    if (isEmailInvalid) return
+  }
+  if (id === 'password') {
+    const isPasswordInvalid = formValidation.passwordVerify(value, formDispatch)
+    if (isPasswordInvalid) return
+  }
+  if (id === 'confirmedPassword') {
+    const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+    if (isConfirmedPasswordInvalid) return
+  }
 }

@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react'
-import { TimerContext } from '../contexts/TimerContext'
-import { ButtonsContext } from '../contexts/ButtonsContext'
-import { ButtonContextType, TimerContextType } from '../types/types'
+import { TimerContext, TimerContextType } from '../contexts/TimerContext'
+import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
 
 export const useInit = () => {
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType

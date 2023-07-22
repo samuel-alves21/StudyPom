@@ -1,4 +1,48 @@
-import { FormState } from '../../types/types'
+import { FormsError } from './reducer'
+
+export interface FormState {
+  email: {
+    hasError: boolean
+    currentError: FormsError
+    errorTypes: {
+      exists: string
+      empty: string
+      invalid: string
+      none: null
+    }
+  }
+  username: {
+    hasError: boolean
+    currentError: FormsError
+    errorTypes: {
+      exists: string
+      empty: string
+      invalid: string
+      none: null
+    }
+  }
+  confirmedPassword: {
+    hasError: boolean
+    currentError: FormsError
+    errorTypes: {
+      mismatch: string
+      empty: string
+      none: null
+    }
+  }
+  password: {
+    hasError: boolean
+    currentError: FormsError
+    errorTypes: {
+      uppercaseRequired: string
+      lowercaseRequired: string
+      specialCharRequired: string
+      invalidLength: string
+      empty: string
+      none: null
+    }
+  }
+}
 
 export const initialState: FormState = {
   email: {

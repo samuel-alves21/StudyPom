@@ -1,8 +1,8 @@
+import styled from 'styled-components'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { ColorPicker } from './ColorPicker'
 import { CheckBox } from './CheckBox'
-import styled from 'styled-components'
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import { MobileColorPicker } from './MobileColorPicker'
 
@@ -26,30 +26,23 @@ export const SetColor = () => {
 
   const color = mainColorIsChecked ? mainColor : secundaryColor
 
+  const checkBoxProps = {
+    setMainColorIsChecked: setMainColorIsChecked,
+    setSecundaryColorIsChecked: setSecundaryColorIsChecked,
+    mainColorIsChecked: mainColorIsChecked,
+    secundaryColorIsChecked: secundaryColorIsChecked,
+  }
+
   return (
     <Wrapper>
       <ColorOptionsWrapper>
         <div>
           <label htmlFor='main-color'>main color</label>
-          <CheckBox
-            setMainColorIsChecked={setMainColorIsChecked}
-            setSecundaryColorIsChecked={setSecundaryColorIsChecked}
-            mainColorIsChecked={mainColorIsChecked}
-            secundaryColorIsChecked={secundaryColorIsChecked}
-            ref={mainColorBox}
-            id='main-color'
-          />
+          <CheckBox {...checkBoxProps} ref={mainColorBox} id='main-color' />
         </div>
         <div>
           <label htmlFor='secundary-color'>secundary color</label>
-          <CheckBox
-            setMainColorIsChecked={setMainColorIsChecked}
-            setSecundaryColorIsChecked={setSecundaryColorIsChecked}
-            mainColorIsChecked={mainColorIsChecked}
-            secundaryColorIsChecked={secundaryColorIsChecked}
-            ref={secundaryColorBox}
-            id='secundary-color'
-          />
+          <CheckBox {...checkBoxProps} ref={secundaryColorBox} id='secundary-color' />
         </div>
       </ColorOptionsWrapper>
       <ColorPicker

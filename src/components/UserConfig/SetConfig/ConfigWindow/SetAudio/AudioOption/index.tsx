@@ -3,8 +3,21 @@ import { useMemo, useContext } from 'react'
 import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
-import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
-import { AudioOptionProps } from '../../../../../../types/types'
+import {
+  CustomizationContext,
+  CustomizationContextType,
+  SoundObject,
+} from '../../../../../../contexts/CustomizationContext'
+
+export interface AudioOptionProps {
+  sounds: {
+    name: keyof SoundObject
+    sounds: {
+      start: keyof SoundObject
+      end: keyof SoundObject
+    }
+  }
+}
 
 export const AudioOption = ({
   sounds: {
@@ -27,6 +40,13 @@ export const AudioOption = ({
   startSound.volume = Number(volume)
   endSound.volume = Number(volume)
 
+  const progressBarProps = {
+    startSoundDuration: startSoundDuration,
+    endSoundDuration: endSoundDuration,
+    endSoundCurrentTime: endSoundCurrentTime,
+    startSoundCurrentTime: startSoundCurrentTime,
+  }
+
   return (
     <Wrapper>
       <h3>{name}</h3>
@@ -35,26 +55,14 @@ export const AudioOption = ({
           <label htmlFor='start'>start</label>
           <i className='bi bi-play-fill' onClick={() => startSound.play()}></i>
         </div>
-        <ProgressBar
-          id='start'
-          startSoundDuration={startSoundDuration}
-          endSoundDuration={endSoundDuration}
-          endSoundCurrentTime={endSoundCurrentTime}
-          startSoundCurrentTime={startSoundCurrentTime}
-        />
+        <ProgressBar id='start' {...progressBarProps} />
       </InputWrapper>
       <InputWrapper>
         <div>
           <label htmlFor='end'>end</label>
           <i className='bi bi-play-fill' onClick={() => endSound.play()}></i>
         </div>
-        <ProgressBar
-          id='end'
-          startSoundDuration={startSoundDuration}
-          endSoundDuration={endSoundDuration}
-          endSoundCurrentTime={endSoundCurrentTime}
-          startSoundCurrentTime={startSoundCurrentTime}
-        />
+        <ProgressBar id='end' {...progressBarProps} />
       </InputWrapper>
       <SetAudioBtn sounds={{ start, end, name }} />
     </Wrapper>

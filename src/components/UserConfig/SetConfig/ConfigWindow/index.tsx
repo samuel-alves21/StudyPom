@@ -7,7 +7,16 @@ import { SetBackground } from './SetBackgound'
 import { SetAudio } from './SetAudio'
 import { SetColor } from './SetColor'
 import { useDisplay } from '../../../../hooks/useDisplay'
-import { ConfigWindowProps, StyledConfingWindow } from '../../../../types/types'
+
+interface ConfigWindowProps {
+  setShouldDisplay: (shouldDisplay: boolean) => void
+  shouldDisplay: boolean
+  gear: HTMLElement
+}
+
+interface StyledConfingWindow {
+  shouldDisplay: boolean
+}
 
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const thisWindow = useRef<HTMLDivElement | null>(null)

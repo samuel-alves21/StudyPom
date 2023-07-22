@@ -1,7 +1,11 @@
 import { ChromePicker, ColorResult } from 'react-color'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { useContext } from 'react'
-import { ColorPickerProp } from '../../../../../types/types'
+import { MobileColorPickerProps } from './MobileColorPicker'
+
+interface ColorPickerProp extends MobileColorPickerProps {
+  color: string
+}
 
 export const ColorPicker = ({ color, mainColorIsChecked, secundaryColorIsChecked }: ColorPickerProp) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType

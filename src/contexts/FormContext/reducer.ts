@@ -1,4 +1,26 @@
-import { FormReducer } from '../../types/types'
+import { FormState } from './initialState'
+import { FormContextTypes } from './types'
+
+export type FormsError =
+  | 'none'
+  | 'empty'
+  | 'invalid'
+  | 'exists'
+  | 'invalidLength'
+  | 'uppercaseRequired'
+  | 'lowercaseRequired'
+  | 'specialCharRequired'
+  | 'mismatch'
+
+export interface FormReducerAction {
+  type: FormContextTypes
+  payload: {
+    setHasError: boolean
+    setCurrentError: FormsError
+  }
+}
+
+export type FormReducer = (state: FormState, action: FormReducerAction) => FormState
 
 export const reducer: FormReducer = (state, action) => {
   switch (action.type) {

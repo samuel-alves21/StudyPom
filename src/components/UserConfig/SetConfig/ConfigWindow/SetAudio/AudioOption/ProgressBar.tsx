@@ -1,6 +1,18 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-import { ProgressBarProps, SpanBarSoundProps } from '../../../../../../types/types'
+
+export interface SpanBarSoundProps {
+  currentTime: number
+  duration: number
+}
+
+export interface ProgressBarProps {
+  id: 'start' | 'end'
+  startSoundDuration: number
+  startSoundCurrentTime: number
+  endSoundDuration: number
+  endSoundCurrentTime: number
+}
 
 export const ProgressBar = ({
   id,

@@ -1,5 +1,8 @@
 import styled from 'styled-components'
-import { BackgroundFilterProps } from '../../../types/types'
+
+interface BackgroundFilterProps {
+  shouldDisplay: boolean
+}
 
 export const Filter = styled.div<BackgroundFilterProps>`
   pointer-events: none;

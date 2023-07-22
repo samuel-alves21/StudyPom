@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react'
-import { UseSounds } from '../types/types'
+
+export type UseSounds = (
+  endSound: HTMLAudioElement,
+  startSound: HTMLAudioElement
+) => {
+  startSoundDuration: number
+  startSoundCurrentTime: number
+  endSoundDuration: number
+  endSoundCurrentTime: number
+}
 
 export const useSounds: UseSounds = (endSound, startSound) => {
   const [startSoundDuration, setStartSoundDuration] = useState<number>(startSound.duration)

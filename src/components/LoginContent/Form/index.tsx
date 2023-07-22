@@ -1,57 +1,33 @@
-import { useRef, useState, useEffect, useMemo, useContext } from 'react'
 import styled from 'styled-components'
+import { useRef, useState, useEffect, useMemo, useContext } from 'react'
+import { FormContext, FormContextType } from '../../../contexts/FormContext'
 import { FormButton } from './FormButton'
+import { FormInput } from './FormInput'
 import { Text } from './Text'
-import { EmailInput } from './EmailInput'
-import { Username } from './UsernameInput'
-import { PasswordInput } from './PasswordInput'
-import { ConfirmedPasswordInput } from './ConfirmedPasswordInput'
-import { FormContext } from '../../../contexts/FormContext'
-import { FormContextType, FormInputType } from '../../../types/types'
-import { formValidation } from '../../../functions/formValidation'
+
+export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
 
 export const Form = () => {
-  const { formState, formDispatch } = useContext(FormContext) as FormContextType
-
+  const { formState } = useContext(FormContext) as FormContextType
   const [shouldSendform, setShouldSend] = useState<boolean>(false)
-  const [passwordValue, setPasswordValue] = useState<string>('')
-  const [confirmedPasswordValue, setConfirmedPasswordValue] = useState<string>('')
 
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
 
   const formWrapper = useRef<null | HTMLFormElement>(null)
 
-  const IconHandleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const thisElement = e.target as HTMLElement
-    const nextElement = thisElement.nextElementSibling as HTMLElement
-    nextElement.focus()
-  }
-
-  const clearText = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const thisElement = e.target as HTMLElement
-    const previousElement = thisElement.previousElementSibling as HTMLInputElement
-    previousElement.value = ''
-    formValidation.EmptyVerify(previousElement.value, formDispatch, previousElement.id as FormInputType)
-  }
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
     const type = thisElement.id as FormInputType
-    const keys = ['Shift', 'Control', 'Alt', 'AltGraph', 'Escape']
 
     if (e.key === 'Escape') {
-      e.preventDefault()
       thisElement.blur()
     }
-    if (keys.includes(e.key)) {
+    if (e.key === 'Tab') {
       e.preventDefault()
-      return
-    } 
-
-    const isEmpty = formValidation.EmptyVerify(thisElement.value, formDispatch, type)
-    if (isEmpty) return
+    }
 
     if (formState[type].hasError) return
+
     if (e.key === 'Enter') {
       inputsArray.forEach((input, index) => {
         if (input === e.target) {
@@ -63,7 +39,6 @@ export const Form = () => {
           }
         }
       })
-      
     }
   }
 
@@ -83,27 +58,17 @@ export const Form = () => {
     e.preventDefault()
   }
 
+  const props = {
+    handleKeyDown: handleKeyDown,
+  }
+
   return (
     <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
       <Text />
-      <Username IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='username' clearText={clearText} />
-      <EmailInput IconHandleClick={IconHandleClick} handleKeyDown={handleKeyDown} id='email' clearText={clearText} />
-      <PasswordInput
-        IconHandleClick={IconHandleClick}
-        handleKeyDown={handleKeyDown}
-        id='password'
-        setPasswordValue={setPasswordValue}
-        confirmedPasswordValue={confirmedPasswordValue}
-        clearText={clearText}
-      />
-      <ConfirmedPasswordInput
-        IconHandleClick={IconHandleClick}
-        handleKeyDown={handleKeyDown}
-        id='confirmedPassword'
-        passwordValue={passwordValue}
-        setConfirmedPasswordValue={setConfirmedPasswordValue}
-        clearText={clearText}
-      />
+      <FormInput {...props} id='username' placeholder='username' type='text' />
+      <FormInput {...props} id='email' placeholder='email' type='email' />
+      <FormInput {...props} id='password' placeholder='password' type='password' />
+      <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />
       <FormButton shouldSendform={shouldSendform} />
       <p>
         Already have an account? <a href='#'>Sign in</a>

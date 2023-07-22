@@ -1,9 +1,12 @@
+import styled from 'styled-components'
 import { useContext, useState } from 'react'
 import { TimerContext, TimerContextType } from '../../../contexts/TimerContext'
 import { ButtonsContext, ButtonContextType } from '../../../contexts/ButtonsContext'
 import { useSetWindow } from '../../../hooks/useSetWindow'
-import styled from 'styled-components'
-import { CounterResetBtnProps } from '../../../types/types'
+
+export interface CounterResetBtnProps {
+  animate: boolean
+}
 
 export const CounterResetBtn = () => {
   const [animate, setAnimate] = useState(false)

@@ -1,18 +1,23 @@
 import styled from 'styled-components'
+import { useContext, useEffect, useRef } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
 import { Timer } from '../components/Timer'
 import { useSetWindow } from '../hooks/useSetWindow'
 import { useInit } from '../hooks/useInit'
-import { useContext, useEffect, useRef } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 import { useNavigate } from 'react-router-dom'
 import { Spinner } from '../components/Spinner'
 import { ColorStyle } from '../components/ColorStyle'
-import { MainContainerProps } from '../types/types'
 
-const user = false
+export interface MainContainerProps {
+  background: string
+  blur: string
+  bright: string
+}
+
+const user = true
 
 const App = () => {
   const {

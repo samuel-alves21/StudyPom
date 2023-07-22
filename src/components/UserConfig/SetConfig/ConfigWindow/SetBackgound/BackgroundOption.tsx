@@ -2,7 +2,13 @@ import { useContext } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import styled from 'styled-components'
-import { BackgroundOptionProps } from '../../../../../types/types'
+
+interface BackgroundOptionProps {
+  background: {
+    path: string
+    name: string
+  }
+}
 
 export const BackgroundOption = ({ background }: BackgroundOptionProps) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { OptionsBtn } from './OptionsBtn'
 
+export type Id = 'pomodoro' | 'short' | 'long' | 'cycles'
+
 export const CounterOptionsBtn = () => {
   return (
     <ButtonsWrapper className='buttons-wrapper'>
