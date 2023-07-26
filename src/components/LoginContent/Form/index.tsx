@@ -1,15 +1,17 @@
 import styled from 'styled-components'
-import { useRef, useState, useEffect, useMemo, useContext } from 'react'
+import { useRef, useEffect, useMemo, useContext, useState } from 'react'
 import { FormContext, FormContextType } from '../../../contexts/FormContext'
 import { FormButton } from './FormButton'
 import { FormInput } from './FormInput'
 import { Text } from './Text'
+import { formValidation } from '../../../functions/formValidation'
 
 export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
 
 export const Form = () => {
-  const { formState } = useContext(FormContext) as FormContextType
-  const [shouldSendform, setShouldSend] = useState<boolean>(false)
+  const { formState, formDispatch } = useContext(FormContext) as FormContextType
+  const hasError = (formState.email.hasError || formState.password.hasError || formState.username.hasError || formState.confirmedPassword.hasError) 
+  const [ shouldSend, setShouldSend ] = useState(false) 
 
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
 
@@ -19,9 +21,6 @@ export const Form = () => {
     const thisElement = e.target as HTMLInputElement
     const type = thisElement.id as FormInputType
 
-    if (e.key === 'Escape') {
-      thisElement.blur()
-    }
     if (e.key === 'Tab') {
       e.preventDefault()
     }
@@ -54,8 +53,36 @@ export const Form = () => {
     })
   }, [inputsArray])
 
+  useEffect(() => {
+    window.addEventListener('mouseover', (e: MouseEvent) => {
+      const thisElement = e.target as HTMLButtonElement
+      if (thisElement.type === 'submit') {
+        setShouldSend(true)
+      }
+    })
+    return () => window.removeEventListener('click', (e: MouseEvent) => {
+      const thisElement = e.target as HTMLButtonElement
+      if (thisElement.type === 'submit') {
+        setShouldSend(true)
+      }
+    })
+  }, [])
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!shouldSend) return
+    let isEmpty = false
+    inputsArray.forEach((input) => {
+      if (!input.value) {
+        formValidation.EmptyVerify(input.value, formDispatch, input.id as FormInputType)
+        isEmpty = true
+      } 
+    })
+    if (!hasError && !isEmpty ) {
+      console.log('form sent')
+      return
+    }
+    console.log('form not sent')
   }
 
   const props = {
@@ -69,7 +96,7 @@ export const Form = () => {
       <FormInput {...props} id='email' placeholder='email' type='email' />
       <FormInput {...props} id='password' placeholder='password' type='password' />
       <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />
-      <FormButton shouldSendform={shouldSendform} />
+      <FormButton />
       <p>
         Already have an account? <a href='#'>Sign in</a>
       </p>

@@ -17,22 +17,21 @@ interface FormInputProps {
 
 export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputProps) => {
   const [shouldShowPassword, setShouldShowPassword] = useState<boolean>(false)
-  const [shouldValidate, setShouldValidate] = useState<boolean>(false)
 
   const EyeIconProps = {
     shouldShowPassword: shouldShowPassword,
     setShouldShowPassword: setShouldShowPassword,
   }
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
+
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setShouldValidate(true)
     const value = e.target.value
     const passwordInput = e.target.parentElement?.previousSibling?.childNodes[1] as HTMLInputElement
     formValidator(value, id, passwordInput.value, formDispatch)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!shouldValidate) return
+    if (!formState[id].shouldValidate) return
     const value = e.target.value
     const passwordInput = e.target.parentElement?.previousSibling?.childNodes[1] as HTMLInputElement
     formValidator(value, id, passwordInput.value, formDispatch)

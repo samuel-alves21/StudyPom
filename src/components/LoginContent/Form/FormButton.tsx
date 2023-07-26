@@ -1,13 +1,8 @@
 import styled from 'styled-components'
 
-export const FormButton = ({ shouldSendform }: { shouldSendform: boolean }) => {
-  const handleclick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    shouldSendform && console.log('form sent')
-  }
-
+export const FormButton = () => {
   return (
-    <Button type='submit' onClick={(e) => handleclick(e)}>
+    <Button type='submit'>
       Create account
     </Button>
   )

@@ -10,13 +10,17 @@ export type FormsError =
   | 'uppercaseRequired'
   | 'lowercaseRequired'
   | 'specialCharRequired'
+  | 'hasSequentialChars'
   | 'mismatch'
+  | 'maxLength'
+  | 'minLength'
 
 export interface FormReducerAction {
   type: FormContextTypes
   payload: {
     setHasError: boolean
     setCurrentError: FormsError
+    shouldValidate: boolean
   }
 }
 
@@ -28,6 +32,7 @@ export const reducer: FormReducer = (state, action) => {
       return {
         ...state,
         email: {
+          shouldValidate: action.payload.shouldValidate,
           hasError: action.payload.setHasError,
           currentError: action.payload.setCurrentError,
           errorTypes: { ...state.email.errorTypes },
@@ -37,6 +42,7 @@ export const reducer: FormReducer = (state, action) => {
       return {
         ...state,
         username: {
+          shouldValidate: action.payload.shouldValidate,
           hasError: action.payload.setHasError,
           currentError: action.payload.setCurrentError,
           errorTypes: { ...state.username.errorTypes },
@@ -46,6 +52,7 @@ export const reducer: FormReducer = (state, action) => {
       return {
         ...state,
         password: {
+          shouldValidate: action.payload.shouldValidate,
           hasError: action.payload.setHasError,
           currentError: action.payload.setCurrentError,
           errorTypes: { ...state.password.errorTypes },
@@ -55,6 +62,7 @@ export const reducer: FormReducer = (state, action) => {
       return {
         ...state,
         confirmedPassword: {
+          shouldValidate: action.payload.shouldValidate,
           hasError: action.payload.setHasError,
           currentError: action.payload.setCurrentError,
           errorTypes: { ...state.confirmedPassword.errorTypes },
