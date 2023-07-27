@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useContext } from 'react'
 import { FormContext, FormContextType } from '../../../contexts/FormContext'
 import { FormInputType } from '.'
+import { breakpoints } from '../../../utilities/breakpoints'
 
 interface FormInputWrapperProps {
   children: React.ReactNode
@@ -11,7 +12,7 @@ interface FormInputWrapperProps {
 export const InputFieldWrapper = ({ children, type }: FormInputWrapperProps) => {
   const { formState } = useContext(FormContext) as FormContextType
 
-  return <Wrapper error={formState[type].hasError}>{children}</Wrapper>
+  return <Wrapper id='input-field-wrapper' error={formState[type].hasError}>{children}</Wrapper>
 }
 
 const Wrapper = styled.div<{ error: boolean }>`
@@ -36,11 +37,8 @@ const Wrapper = styled.div<{ error: boolean }>`
     margin-right: 5px;
   }
 
-  & input {
-    width: 100%;
-    background-color: transparent;
-    margin: 0 10px;
-    color: #fff;
-    font-size: 16px;
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 80%;
+    padding: 5px;
   }
 `

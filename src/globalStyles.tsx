@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { breakpoints } from './utilities/breakpoints'
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -13,7 +14,8 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
     color: #fff; 
-    --color-error: #ff3939  
+    --color-error: #ff3939;
+    --color-primary: #cc66fc;
   }
 
   body {
@@ -26,12 +28,17 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  .main-container {
+    width: 100%;
+    max-width: 2000px
+  }
+
   h1, h2, h3, h4 {
     text-align: center;
   }
 
   h1 {
-    font-size: calc(3.3rem + 0.2vw);
+    font-size: calc(3.2rem + 0.2vw);
   }
 
   h2 {
@@ -71,6 +78,12 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'montserrat', sans-serif;
   }
 
+  .form-input {
+    @media (max-width: ${breakpoints.mobile}) {
+      width: 80%;
+    }
+  }
+
   button {
     outline: none;
     border: none;
@@ -81,6 +94,34 @@ export const GlobalStyles = createGlobalStyle`
     transition: background-color 5s;
     transition: color 0.5s;
     font-weight: 500;
+  }
+
+  .form-input {
+    width: 100%;
+    background-color: transparent;
+    margin: 0 10px;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .form-button {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: #3b3b3b;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #af32e9;
+      color: #fff;
+    }
+
+    @media (max-width: ${breakpoints.mobile}) {
+      width: 80%;
+    }
   }
 
   input[type="range"] {

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import image from '../../../img/to-do.png'
+import { breakpoints } from '../../../utilities/breakpoints'
 
 export const ToDoImage = () => {
   return (
@@ -10,10 +11,17 @@ export const ToDoImage = () => {
 }
 
 const Wrapper = styled.div`
-  width: 480px;
-  height: 480px;
+  width: calc(415px + 3vw);
+  height: calc(415px + 3vw);
+  max-width: 480px;
+  max-height: 480px;
+
   background-color: rgba(175, 50, 233, 0.425);
-  border-radius: 350px;
+  border-radius: 50%;
+
+  @media screen and (max-width: ${breakpoints.laptop}) {
+    display: none;
+  }
 
   & img {
     margin-left: -25px;

@@ -47,7 +47,7 @@ const App = () => {
       ) : (
         <>
           <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-          <MainContainer background={background} blur={blur} bright={bright}>
+          <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
             <Wrapper>
               <Logo />
               <Timer />

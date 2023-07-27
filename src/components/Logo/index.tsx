@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import logo from '../../img/logo.png'
+import { breakpoints } from '../../utilities/breakpoints'
 
 export const Logo = () => {
   return (
@@ -14,4 +15,12 @@ const ImgContainer = styled.div`
   top: 25px;
   left: 25px;
   width: 200px;
+  
+  @media screen and (max-width: ${breakpoints.laptop}) {
+    position: initial;
+  }
+
+  @media screen and (max-width: ${breakpoints.mobile}) {
+    width: 150px;
+  }
 `

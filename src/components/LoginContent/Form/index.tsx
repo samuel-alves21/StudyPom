@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { useRef, useEffect, useMemo, useContext, useState } from 'react'
 import { FormContext, FormContextType } from '../../../contexts/FormContext'
-import { FormButton } from './FormButton'
 import { FormInput } from './FormInput'
 import { Text } from './Text'
 import { formValidation } from '../../../functions/formValidation'
+import { breakpoints } from '../../../utilities/breakpoints'
+import { Logo } from '../../Logo'
 
 export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
 
@@ -91,12 +92,13 @@ export const Form = () => {
 
   return (
     <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
+      <Logo />
       <Text />
       <FormInput {...props} id='username' placeholder='username' type='text' />
       <FormInput {...props} id='email' placeholder='email' type='email' />
       <FormInput {...props} id='password' placeholder='password' type='password' />
       <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />
-      <FormButton />
+      <button type='submit' className='form-button'>Create account</button>
       <p>
         Already have an account? <a href='#'>Sign in</a>
       </p>
@@ -110,4 +112,12 @@ const FormWrapper = styled.form`
   align-items: center;
   gap: 20px;
   width: 550px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    gap: 15px;
+  }
+
+  @media (max-width: ${breakpoints.smallMobile}) {
+    gap: 10px;
+  }
 `

@@ -22,6 +22,7 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
     shouldShowPassword: shouldShowPassword,
     setShouldShowPassword: setShouldShowPassword,
   }
+  
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -41,7 +42,8 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
     <>
       <InputFieldWrapper type={id}>
         <InputIcon id={id} />
-        <input
+        <input 
+          className='form-input'
           onChange={(e) => handleChange(e)}
           type={type === 'password' ? shouldShowPassword ? 'text' : 'password' : type}
           placeholder={placeholder}

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../../utilities/breakpoints'
 
 export const Text = () => {
   return (
@@ -21,10 +22,14 @@ const Wrapper = styled.div`
   & > p {
     margin-bottom: 10px;
     line-height: 25px;
+
+    @media (max-width: ${breakpoints.mobile}) {
+      margin-bottom: 0;
+    }
   }
 
   & strong,
   & > h1 {
-    color: #cc66fc;
+    color: var(--color-primary);
   }
 `

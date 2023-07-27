@@ -20,4 +20,5 @@ const Wrapper = styled.div`
   justify-content: space-around;
   width: 100%;
   text-align: center;
+  height: 100%;
 `
