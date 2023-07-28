@@ -21,4 +21,5 @@ const Wrapper = styled.div`
   width: 100%;
   text-align: center;
   height: 100%;
+  gap: 50px;
 `

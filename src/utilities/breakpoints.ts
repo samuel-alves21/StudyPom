@@ -3,4 +3,5 @@ export const breakpoints = {
   mobile: '480px',
   tablet: '798px',
   laptop: '1024px',
+  midScreen: '1300px',
 }

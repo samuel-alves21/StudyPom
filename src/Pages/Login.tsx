@@ -9,15 +9,13 @@ export const Login = () => {
   }, [])
 
   return (
-    <>
-      <Bg>
-        <Wrapper className='main-container'>
-          <GlassBox>
-            <LoginContent />
-          </GlassBox>
-        </Wrapper>
-      </Bg>
-    </>
+    <Bg>
+      <Wrapper className='main-container'>
+        <GlassBox>
+          <LoginContent />
+        </GlassBox>
+      </Wrapper>
+    </Bg>
   )
 }
 
@@ -43,7 +41,8 @@ const GlassBox = styled.div`
   display: flex;
   align-items: center;
   max-height: 900px;
-  height: 90vh;
+  height: 100%;
+  min-height: fit-content;
   min-width: 80%;
 
   background: rgba(17, 17, 17, 0.65);
@@ -52,7 +51,7 @@ const GlassBox = styled.div`
   -webkit-backdrop-filter: blur(3.5px);
 
   border-radius: 50px;
-  padding: 20px;
+  padding: 5% 20px;
 
   @media (max-width: ${breakpoints.laptop}) {
     flex-direction: column;
@@ -61,11 +60,8 @@ const GlassBox = styled.div`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
+    height: 100%;
     border-radius: 15px;
     padding: 20px 10px;
-  }
-
-  @media (max-width: ${breakpoints.smallMobile}) {
-    height: 100%;
   }
 `

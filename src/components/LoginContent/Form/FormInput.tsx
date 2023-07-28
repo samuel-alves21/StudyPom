@@ -39,23 +39,21 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
   }
 
   return (
-    <>
-      <InputFieldWrapper type={id}>
-        <InputIcon id={id} />
-        <input 
-          className='form-input'
-          onChange={(e) => handleChange(e)}
-          type={type === 'password' ? shouldShowPassword ? 'text' : 'password' : type}
-          placeholder={placeholder}
-          onKeyDown={(e) => handleKeyDown(e)}
-          onBlur={(e) => handleBlur(e)}
-          autoComplete='off'
-          id={id}
-        />
-        {(id === 'password' || id === 'confirmedPassword') && <EyeIcon {...EyeIconProps} />}
-        <ClearText />
-        {formState[id].hasError && <Error errorField={id} errorType={formState[id].currentError} />}
-      </InputFieldWrapper>
-    </>
+    <InputFieldWrapper type={id}>
+      <InputIcon id={id} />
+      <input 
+        className='form-input'
+        onChange={(e) => handleChange(e)}
+        type={type === 'password' ? shouldShowPassword ? 'text' : 'password' : type}
+        placeholder={placeholder}
+        onKeyDown={(e) => handleKeyDown(e)}
+        onBlur={(e) => handleBlur(e)}
+        autoComplete='off'
+        id={id}
+      />
+      {(id === 'password' || id === 'confirmedPassword') && <EyeIcon {...EyeIconProps} />}
+      <ClearText />
+      {formState[id].hasError && <Error errorField={id} errorType={formState[id].currentError} />}
+    </InputFieldWrapper>
   )
 }

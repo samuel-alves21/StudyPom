@@ -114,10 +114,10 @@ const FormWrapper = styled.form`
   width: 550px;
 
   @media (max-width: ${breakpoints.mobile}) {
-    gap: 15px;
+    gap: 25px;
   }
 
   @media (max-width: ${breakpoints.smallMobile}) {
-    gap: 10px;
+    gap: 20px;
   }
 `

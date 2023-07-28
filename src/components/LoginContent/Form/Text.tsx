@@ -32,4 +32,10 @@ const Wrapper = styled.div`
   & > h1 {
     color: var(--color-primary);
   }
+
+  @media (max-width: ${breakpoints.smallMobile}) {
+    & p {
+      display: none;
+    }
+  }
 `

@@ -19,6 +19,11 @@ const Wrapper = styled.div`
   background-color: rgba(175, 50, 233, 0.425);
   border-radius: 50%;
 
+  @media screen and (max-width: ${breakpoints.midScreen}) {
+    width: calc(360px + 3vw);
+    height: calc(360px + 3vw);
+  }
+
   @media screen and (max-width: ${breakpoints.laptop}) {
     display: none;
   }
