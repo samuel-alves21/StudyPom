@@ -5,16 +5,15 @@ import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
 import {
   CustomizationContext,
-  CustomizationContextType,
-  SoundObject,
+  CustomizationContextType
 } from '../../../../../../contexts/CustomizationContext'
 
 export interface AudioOptionProps {
   sounds: {
-    name: keyof SoundObject
+    name: string
     sounds: {
-      start: keyof SoundObject
-      end: keyof SoundObject
+      start: string
+      end: string
     }
   }
 }

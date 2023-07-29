@@ -1,4 +1,4 @@
-import { Id } from '../types/types'
+import { Id } from '../components/Timer/Counter/CounterOptionsBtn'
 import { limitValues } from '../utilities/limitValues'
 
 export const decrementTime = (time: number, setting: Id) => {
