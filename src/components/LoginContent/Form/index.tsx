@@ -142,7 +142,9 @@ const TextWrapper = styled.div`
 
   @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
     max-width: 300px;
-    justify-content: space-between;
+    justify-content: space-around;
+    min-height: 475px;
+    flex-direction: column-reverse;
 
     & > div {
       position: initial;
@@ -155,6 +157,10 @@ const FormWrapper = styled.form`
   flex-direction: column;
   align-items: center;
   gap: var(--gap-1);
+
+  & > h2 {
+    color: var(--color-primary);
+  }
 
   @media (max-width: ${breakpoints.mobile}) {
     gap: 25px;
