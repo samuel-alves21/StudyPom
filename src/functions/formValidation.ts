@@ -1,6 +1,6 @@
-import { FormInputType } from "../components/LoginContent/Form"
-import { FormReducerAction } from "../contexts/FormContext/reducer"
-import { FormContextTypes } from "../contexts/FormContext/types"
+import { FormInputType } from '../components/LoginContent/Form'
+import { FormReducerAction } from '../contexts/FormContext/reducer'
+import { FormContextTypes } from '../contexts/FormContext/types'
 
 export const idParser = (id: FormInputType) => {
   let parsedId = ''
@@ -14,24 +14,35 @@ export const idParser = (id: FormInputType) => {
   return parsedId
 }
 export const formValidation = {
-
   usernameVerify(username: string, formDispatch: (value: FormReducerAction) => void) {
     if (username.length < 3) {
-      formDispatch({ type: 'SET_USERNAME_ERROR', payload: { setHasError: true, setCurrentError: 'minLength', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_USERNAME_ERROR',
+        payload: { setHasError: true, setCurrentError: 'minLength', shouldValidate: true },
+      })
       return true
     }
     if (username.length > 15) {
-      formDispatch({ type: 'SET_USERNAME_ERROR', payload: { setHasError: true, setCurrentError: 'maxLength', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_USERNAME_ERROR',
+        payload: { setHasError: true, setCurrentError: 'maxLength', shouldValidate: true },
+      })
       return true
     }
-    formDispatch({ type: 'SET_USERNAME_ERROR', payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true } })
+    formDispatch({
+      type: 'SET_USERNAME_ERROR',
+      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+    })
     return false
   },
 
   emailVerify(email: string, formDispatch: (value: FormReducerAction) => void) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     if (!emailRegex.test(email)) {
-      formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'invalid', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_EMAIL_ERROR',
+        payload: { setHasError: true, setCurrentError: 'invalid', shouldValidate: true },
+      })
       return true
     }
     if (email.length > 100) {
@@ -40,8 +51,11 @@ export const formValidation = {
         payload: { setHasError: true, setCurrentError: 'maxLength', shouldValidate: true },
       })
       return true
-    } 
-    formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true } })
+    }
+    formDispatch({
+      type: 'SET_EMAIL_ERROR',
+      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+    })
     return false
   },
 
@@ -53,30 +67,41 @@ export const formValidation = {
         payload: { setHasError: true, setCurrentError: 'empty', shouldValidate: true },
       })
       return true
-    } 
+    }
     formDispatch({
       type: `SET_${parsedId.toUpperCase()}_ERROR` as FormContextTypes,
       payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
     })
     return false
-    
   },
 
   passwordVerify(password: string, formDispatch: (value: FormReducerAction) => void) {
     if (password.length < 8) {
-      formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: true, setCurrentError: 'invalidLength', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_PASSWORD_ERROR',
+        payload: { setHasError: true, setCurrentError: 'invalidLength', shouldValidate: true },
+      })
       return true
     }
     if (!/^(?=.*[A-Z]).+$/.test(password)) {
-      formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: true, setCurrentError: 'uppercaseRequired', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_PASSWORD_ERROR',
+        payload: { setHasError: true, setCurrentError: 'uppercaseRequired', shouldValidate: true },
+      })
       return true
     }
     if (!/^(?=.*[a-z]).+$/.test(password)) {
-      formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: true, setCurrentError: 'lowercaseRequired', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_PASSWORD_ERROR',
+        payload: { setHasError: true, setCurrentError: 'lowercaseRequired', shouldValidate: true },
+      })
       return true
     }
     if (/(.)\1{3}/.test(password)) {
-      formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: true, setCurrentError: 'hasSequentialChars', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_PASSWORD_ERROR',
+        payload: { setHasError: true, setCurrentError: 'hasSequentialChars', shouldValidate: true },
+      })
       return true
     }
     if (!/[!@#$%^&*()/+,.?":{}|<>]/.test(password)) {
@@ -86,7 +111,10 @@ export const formValidation = {
       })
       return true
     }
-    formDispatch({ type: 'SET_PASSWORD_ERROR', payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true } })
+    formDispatch({
+      type: 'SET_PASSWORD_ERROR',
+      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+    })
     return false
   },
 
@@ -103,7 +131,10 @@ export const formValidation = {
 
       return true
     } else {
-      formDispatch({ type: 'SET_CONFIRMED_PASSWORD_ERROR', payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true } })
+      formDispatch({
+        type: 'SET_CONFIRMED_PASSWORD_ERROR',
+        payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+      })
       return false
     }
   },

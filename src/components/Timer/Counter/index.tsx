@@ -24,7 +24,7 @@ const CounterWrapper = styled.div`
   max-width: 600px;
 
   display: flex;
-  gap: 20px;
+  gap: var(--gap-1);
   flex-direction: column;
   align-items: center;
 
@@ -34,6 +34,6 @@ const CounterWrapper = styled.div`
 const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: var(--gap-1);
   transition: color 0.3s ease-in-out;
 `

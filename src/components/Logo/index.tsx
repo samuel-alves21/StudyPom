@@ -15,12 +15,12 @@ const ImgContainer = styled.div`
   top: 25px;
   left: 25px;
   width: 200px;
-  
-  @media screen and (max-width: ${breakpoints.laptop}) {
+
+  @media (max-width: ${breakpoints.laptop}) {
     position: initial;
   }
 
-  @media screen and (max-width: ${breakpoints.mobile}) {
+  @media (max-width: ${breakpoints.mobile}) {
     width: 150px;
   }
 `

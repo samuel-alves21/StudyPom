@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: ${breakpoints.mobile}) {
+  @media (max-width: ${breakpoints.mobile}) {
     padding: 10px;
   }
 `
@@ -63,5 +63,9 @@ const GlassBox = styled.div`
     height: 100%;
     border-radius: 15px;
     padding: 20px 10px;
+  }
+
+  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+    padding: 30px;
   }
 `

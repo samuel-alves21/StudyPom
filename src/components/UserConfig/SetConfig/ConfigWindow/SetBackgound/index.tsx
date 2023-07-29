@@ -29,7 +29,7 @@ const BackgroundsWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: var(--gap-1);
 
   @media (max-width: ${breakpoints.tablet}) {
     gap: 50px;

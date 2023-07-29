@@ -11,8 +11,14 @@ export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'userna
 
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
-  const hasError = (formState.email.hasError || formState.password.hasError || formState.username.hasError || formState.confirmedPassword.hasError) 
-  const [ shouldSend, setShouldSend ] = useState(false) 
+  
+  const hasError =
+    formState.email.hasError ||
+    formState.password.hasError ||
+    formState.username.hasError ||
+    formState.confirmedPassword.hasError
+
+  const [shouldSend, setShouldSend] = useState(false)
 
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
 
@@ -61,12 +67,13 @@ export const Form = () => {
         setShouldSend(true)
       }
     })
-    return () => window.removeEventListener('click', (e: MouseEvent) => {
-      const thisElement = e.target as HTMLButtonElement
-      if (thisElement.type === 'submit') {
-        setShouldSend(true)
-      }
-    })
+    return () =>
+      window.removeEventListener('click', (e: MouseEvent) => {
+        const thisElement = e.target as HTMLButtonElement
+        if (thisElement.type === 'submit') {
+          setShouldSend(true)
+        }
+      })
   }, [])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,9 +84,9 @@ export const Form = () => {
       if (!input.value) {
         formValidation.EmptyVerify(input.value, formDispatch, input.id as FormInputType)
         isEmpty = true
-      } 
+      }
     })
-    if (!hasError && !isEmpty ) {
+    if (!hasError && !isEmpty) {
       console.log('form sent')
       return
     }
@@ -91,33 +98,73 @@ export const Form = () => {
   }
 
   return (
-    <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
-      <Logo />
-      <Text />
-      <FormInput {...props} id='username' placeholder='username' type='text' />
-      <FormInput {...props} id='email' placeholder='email' type='email' />
-      <FormInput {...props} id='password' placeholder='password' type='password' />
-      <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />
-      <button type='submit' className='form-button'>Create account</button>
-      <p>
-        Already have an account? <a href='#'>Sign in</a>
-      </p>
-    </FormWrapper>
+    <Wrapper>
+      <TextWrapper>
+        <Logo />
+        <Text />
+      </TextWrapper>
+      <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
+        <h2>Create your account</h2>
+        <FormInput {...props} id='username' placeholder='username' type='text' />
+        <FormInput {...props} id='email' placeholder='email' type='email' />
+        <FormInput {...props} id='password' placeholder='password' type='password' />
+        <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />
+        <button type='submit' className='form-button'>
+          Create account
+        </button>
+        <p>
+          Already have an account? <a href='#'>Sign in</a>
+        </p>
+      </FormWrapper>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 550px;
+  gap: var(--gap-1);
+
+  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-grow: 1;
+  }
+`
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-1);
+
+  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+    max-width: 300px;
+    justify-content: space-between;
+
+    & > div {
+      position: initial;
+    }
+  }
+`
 
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  width: 550px;
+  gap: var(--gap-1);
 
   @media (max-width: ${breakpoints.mobile}) {
     gap: 25px;
   }
 
   @media (max-width: ${breakpoints.smallMobile}) {
-    gap: 20px;
+    gap: var(--gap-1);
+  }
+
+  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+    width: 350px;
   }
 `

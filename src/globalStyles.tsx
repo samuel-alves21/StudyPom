@@ -16,6 +16,8 @@ export const GlobalStyles = createGlobalStyle`
     color: #fff; 
     --color-error: #ff3939;
     --color-primary: #cc66fc;
+
+    --gap-1: 20px;
   }
 
   body {
@@ -78,12 +80,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'montserrat', sans-serif;
   }
 
-  .form-input {
-    @media (max-width: ${breakpoints.mobile}) {
-      width: 80%;
-    }
-  }
-
   button {
     outline: none;
     border: none;
@@ -102,10 +98,14 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0 10px;
     color: #fff;
     font-size: 16px;
+
+    @media (max-width: ${breakpoints.mobile}) {
+      width: 80%;
+    }
   }
 
   .form-button {
-    width: 70%;
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: none;

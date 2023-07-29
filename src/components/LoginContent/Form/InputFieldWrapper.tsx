@@ -12,11 +12,15 @@ interface FormInputWrapperProps {
 export const InputFieldWrapper = ({ children, type }: FormInputWrapperProps) => {
   const { formState } = useContext(FormContext) as FormContextType
 
-  return <Wrapper id='input-field-wrapper' error={formState[type].hasError}>{children}</Wrapper>
+  return (
+    <Wrapper id='input-field-wrapper' error={formState[type].hasError}>
+      {children}
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div<{ error: boolean }>`
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 10px;

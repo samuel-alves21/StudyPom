@@ -9,7 +9,6 @@ export const Text = () => {
         Maximize your <strong>productivity</strong> with our <strong>Pomodoro</strong> app. Focus{' '}
         <strong>better</strong>, work <strong>smarter</strong>, and achieve <strong>more</strong>. Sign in to start now!
       </p>
-      <h2>Create your account</h2>
     </Wrapper>
   )
 }
@@ -20,12 +19,7 @@ const Wrapper = styled.div`
   gap: 20px;
 
   & > p {
-    margin-bottom: 10px;
     line-height: 25px;
-
-    @media (max-width: ${breakpoints.mobile}) {
-      margin-bottom: 0;
-    }
   }
 
   & strong,

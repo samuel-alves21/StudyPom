@@ -13,6 +13,6 @@ export const WorkedTime = () => {
 const DetailsWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  gap: 20px;
+  gap: var(--gap-1);
   width: 100%;
 `

@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: var(--gap-1);
 `
 
 const SoundsWrapper = styled.div`
