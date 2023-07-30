@@ -68,8 +68,10 @@ const Wrapper = styled.div<GearIconProps>`
     }
   }
 
-  & .bi-gear-fill:hover {
-    color: var(--color-primary);
-    cursor: pointer;
+  @media (hover: hover) and (pointer: fine) {
+    & .bi-gear-fill:hover {
+      color: var(--color-primary);
+      cursor: pointer;
+    }
   }
 `

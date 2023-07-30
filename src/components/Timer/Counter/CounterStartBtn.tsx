@@ -38,8 +38,10 @@ export const ToggleButton = styled.button`
   transition: background-color 5s;
   transition: color 0.05s;
 
-  &:hover {
-    background-color: transparent;
-    color: white;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: transparent;
+      color: white;
+    }
   }
 `

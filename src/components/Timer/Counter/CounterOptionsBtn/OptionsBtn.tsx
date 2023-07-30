@@ -44,9 +44,12 @@ export const OptionsBtn = ({ text }: OptionsBtnProps) => {
 export const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ isSelected }) => (isSelected ? 'white' : 'transparent')};
   color: ${({ isSelected }) => (isSelected ? 'black' : 'white')};
-  &:hover {
-    background-color: white;
-    color: #1d1d1d;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: white;
+      color: #1d1d1d;
+    }
   }
 
   @media (max-width: ${breakpoints.mobile}) {

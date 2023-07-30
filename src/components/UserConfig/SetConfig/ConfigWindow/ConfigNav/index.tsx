@@ -49,10 +49,12 @@ const Wrapper = styled.div`
     color: white;
   }
 
-  & .bi-x-lg:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    color: #ffffff8f;
+  @media (hover: hover) and (pointer: fine) {
+    & .bi-x-lg:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      color: #ffffff8f;
+    }
   }
 `
 
@@ -65,9 +67,11 @@ const Options = styled.div`
 const Option = styled.p<ConfigNavStyledProps>`
   position: relative;
 
-  &:hover {
-    cursor: pointer;
-    color: #ffffff8f;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      color: #ffffff8f;
+    }
   }
 
   &::after {

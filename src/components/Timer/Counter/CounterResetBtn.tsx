@@ -35,9 +35,11 @@ const Wrapper = styled.div<CounterResetBtnProps>`
     font-size: 3.5rem;
   }
 
-  & .bi-arrow-clockwise:hover {
-    color: var(--color-primary);
-    cursor: pointer;
+  @media (hover: hover) and (pointer: fine) {
+    & .bi-arrow-clockwise:hover {
+      color: var(--color-primary);
+      cursor: pointer;
+    }
   }
 
   animation: ${({ animate }) => (animate ? 'full-rotate 0.7s linear forwards' : 'none')};

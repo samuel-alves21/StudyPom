@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { FormContext, FormContextType } from '../../../contexts/FormContext'
-import { formValidator } from '../../../functions/formValidation'
+import { formValidator, getPasswordField } from '../../../functions/formValidation'
 import { InputFieldWrapper } from './InputFieldWrapper'
 import { Error } from './Error'
 import { EyeIcon } from './EyeIcon'
@@ -27,15 +27,16 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value
-    const passwordInput = e.target.parentElement?.previousSibling?.childNodes[1] as HTMLInputElement
-    formValidator(value, id, passwordInput.value, formDispatch)
+    const password = getPasswordField(id)
+    formValidator(value, id, password as string, formDispatch)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!formState[id].shouldValidate) return
     const value = e.target.value
-    const passwordInput = e.target.parentElement?.previousSibling?.childNodes[1] as HTMLInputElement
-    formValidator(value, id, passwordInput.value, formDispatch)
+    const password = getPasswordField(id)
+    console.log(password)
+    formValidator(value, id, password as string, formDispatch)
   }
 
   return (

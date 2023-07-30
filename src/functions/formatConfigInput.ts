@@ -1,4 +1,4 @@
-import { Id } from '../types/types'
+import { Id } from '../components/Timer/Counter/CounterOptionsBtn'
 import { secondsToMinutes } from './secondsToMinutes'
 import { secondsToTime } from './secondsToTime'
 

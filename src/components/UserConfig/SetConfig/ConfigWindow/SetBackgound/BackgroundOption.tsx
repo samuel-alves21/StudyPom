@@ -38,9 +38,11 @@ const Wrapper = styled.div`
   height: 150px;
   transition: transform 0.3s ease-in-out;
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
   }
 
   &,

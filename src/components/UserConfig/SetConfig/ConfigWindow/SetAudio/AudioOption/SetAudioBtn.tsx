@@ -40,8 +40,11 @@ const Button = styled(StyledButton)`
   margin: 0 auto;
   background-color: ${({ isSelected }: StyledSoundButtonProps) => (isSelected ? 'white' : 'transparent')};
   color: ${({ isSelected }: StyledSoundButtonProps) => (isSelected ? 'black' : 'white')};
-  &:hover {
-    background-color: white;
-    color: #1d1d1d;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: white;
+      color: #1d1d1d;
+    }
   }
 `

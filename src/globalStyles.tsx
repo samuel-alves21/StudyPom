@@ -68,8 +68,10 @@ export const GlobalStyles = createGlobalStyle`
     color: #b032e9;
   }
 
-  a:hover {
-    text-decoration: underline;
+  @media (hover: hover) and (pointer: fine) {
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   input {
@@ -114,9 +116,11 @@ export const GlobalStyles = createGlobalStyle`
     color: #3b3b3b;
     cursor: pointer;
 
-    &:hover {
-      background-color: #af32e9;
-      color: #fff;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: #af32e9;
+        color: #fff;
+      }
     }
 
     @media (max-width: ${breakpoints.mobile}) {

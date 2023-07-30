@@ -3,18 +3,14 @@ import { useMemo, useContext } from 'react'
 import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
-import {
-  CustomizationContext,
-  CustomizationContextType,
-  SoundObject,
-} from '../../../../../../contexts/CustomizationContext'
+import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
 
 export interface AudioOptionProps {
   sounds: {
-    name: keyof SoundObject
+    name: string
     sounds: {
-      start: keyof SoundObject
-      end: keyof SoundObject
+      start: string
+      end: string
     }
   }
 }
@@ -93,8 +89,10 @@ const InputWrapper = styled.div`
     cursor: pointer;
   }
 
-  & .bi-play-fill:hover {
-    color: var(--color-primary);
+  @media (hover: hover) and (pointer: fine) {
+    & .bi-play-fill:hover {
+      color: var(--color-primary);
+    }
   }
 
   & > div {

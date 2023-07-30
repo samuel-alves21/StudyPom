@@ -18,11 +18,11 @@ export const Error = ({ errorField, errorType }: FormErrorProps) => {
 
 const ErrorMsg = styled.p`
   font-size: 15px;
-  width: fit-content;
   padding: 0;
   position: absolute;
   bottom: -23px;
   left: 0px;
   text-align: left;
   color: var(--color-error);
+  width: 110%;
 `

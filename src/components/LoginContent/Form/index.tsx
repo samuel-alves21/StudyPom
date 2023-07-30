@@ -1,28 +1,18 @@
 import styled from 'styled-components'
-import { useRef, useEffect, useMemo, useContext, useState } from 'react'
+import { useContext } from 'react'
 import { FormContext, FormContextType } from '../../../contexts/FormContext'
 import { FormInput } from './FormInput'
 import { Text } from './Text'
-import { formValidation } from '../../../functions/formValidation'
 import { breakpoints } from '../../../utilities/breakpoints'
 import { Logo } from '../../Logo'
+import { useFormInputs } from '../../../hooks/useFormInputs'
+import { formSubmit } from '../../../functions/formSubmit'
+import { hasErrorOnSubmit } from '../../../functions/formValidation'
 
 export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
 
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
-  
-  const hasError =
-    formState.email.hasError ||
-    formState.password.hasError ||
-    formState.username.hasError ||
-    formState.confirmedPassword.hasError
-
-  const [shouldSend, setShouldSend] = useState(false)
-
-  const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
-
-  const formWrapper = useRef<null | HTMLFormElement>(null)
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
@@ -39,59 +29,15 @@ export const Form = () => {
         if (input === e.target) {
           if (inputsArray[index + 1]) {
             inputsArray[index + 1].focus()
-            setShouldSend(false)
           } else {
-            setShouldSend(true)
+            formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch)
           }
         }
       })
     }
   }
 
-  useEffect(() => {
-    const form = formWrapper.current as HTMLFormElement
-    form.childNodes.forEach((child) => {
-      child.childNodes.forEach((child2) => {
-        const element = child2 as HTMLInputElement
-        if (element.placeholder) {
-          inputsArray.push(element as HTMLInputElement)
-        }
-      })
-    })
-  }, [inputsArray])
-
-  useEffect(() => {
-    window.addEventListener('mouseover', (e: MouseEvent) => {
-      const thisElement = e.target as HTMLButtonElement
-      if (thisElement.type === 'submit') {
-        setShouldSend(true)
-      }
-    })
-    return () =>
-      window.removeEventListener('click', (e: MouseEvent) => {
-        const thisElement = e.target as HTMLButtonElement
-        if (thisElement.type === 'submit') {
-          setShouldSend(true)
-        }
-      })
-  }, [])
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!shouldSend) return
-    let isEmpty = false
-    inputsArray.forEach((input) => {
-      if (!input.value) {
-        formValidation.EmptyVerify(input.value, formDispatch, input.id as FormInputType)
-        isEmpty = true
-      }
-    })
-    if (!hasError && !isEmpty) {
-      console.log('form sent')
-      return
-    }
-    console.log('form not sent')
-  }
+  const inputsArray = useFormInputs('form')
 
   const props = {
     handleKeyDown: handleKeyDown,
@@ -103,13 +49,16 @@ export const Form = () => {
         <Logo />
         <Text />
       </TextWrapper>
-      <FormWrapper ref={formWrapper} action='' onSubmit={(e) => handleSubmit(e)}>
+      <FormWrapper id='form'>
         <h2>Create your account</h2>
         <FormInput {...props} id='username' placeholder='username' type='text' />
         <FormInput {...props} id='email' placeholder='email' type='email' />
         <FormInput {...props} id='password' placeholder='password' type='password' />
         <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />
-        <button type='submit' className='form-button'>
+        <button
+          className='form-button'
+          onClick={() => formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch)}
+        >
           Create account
         </button>
         <p>
@@ -152,7 +101,7 @@ const TextWrapper = styled.div`
   }
 `
 
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

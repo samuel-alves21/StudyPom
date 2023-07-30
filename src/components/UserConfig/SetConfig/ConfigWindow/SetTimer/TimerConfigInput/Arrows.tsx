@@ -37,12 +37,14 @@ const ArrowIcon = styled.div`
   padding: 0 8px;
   font-size: 12px;
 
-  &:hover {
-    cursor: pointer;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+    }
 
-  & .bi-caret-up-fill:hover,
-  & .bi-caret-down-fill:hover {
-    transform: scale(1.3) !important;
+    & .bi-caret-up-fill:hover,
+    & .bi-caret-down-fill:hover {
+      transform: scale(1.3) !important;
+    }
   }
 `
