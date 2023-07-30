@@ -13,7 +13,8 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
-    color: #fff; 
+    color: #fff;
+
     --color-error: #ff3939;
     --color-primary: #cc66fc;
 
@@ -65,7 +66,7 @@ export const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: #b032e9;
+    color: var( --color-primary);
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -118,7 +119,7 @@ export const GlobalStyles = createGlobalStyle`
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: #af32e9;
+        background-color: var( --color-primary);
         color: #fff;
       }
     }
