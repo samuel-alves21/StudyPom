@@ -9,6 +9,8 @@ import { useFormInputs } from '../../hooks/useFormInputs'
 import { formSubmit } from '../../functions/formSubmit'
 import { hasErrorOnSubmit } from '../../functions/formValidation'
 import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
+import { UserContext, UserContextType } from '../../contexts/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 interface TextWrapperProps {
   isLogin: boolean
@@ -23,6 +25,9 @@ export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'userna
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
+  const { setUser } = useContext(UserContext) as UserContextType
+
+  const navigate = useNavigate()
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
@@ -57,6 +62,11 @@ export const Form = () => {
     formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin)
   }
 
+  const handleGoWithoutAccount = () => {
+    setUser('pending')
+    navigate('/')
+  }
+
   return (
     <Wrapper isLogin={isLogin}>
       <TextWrapper isLogin={isLogin}>
@@ -75,10 +85,15 @@ export const Form = () => {
         <p>
           {isLogin ? 'Don’t have an account?' : 'Already have an account?'}
           &nbsp;
-          <a href='#' onClick={() => setIsLogin(!isLogin)}>
+          <span className='navigation-span' onClick={() => setIsLogin(!isLogin)}>
             {isLogin ? 'Sign up' : 'Login'}
-          </a>
+          </span>
         </p>
+        {isLogin ||         
+        <div className='arrow-div'>
+          <p>or <span className='navigation-span' onClick={handleGoWithoutAccount}>continue without account</span></p>
+          <i className="bi bi-arrow-right"></i>
+        </div>}
       </FormWrapper>
     </Wrapper>
   )
@@ -109,6 +124,20 @@ const Wrapper = styled.div<LoginWrapper>`
       `
     }
   }}
+
+  .arrow-div {
+    gap: 10px;
+    position: relative;
+  }
+
+  .bi-arrow-right {
+    font-size: 18px;
+    color: var(--color-primary);
+    position: absolute;
+    bottom: -2px;
+    right: -25px;
+    transition: translate 0.03s ease-in-out;
+  }
 `
 
 const TextWrapper = styled.div<TextWrapperProps>`

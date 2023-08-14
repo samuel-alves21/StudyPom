@@ -69,6 +69,17 @@ export const GlobalStyles = createGlobalStyle`
     color: var( --color-primary);
   }
 
+  .navigation-span {
+    text-decoration: none;
+    color: var( --color-primary);
+    font-weight: normal;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     a:hover {
       text-decoration: underline;

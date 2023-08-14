@@ -10,6 +10,7 @@ import { CustomizationContext, CustomizationContextType } from '../contexts/Cust
 import { useNavigate } from 'react-router-dom'
 import { Spinner } from '../components/Spinner'
 import { ColorStyle } from '../components/ColorStyle'
+import { UserContext, UserContextType } from '../contexts/UserContext'
 
 export interface MainContainerProps {
   background: string
@@ -17,12 +18,12 @@ export interface MainContainerProps {
   bright: string
 }
 
-const user = false
-
 const App = () => {
   const {
     customizationState: { background, blur, bright, mainColor, secundaryColor },
   } = useContext(CustomizationContext) as CustomizationContextType
+
+  const { user } = useContext(UserContext) as UserContextType
 
   const navigate = useNavigate()
 
@@ -35,7 +36,7 @@ const App = () => {
       }, 2000)
     }
     return () => clearTimeout(myTimer.current)
-  }, [navigate])
+  }, [navigate, user])
 
   useSetWindow()
   useInit()
