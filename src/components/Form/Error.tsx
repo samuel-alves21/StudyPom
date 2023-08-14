@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { FormContext, FormContextType } from '../../../contexts/FormContext'
-import { FormsError } from '../../../contexts/FormContext/reducer'
+import { FormContext, FormContextType } from '../../contexts/FormContext'
+import { FormsError } from '../../contexts/FormContext/reducer'
 import { FormInputType } from '.'
 
 interface FormErrorProps {

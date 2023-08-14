@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react'
-import { FormContext, FormContextType } from '../../../contexts/FormContext'
-import { formValidator, getPasswordField } from '../../../functions/formValidation'
+import { FormContext, FormContextType } from '../../contexts/FormContext'
+import { formValidator, getPasswordField } from '../../functions/formValidation'
 import { InputFieldWrapper } from './InputFieldWrapper'
 import { Error } from './Error'
 import { EyeIcon } from './EyeIcon'
 import { ClearText } from './ClearText'
 import { InputIcon } from './InputIcon'
 import { FormInputType } from '.'
+import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
 
 interface FormInputProps {
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
@@ -24,19 +25,19 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
   }
 
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
+  const { isLogin } = useContext(LoginContext) as LoginContextType
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value
     const password = getPasswordField(id)
-    formValidator(value, id, password as string, formDispatch)
+    formValidator(value, id, password as string, formDispatch, isLogin)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!formState[id].shouldValidate) return
     const value = e.target.value
     const password = getPasswordField(id)
-    console.log(password)
-    formValidator(value, id, password as string, formDispatch)
+    formValidator(value, id, password as string, formDispatch, isLogin)
   }
 
   return (

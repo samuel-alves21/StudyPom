@@ -112,7 +112,8 @@ export const GlobalStyles = createGlobalStyle`
     padding: 10px;
     border-radius: 5px;
     border: none;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
+    transition: background-color 0.2s ease;
     font-size: 14px;
     color: #3b3b3b;
     cursor: pointer;

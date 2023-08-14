@@ -1,12 +1,10 @@
 import styled from 'styled-components'
-import { ToDoImage } from './ToDoImage'
-import { Form } from './Form'
 import { FormProvider } from '../../contexts/FormContext'
+import { Form } from '../Form'
 
 export const LoginContent = () => {
   return (
     <Wrapper>
-      <ToDoImage />
       <FormProvider>
         <Form />
       </FormProvider>
@@ -15,11 +13,6 @@ export const LoginContent = () => {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  text-align: center;
-  height: 100%;
-  gap: 50px;
+  margin: 0 auto;
+  height: 90%;
 `

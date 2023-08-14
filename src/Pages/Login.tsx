@@ -1,9 +1,17 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { LoginContent } from '../components/LoginContent'
 import { breakpoints } from '../utilities/breakpoints'
+import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { RegisterContent } from '../components/RegisterContext'
 
-export const Login = () => {
+interface GlassBoxProps {
+  isLogin: boolean
+}
+
+export const Register = () => {
+  const { isLogin } = useContext(LoginContext) as LoginContextType
+
   useEffect(() => {
     window.document.title = 'StudyPom | Login'
   }, [])
@@ -11,9 +19,7 @@ export const Login = () => {
   return (
     <Bg>
       <Wrapper className='main-container'>
-        <GlassBox>
-          <LoginContent />
-        </GlassBox>
+        <GlassBox isLogin={isLogin}>{isLogin ? <LoginContent /> : <RegisterContent />}</GlassBox>
       </Wrapper>
     </Bg>
   )
@@ -37,13 +43,12 @@ const Wrapper = styled.div`
   }
 `
 
-const GlassBox = styled.div`
+const GlassBox = styled.div<GlassBoxProps>`
   display: flex;
   align-items: center;
   max-height: 900px;
-  height: 100%;
   min-height: fit-content;
-  min-width: 80%;
+  min-width: ${({ isLogin }) => (isLogin ? 'fit-content' : '80%')};
 
   background: rgba(17, 17, 17, 0.65);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -51,7 +56,17 @@ const GlassBox = styled.div`
   -webkit-backdrop-filter: blur(3.5px);
 
   border-radius: 50px;
-  padding: 5% 20px;
+  padding: 60px 30px;
+
+  ${({ isLogin }) => {
+    if (isLogin) {
+      return `
+        min-height: 80vh;
+        max-height: 1000px;
+        width: 500px;
+      `
+    }
+  }}
 
   @media (max-width: ${breakpoints.laptop}) {
     flex-direction: column;

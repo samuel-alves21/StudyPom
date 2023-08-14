@@ -4,7 +4,7 @@ import { breakpoints } from '../../utilities/breakpoints'
 
 export const Logo = () => {
   return (
-    <ImgContainer>
+    <ImgContainer id='logo'>
       <img src={logo} alt='' className='img-full-cover' />
     </ImgContainer>
   )

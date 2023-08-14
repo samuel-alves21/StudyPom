@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { FormContext, FormContextType } from '../../../contexts/FormContext'
+import { FormContext, FormContextType } from '../../contexts/FormContext'
 import { FormInputType } from '.'
-import { breakpoints } from '../../../utilities/breakpoints'
+import { breakpoints } from '../../utilities/breakpoints'
 
 interface FormInputWrapperProps {
   children: React.ReactNode

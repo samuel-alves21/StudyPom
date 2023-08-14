@@ -1,4 +1,4 @@
-import { FormInputType } from '../components/LoginContent/Form'
+import { FormInputType } from '../components/Form'
 import { FormState } from '../contexts/FormContext/initialState'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
 import { FormContextTypes } from '../contexts/FormContext/types'
@@ -183,25 +183,28 @@ export const formValidator = (
   value: string,
   id: FormInputType,
   passwordValue: string,
-  formDispatch: (value: FormReducerAction) => void
+  formDispatch: (value: FormReducerAction) => void,
+  isLogin: boolean
 ) => {
-  const isEmpty = formValidation.EmptyVerify(value, formDispatch, id)
-  if (isEmpty) return
-  if (id === 'username') {
-    const isUsernameInvalid = formValidation.usernameVerify(value, formDispatch)
-    if (isUsernameInvalid) return
-  }
-  if (id === 'email') {
-    const isEmailInvalid = formValidation.emailVerify(value, formDispatch)
-    if (isEmailInvalid) return
-  }
-  if (id === 'password') {
-    const isPasswordInvalid = formValidation.passwordVerify(value, formDispatch)
-    const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
-    if (isPasswordInvalid || isConfirmedPasswordInvalid) return
-  }
-  if (id === 'confirmedPassword') {
-    const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
-    if (isConfirmedPasswordInvalid) return
+  if (!isLogin) {
+    const isEmpty = formValidation.EmptyVerify(value, formDispatch, id)
+    if (isEmpty) return
+    if (id === 'username') {
+      const isUsernameInvalid = formValidation.usernameVerify(value, formDispatch)
+      if (isUsernameInvalid) return
+    }
+    if (id === 'email') {
+      const isEmailInvalid = formValidation.emailVerify(value, formDispatch)
+      if (isEmailInvalid) return
+    }
+    if (id === 'password') {
+      const isPasswordInvalid = formValidation.passwordVerify(value, formDispatch)
+      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+      if (isPasswordInvalid || isConfirmedPasswordInvalid) return
+    }
+    if (id === 'confirmedPassword') {
+      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+      if (isConfirmedPasswordInvalid) return
+    }
   }
 }

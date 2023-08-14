@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { formValidation } from '../../../functions/formValidation'
-import { FormContext, FormContextType } from '../../../contexts/FormContext'
+import { formValidation } from '../../functions/formValidation'
+import { FormContext, FormContextType } from '../../contexts/FormContext'
 import { FormInputType } from '.'
 
 export const ClearText = () => {
