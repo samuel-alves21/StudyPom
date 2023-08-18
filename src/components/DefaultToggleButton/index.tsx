@@ -39,8 +39,8 @@ export const DefaultToggleButton = () => {
 }
 
 const Wrapper = styled.div<WrapperProps>`
-  width: 80px;
-  height: 30px;
+  width: 65px;
+  height: 25px;
   border-radius: 20px;
   border: 1px solid #fff;
   cursor: pointer;
@@ -53,8 +53,8 @@ const Wrapper = styled.div<WrapperProps>`
 `
 
 const Circle = styled.div<CircleProps>`
-  width: 28px;
-  height: 26px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   background-color: #fff;
 
@@ -78,13 +78,13 @@ const Circle = styled.div<CircleProps>`
     }
 
     100% {
-      transform: translateX(165%);
+      transform: translateX(183%);
     }
   }
 
   @keyframes circle-slide-out {
     0% {
-      transform: translateX(165%);
+      transform: translateX(183%);
     }
 
     100% {
