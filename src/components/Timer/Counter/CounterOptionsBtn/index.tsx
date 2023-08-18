@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { OptionsBtn } from './OptionsBtn'
+import { standardValues } from '../../../../utilities/standardValues'
 
-export type Id = 'pomodoro' | 'short' | 'long' | 'cycles'
+export type Id = keyof typeof standardValues
 
 export const CounterOptionsBtn = () => {
   return (

@@ -58,6 +58,7 @@ export const GlobalStyles = createGlobalStyle`
 
   label {
     font-size: calc(1.6rem);
+    cursor: pointer;
   }
 
   span {
@@ -92,6 +93,10 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.3rem;
     padding: 0 0.5rem;
     font-family: 'montserrat', sans-serif;
+  }
+
+  input[type="text"]:disabled {
+    cursor: not-allowed;
   }
 
   button {

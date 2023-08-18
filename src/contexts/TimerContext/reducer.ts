@@ -10,6 +10,12 @@ export interface TimerReducerAction {
 
 export const reducer: TimerReducer = (state, action) => {
   switch (action.type) {
+    case 'SET_DEFAULT':
+      if (typeof action.payload !== 'boolean') return state
+      return {
+        ...state,
+        isDefault: action.payload
+      }
     case 'CONFIG_CYCLES':
       if (typeof action.payload !== 'number') return state
       return {

@@ -3,10 +3,12 @@ import { TimerConfigInput } from './TimerConfigInput'
 import { useState, useContext } from 'react'
 import { LimitValues } from './LimitValues'
 import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
+import { DefaultToggleButton } from '../../../../DefaultToggleButton'
 
 export const SetTimer = () => {
   const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
+    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, isDefault }, 
+    timeDispatch 
   } = useContext(TimerContext) as TimerContextType
 
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
@@ -35,6 +37,10 @@ export const SetTimer = () => {
         <label htmlFor='cycles'>Cycles:</label>
         <TimerConfigInput id='cycles' state={configCycles} setState={setConfigCycles} />
         <LimitValues id={'cycles'} />
+      </InputContainer>
+      <InputContainer>
+        <label onClick={() => timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })}>pomodoro default:</label>
+        <DefaultToggleButton />
       </InputContainer>
     </Wrapper>
   )

@@ -1,6 +1,6 @@
 export const standardValues = {
   pomodoro: 1500,
-  shortBreak: 300,
-  longBreak: 900,
+  short: 300,
+  long: 900,
   cycles: 4,
 }

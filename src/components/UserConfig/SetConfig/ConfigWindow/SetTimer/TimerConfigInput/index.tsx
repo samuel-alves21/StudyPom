@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Arrows } from './Arrows'
 import { formatConfigInput } from '../../../../../../functions/formatConfigInput'
 import { limitValues } from '../../../../../../utilities/limitValues'
@@ -7,6 +7,8 @@ import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
 import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
 import { Id } from '../../../../../Timer/Counter/CounterOptionsBtn'
+import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
+import { standardValues } from '../../../../../../utilities/standardValues'
 
 interface TimerConfigInputProps {
   id: Id
@@ -18,6 +20,15 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   const [isOnFocus, setIsOnFocus] = useState(false)
 
   useTimerConfig(state, id)
+
+  const { timeState: { isDefault } } = useContext(TimerContext) as TimerContextType
+
+  useEffect(() => {
+    if (isDefault) {
+      setState(standardValues[id].toString())
+    }
+  },[id, isDefault, setState]) 
+
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
@@ -47,6 +58,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   }
 
   const handleWhell = (e: React.WheelEvent<HTMLInputElement>) => {
+    if (isDefault) return
     if (isOnFocus) return
     if (e.deltaY < 0) {
       setState(acrementTime(Number(state), id).toString())
@@ -94,6 +106,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
         id={id}
         readOnly={false}
         onWheel={(e) => handleWhell(e)}
+        disabled={isDefault}
       />
       <Arrows state={state} setState={setState} id={id} />
     </InputAndArrows>

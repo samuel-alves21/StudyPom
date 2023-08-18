@@ -13,3 +13,4 @@ export type TimerActionTypes =
   | 'CONFIG_SHORT_TIME'
   | 'CONFIG_LONG_TIME'
   | 'CONFIG_CYCLES'
+  | 'SET_DEFAULT'

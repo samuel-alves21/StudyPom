@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
 import { Id } from '../../../../../Timer/Counter/CounterOptionsBtn'
+import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
+import { useContext } from 'react'
 
 interface ArrowsProps {
   state: string
@@ -10,7 +12,12 @@ interface ArrowsProps {
 }
 
 export const Arrows = ({ id, setState, state }: ArrowsProps) => {
+  const { timeState: { isDefault } } = useContext(TimerContext) as TimerContextType
+
+
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (isDefault) return
+
     const thisElement = e.target as HTMLElement
 
     if (thisElement.id === 'acrement') {
