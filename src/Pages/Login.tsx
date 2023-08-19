@@ -4,6 +4,7 @@ import { LoginContent } from '../components/LoginContent'
 import { breakpoints } from '../utilities/breakpoints'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 import { RegisterContent } from '../components/RegisterContext'
+import { Spinner } from '../components/Spinner'
 
 interface GlassBoxProps {
   isLogin: boolean
@@ -18,6 +19,7 @@ export const Register = () => {
 
   return (
     <Bg>
+      <Spinner />
       <Wrapper className='main-container'>
         <GlassBox isLogin={isLogin}>{isLogin ? <LoginContent /> : <RegisterContent />}</GlassBox>
       </Wrapper>

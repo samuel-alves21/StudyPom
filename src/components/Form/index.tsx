@@ -25,7 +25,7 @@ export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'userna
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
-  const { setUser } = useContext(UserContext) as UserContextType
+  const { setUser, user } = useContext(UserContext) as UserContextType
 
   const navigate = useNavigate()
 
@@ -45,7 +45,7 @@ export const Form = () => {
           if (inputsArray[index + 1]) {
             inputsArray[index + 1].focus()
           } else {
-            formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin)
+            formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, user, setUser)
           }
         }
       })
@@ -59,11 +59,11 @@ export const Form = () => {
   }
 
   const handleClick = () => {
-    formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin)
+    formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, user, setUser)
   }
 
   const handleGoWithoutAccount = () => {
-    setUser('pending')
+    setUser({ ...user, isLogedIn: 'pending' })
     navigate('/')
   }
 
@@ -89,11 +89,17 @@ export const Form = () => {
             {isLogin ? 'Sign up' : 'Login'}
           </span>
         </p>
-        {isLogin ||         
-        <div className='arrow-div'>
-          <p>or <span className='navigation-span' onClick={handleGoWithoutAccount}>continue without account</span></p>
-          <i className="bi bi-arrow-right"></i>
-        </div>}
+        {isLogin || (
+          <div className='arrow-div'>
+            <p>
+              or{' '}
+              <span className='navigation-span' onClick={handleGoWithoutAccount}>
+                continue without account
+              </span>
+            </p>
+            <i className='bi bi-arrow-right'></i>
+          </div>
+        )}
       </FormWrapper>
     </Wrapper>
   )

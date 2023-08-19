@@ -12,8 +12,9 @@ interface ArrowsProps {
 }
 
 export const Arrows = ({ id, setState, state }: ArrowsProps) => {
-  const { timeState: { isDefault } } = useContext(TimerContext) as TimerContextType
-
+  const {
+    timeState: { isDefault },
+  } = useContext(TimerContext) as TimerContextType
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (isDefault) return

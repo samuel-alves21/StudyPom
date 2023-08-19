@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
@@ -8,9 +8,9 @@ import { useSetWindow } from '../hooks/useSetWindow'
 import { useInit } from '../hooks/useInit'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 import { useNavigate } from 'react-router-dom'
-import { Spinner } from '../components/Spinner'
 import { ColorStyle } from '../components/ColorStyle'
 import { UserContext, UserContextType } from '../contexts/UserContext'
+import { LoginIcon } from '../components/LoginIcon'
 
 export interface MainContainerProps {
   background: string
@@ -27,36 +27,27 @@ const App = () => {
 
   const navigate = useNavigate()
 
-  const myTimer = useRef<number>()
-
   useEffect(() => {
-    if (!user) {
-      myTimer.current = setTimeout(() => {
-        navigate('/login')
-      }, 2000)
+    console.log(user.username)
+    if (!user.isLogedIn === true) {
+      navigate('/login')
     }
-    return () => clearTimeout(myTimer.current)
-  }, [navigate, user])
+  }, [navigate, user.username, user.isLogedIn])
 
   useSetWindow()
   useInit()
 
   return (
     <>
-      {!user ? (
-        <Spinner mainColor={mainColor} />
-      ) : (
-        <>
-          <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-          <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
-            <Wrapper>
-              <Logo />
-              <Timer />
-              <UserConfig />
-            </Wrapper>
-          </MainContainer>
-        </>
-      )}
+      <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
+      <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
+        <Wrapper>
+          <Logo />
+          <LoginIcon />
+          <Timer />
+          <UserConfig />
+        </Wrapper>
+      </MainContainer>
     </>
   )
 }

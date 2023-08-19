@@ -7,8 +7,8 @@ import { DefaultToggleButton } from '../../../../DefaultToggleButton'
 
 export const SetTimer = () => {
   const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, isDefault }, 
-    timeDispatch 
+    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, isDefault },
+    timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))

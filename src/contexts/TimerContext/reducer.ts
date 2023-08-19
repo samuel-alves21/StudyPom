@@ -14,7 +14,7 @@ export const reducer: TimerReducer = (state, action) => {
       if (typeof action.payload !== 'boolean') return state
       return {
         ...state,
-        isDefault: action.payload
+        isDefault: action.payload,
       }
     case 'CONFIG_CYCLES':
       if (typeof action.payload !== 'number') return state

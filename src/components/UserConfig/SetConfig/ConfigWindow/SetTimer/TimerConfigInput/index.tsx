@@ -21,14 +21,15 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
 
   useTimerConfig(state, id)
 
-  const { timeState: { isDefault } } = useContext(TimerContext) as TimerContextType
+  const {
+    timeState: { isDefault },
+  } = useContext(TimerContext) as TimerContextType
 
   useEffect(() => {
     if (isDefault) {
       setState(standardValues[id].toString())
     }
-  },[id, isDefault, setState]) 
-
+  }, [id, isDefault, setState])
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement

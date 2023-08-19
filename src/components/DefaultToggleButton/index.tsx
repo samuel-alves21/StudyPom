@@ -1,7 +1,7 @@
-import { useContext, useState, useEffect } from "react"
-import styled from "styled-components"
-import { TimerContext, TimerContextType } from "../../contexts/TimerContext"
-import { standardValues } from "../../utilities/standardValues"
+import { useContext, useState, useEffect } from 'react'
+import styled from 'styled-components'
+import { TimerContext, TimerContextType } from '../../contexts/TimerContext'
+import { standardValues } from '../../utilities/standardValues'
 
 interface CircleProps {
   shouldAnimate: boolean
@@ -14,21 +14,23 @@ interface WrapperProps {
 
 export const DefaultToggleButton = () => {
   const [shouldAnimate, setShouldAnimate] = useState(false)
-  const { timeState: { isDefault }, timeDispatch } = useContext(TimerContext) as TimerContextType
+  const {
+    timeState: { isDefault },
+    timeDispatch,
+  } = useContext(TimerContext) as TimerContextType
 
   useEffect(() => {
     if (isDefault) {
-      timeDispatch({ type: "CONFIG_POMODORO_TIME", payload: standardValues.pomodoro })
-      timeDispatch({ type: "CONFIG_SHORT_TIME", payload: standardValues.short })
-      timeDispatch({ type: "CONFIG_LONG_TIME", payload: standardValues.long })
-      timeDispatch({ type: "CONFIG_CYCLES", payload: standardValues.cycles })
-     }
+      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: standardValues.pomodoro })
+      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: standardValues.short })
+      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: standardValues.long })
+      timeDispatch({ type: 'CONFIG_CYCLES', payload: standardValues.cycles })
+    }
   }, [isDefault, timeDispatch])
-
 
   const handleClick = () => {
     setShouldAnimate(true)
-    timeDispatch({ type: "SET_DEFAULT", payload: !isDefault })
+    timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
   }
 
   return (
@@ -49,7 +51,7 @@ const Wrapper = styled.div<WrapperProps>`
   align-items: center;
   transition: background-color 0.2s ease-in-out;
 
-  background-color: ${({ isDefault }) => isDefault ? 'var(--color-primary)' : 'transparent'};
+  background-color: ${({ isDefault }) => (isDefault ? 'var(--color-primary)' : 'transparent')};
 `
 
 const Circle = styled.div<CircleProps>`
