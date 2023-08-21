@@ -1,104 +1,80 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
-import { auth, database } from '../firebase/config'
+import { auth } from '../firebase/config'
 import { isEmptyOnSubmit } from './formValidation'
 import { NavigateFunction } from 'react-router-dom'
-import { User } from '../contexts/UserContext'
-import { push, ref, set } from 'firebase/database'
 import { usernameVerify } from '../firebase/usernameVerify'
+import { userRegister } from '../firebase/userRegister'
+import { User } from 'firebase/auth'
+import { usernameRegister } from '../firebase/usernameRegister'
+import { UserState } from '../contexts/UserContext'
 
+export interface FormData {
+  [key: string]: string
+}
+ 
 type FormSubmitFn = (
   hasError: boolean,
   inputsArray: HTMLInputElement[],
   formDispatch: (value: FormReducerAction) => void,
   isLogin: boolean,
   navigate: NavigateFunction,
-  userObj: User,
-  setUser: (value: User) => void
+  userObj: UserState,
+  setUser: (value: UserState) => void,
+  setLoginError: (value: boolean) => void
 ) => void
 
-export const formSubmit: FormSubmitFn = (hasError, inputsArray, formDispatch, isLogin, navigate, userObj, setUser) => {
+export const formSubmit: FormSubmitFn = async (hasError, inputsArray, formDispatch, isLogin, navigate, userObj, setUser, setLoginError) => {
   const spinner = document.getElementById('spinner') as HTMLDivElement
   spinner.style.display = 'flex'
 
-  const data = {} as { [key: string]: string }
+  const formData = {} as FormData
   inputsArray.forEach((input) => {
-    data[input.id] = input.value
+    formData[input.id] = input.value
   })
 
   if (!isLogin) {
     const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)
     if (!hasError && !isEmpty) {
-      usernameVerify(data, spinner, formDispatch)  
-        .then((usernameExists) => {
-          console.log(usernameExists)
-          if (!usernameExists) {
-            createUserWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
-              const user = userCredential.user
-              console.log(user)
-              setUser({ ...userObj, email: data.email, id: user.uid, username: data.username, isLogedIn: true })
-    
-              set(ref(database, 'users/' + user.uid), {
-                username: data.username,
-                email: data.email,
-                id: user.uid
-              })
-                .then(() => {
-                  console.log('here')
-                  set(push(ref(database, 'username/')), {
-                    username: data.username,
-                  }).then(() => {
-                    console.log('here')
-                    navigate('/')
-                  })
-                  .catch((error) => {
-                    console.log(error)
-                    spinner.style.display = 'none'
-                  })
-                })
-                .catch((error) => {
-                  console.log(error)
-                  spinner.style.display = 'none'
-                })
-              .catch((error) => {
-                console.log(error)
-                spinner.style.display = 'none'
-              })
-            })
-            .catch((error) => {
-              if (error.code === 'auth/email-already-in-use') {
-                formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
-              }
-              console.log(error.code)
-              spinner.style.display = 'none'
-            })
-          }
-        })
-    } else {
-      spinner.style.display = 'none'
-      console.error('form not sent')
+      try {
+        const usernameExists = await usernameVerify(formData)
+        if (usernameExists) {
+          formDispatch({ type: 'SET_USERNAME_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
+          spinner.style.display = 'none'
+        } else {
+          const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+          const firebaseUser: User = userCredential.user
+          await userRegister(firebaseUser, formData)
+          setUser({ ...userObj, email: formData.email, id: firebaseUser.uid, username: formData.username, isLogedIn: true })
+          await usernameRegister(formData.username)
+          navigate('/')
+        }
+      } catch (error: any) {
+        if (error.code === 'auth/email-already-in-use') {
+          formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
+        }
+        console.log(error.code)
+        spinner.style.display = 'none'
+      }
     }
   } else {
     const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)
     if (!hasError && !isEmpty) {
-      signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-          const user = userCredential.user
-          console.log(user)
-          setUser({ ...userObj, email: data.email, id: user.uid, username: data.username, isLogedIn: true })
-          navigate('/')
-        })
-        .catch((error) => {
-          const errorCode = error.code
-          const errorMessage = error.message
-          console.log(errorCode)
-          console.log(errorMessage)
-          spinner.style.display = 'none'
-        })
-      return
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password)
+        const user = userCredential.user
+        setUser({ ...userObj, email: formData.email, id: user.uid, username: formData.username, isLogedIn: true })
+        navigate('/')
+      } catch (error: any) {
+        if (error.code === 'auth/invalid-email' || error.code === 'auth/wrong-password') {
+          setLoginError(true)
+        }
+        spinner.style.display = 'none'
+        console.log(error.code)
+      }
     } else {
       console.error('form not sent')
     }
   }
+  spinner.style.display = 'none'
 }

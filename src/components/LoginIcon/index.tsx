@@ -1,4 +1,4 @@
-import { useContext} from 'react'
+import { useContext } from 'react'
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import styled from 'styled-components'
 import { auth } from '../../firebase/config'

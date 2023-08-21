@@ -4,7 +4,7 @@ interface UserProviderProps {
   children: React.ReactNode
 }
 
-export interface User {
+export interface UserState {
   username: string
   id: string
   email: string
@@ -19,14 +19,14 @@ const initialState = {
 }
 
 export interface UserContextType {
-  user: User
-  setUser: (userObj: User) => void
+  user: UserState
+  setUser: (userObj: UserState) => void
 }
 
 export const UserContext = createContext<UserContextType | null>(null)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [user, setUser] = useState<User>(initialState)
+  const [user, setUser] = useState<UserState>(initialState)
 
   return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
 }

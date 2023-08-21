@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getDatabase } from "firebase/database"
+import { getDatabase } from 'firebase/database'
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -11,7 +11,7 @@ const firebaseConfig = {
   messagingSenderId: '1082552740889',
   appId: '1:1082552740889:web:497d12a602d2b54a458e88',
   measurementId: 'G-H196GVFDT4',
-  databaseURL: 'https://pomodoro-app-cf8c3-default-rtdb.firebaseio.com/'
+  databaseURL: 'https://pomodoro-app-cf8c3-default-rtdb.firebaseio.com/',
 }
 
 const app = initializeApp(firebaseConfig)
