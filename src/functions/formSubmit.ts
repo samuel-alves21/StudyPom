@@ -12,7 +12,7 @@ import { UserState } from '../contexts/UserContext'
 export interface FormData {
   [key: string]: string
 }
- 
+
 type FormSubmitFn = (
   hasError: boolean,
   inputsArray: HTMLInputElement[],
@@ -24,7 +24,16 @@ type FormSubmitFn = (
   setLoginError: (value: boolean) => void
 ) => void
 
-export const formSubmit: FormSubmitFn = async (hasError, inputsArray, formDispatch, isLogin, navigate, userObj, setUser, setLoginError) => {
+export const formSubmit: FormSubmitFn = async (
+  hasError,
+  inputsArray,
+  formDispatch,
+  isLogin,
+  navigate,
+  userObj,
+  setUser,
+  setLoginError
+) => {
   const spinner = document.getElementById('spinner') as HTMLDivElement
   spinner.style.display = 'flex'
 
@@ -45,7 +54,13 @@ export const formSubmit: FormSubmitFn = async (hasError, inputsArray, formDispat
           const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
           const firebaseUser: User = userCredential.user
           await userRegister(firebaseUser, formData)
-          setUser({ ...userObj, email: formData.email, id: firebaseUser.uid, username: formData.username, isLogedIn: true })
+          setUser({
+            ...userObj,
+            email: formData.email,
+            id: firebaseUser.uid,
+            username: formData.username,
+            isLogedIn: true,
+          })
           await usernameRegister(formData.username)
           navigate('/')
         }
@@ -61,12 +76,14 @@ export const formSubmit: FormSubmitFn = async (hasError, inputsArray, formDispat
     const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)
     if (!hasError && !isEmpty) {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password)
-        const user = userCredential.user
-        setUser({ ...userObj, email: formData.email, id: user.uid, username: formData.username, isLogedIn: true })
+        await signInWithEmailAndPassword(auth, formData.email, formData.password)
         navigate('/')
       } catch (error: any) {
-        if (error.code === 'auth/invalid-email' || error.code === 'auth/wrong-password') {
+        if (
+          error.code === 'auth/invalid-email' ||
+          error.code === 'auth/wrong-password' ||
+          error.code === 'auth/user-not-found'
+        ) {
           setLoginError(true)
         }
         spinner.style.display = 'none'

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormContext, FormContextType } from '../../contexts/FormContext'
 import { FormInput } from './FormInput'
 import { Text } from './Text'
@@ -27,7 +27,7 @@ export const Form = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
   const { setUser, user } = useContext(UserContext) as UserContextType
 
-  const [ loginError, setLoginError ] = useState(false)
+  const [loginError, setLoginError] = useState(false)
 
   const navigate = useNavigate()
 
@@ -47,17 +47,21 @@ export const Form = () => {
           if (inputsArray[index + 1]) {
             inputsArray[index + 1].focus()
           } else {
-            formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, user, setUser, setLoginError)
+            formSubmit(
+              hasErrorOnSubmit(formState),
+              inputsArray,
+              formDispatch,
+              isLogin,
+              navigate,
+              user,
+              setUser,
+              setLoginError
+            )
           }
         }
       })
     }
   }
-
-  useEffect(() => {
-    console.log(isLogin)
-    console.log(loginError)
-  }, [loginError, isLogin])
 
   const inputsArray = useFormInputs('form')
 
@@ -85,7 +89,7 @@ export const Form = () => {
         {isLogin || <FormInput {...props} id='username' placeholder='username' type='text' />}
         <FormInput {...props} id='email' placeholder='email' type='email' />
         <FormInput {...props} id='password' placeholder='password' type='password' />
-        {(isLogin && loginError) && <p id='login-error'>Invalid email or password</p>}
+        {isLogin && loginError && <p id='login-error'>Invalid email or password</p>}
         {isLogin || <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />}
         <button className='form-button' onClick={handleClick}>
           {isLogin ? 'Access account' : 'Create account'}

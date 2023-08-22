@@ -6,8 +6,8 @@ interface UserProviderProps {
 
 export interface UserState {
   username: string
-  id: string
-  email: string
+  id: string | undefined
+  email: string | null
   isLogedIn: boolean | 'pending'
 }
 

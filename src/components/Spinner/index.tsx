@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 import { SpinnerCircular } from 'spinners-react'
 
-export const Spinner = () => {
+interface SpinnerProps {
+  darkBackground: boolean
+}
+
+export const Spinner = ({ darkBackground }: SpinnerProps) => {
   return (
-    <SpinnerWrapper className='spinner' id='spinner'>
+    <SpinnerWrapper className='spinner' id='spinner' darkBackground={darkBackground}>
       <SpinnerCircular speed={150} color={'#cc66fc'} size={100} />
     </SpinnerWrapper>
   )
 }
 
-const SpinnerWrapper = styled.div`
-  background-color: #00000060;
+const SpinnerWrapper = styled.div<SpinnerProps>`
+  background-color: ${({ darkBackground }) => darkBackground ? '#00000060' : '#fff'};
   position: absolute;
   display: none;
   align-items: center;
