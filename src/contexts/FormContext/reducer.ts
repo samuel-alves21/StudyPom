@@ -28,32 +28,32 @@ export type FormReducer = (state: FormState, action: FormReducerAction) => FormS
 export const reducer: FormReducer = (state, action) => {
   switch (action.type) {
     case 'SET_EMAIL_ERROR':
-      return {
-        ...state,
-        email: {
-          shouldValidate: true,
-          hasError: action.payload.setHasError,
-          currentError: action.payload.setCurrentError,
-          errorTypes: { ...state.email.errorTypes },
-        },
-      }
+        return {
+          ...state,
+          email: {
+            shouldValidate: true,
+            hasError: action.payload?.setHasError as boolean,
+            currentError: action.payload?.setCurrentError as FormsError,
+            errorTypes: { ...state.email.errorTypes },
+          },
+        }
     case 'SET_USERNAME_ERROR':
-      return {
-        ...state,
-        username: {
-          shouldValidate: true,
-          hasError: action.payload.setHasError,
-          currentError: action.payload.setCurrentError,
-          errorTypes: { ...state.username.errorTypes },
-        },
-      }
+        return {
+          ...state,
+          username: {
+            shouldValidate: true,
+            hasError: action.payload?.setHasError as boolean,
+            currentError: action.payload?.setCurrentError as FormsError,
+            errorTypes: { ...state.username.errorTypes },
+          },
+        }
     case 'SET_PASSWORD_ERROR':
       return {
         ...state,
         password: {
           shouldValidate: true,
-          hasError: action.payload.setHasError,
-          currentError: action.payload.setCurrentError,
+          hasError: action.payload?.setHasError as boolean,
+          currentError: action.payload?.setCurrentError as FormsError,
           errorTypes: { ...state.password.errorTypes },
         },
       }
@@ -62,8 +62,8 @@ export const reducer: FormReducer = (state, action) => {
         ...state,
         confirmedPassword: {
           shouldValidate: true,
-          hasError: action.payload.setHasError,
-          currentError: action.payload.setCurrentError,
+          hasError: action.payload?.setHasError as boolean,
+          currentError: action.payload?.setCurrentError as FormsError,
           errorTypes: { ...state.confirmedPassword.errorTypes },
         },
       }
@@ -74,19 +74,19 @@ export const reducer: FormReducer = (state, action) => {
             shouldValidate: true,
             hasError: false,
             currentError: 'none',
-            errorTypes: { ...state.confirmedPassword.errorTypes },
+            errorTypes: { ...state.email.errorTypes },
           },
           username: {
             shouldValidate: true,
             hasError: false,
             currentError: 'none',
-            errorTypes: { ...state.confirmedPassword.errorTypes },
+            errorTypes: { ...state.username.errorTypes },
           },
           password: {
             shouldValidate: true,
             hasError: false,
             currentError: 'none',
-            errorTypes: { ...state.confirmedPassword.errorTypes },
+            errorTypes: { ...state.password.errorTypes },
           },
           confirmedPassword: {
             shouldValidate: true,
