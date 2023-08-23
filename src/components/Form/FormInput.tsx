@@ -40,6 +40,12 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
     formValidator(value, id, password as string, formDispatch, isLogin)
   }
 
+  const handleFocus = () => {
+    if (isLogin) {
+      formDispatch({ type: 'RESET' })
+    }
+  }
+
   return (
     <InputFieldWrapper type={id}>
       <InputIcon id={id} />
@@ -52,6 +58,7 @@ export const FormInput = ({ handleKeyDown, id, placeholder, type }: FormInputPro
         onBlur={(e) => handleBlur(e)}
         autoComplete='off'
         id={id}
+        onFocus={handleFocus}
       />
       {(id === 'password' || id === 'confirmedPassword') && <EyeIcon {...EyeIconProps} />}
       <ClearText />

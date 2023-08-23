@@ -17,7 +17,7 @@ export type FormsError =
 
 export interface FormReducerAction {
   type: FormContextTypes
-  payload: {
+  payload?: {
     setHasError: boolean
     setCurrentError: FormsError
   }
@@ -67,7 +67,37 @@ export const reducer: FormReducer = (state, action) => {
           errorTypes: { ...state.confirmedPassword.errorTypes },
         },
       }
+      case 'RESET':
+        return {
+          ...state,
+          email: {
+            shouldValidate: true,
+            hasError: false,
+            currentError: 'none',
+            errorTypes: { ...state.confirmedPassword.errorTypes },
+          },
+          username: {
+            shouldValidate: true,
+            hasError: false,
+            currentError: 'none',
+            errorTypes: { ...state.confirmedPassword.errorTypes },
+          },
+          password: {
+            shouldValidate: true,
+            hasError: false,
+            currentError: 'none',
+            errorTypes: { ...state.confirmedPassword.errorTypes },
+          },
+          confirmedPassword: {
+            shouldValidate: true,
+            hasError: false,
+            currentError: 'none',
+            errorTypes: { ...state.confirmedPassword.errorTypes },
+          }
+        }
     default:
-      return { ...state }
+      return { 
+        ...state,
+      }
   }
 }
