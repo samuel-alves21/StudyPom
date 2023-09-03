@@ -5,11 +5,11 @@ import { auth } from '../../firebase/config'
 
 export const LoginIcon = () => {
   const { pendentUser } = useContext(UserContext) as UserContextType
-  
+
   return (
     <Wrapper>
       {pendentUser ? (
-        <h3 onClick={() => window.location.href = '/StudyPom/login'}>Sign Up</h3>
+        <h3 onClick={() => (window.location.href = '/StudyPom/register')}>Sign Up</h3>
       ) : (
         <i className='bi bi-box-arrow-right' onClick={() => auth.signOut()}></i>
       )}

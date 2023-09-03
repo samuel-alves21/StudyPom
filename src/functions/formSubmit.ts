@@ -19,7 +19,14 @@ type FormSubmitFn = (
   setLoginError: (value: boolean) => void
 ) => void
 
-export const formSubmit: FormSubmitFn = async ( hasError, inputsArray, formDispatch, isLogin, navigate, setLoginError) => {
+export const formSubmit: FormSubmitFn = async (
+  hasError,
+  inputsArray,
+  formDispatch,
+  isLogin,
+  navigate,
+  setLoginError
+) => {
   const spinner = document.getElementById('spinner') as HTMLDivElement
   spinner.style.display = 'flex'
 
@@ -27,6 +34,9 @@ export const formSubmit: FormSubmitFn = async ( hasError, inputsArray, formDispa
   inputsArray.forEach((input) => {
     formData[input.id] = input.value
   })
+
+  console.log('is login: ' + isLogin)
+  console.log('has error: ' + hasError)
 
   if (!isLogin) {
     const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)

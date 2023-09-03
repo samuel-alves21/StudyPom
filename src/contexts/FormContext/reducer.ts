@@ -28,25 +28,25 @@ export type FormReducer = (state: FormState, action: FormReducerAction) => FormS
 export const reducer: FormReducer = (state, action) => {
   switch (action.type) {
     case 'SET_EMAIL_ERROR':
-        return {
-          ...state,
-          email: {
-            shouldValidate: true,
-            hasError: action.payload?.setHasError as boolean,
-            currentError: action.payload?.setCurrentError as FormsError,
-            errorTypes: { ...state.email.errorTypes },
-          },
-        }
+      return {
+        ...state,
+        email: {
+          shouldValidate: true,
+          hasError: action.payload?.setHasError as boolean,
+          currentError: action.payload?.setCurrentError as FormsError,
+          errorTypes: { ...state.email.errorTypes },
+        },
+      }
     case 'SET_USERNAME_ERROR':
-        return {
-          ...state,
-          username: {
-            shouldValidate: true,
-            hasError: action.payload?.setHasError as boolean,
-            currentError: action.payload?.setCurrentError as FormsError,
-            errorTypes: { ...state.username.errorTypes },
-          },
-        }
+      return {
+        ...state,
+        username: {
+          shouldValidate: true,
+          hasError: action.payload?.setHasError as boolean,
+          currentError: action.payload?.setCurrentError as FormsError,
+          errorTypes: { ...state.username.errorTypes },
+        },
+      }
     case 'SET_PASSWORD_ERROR':
       return {
         ...state,
@@ -67,36 +67,36 @@ export const reducer: FormReducer = (state, action) => {
           errorTypes: { ...state.confirmedPassword.errorTypes },
         },
       }
-      case 'RESET':
-        return {
-          ...state,
-          email: {
-            shouldValidate: true,
-            hasError: false,
-            currentError: 'none',
-            errorTypes: { ...state.email.errorTypes },
-          },
-          username: {
-            shouldValidate: true,
-            hasError: false,
-            currentError: 'none',
-            errorTypes: { ...state.username.errorTypes },
-          },
-          password: {
-            shouldValidate: true,
-            hasError: false,
-            currentError: 'none',
-            errorTypes: { ...state.password.errorTypes },
-          },
-          confirmedPassword: {
-            shouldValidate: true,
-            hasError: false,
-            currentError: 'none',
-            errorTypes: { ...state.confirmedPassword.errorTypes },
-          }
-        }
+    case 'RESET':
+      return {
+        ...state,
+        email: {
+          shouldValidate: true,
+          hasError: false,
+          currentError: 'none',
+          errorTypes: { ...state.email.errorTypes },
+        },
+        username: {
+          shouldValidate: true,
+          hasError: false,
+          currentError: 'none',
+          errorTypes: { ...state.username.errorTypes },
+        },
+        password: {
+          shouldValidate: true,
+          hasError: false,
+          currentError: 'none',
+          errorTypes: { ...state.password.errorTypes },
+        },
+        confirmedPassword: {
+          shouldValidate: true,
+          hasError: false,
+          currentError: 'none',
+          errorTypes: { ...state.confirmedPassword.errorTypes },
+        },
+      }
     default:
-      return { 
+      return {
         ...state,
       }
   }

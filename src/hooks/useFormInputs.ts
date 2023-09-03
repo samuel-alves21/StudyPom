@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 
-export const useFormInputs = (id: string) => {
-  const inputsArray: HTMLInputElement[] = useMemo(() => [], [])
+export const useFormInputs = (id: string, isLogin: boolean) => {
+  const inputsArray: HTMLInputElement[] = useMemo(() => [], [isLogin])
 
   useEffect(() => {
     const form = document.getElementById(id) as HTMLFormElement
@@ -13,7 +13,7 @@ export const useFormInputs = (id: string) => {
         }
       })
     })
-  }, [inputsArray, id])
+  }, [inputsArray, id, isLogin])
 
   return inputsArray
 }

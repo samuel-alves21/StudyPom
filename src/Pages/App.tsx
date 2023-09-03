@@ -40,42 +40,43 @@ const App = () => {
         setIsLoading(false)
       }, 1000)
       return
-    } 
+    }
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         setIsLoading(false)
       } else {
-        window.location.href = '/StudyPom/login'
+        window.location.href = '/StudyPom/register'
       }
     })
 
     return () => {
-      clearTimeout(setTimeout(() => {
-        setIsLoading(false)
-      }, 1000))
+      clearTimeout(
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 1000)
+      )
       unsubscribe()
-    } 
-  
+    }
   }, [navigate, pendentUser, setPendentUser])
 
   useSetWindow()
   useInit()
- 
+
   return (
     <>
       <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-      {
-        isLoading ? <Spinner darkBackground={false} displayOnFirstLoad={true} /> :
+      {isLoading ? (
+        <Spinner darkBackground={false} displayOnFirstLoad={true} />
+      ) : (
         <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
-        <Wrapper>
-          <Logo />
-          <LoginIcon />
-          <Timer />
-          <UserConfig />
-        </Wrapper>
-      </MainContainer>
-      }
-
+          <Wrapper>
+            <Logo />
+            <LoginIcon />
+            <Timer />
+            <UserConfig />
+          </Wrapper>
+        </MainContainer>
+      )}
     </>
   )
 }

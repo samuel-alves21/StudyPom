@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { FormContext, FormContextType } from '../../contexts/FormContext'
 import { FormInput } from './FormInput'
 import { Text } from './Text'
@@ -24,10 +24,14 @@ export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'userna
 
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
-  const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
+  const { isLogin } = useContext(LoginContext) as LoginContextType
   const { setPendentUser } = useContext(UserContext) as UserContextType
 
   const [loginError, setLoginError] = useState(false)
+
+  useEffect(() => {
+    formDispatch({ type: 'RESET' })
+  }, [formDispatch])
 
   const navigate = useNavigate()
 
@@ -47,33 +51,38 @@ export const Form = () => {
           if (inputsArray[index + 1]) {
             inputsArray[index + 1].focus()
           } else {
-            formSubmit(
-              hasErrorOnSubmit(formState),
-              inputsArray,
-              formDispatch,
-              isLogin,
-              navigate,
-              setLoginError
-            )
+            formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, setLoginError)
           }
         }
       })
     }
   }
 
-  const inputsArray = useFormInputs('form')
+  const inputsArray = useFormInputs('form', isLogin)
 
   const props = {
     handleKeyDown: handleKeyDown,
   }
 
   const handleClick = () => {
+    console.log(formState)
+    console.log(inputsArray)
     formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, setLoginError)
   }
 
   const handleGoWithoutAccount = () => {
     setPendentUser(true)
     navigate('/')
+  }
+
+  const handleChangePage = () => {
+    if (isLogin) {
+      navigate('/register')
+      // window.location.href = '/StudyPom/register'
+    } else {
+      // window.location.href = '/StudyPom/login'
+      navigate('/login')
+    }
   }
 
   return (
@@ -95,7 +104,7 @@ export const Form = () => {
         <p>
           {isLogin ? 'Don’t have an account?' : 'Already have an account?'}
           &nbsp;
-          <span className='navigation-span' onClick={() => setIsLogin(!isLogin)}>
+          <span className='navigation-span' onClick={handleChangePage}>
             {isLogin ? 'Sign up' : 'Login'}
           </span>
         </p>

@@ -1,17 +1,17 @@
 import { useEffect, useContext } from 'react'
 import styled from 'styled-components'
-import { LoginContent } from '../components/LoginContent'
 import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
+import { RegisterContent } from '../components/RegisterContent'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 
-export const Login = () => {
+export const Register = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
 
   useEffect(() => {
-    window.document.title = 'StudyPom | Login'
-    setIsLogin(true)
+    window.document.title = 'StudyPom | Register'
+    setIsLogin(false)
   }, [setIsLogin])
 
   return (
@@ -19,7 +19,7 @@ export const Login = () => {
       <Spinner darkBackground={true} displayOnFirstLoad={false} />
       <Wrapper className='main-container'>
         <GlassBox>
-          <LoginContent />
+          <RegisterContent />
         </GlassBox>
       </Wrapper>
     </Bg>
