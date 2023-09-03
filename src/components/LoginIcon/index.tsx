@@ -2,23 +2,16 @@ import { useContext } from 'react'
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import styled from 'styled-components'
 import { auth } from '../../firebase/config'
-import { useNavigate } from 'react-router-dom'
+
 export const LoginIcon = () => {
-  const { user } = useContext(UserContext) as UserContextType
-
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    auth.signOut()
-    navigate('/login')
-  }
-
+  const { pendentUser } = useContext(UserContext) as UserContextType
+  
   return (
     <Wrapper>
-      {user.isLogedIn === 'pending' ? (
-        <h3 onClick={() => navigate('/login')}>Sign Up</h3>
+      {pendentUser ? (
+        <h3 onClick={() => window.location.href = '/StudyPom/login'}>Sign Up</h3>
       ) : (
-        <i className='bi bi-box-arrow-right' onClick={handleClick}></i>
+        <i className='bi bi-box-arrow-right' onClick={() => auth.signOut()}></i>
       )}
     </Wrapper>
   )

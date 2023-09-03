@@ -4,29 +4,15 @@ interface UserProviderProps {
   children: React.ReactNode
 }
 
-export interface UserState {
-  username: string
-  id: string | undefined
-  email: string | null
-  isLogedIn: boolean | 'pending'
-}
-
-const initialState = {
-  username: '',
-  id: '',
-  email: '',
-  isLogedIn: false,
-}
-
 export interface UserContextType {
-  user: UserState
-  setUser: (userObj: UserState) => void
+  pendentUser: boolean
+  setPendentUser: (user: boolean) => void
 }
 
 export const UserContext = createContext<UserContextType | null>(null)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [user, setUser] = useState<UserState>(initialState)
+  const [pendentUser, setPendentUser] = useState<boolean>(false)
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ pendentUser, setPendentUser }}>{children}</UserContext.Provider>
 }

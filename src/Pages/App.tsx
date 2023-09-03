@@ -13,8 +13,6 @@ import { UserContext, UserContextType } from '../contexts/UserContext'
 import { LoginIcon } from '../components/LoginIcon'
 import { auth } from '../firebase/config'
 import { onAuthStateChanged } from 'firebase/auth'
-import { Spinner } from '../components/Spinner'
-import { getUsername } from '../firebase/getUsername'
 
 export interface MainContainerProps {
   background: string
@@ -27,44 +25,40 @@ const App = () => {
     customizationState: { background, blur, bright, mainColor, secundaryColor },
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const { user, setUser } = useContext(UserContext) as UserContextType
+  const { pendentUser, setPendentUser } = useContext(UserContext) as UserContextType
 
   const navigate = useNavigate()
 
-  console.log
-
   useEffect(() => {
-
-    console.log('app')
-    if (user.isLogedIn === 'pending') return
+    console.log(pendentUser)
+    console.log(auth.currentUser)
+    if (pendentUser) return 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        const username = await getUsername()
-        console.log(username)
+        console.log(auth.currentUser?.displayName)
       } else {
-        navigate('/login')
+        window.location.href = '/StudyPom/login'
       }
     })
 
     return () => unsubscribe()
   
-  }, [navigate, user, setUser])
+  }, [navigate, pendentUser, setPendentUser])
 
   useSetWindow()
   useInit()
-
+ 
   return (
     <>
       <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-      <Spinner darkBackground={false}/> 
-        <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
-          <Wrapper>
-            <Logo />
-            <LoginIcon />
-            <Timer />
-            <UserConfig />
-          </Wrapper>
-        </MainContainer>
+      <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
+        <Wrapper>
+          <Logo />
+          <LoginIcon />
+          <Timer />
+          <UserConfig />
+        </Wrapper>
+      </MainContainer>
     </>
   )
 }

@@ -19,7 +19,7 @@ export const Register = () => {
 
   return (
     <Bg>
-      <Spinner darkBackground={true}/>
+      <Spinner darkBackground={true} displayOnFirstLoad={false}/>
       <Wrapper className='main-container'>
         <GlassBox isLogin={isLogin}>{isLogin ? <LoginContent /> : <RegisterContent />}</GlassBox>
       </Wrapper>

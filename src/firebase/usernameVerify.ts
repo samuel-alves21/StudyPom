@@ -1,7 +1,7 @@
 import { get, ref } from 'firebase/database'
 import { database } from './config'
 
-export const usernameVerify = async (data: { [key: string]: string }) => {
+export const usernameVerify = async (username: string) => {
   const usernames = [] as string[]
   const snapshot = await get(ref(database, 'username/'))
   if (snapshot.exists()) {
@@ -9,7 +9,7 @@ export const usernameVerify = async (data: { [key: string]: string }) => {
     for (const value of Object.values(usernamesData)) {
       usernames.push(value.username)
     }
-    const usernameExists = usernames.includes(data.username)
+    const usernameExists = usernames.includes(username)
     return usernameExists
   } else {
     const usernameExists = false

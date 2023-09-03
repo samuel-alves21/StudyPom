@@ -25,7 +25,7 @@ export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'userna
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
-  const { setUser, user } = useContext(UserContext) as UserContextType
+  const { setPendentUser } = useContext(UserContext) as UserContextType
 
   const [loginError, setLoginError] = useState(false)
 
@@ -53,8 +53,6 @@ export const Form = () => {
               formDispatch,
               isLogin,
               navigate,
-              user,
-              setUser,
               setLoginError
             )
           }
@@ -70,11 +68,11 @@ export const Form = () => {
   }
 
   const handleClick = () => {
-    formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, user, setUser, setLoginError)
+    formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, setLoginError)
   }
 
   const handleGoWithoutAccount = () => {
-    setUser({ ...user, isLogedIn: 'pending' })
+    setPendentUser(true)
     navigate('/')
   }
 

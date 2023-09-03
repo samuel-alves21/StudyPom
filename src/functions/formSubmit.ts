@@ -1,13 +1,10 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
 import { auth } from '../firebase/config'
 import { isEmptyOnSubmit } from './formValidation'
 import { NavigateFunction } from 'react-router-dom'
+import { createUser } from '../firebase/createUser'
 import { usernameVerify } from '../firebase/usernameVerify'
-import { userRegister } from '../firebase/userRegister'
-import { User } from 'firebase/auth'
-import { usernameRegister } from '../firebase/usernameRegister'
-import { UserState } from '../contexts/UserContext'
 
 export interface FormData {
   [key: string]: string
@@ -19,21 +16,10 @@ type FormSubmitFn = (
   formDispatch: (value: FormReducerAction) => void,
   isLogin: boolean,
   navigate: NavigateFunction,
-  userObj: UserState,
-  setUser: (value: UserState) => void,
   setLoginError: (value: boolean) => void
 ) => void
 
-export const formSubmit: FormSubmitFn = async (
-  hasError,
-  inputsArray,
-  formDispatch,
-  isLogin,
-  navigate,
-  userObj,
-  setUser,
-  setLoginError
-) => {
+export const formSubmit: FormSubmitFn = async ( hasError, inputsArray, formDispatch, isLogin, navigate, setLoginError) => {
   const spinner = document.getElementById('spinner') as HTMLDivElement
   spinner.style.display = 'flex'
 
@@ -46,22 +32,12 @@ export const formSubmit: FormSubmitFn = async (
     const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)
     if (!hasError && !isEmpty) {
       try {
-        const usernameExists = await usernameVerify(formData)
+        const usernameExists = await usernameVerify(formData.username)
         if (usernameExists) {
           formDispatch({ type: 'SET_USERNAME_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
           spinner.style.display = 'none'
         } else {
-          const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
-          const firebaseUser: User = userCredential.user
-          await userRegister(firebaseUser, formData)
-          setUser({
-            ...userObj,
-            email: formData.email,
-            id: firebaseUser.uid,
-            username: formData.username,
-            isLogedIn: true,
-          })
-          await usernameRegister(formData.username)
+          await createUser(formData.email, formData.password, formData.username)
           navigate('/')
         }
       } catch (error: any) {
