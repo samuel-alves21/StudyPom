@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
@@ -13,6 +13,7 @@ import { UserContext, UserContextType } from '../contexts/UserContext'
 import { LoginIcon } from '../components/LoginIcon'
 import { auth } from '../firebase/config'
 import { onAuthStateChanged } from 'firebase/auth'
+import { Spinner } from '../components/Spinner'
 
 export interface MainContainerProps {
   background: string
@@ -25,6 +26,8 @@ const App = () => {
     customizationState: { background, blur, bright, mainColor, secundaryColor },
   } = useContext(CustomizationContext) as CustomizationContextType
 
+  const [isLoading, setIsLoading] = useState(true)
+
   const { pendentUser, setPendentUser } = useContext(UserContext) as UserContextType
 
   const navigate = useNavigate()
@@ -32,16 +35,26 @@ const App = () => {
   useEffect(() => {
     console.log(pendentUser)
     console.log(auth.currentUser)
-    if (pendentUser) return 
+    if (pendentUser) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+      return
+    } 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        console.log(auth.currentUser?.displayName)
+        setIsLoading(false)
       } else {
         window.location.href = '/StudyPom/login'
       }
     })
 
-    return () => unsubscribe()
+    return () => {
+      clearTimeout(setTimeout(() => {
+        setIsLoading(false)
+      }, 1000))
+      unsubscribe()
+    } 
   
   }, [navigate, pendentUser, setPendentUser])
 
@@ -51,7 +64,9 @@ const App = () => {
   return (
     <>
       <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-      <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
+      {
+        isLoading ? <Spinner darkBackground={false} displayOnFirstLoad={true} /> :
+        <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
           <Logo />
           <LoginIcon />
@@ -59,6 +74,8 @@ const App = () => {
           <UserConfig />
         </Wrapper>
       </MainContainer>
+      }
+
     </>
   )
 }
