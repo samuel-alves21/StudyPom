@@ -65,12 +65,13 @@ export const Form = () => {
   }
 
   const handleClick = () => {
-    console.log(formState)
-    console.log(inputsArray)
     formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, setLoginError)
   }
 
   const handleGoWithoutAccount = () => {
+    inputsArray.forEach((input) => {
+      input.value = ''
+    })
     setPendentUser(true)
     navigate('/')
   }
@@ -78,9 +79,7 @@ export const Form = () => {
   const handleChangePage = () => {
     if (isLogin) {
       navigate('/register')
-      // window.location.href = '/StudyPom/register'
     } else {
-      // window.location.href = '/StudyPom/login'
       navigate('/login')
     }
   }

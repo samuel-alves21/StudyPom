@@ -36,6 +36,22 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 2000px
   }
 
+  .flex-all-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .styled-page-box {
+    background: rgba(17, 17, 17, 0.65);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+
+    border-radius: 50px;
+    padding: 60px 30px;
+  }
+
   h1, h2, h3, h4 {
     text-align: center;
   }

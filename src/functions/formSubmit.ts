@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { User, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
 import { auth } from '../firebase/config'
 import { isEmptyOnSubmit } from './formValidation'
@@ -35,9 +35,6 @@ export const formSubmit: FormSubmitFn = async (
     formData[input.id] = input.value
   })
 
-  console.log('is login: ' + isLogin)
-  console.log('has error: ' + hasError)
-
   if (!isLogin) {
     const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)
     if (!hasError && !isEmpty) {
@@ -48,13 +45,13 @@ export const formSubmit: FormSubmitFn = async (
           spinner.style.display = 'none'
         } else {
           await createUser(formData.email, formData.password, formData.username)
-          navigate('/')
+          await sendEmailVerification(auth.currentUser as User)
+          navigate('/emailVerification')
         }
       } catch (error: any) {
         if (error.code === 'auth/email-already-in-use') {
           formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
         }
-        console.log(error.code)
         spinner.style.display = 'none'
       }
     }
@@ -73,7 +70,6 @@ export const formSubmit: FormSubmitFn = async (
           setLoginError(true)
         }
         spinner.style.display = 'none'
-        console.log(error.code)
       }
     } else {
       console.error('form not sent')

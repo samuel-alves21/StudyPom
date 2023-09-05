@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Login } from './Login.tsx'
 import App from './App.tsx'
 import { Register } from './Register.tsx'
+import { EmailVerification } from './EmailVerification.tsx'
 
 const router = createBrowserRouter(
   [
@@ -16,6 +17,10 @@ const router = createBrowserRouter(
     {
       path: '/register',
       element: <Register />,
+    },
+    {
+      path: '/emailVerification',
+      element: <EmailVerification />,
     },
   ],
   { basename: '/StudyPom' }

@@ -14,7 +14,7 @@ interface GlassBoxProps {
 export const GlassBox = ({ children }: GlassBoxProps) => {
   const { isLogin } = useContext(LoginContext) as LoginContextType
 
-  return <Wrapper isLogin={isLogin}>{children}</Wrapper>
+  return <Wrapper className='styled-page-box' isLogin={isLogin}>{children}</Wrapper>
 }
 
 const Wrapper = styled.div<StyledGlassBoxProps>`
@@ -23,14 +23,6 @@ const Wrapper = styled.div<StyledGlassBoxProps>`
   max-height: 900px;
   min-height: fit-content;
   min-width: ${({ isLogin }) => (isLogin ? 'fit-content' : '80%')};
-
-  background: rgba(17, 17, 17, 0.65);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(3.5px);
-  -webkit-backdrop-filter: blur(3.5px);
-
-  border-radius: 50px;
-  padding: 60px 30px;
 
   ${({ isLogin }) => {
     if (isLogin) {

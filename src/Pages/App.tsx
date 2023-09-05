@@ -33,30 +33,22 @@ const App = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log(pendentUser)
-    console.log(auth.currentUser)
+
     if (pendentUser) {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 1000)
+      setIsLoading(false)
       return
     }
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
+        console.log(firebaseUser.emailVerified)
         setIsLoading(false)
       } else {
         window.location.href = '/StudyPom/register'
       }
     })
 
-    return () => {
-      clearTimeout(
-        setTimeout(() => {
-          setIsLoading(false)
-        }, 1000)
-      )
-      unsubscribe()
-    }
+    return () => unsubscribe()
+
   }, [navigate, pendentUser, setPendentUser])
 
   useSetWindow()

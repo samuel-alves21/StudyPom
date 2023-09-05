@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth, database } from './config'
-import { push, ref, set } from 'firebase/database'
+import { ref, set } from 'firebase/database'
 
 export const createUser = async (email: string, password: string, username: string) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password)
@@ -15,7 +15,7 @@ export const createUser = async (email: string, password: string, username: stri
     id: userCredential.user.uid,
   })
 
-  await push(ref(database, 'username/'), {
+  await set(ref(database, 'username/' + userCredential.user.uid), {
     username: username,
   })
 }

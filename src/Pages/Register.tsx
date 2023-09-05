@@ -5,6 +5,8 @@ import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
 import { RegisterContent } from '../components/RegisterContent'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { useNavigate } from 'react-router-dom'
+import { useUserVerify } from '../hooks/useUserVerify'
 
 export const Register = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
@@ -13,6 +15,9 @@ export const Register = () => {
     window.document.title = 'StudyPom | Register'
     setIsLogin(false)
   }, [setIsLogin])
+
+  const navigate = useNavigate()
+  useUserVerify(navigate)
 
   return (
     <Bg>

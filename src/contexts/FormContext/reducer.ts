@@ -71,25 +71,25 @@ export const reducer: FormReducer = (state, action) => {
       return {
         ...state,
         email: {
-          shouldValidate: true,
+          shouldValidate: false,
           hasError: false,
           currentError: 'none',
           errorTypes: { ...state.email.errorTypes },
         },
         username: {
-          shouldValidate: true,
+          shouldValidate: false,
           hasError: false,
           currentError: 'none',
           errorTypes: { ...state.username.errorTypes },
         },
         password: {
-          shouldValidate: true,
+          shouldValidate: false,
           hasError: false,
           currentError: 'none',
           errorTypes: { ...state.password.errorTypes },
         },
         confirmedPassword: {
-          shouldValidate: true,
+          shouldValidate: false,
           hasError: false,
           currentError: 'none',
           errorTypes: { ...state.confirmedPassword.errorTypes },
