@@ -44,11 +44,11 @@ export const GlobalStyles = createGlobalStyle`
 
   .styled-page-box {
     background: rgba(17, 17, 17, 0.65);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(165, 34, 128, 0.37);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
 
-    border-radius: 50px;
+    border-radius: 30px;
     padding: 60px 30px;
   }
 

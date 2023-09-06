@@ -60,7 +60,11 @@ export const formSubmit: FormSubmitFn = async (
     if (!hasError && !isEmpty) {
       try {
         await signInWithEmailAndPassword(auth, formData.email, formData.password)
-        navigate('/')
+        if (!auth.currentUser?.emailVerified) {
+          navigate('/emailVerification')
+        } else {
+          navigate('/')
+        }
       } catch (error: any) {
         if (
           error.code === 'auth/invalid-email' ||
