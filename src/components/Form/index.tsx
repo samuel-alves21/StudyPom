@@ -85,7 +85,7 @@ export const Form = () => {
   }
 
   return (
-    <Wrapper isLogin={isLogin}>
+    <Wrapper isLogin={isLogin} className='flex-all-center'>
       <TextWrapper isLogin={isLogin}>
         <Logo />
         {isLogin || <Text />}

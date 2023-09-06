@@ -18,7 +18,7 @@ export const RangeInputs = () => {
 
   return (
     <Wrapper>
-      <RangeInputWrapper>
+      <RangeInputWrapper className='flex-all-center'>
         <label htmlFor='blur'>Blur</label>
         <input
           type='range'
@@ -32,7 +32,7 @@ export const RangeInputs = () => {
         />
         <span>{Number(blur).toFixed(1)}</span>
       </RangeInputWrapper>
-      <RangeInputWrapper>
+      <RangeInputWrapper className='flex-all-center'>
         <label htmlFor='bright'>Bright</label>
         <input
           type='range'
@@ -58,9 +58,6 @@ const Wrapper = styled.div`
 
 const RangeInputWrapper = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   & > input[type='range'] {
     margin: 0 10px;

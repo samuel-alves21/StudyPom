@@ -29,7 +29,7 @@ export const Arrows = ({ id, setState, state }: ArrowsProps) => {
   }
 
   return (
-    <ArrowIcon>
+    <ArrowIcon className='flex-all-center'>
       <i id='acrement' onClick={(e) => handleClick(e)} className='bi bi-caret-up-fill'></i>
       <i id='decrement' onClick={(e) => handleClick(e)} className='bi bi-caret-down-fill'></i>
     </ArrowIcon>
@@ -37,10 +37,7 @@ export const Arrows = ({ id, setState, state }: ArrowsProps) => {
 }
 
 const ArrowIcon = styled.div`
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--color-primary);
   padding: 0 8px;
   font-size: 12px;

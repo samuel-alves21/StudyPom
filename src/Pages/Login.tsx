@@ -5,8 +5,6 @@ import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
-import { useUserVerify } from '../hooks/useUserVerify'
-import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
@@ -16,13 +14,10 @@ export const Login = () => {
     setIsLogin(true)
   }, [setIsLogin])
 
-  const navigate = useNavigate()
-  useUserVerify(navigate)
-
   return (
     <Bg>
       <Spinner darkBackground={true} displayOnFirstLoad={false} />
-      <Wrapper className='main-container'>
+      <Wrapper className='main-container flex-all-center'>
         <GlassBox>
           <LoginContent />
         </GlassBox>
@@ -40,9 +35,6 @@ const Wrapper = styled.div`
   padding: 30px;
   min-height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   @media (max-width: ${breakpoints.mobile}) {
     padding: 10px;

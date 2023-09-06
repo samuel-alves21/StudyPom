@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
@@ -7,13 +7,11 @@ import { Timer } from '../components/Timer'
 import { useSetWindow } from '../hooks/useSetWindow'
 import { useInit } from '../hooks/useInit'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
-import { useNavigate } from 'react-router-dom'
 import { ColorStyle } from '../components/ColorStyle'
 import { UserContext, UserContextType } from '../contexts/UserContext'
 import { LoginIcon } from '../components/LoginIcon'
-import { auth } from '../firebase/config'
-import { onAuthStateChanged } from 'firebase/auth'
 import { Spinner } from '../components/Spinner'
+import { useUserManager } from '../hooks/useUserManager'
 
 export interface MainContainerProps {
   background: string
@@ -28,29 +26,10 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const { pendentUser, setPendentUser } = useContext(UserContext) as UserContextType
+  const { pendentUser } = useContext(UserContext) as UserContextType
 
-  const navigate = useNavigate()
 
-  useEffect(() => {
-
-    if (pendentUser) {
-      setIsLoading(false)
-      return
-    }
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        console.log(firebaseUser.emailVerified)
-        setIsLoading(false)
-      } else {
-        window.location.href = '/StudyPom/register'
-      }
-    })
-
-    return () => unsubscribe()
-
-  }, [navigate, pendentUser, setPendentUser])
-
+  useUserManager(pendentUser, setIsLoading)
   useSetWindow()
   useInit()
 
