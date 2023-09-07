@@ -10,16 +10,15 @@ export const useUserManager = (pendentUser: boolean, setIsLoading: (value: boole
       return
     }
     
-    if (!auth.currentUser?.emailVerified) {
-      window.location.replace('/StudyPom/emailVerification')
-      return
-    }
-
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
+        if (!auth.currentUser?.emailVerified) {
+          window.location.replace('/StudyPom/emailVerification/login')
+        }
         setIsLoading(false)
       } else {
         window.location.replace('/StudyPom/register')
+        setIsLoading(false)
       }
     })
 

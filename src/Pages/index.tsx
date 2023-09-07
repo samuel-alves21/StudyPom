@@ -19,7 +19,7 @@ const router = createBrowserRouter(
       element: <Register />,
     },
     {
-      path: '/emailVerification',
+      path: '/emailVerification/:origin',
       element: <EmailVerification />,
     },
   ],

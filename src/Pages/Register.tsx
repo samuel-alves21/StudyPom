@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   padding: 30px;
   min-height: 100vh;
   width: 100%;
+  position: relative;
 
   @media (max-width: ${breakpoints.mobile}) {
     padding: 10px;
