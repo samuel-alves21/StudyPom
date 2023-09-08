@@ -14,7 +14,11 @@ interface GlassBoxProps {
 export const GlassBox = ({ children }: GlassBoxProps) => {
   const { isLogin } = useContext(LoginContext) as LoginContextType
 
-  return <Wrapper className='styled-page-box' isLogin={isLogin}>{children}</Wrapper>
+  return (
+    <Wrapper className='styled-page-box' isLogin={isLogin}>
+      {children}
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div<StyledGlassBoxProps>`

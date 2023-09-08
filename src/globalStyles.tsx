@@ -52,6 +52,65 @@ export const GlobalStyles = createGlobalStyle`
     padding: 60px 30px;
   }
 
+  .navigation-span {
+    text-decoration: none;
+    color: var( --color-primary);
+    font-weight: normal;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .form-input {
+    width: 100%;
+    background-color: transparent;
+    margin: 0 10px;
+    color: #fff;
+    font-size: 16px;
+
+    @media (max-width: ${breakpoints.mobile}) {
+      width: 80%;
+    }
+  }
+
+  .form-button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    transition: color 0.2s ease;
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    color: #3b3b3b;
+    cursor: pointer;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var( --color-primary);
+        color: #3b3b3b;
+      }
+    }
+
+    @media (max-width: ${breakpoints.mobile}) {
+      width: 80%;
+    }
+  }
+
+  .form-button-disabled {
+    opacity: 0.5;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        opacity: 0.5;
+        background-color: #fff;
+        color: #000;
+        cursor: not-allowed;
+      }
+    }
+  }
+
   h1, h2, h3, h4 {
     text-align: center;
   }
@@ -86,17 +145,6 @@ export const GlobalStyles = createGlobalStyle`
     color: var( --color-primary);
   }
 
-  .navigation-span {
-    text-decoration: none;
-    color: var( --color-primary);
-    font-weight: normal;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
   @media (hover: hover) and (pointer: fine) {
     a:hover {
       text-decoration: underline;
@@ -125,41 +173,6 @@ export const GlobalStyles = createGlobalStyle`
     transition: background-color 5s;
     transition: color 0.5s;
     font-weight: 500;
-  }
-
-  .form-input {
-    width: 100%;
-    background-color: transparent;
-    margin: 0 10px;
-    color: #fff;
-    font-size: 16px;
-
-    @media (max-width: ${breakpoints.mobile}) {
-      width: 80%;
-    }
-  }
-
-  .form-button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    transition: color 0.2s ease;
-    transition: background-color 0.2s ease;
-    font-size: 14px;
-    color: #3b3b3b;
-    cursor: pointer;
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        background-color: var( --color-primary);
-        color: #fff;
-      }
-    }
-
-    @media (max-width: ${breakpoints.mobile}) {
-      width: 80%;
-    }
   }
 
   input[type="range"] {

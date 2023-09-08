@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 interface MessagePopUpProps {
   success: boolean
@@ -10,8 +10,6 @@ interface StyledMessagePopUpProps {
 }
 
 export const MessagePopUp = ({ success, text }: MessagePopUpProps) => {
-
-  
   return (
     <Wrapper success={success}>
       <p>{text}</p>
@@ -20,7 +18,7 @@ export const MessagePopUp = ({ success, text }: MessagePopUpProps) => {
 }
 
 const Wrapper = styled.div<StyledMessagePopUpProps>`
-    ${({ success }) => {
+  ${({ success }) => {
     if (success) {
       return `
         background-color: #98ec98a9;
@@ -38,7 +36,7 @@ const Wrapper = styled.div<StyledMessagePopUpProps>`
 
   position: absolute;
   padding: 10px;
-  border-radius: 5px; 
+  border-radius: 5px;
   user-select: none;
 
   animation: popup-in 10s ease-in-out forwards;

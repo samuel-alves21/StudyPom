@@ -28,7 +28,6 @@ const App = () => {
 
   const { pendentUser } = useContext(UserContext) as UserContextType
 
-
   useUserManager(pendentUser, setIsLoading)
   useSetWindow()
   useInit()
