@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
-import { auth } from '../firebase/config'
+import { auth, database } from '../firebase/config'
+import { ref, remove } from 'firebase/database'
 
 export const useUserManager = (pendentUser: boolean, setIsLoading: (value: boolean) => void) => {
   useEffect(() => {
@@ -9,15 +10,16 @@ export const useUserManager = (pendentUser: boolean, setIsLoading: (value: boole
       return
     }
 
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        if (!auth.currentUser?.emailVerified) {
+        if (!firebaseUser.emailVerified) {
           window.location.replace('/StudyPom/emailVerification/login')
+        } else {
+          await remove(ref(database, 'users/' + firebaseUser.uid + '/register'))
         }
         setIsLoading(false)
       } else {
         window.location.replace('/StudyPom/register')
-        setIsLoading(false)
       }
     })
 

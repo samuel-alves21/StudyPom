@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { auth, database } from '../firebase/config'
 import { Spinner } from '../components/Spinner'
-import { Unsubscribe, onAuthStateChanged } from 'firebase/auth'
+import { Unsubscribe, User, onAuthStateChanged, sendEmailVerification } from 'firebase/auth'
 import { MessagePopUp } from '../components/MessagePopUp'
 import { useParams } from 'react-router-dom'
 import { setRegisterData } from '../firebase/setRegisterData'
@@ -30,8 +30,11 @@ export const EmailVerification = () => {
     window.document.title = 'StudyPom | Email Verification'
     let valueUnsubcribe: Unsubscribe
 
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
+        if (firebaseUser.emailVerified) {
+          window.location.replace('/StudyPom')
+        }
         valueUnsubcribe = onValue(ref(database, 'users/' + firebaseUser.uid + '/register'), (snapshot) => {
           setRegisterState(snapshot.val())
           if (snapshot.exists()) {
@@ -70,9 +73,18 @@ export const EmailVerification = () => {
 
   const sendEmail = async () => {
     if (shouldSendEmail) {
-      // await sendEmailVerification(auth.currentUser as User)
-      await setRegisterData(registerState?.clicks)
-      console.log('email sent')
+      try {
+        if (registerState?.clicks === undefined) {
+          await setRegisterData(0)
+        } else {
+          await setRegisterData(registerState.clicks)
+        }
+        await sendEmailVerification(auth.currentUser as User)
+        console.log('email sent')
+      } catch (error) {
+        console.error(error)
+        console.log('email not sent')
+      }
     } else {
       console.log('email not sent')
     }

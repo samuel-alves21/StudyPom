@@ -11,6 +11,7 @@ import { hasErrorOnSubmit } from '../../functions/formValidation'
 import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { SignInWithGoogleBtn } from './SignInWithGoogleBtn'
 
 interface TextWrapperProps {
   isLogin: boolean
@@ -97,6 +98,7 @@ export const Form = () => {
         <FormInput {...props} id='password' placeholder='password' type='password' />
         {isLogin && loginError && <p id='login-error'>Invalid email or password</p>}
         {isLogin || <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />}
+        <SignInWithGoogleBtn />
         <button className='form-button' onClick={handleClick}>
           {isLogin ? 'Access account' : 'Create account'}
         </button>

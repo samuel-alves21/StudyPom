@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { ButtonsContext, ButtonContextType } from '../../contexts/ButtonsContext'
+import { auth } from '../../firebase/config'
 
 export const CurrentTimerOption = () => {
   const {
@@ -12,7 +13,7 @@ export const CurrentTimerOption = () => {
     if (wasClicked) {
       setCurrentOption(pomodoro ? 'Working' : short ? 'Short Break' : 'Long Break')
     } else {
-      setCurrentOption('Are you Ready?')
+      setCurrentOption(`${auth.currentUser?.displayName} Let's get started`)
     }
   }, [wasClicked, pomodoro, short])
 
