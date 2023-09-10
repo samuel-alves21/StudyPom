@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle`
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
 
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 60px 30px;
   }
 

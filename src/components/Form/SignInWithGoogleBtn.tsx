@@ -4,7 +4,6 @@ import { signInWithPopup, updateProfile } from "firebase/auth"
 import { auth, database, provider } from "../../firebase/config"
 import { get, ref, set } from "firebase/database"
 import { useNavigate } from "react-router-dom"
-import { Spinner } from "../Spinner"
 
 export const SignInWithGoogleBtn = () => {
   const navigate = useNavigate()
@@ -48,10 +47,9 @@ export const SignInWithGoogleBtn = () => {
 
   return (
     <Wrapper>
-      <Spinner darkBackground={true} displayOnFirstLoad={false} />
       <button className="form-button" onClick={handleClick}>
         <img src={googleLogo} alt="google logo" />
-        Sign in with Google
+        Or sign in with Google
       </button>
     </Wrapper>
   )
@@ -59,6 +57,8 @@ export const SignInWithGoogleBtn = () => {
 
 const Wrapper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
 
   & button {
     position: relative;

@@ -14,6 +14,10 @@ export const Register = () => {
     setIsLogin(false)
   }, [setIsLogin])
 
+  useEffect(() => {
+    fetch('https://api.ipify.org').then((response) => response.text()).then((ip) => console.log(ip)).catch((e) => console.log(e))
+  }, [])
+
   return (
     <Bg>
       <Spinner darkBackground={true} displayOnFirstLoad={false} />

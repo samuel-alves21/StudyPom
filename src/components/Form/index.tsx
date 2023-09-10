@@ -12,6 +12,7 @@ import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { SignInWithGoogleBtn } from './SignInWithGoogleBtn'
+import { PasswordRecover } from './PasswordRecover'
 
 interface TextWrapperProps {
   isLogin: boolean
@@ -102,6 +103,7 @@ export const Form = () => {
         <button className='form-button' onClick={handleClick}>
           {isLogin ? 'Access account' : 'Create account'}
         </button>
+        {isLogin && <PasswordRecover />}
         <p>
           {isLogin ? 'Don’t have an account?' : 'Already have an account?'}
           &nbsp;

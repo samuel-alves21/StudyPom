@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { Register } from './Register.tsx'
 import { EmailVerification } from './EmailVerification.tsx'
 import { ErrorPage } from './ErrorPage.tsx'
+import { PasswordReset } from './PasswordReset.tsx'
 
 const router = createBrowserRouter(
   [
@@ -22,6 +23,10 @@ const router = createBrowserRouter(
     {
       path: '/StudyPom/emailVerification/:origin',
       element: <EmailVerification />,
+    },
+    {
+      path: '/StudyPom/passwordReset',
+      element: <PasswordReset />,
     },
     {
       path: '*',
