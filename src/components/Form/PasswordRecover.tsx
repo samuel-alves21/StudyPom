@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 export const PasswordRecover = () => {
   const navigate = useNavigate()
@@ -7,5 +7,9 @@ export const PasswordRecover = () => {
     navigate('/StudyPom/passwordReset')
   }
 
-  return <span className="navigation-span" onClick={handleClick}>Forgot your password?</span>
+  return (
+    <span className='navigation-span' onClick={handleClick}>
+      Forgot your password?
+    </span>
+  )
 }

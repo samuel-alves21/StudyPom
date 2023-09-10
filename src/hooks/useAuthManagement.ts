@@ -1,9 +1,9 @@
-import { Unsubscribe, onAuthStateChanged } from "firebase/auth"
-import { useEffect, useState } from "react"
-import { auth, database } from "../firebase/config"
-import { onValue, ref } from "firebase/database"
-import { getRegisterTimeout } from "../functions/getRegisterTimeout"
-import { getRegisterWaitTime } from "../functions/getRegisterWaitTime"
+import { Unsubscribe, onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from 'react'
+import { auth, database } from '../firebase/config'
+import { onValue, ref } from 'firebase/database'
+import { getRegisterTimeout } from '../functions/getRegisterTimeout'
+import { getRegisterWaitTime } from '../functions/getRegisterWaitTime'
 
 interface RegisterState {
   clicks: number
@@ -63,5 +63,5 @@ export const useAuthManagement = () => {
 
   const shouldSendEmail = timeLeft <= 0
 
-  return {isLoading, shouldSendEmail, timeLeft, registerState}
+  return { isLoading, shouldSendEmail, timeLeft, registerState }
 }

@@ -1,13 +1,13 @@
-import styled from "styled-components"
-import img404 from "../img/404.png"
-import { breakpoints } from "../utilities/breakpoints"
+import styled from 'styled-components'
+import img404 from '../img/404.png'
+import { breakpoints } from '../utilities/breakpoints'
 
 export const ErrorPage = () => {
   return (
-    <Wrapper className="flex-all-center">
-      <TitleWrapper className="flex-all-center">
+    <Wrapper className='flex-all-center'>
+      <TitleWrapper className='flex-all-center'>
         <Title>Error</Title>
-        <img src={img404} alt="404-image" />
+        <img src={img404} alt='404-image' />
       </TitleWrapper>
       <p>It seen's like this page doesn't exist...</p>
     </Wrapper>
@@ -36,7 +36,7 @@ const TitleWrapper = styled.div`
     gap: 0;
     margin-bottom: 20px;
   }
-` 
+`
 
 const Title = styled.h1`
   font-size: 125px;

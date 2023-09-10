@@ -6,13 +6,14 @@ import { Text } from './Text'
 import { breakpoints } from '../../utilities/breakpoints'
 import { Logo } from '../Logo'
 import { useFormInputs } from '../../hooks/useFormInputs'
-import { formSubmit } from '../../functions/formSubmit'
 import { hasErrorOnSubmit } from '../../functions/formValidation'
 import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { SignInWithGoogleBtn } from './SignInWithGoogleBtn'
 import { PasswordRecover } from './PasswordRecover'
+import { login } from '../../functions/login'
+import { register } from '../../functions/register'
 
 interface TextWrapperProps {
   isLogin: boolean
@@ -37,6 +38,14 @@ export const Form = () => {
 
   const navigate = useNavigate()
 
+  const handleClick = () => {
+    if (isLogin) {
+      login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError)
+    } else {
+      register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
+    }
+  }
+  
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
     const type = thisElement.id as FormInputType
@@ -53,7 +62,7 @@ export const Form = () => {
           if (inputsArray[index + 1]) {
             inputsArray[index + 1].focus()
           } else {
-            formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, setLoginError)
+            handleClick()
           }
         }
       })
@@ -64,10 +73,6 @@ export const Form = () => {
 
   const props = {
     handleKeyDown: handleKeyDown,
-  }
-
-  const handleClick = () => {
-    formSubmit(hasErrorOnSubmit(formState), inputsArray, formDispatch, isLogin, navigate, setLoginError)
   }
 
   const handleGoWithoutAccount = () => {

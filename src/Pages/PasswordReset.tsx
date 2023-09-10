@@ -1,10 +1,9 @@
-import styled from "styled-components"
-import { breakpoints } from "../utilities/breakpoints"
-import { sendPasswordResetEmail } from "firebase/auth"
-import { auth } from "../firebase/config"
+import styled from 'styled-components'
+import { breakpoints } from '../utilities/breakpoints'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from '../firebase/config'
 
 export const PasswordReset = () => {
-
   const handleClick = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
     input.focus()
@@ -31,22 +30,22 @@ export const PasswordReset = () => {
     console.log(input.value)
     if (!input.value) return
     console.log('email sent')
-    sendPasswordResetEmail(auth, input.value) 
+    sendPasswordResetEmail(auth, input.value)
   }
 
   return (
-    <Wrapper className="flex-all-center">
+    <Wrapper className='flex-all-center'>
       <ContentWrapper className='styled-page-box flex-all-center'>
         <h1>Password Reset</h1>
-          <span onClick={handleClick}>Enter with your email:</span>
-          <InputWrapper>
-            <input type="text" id='password-recover-input' onKeyDown={(e) => handleKeyDown(e)}/>
-            <i className='bi bi-x' onClick={clearText}></i>
-          </InputWrapper>
-        <button className="form-button" onClick={handleSubmit}>submit</button>
-        <p>
-          If you didn't receive an email, please check your spam folder.
-        </p>
+        <span onClick={handleClick}>Enter with your email:</span>
+        <InputWrapper>
+          <input type='text' id='password-recover-input' onKeyDown={(e) => handleKeyDown(e)} />
+          <i className='bi bi-x' onClick={clearText}></i>
+        </InputWrapper>
+        <button className='form-button' onClick={handleSubmit}>
+          submit
+        </button>
+        <p>If you didn't receive an email, please check your spam folder.</p>
       </ContentWrapper>
     </Wrapper>
   )
@@ -84,7 +83,7 @@ const ContentWrapper = styled.div`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    padding: 60px 10px
+    padding: 60px 10px;
   }
 `
 

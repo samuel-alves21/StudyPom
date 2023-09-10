@@ -1,9 +1,9 @@
-import styled from "styled-components"
-import googleLogo from "../../img/google-logo.png"
-import { signInWithPopup, updateProfile } from "firebase/auth"
-import { auth, database, provider } from "../../firebase/config"
-import { get, ref, set } from "firebase/database"
-import { useNavigate } from "react-router-dom"
+import styled from 'styled-components'
+import googleLogo from '../../img/google-logo.png'
+import { signInWithPopup, updateProfile } from 'firebase/auth'
+import { auth, database, provider } from '../../firebase/config'
+import { get, ref, set } from 'firebase/database'
+import { useNavigate } from 'react-router-dom'
 
 export const SignInWithGoogleBtn = () => {
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ export const SignInWithGoogleBtn = () => {
         })
         await set(ref(database, 'users/' + result.user.uid), {
           username: username,
-          email:  result.user.email,
+          email: result.user.email,
           id: result.user.uid,
         })
         await set(ref(database, 'username/' + result.user.uid), {
@@ -30,7 +30,7 @@ export const SignInWithGoogleBtn = () => {
       } else {
         await set(ref(database, 'users/' + result.user.uid), {
           username: result.user.displayName,
-          email:  result.user.email,
+          email: result.user.email,
           id: result.user.uid,
         })
         await set(ref(database, 'username/' + result.user.uid), {
@@ -47,8 +47,8 @@ export const SignInWithGoogleBtn = () => {
 
   return (
     <Wrapper>
-      <button className="form-button" onClick={handleClick}>
-        <img src={googleLogo} alt="google logo" />
+      <button className='form-button' onClick={handleClick}>
+        <img src={googleLogo} alt='google logo' />
         Or sign in with Google
       </button>
     </Wrapper>

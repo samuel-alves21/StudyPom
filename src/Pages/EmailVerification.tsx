@@ -9,13 +9,12 @@ import { secondsToMinutes } from '../functions/secondsToMinutes'
 import { useAuthManagement } from '../hooks/useAuthManagement'
 
 export const EmailVerification = () => {
-
   const { origin } = useParams()
 
-  const {isLoading, shouldSendEmail, timeLeft, registerState} = useAuthManagement()
+  const { isLoading, shouldSendEmail, timeLeft, registerState } = useAuthManagement()
 
   const sendEmail = async () => {
-    if (shouldSendEmail) {  
+    if (shouldSendEmail) {
       try {
         if (registerState?.clicks === undefined) {
           await setRegisterData(0)

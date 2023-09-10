@@ -9,8 +9,9 @@ import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 export const Login = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
 
+  window.document.title = 'StudyPom | Login'
+
   useEffect(() => {
-    window.document.title = 'StudyPom | Login'
     setIsLogin(true)
   }, [setIsLogin])
 
