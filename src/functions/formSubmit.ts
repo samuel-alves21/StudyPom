@@ -46,7 +46,7 @@ export const formSubmit: FormSubmitFn = async (
         } else {
           await createUser(formData.email, formData.password, formData.username)
           await sendEmailVerification(auth.currentUser as User)
-          navigate('/emailVerification/register')
+          navigate('/StudyPom/emailVerification/register')
         }
       } catch (error: any) {
         if (error.code === 'auth/email-already-in-use') {
@@ -61,9 +61,9 @@ export const formSubmit: FormSubmitFn = async (
       try {
         await signInWithEmailAndPassword(auth, formData.email, formData.password)
         if (!auth.currentUser?.emailVerified) {
-          navigate('/emailVerification/login')
+          navigate('/StudyPom/emailVerification/login')
         } else {
-          navigate('/')
+          navigate('/StudyPom')
         }
       } catch (error: any) {
         if (

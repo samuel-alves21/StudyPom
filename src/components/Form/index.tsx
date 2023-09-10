@@ -74,14 +74,14 @@ export const Form = () => {
       input.value = ''
     })
     setPendentUser(true)
-    navigate('/')
+    navigate('/StudyPom')
   }
 
   const handleChangePage = () => {
     if (isLogin) {
-      navigate('/register')
+      navigate('/StudyPom/register')
     } else {
-      navigate('/login')
+      navigate('/StudyPom/login')
     }
   }
 

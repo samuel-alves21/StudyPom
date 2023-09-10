@@ -3,29 +3,33 @@ import { Login } from './Login.tsx'
 import App from './App.tsx'
 import { Register } from './Register.tsx'
 import { EmailVerification } from './EmailVerification.tsx'
+import { ErrorPage } from './ErrorPage.tsx'
 
 const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: '/StudyPom',
       element: <App />,
     },
     {
-      path: '/login',
+      path: '/StudyPom/login',
       element: <Login />,
     },
     {
-      path: '/register',
+      path: '/StudyPom/register',
       element: <Register />,
     },
     {
-      path: '/emailVerification/:origin',
+      path: '/StudyPom/emailVerification/:origin',
       element: <EmailVerification />,
     },
-  ],
-  { basename: '/StudyPom' }
+    {
+      path: '*',
+      element: <ErrorPage />,
+    }
+  ]
 )
 
 export const Pages = () => {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} fallbackElement/>
 }

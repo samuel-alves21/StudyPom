@@ -39,7 +39,7 @@ export const SignInWithGoogleBtn = () => {
         })
       }
       spinner.style.display = 'none'
-      navigate('/')
+      navigate('/StudyPom')
     } catch (error) {
       console.error(error)
     }
