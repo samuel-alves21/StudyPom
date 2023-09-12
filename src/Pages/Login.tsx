@@ -5,15 +5,37 @@ import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { Unsubscribe, onValue, ref } from 'firebase/database'
+import { getIp } from '../functions/getIp'
+import { database } from '../firebase/config'
+import { AccessContext, AccessContextType } from '../contexts/AccessContext'
 
 export const Login = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
+  const { accessDispatch } = useContext(AccessContext) as AccessContextType
 
   window.document.title = 'StudyPom | Login'
 
   useEffect(() => {
     setIsLogin(true)
   }, [setIsLogin])
+
+  useEffect(() => {
+    let unsubscribe: Unsubscribe
+    const asyncFn = async () => {
+      const ip = await getIp()
+      unsubscribe = onValue(ref(database, `ips/${ip}`), (snapshot) => {
+        if (snapshot.exists()) {
+          const accessvalues = snapshot.val()
+          console.log(accessvalues)
+          accessDispatch({ type: 'INCREMENT_ATTEMPTS', payload: accessvalues.attempts })
+          accessDispatch({ type: 'SET_DATE', payload: accessvalues.date })
+        }
+      })
+    }
+    asyncFn()
+    return () => unsubscribe && unsubscribe()
+  }, [accessDispatch])
 
   return (
     <Bg>

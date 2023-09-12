@@ -52,6 +52,10 @@ export const GlobalStyles = createGlobalStyle`
     padding: 60px 30px;
   }
 
+  .error {
+    color: var( --color-error);
+  }
+
   .navigation-span {
     text-decoration: none;
     color: var( --color-primary);

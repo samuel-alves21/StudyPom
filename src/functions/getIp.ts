@@ -1,5 +1,5 @@
 export const getIp = async () => {
   const response = await fetch('https://api.ipify.org')
-  const ip = await response.text()
+  const ip = (await response.text()).replaceAll('.', '')
   return ip
 }

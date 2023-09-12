@@ -6,14 +6,17 @@ import { Text } from './Text'
 import { breakpoints } from '../../utilities/breakpoints'
 import { Logo } from '../Logo'
 import { useFormInputs } from '../../hooks/useFormInputs'
-import { hasErrorOnSubmit } from '../../functions/formValidation'
 import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
-import { UserContext, UserContextType } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { SignInWithGoogleBtn } from './SignInWithGoogleBtn'
 import { PasswordRecover } from './PasswordRecover'
+import { AccessContext, AccessContextType } from '../../contexts/AccessContext'
+import { SubmitButton } from './SubmitButton'
 import { login } from '../../functions/login'
 import { register } from '../../functions/register'
+import { hasErrorOnSubmit } from '../../functions/formValidation'
+import { SignInWithoutAccountBtn } from './SignInWithoutAccountBtn'
+import { PageSwitch } from './PageSwitch'
 
 interface TextWrapperProps {
   isLogin: boolean
@@ -28,7 +31,7 @@ export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'userna
 export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
   const { isLogin } = useContext(LoginContext) as LoginContextType
-  const { setPendentUser } = useContext(UserContext) as UserContextType
+  const { accessState } = useContext(AccessContext) as AccessContextType
 
   const [loginError, setLoginError] = useState(false)
 
@@ -38,14 +41,6 @@ export const Form = () => {
 
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    if (isLogin) {
-      login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError)
-    } else {
-      register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
-    }
-  }
-  
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLInputElement
     const type = thisElement.id as FormInputType
@@ -62,7 +57,11 @@ export const Form = () => {
           if (inputsArray[index + 1]) {
             inputsArray[index + 1].focus()
           } else {
-            handleClick()
+            if (isLogin) {
+              login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError, accessState)
+            } else {
+              register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
+            }
           }
         }
       })
@@ -73,22 +72,6 @@ export const Form = () => {
 
   const props = {
     handleKeyDown: handleKeyDown,
-  }
-
-  const handleGoWithoutAccount = () => {
-    inputsArray.forEach((input) => {
-      input.value = ''
-    })
-    setPendentUser(true)
-    navigate('/StudyPom')
-  }
-
-  const handleChangePage = () => {
-    if (isLogin) {
-      navigate('/StudyPom/register')
-    } else {
-      navigate('/StudyPom/login')
-    }
   }
 
   return (
@@ -102,31 +85,13 @@ export const Form = () => {
         {isLogin || <FormInput {...props} id='username' placeholder='username' type='text' />}
         <FormInput {...props} id='email' placeholder='email' type='email' />
         <FormInput {...props} id='password' placeholder='password' type='password' />
-        {isLogin && loginError && <p id='login-error'>Invalid email or password</p>}
+        {isLogin && loginError && <p className='error'>Invalid email or password</p>}
         {isLogin || <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />}
         <SignInWithGoogleBtn />
-        <button className='form-button' onClick={handleClick}>
-          {isLogin ? 'Access account' : 'Create account'}
-        </button>
+        <SubmitButton inputsArray={inputsArray} setLoginError={setLoginError} />
         {isLogin && <PasswordRecover />}
-        <p>
-          {isLogin ? 'Don’t have an account?' : 'Already have an account?'}
-          &nbsp;
-          <span className='navigation-span' onClick={handleChangePage}>
-            {isLogin ? 'Sign up' : 'Login'}
-          </span>
-        </p>
-        {isLogin || (
-          <div className='arrow-div'>
-            <p>
-              or{' '}
-              <span className='navigation-span' onClick={handleGoWithoutAccount}>
-                continue without account
-              </span>
-            </p>
-            <i className='bi bi-arrow-right'></i>
-          </div>
-        )}
+        <PageSwitch />
+        {isLogin || <SignInWithoutAccountBtn inputsArray={inputsArray} />}
       </FormWrapper>
     </Wrapper>
   )
@@ -157,24 +122,6 @@ const Wrapper = styled.div<LoginWrapper>`
       `
     }
   }}
-
-  .arrow-div {
-    gap: 10px;
-    position: relative;
-  }
-
-  .bi-arrow-right {
-    font-size: 18px;
-    color: var(--color-primary);
-    position: absolute;
-    bottom: -2px;
-    right: -25px;
-    transition: translate 0.03s ease-in-out;
-  }
-
-  #login-error {
-    color: var(--color-error);
-  }
 `
 
 const TextWrapper = styled.div<TextWrapperProps>`
