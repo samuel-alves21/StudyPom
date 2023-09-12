@@ -8,15 +8,10 @@ import { FormContext, FormContextType } from '../../contexts/FormContext'
 import { hasErrorOnSubmit } from '../../functions/formValidation'
 import { login } from '../../functions/login'
 import { register } from '../../functions/register'
-import styled from 'styled-components'
 
 interface SubmitButtonProps {
   inputsArray: Array<HTMLInputElement>
   setLoginError: (error: boolean) => void
-}
-
-interface StyledButtonProps {
-  isAllowed: boolean
 }
 
 export const SubmitButton = ({ inputsArray, setLoginError }: SubmitButtonProps) => {
@@ -42,7 +37,7 @@ export const SubmitButton = ({ inputsArray, setLoginError }: SubmitButtonProps) 
       }, 1000)
     }
 
-    setIsAllowed(waitTime < Math.round(Date.now() / 1000))
+    setIsAllowed(waitTime <= Math.round(Date.now() / 1000))
 
     return () => clearInterval(myInterval)
   }, [accessState.date, accessState.attempts, isLogin, setWaitTime, waitTime, isAllowed, timeLeft])
@@ -56,12 +51,8 @@ export const SubmitButton = ({ inputsArray, setLoginError }: SubmitButtonProps) 
   }
 
   return (
-    <Button className='form-button' onClick={handleClick} isAllowed={isAllowed}>
-      {isLogin ? 'Access account' : 'Create account'}
-    </Button>
+    <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleClick}>
+      {isLogin ? isAllowed ? 'Access account' : `try again in: ${secondsToMinutes(timeLeft)}` : 'Create account'}
+    </button>
   )
 }
-
-const Button = styled.button<StyledButtonProps>`
-  cursor: ${(props) => (props.isAllowed ? 'pointer' : 'not-allowed')};
-`

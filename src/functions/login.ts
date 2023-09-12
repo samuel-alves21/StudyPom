@@ -3,10 +3,11 @@ import { FormReducerAction } from '../contexts/FormContext/reducer'
 import { isEmptyOnSubmit } from './formValidation'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, database } from '../firebase/config'
-import { ref, set } from 'firebase/database'
+import { ref, remove, set } from 'firebase/database'
 import { AccessStateType } from '../contexts/AccessContext/initialState'
 import { getIp } from './getIp'
 import { setLoginAttempts } from '../firebase/setLoginAttempts'
+import { removeLoginAttempts } from '../firebase/removeLoginAttempts'
 
 interface FormData {
   [key: string]: string
@@ -34,11 +35,7 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
   if (!hasError && !isEmpty) {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password)
-      const ip = await getIp()
-      await set(ref(database, `ips/${ip}`), {
-        attempts: 0,
-        date: Math.round(Date.now() / 1000),
-      })
+      await removeLoginAttempts()
       if (!auth.currentUser?.emailVerified) {
         navigate('/StudyPom/emailVerification/login')
       } else {

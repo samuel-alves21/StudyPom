@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import styled from 'styled-components'
 import { LoginContent } from '../components/LoginContent'
 import { breakpoints } from '../utilities/breakpoints'
@@ -13,6 +13,8 @@ import { AccessContext, AccessContextType } from '../contexts/AccessContext'
 export const Login = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
   const { accessDispatch } = useContext(AccessContext) as AccessContextType
+
+  const [isLoading, setIsLoading] = useState(true)
 
   window.document.title = 'StudyPom | Login'
 
@@ -31,6 +33,7 @@ export const Login = () => {
           accessDispatch({ type: 'INCREMENT_ATTEMPTS', payload: accessvalues.attempts })
           accessDispatch({ type: 'SET_DATE', payload: accessvalues.date })
         }
+        setIsLoading(false)
       })
     }
     asyncFn()
@@ -39,7 +42,8 @@ export const Login = () => {
 
   return (
     <Bg>
-      <Spinner darkBackground={true} displayOnFirstLoad={false} />
+      <Spinner displayOnFirstLoad={false} darkBackground={true} />
+      {isLoading && <Spinner displayOnFirstLoad={true} darkBackground={false} /> }
       <Wrapper className='main-container flex-all-center'>
         <GlassBox>
           <LoginContent />

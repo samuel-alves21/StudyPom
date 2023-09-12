@@ -35,18 +35,15 @@ const App = () => {
   return (
     <>
       <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-      {isLoading ? (
-        <Spinner darkBackground={false} displayOnFirstLoad={true} />
-      ) : (
-        <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
-          <Wrapper>
-            <Logo />
-            <LoginIcon />
-            <Timer />
-            <UserConfig />
-          </Wrapper>
-        </MainContainer>
-      )}
+      {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} /> }
+      <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
+        <Wrapper>
+          <Logo />
+          <LoginIcon />
+          <Timer />
+          <UserConfig />
+        </Wrapper>
+      </MainContainer>
     </>
   )
 }
