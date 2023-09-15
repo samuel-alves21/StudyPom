@@ -1,7 +1,7 @@
 import { registerTimeouts } from '../utilities/registerTimeouts'
 
-export const getRegisterWaitTime = (clicks: number) => {
-  switch (clicks) {
+export const getVerificationAndPasswordTimeout = (attempts: number) => {
+  switch (attempts) {
     case 1:
       return registerTimeouts.oneClick
     case 2:

@@ -7,20 +7,22 @@ import { FormContext, FormContextType } from '../../contexts/FormContext'
 import { hasErrorOnSubmit } from '../../functions/formValidation'
 import { login } from '../../functions/login'
 import { register } from '../../functions/register'
-import { useLoginTimeout } from '../../hooks/useLoginTimeout'
+import { useTimeout } from '../../hooks/useTimeout'
 
 interface SubmitButtonProps {
   inputsArray: Array<HTMLInputElement>
   setLoginError: (error: boolean) => void
+  setIsLoading: (isLoading: boolean) => void
 }
 
-export const SubmitButton = ({ inputsArray, setLoginError }: SubmitButtonProps) => {
+export const SubmitButton = ({ inputsArray, setLoginError, setIsLoading }: SubmitButtonProps) => {
   const { accessState } = useContext(AccessContext) as AccessContextType
   const { isLogin } = useContext(LoginContext) as LoginContextType
   const { formDispatch, formState } = useContext(FormContext) as FormContextType
 
   const navigate = useNavigate()
-  const { isAllowed, timeLeft } = useLoginTimeout(isLogin)
+
+  const { isAllowed, timeLeft } = useTimeout(isLogin, 'login', setIsLoading)
 
   const handleClick = () => {
     if (isLogin) {

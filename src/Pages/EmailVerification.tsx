@@ -4,31 +4,33 @@ import { Spinner } from '../components/Spinner'
 import { User, sendEmailVerification } from 'firebase/auth'
 import { MessagePopUp } from '../components/MessagePopUp'
 import { useParams } from 'react-router-dom'
-import { setRegisterData } from '../firebase/setRegisterData'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
-import { useAuthManagement } from '../hooks/useAuthManagement'
+import { useContext, useState } from 'react'
+import { setAttemptsData } from '../firebase/setAttemptsData'
+import { useTimeout } from '../hooks/useTimeout'
+import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 
 export const EmailVerification = () => {
+
+  window.document.title = 'StudyPom | Email Verification'
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  const { isLogin } = useContext(LoginContext) as LoginContextType
+
   const { origin } = useParams()
 
-  const { isLoading, shouldSendEmail, timeLeft, registerState } = useAuthManagement()
+  const { attempts, isAllowed, timeLeft } = useTimeout(isLogin, 'verification', setIsLoading)
 
-  const sendEmail = async () => {
-    if (shouldSendEmail) {
-      try {
-        if (registerState?.clicks === undefined) {
-          await setRegisterData(0)
-        } else {
-          await setRegisterData(registerState.clicks)
-        }
-        await sendEmailVerification(auth.currentUser as User)
-        console.log('email sent')
-      } catch (error) {
-        console.error(error)
-        console.log('email not sent')
-      }
-    } else {
+  const handleSubmit = () => {
+    if (isAllowed) {
+      console.log('email sent')
+      setAttemptsData(attempts, 'verification')
+      sendEmailVerification(auth.currentUser as User)
+    }
+    else {
       console.log('email not sent')
+      return
     }
   }
 
@@ -49,8 +51,8 @@ export const EmailVerification = () => {
           <h1>Email Verification</h1>
           <p>Please check your email and click on the link to verify your email to continue.</p>
           <p>If you don't receive an email, please check your spam folder.</p>
-          <button className={`form-button ${shouldSendEmail || 'form-button-disabled'}`} onClick={sendEmail}>
-            {shouldSendEmail ? 're-send email' : 'send another in: ' + secondsToMinutes(timeLeft)}
+          <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
+            {isAllowed ? 're-send email' : 'send another in: ' + secondsToMinutes(timeLeft)}
           </button>
         </ContentWrapper>
       )}

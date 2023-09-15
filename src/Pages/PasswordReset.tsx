@@ -1,53 +1,23 @@
 import styled from 'styled-components'
 import { breakpoints } from '../utilities/breakpoints'
-import { Unsubscribe, sendPasswordResetEmail } from 'firebase/auth'
-import { auth, database } from '../firebase/config'
-import { useEffect, useState } from 'react'
-import { onValue, ref } from 'firebase/database'
-import { getIp } from '../functions/getIp'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from '../firebase/config'
+import { useContext, useState } from 'react'
 import { Spinner } from '../components/Spinner'
 import { setAttemptsData } from '../firebase/setAttemptsData'
-import { getRegisterWaitTime } from '../functions/getRegisterWaitTime'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
+import { useTimeout } from '../hooks/useTimeout'
+import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 
 export const PasswordReset = () => {
 
   window.document.title = 'StudyPom | Password reset'
 
   const [isLoading, setIsLoading] = useState(true)
-  const [attempts, setAttempts] = useState(0)
-  const [lastAttemptDate, setLastAttemptDate] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(0)
-  const [isAllowed, setIsAllowed] = useState(false)
 
-  useEffect(() => {
-    let unsubscribe: Unsubscribe
-    const asyncFn = async () => {
-      const ip = await getIp()
-      unsubscribe = onValue(ref(database, `timeouts/password/ips/${ip}`), (snapshot) => {
-        if (snapshot.exists()) {
-          const values = snapshot.val()
-          setAttempts(values.attempts)
-          setLastAttemptDate(values.date)
-        }
-        setIsLoading(false)
-      })
-    }
-    asyncFn()
-    return () => unsubscribe && unsubscribe()
-  }, [])
+  const { isLogin } = useContext(LoginContext) as LoginContextType
 
-  useEffect(() => {
-    const waitTime = getRegisterWaitTime(attempts) + lastAttemptDate
-
-    const myInterval = setInterval(() => {
-      setTimeLeft((waitTime - Math.round(Date.now() / 1000)) <= 0 ? 0 : waitTime - Math.round(Date.now() / 1000))
-    }, 1000)
-
-    setIsAllowed(waitTime <= Math.round(Date.now() / 1000))
-
-    return () => clearInterval(myInterval)
-  }, [attempts, lastAttemptDate, timeLeft])
+  const { attempts, isAllowed, timeLeft } = useTimeout(isLogin, 'password', setIsLoading)
 
   const handleClick = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement

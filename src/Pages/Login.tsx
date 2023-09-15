@@ -12,7 +12,6 @@ import { AccessContext, AccessContextType } from '../contexts/AccessContext'
 
 export const Login = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
-  const { accessDispatch } = useContext(AccessContext) as AccessContextType
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -22,22 +21,22 @@ export const Login = () => {
     setIsLogin(true)
   }, [setIsLogin])
 
-  useEffect(() => {
-    let unsubscribe: Unsubscribe
-    const asyncFn = async () => {
-      const ip = await getIp()
-      unsubscribe = onValue(ref(database, `timeouts/login/ips/${ip}`), (snapshot) => {
-        if (snapshot.exists()) {
-          const accessvalues = snapshot.val()
-          accessDispatch({ type: 'INCREMENT_ATTEMPTS', payload: accessvalues.attempts })
-          accessDispatch({ type: 'SET_DATE', payload: accessvalues.date })
-        }
-        setIsLoading(false)
-      })
-    }
-    asyncFn()
-    return () => unsubscribe && unsubscribe()
-  }, [accessDispatch])
+  // useEffect(() => {
+  //   let unsubscribe: Unsubscribe
+  //   const asyncFn = async () => {
+  //     const ip = await getIp()
+  //     unsubscribe = onValue(ref(database, `timeouts/login/ips/${ip}`), (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         const accessvalues = snapshot.val()
+  //         accessDispatch({ type: 'INCREMENT_ATTEMPTS', payload: accessvalues.attempts })
+  //         accessDispatch({ type: 'SET_DATE', payload: accessvalues.date })
+  //       }
+  //       setIsLoading(false)
+  //     })
+  //   }
+  //   asyncFn()
+  //   return () => unsubscribe && unsubscribe()
+  // }, [accessDispatch])
 
   return (
     <Bg>
@@ -45,7 +44,7 @@ export const Login = () => {
       {isLoading && <Spinner displayOnFirstLoad={true} darkBackground={false} /> }
       <Wrapper className='main-container flex-all-center'>
         <GlassBox>
-          <LoginContent />
+          <LoginContent setIsLoading={setIsLoading}/>
         </GlassBox>
       </Wrapper>
     </Bg>
