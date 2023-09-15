@@ -4,8 +4,8 @@ import { isEmptyOnSubmit } from './formValidation'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/config'
 import { AccessStateType } from '../contexts/AccessContext/initialState'
-import { setLoginAttempts } from '../firebase/setLoginAttempts'
 import { removeLoginAttempts } from '../firebase/removeLoginAttempts'
+import { setAttemptsData } from '../firebase/setAttemptsData'
 
 interface FormData {
   [key: string]: string
@@ -45,14 +45,14 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
         error.code === 'auth/wrong-password' ||
         error.code === 'auth/user-not-found'
       ) {
-        await setLoginAttempts(access)
+        await setAttemptsData(access.attempts, 'login')
         setLoginError(true)
       }
       spinner.style.display = 'none'
     }
   } else {
     try {
-      await setLoginAttempts(access)
+      await setAttemptsData(access.attempts, 'login')
       console.error('form not sent')
     } catch (error) {
       console.error(error)

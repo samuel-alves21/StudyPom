@@ -10,9 +10,10 @@ export const Register = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
 
   useEffect(() => {
-    window.document.title = 'StudyPom | Register'
     setIsLogin(false)
   }, [setIsLogin])
+
+  window.document.title = 'StudyPom | Register'
 
   return (
     <Bg>

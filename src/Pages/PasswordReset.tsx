@@ -1,9 +1,54 @@
 import styled from 'styled-components'
 import { breakpoints } from '../utilities/breakpoints'
-import { sendPasswordResetEmail } from 'firebase/auth'
-import { auth } from '../firebase/config'
+import { Unsubscribe, sendPasswordResetEmail } from 'firebase/auth'
+import { auth, database } from '../firebase/config'
+import { useEffect, useState } from 'react'
+import { onValue, ref } from 'firebase/database'
+import { getIp } from '../functions/getIp'
+import { Spinner } from '../components/Spinner'
+import { setAttemptsData } from '../firebase/setAttemptsData'
+import { getRegisterWaitTime } from '../functions/getRegisterWaitTime'
+import { secondsToMinutes } from '../functions/secondsToMinutes'
 
 export const PasswordReset = () => {
+
+  window.document.title = 'StudyPom | Password reset'
+
+  const [isLoading, setIsLoading] = useState(true)
+  const [attempts, setAttempts] = useState(0)
+  const [lastAttemptDate, setLastAttemptDate] = useState(0)
+  const [timeLeft, setTimeLeft] = useState(0)
+  const [isAllowed, setIsAllowed] = useState(false)
+
+  useEffect(() => {
+    let unsubscribe: Unsubscribe
+    const asyncFn = async () => {
+      const ip = await getIp()
+      unsubscribe = onValue(ref(database, `timeouts/password/ips/${ip}`), (snapshot) => {
+        if (snapshot.exists()) {
+          const values = snapshot.val()
+          setAttempts(values.attempts)
+          setLastAttemptDate(values.date)
+        }
+        setIsLoading(false)
+      })
+    }
+    asyncFn()
+    return () => unsubscribe && unsubscribe()
+  }, [])
+
+  useEffect(() => {
+    const waitTime = getRegisterWaitTime(attempts) + lastAttemptDate
+
+    const myInterval = setInterval(() => {
+      setTimeLeft((waitTime - Math.round(Date.now() / 1000)) <= 0 ? 0 : waitTime - Math.round(Date.now() / 1000))
+    }, 1000)
+
+    setIsAllowed(waitTime <= Math.round(Date.now() / 1000))
+
+    return () => clearInterval(myInterval)
+  }, [attempts, lastAttemptDate, timeLeft])
+
   const handleClick = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
     input.focus()
@@ -27,14 +72,21 @@ export const PasswordReset = () => {
 
   const handleSubmit = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
-    console.log(input.value)
     if (!input.value) return
-    console.log('email sent')
-    sendPasswordResetEmail(auth, input.value)
+    if (isAllowed) {
+      console.log('email sent')
+      setAttemptsData(attempts, 'password')
+      sendPasswordResetEmail(auth, input.value)
+    }
+    else {
+      console.log('email not sent')
+      return
+    }
   }
 
   return (
     <Wrapper className='flex-all-center'>
+      {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <ContentWrapper className='styled-page-box flex-all-center'>
         <h1>Password Reset</h1>
         <span onClick={handleClick}>Enter with your email:</span>
@@ -42,8 +94,8 @@ export const PasswordReset = () => {
           <input type='text' id='password-recover-input' onKeyDown={(e) => handleKeyDown(e)} />
           <i className='bi bi-x' onClick={clearText}></i>
         </InputWrapper>
-        <button className='form-button' onClick={handleSubmit}>
-          submit
+        <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
+        {isAllowed ? 'send Email' : `try again in: ${secondsToMinutes(timeLeft)}`}
         </button>
         <p>If you didn't receive an email, please check your spam folder.</p>
       </ContentWrapper>
