@@ -26,10 +26,9 @@ export const Login = () => {
     let unsubscribe: Unsubscribe
     const asyncFn = async () => {
       const ip = await getIp()
-      unsubscribe = onValue(ref(database, `ips/${ip}`), (snapshot) => {
+      unsubscribe = onValue(ref(database, `timeouts/login/ips/${ip}`), (snapshot) => {
         if (snapshot.exists()) {
           const accessvalues = snapshot.val()
-          console.log(accessvalues)
           accessDispatch({ type: 'INCREMENT_ATTEMPTS', payload: accessvalues.attempts })
           accessDispatch({ type: 'SET_DATE', payload: accessvalues.date })
         }
