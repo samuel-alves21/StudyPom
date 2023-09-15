@@ -2,7 +2,7 @@ import { ref, set } from 'firebase/database'
 import { getIp } from '../functions/getIp'
 import { database } from './config'
 
-export const setAttemptsData = async (attempts: number, type: string) => {
+export const setAttemptsData = async (attempts: number, type: 'login' | 'password' | 'verification') => {
   const ip = await getIp()
 
   await set(ref(database, `timeouts/${type}/ips/${ip}`), {

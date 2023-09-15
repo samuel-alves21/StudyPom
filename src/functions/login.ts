@@ -4,8 +4,8 @@ import { isEmptyOnSubmit } from './formValidation'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/config'
 import { AccessStateType } from '../contexts/AccessContext/initialState'
-import { removeLoginAttempts } from '../firebase/removeLoginAttempts'
 import { setAttemptsData } from '../firebase/setAttemptsData'
+import { removeAttemptsData } from '../firebase/removeAttemptsData'
 
 interface FormData {
   [key: string]: string
@@ -33,7 +33,7 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
   if (!hasError && !isEmpty) {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password)
-      await removeLoginAttempts()
+      await removeAttemptsData('login')
       if (!auth.currentUser?.emailVerified) {
         navigate('/StudyPom/emailVerification/login')
       } else {
