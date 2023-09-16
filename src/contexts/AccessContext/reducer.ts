@@ -16,11 +16,6 @@ export const reducer: AccessReducer = (state, action) => {
         ...state,
         attempts: action.payload,
       }
-    case 'RESET':
-      return {
-        ...state,
-        attempts: 0,
-      }
     case 'SET_DATE':
       if (!action.payload) return state
       return {

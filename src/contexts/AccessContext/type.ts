@@ -1,1 +1,1 @@
-export type AccessTypes = 'SET_ATTEMPTS' | 'RESET' | 'SET_DATE' | 'SET_FIRST_ATTEMPT' 
+export type AccessTypes = 'SET_ATTEMPTS' | 'SET_DATE' | 'SET_FIRST_ATTEMPT' 
