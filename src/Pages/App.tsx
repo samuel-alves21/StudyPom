@@ -12,6 +12,7 @@ import { UserContext, UserContextType } from '../contexts/UserContext'
 import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
+import { auth } from '../firebase/config'
 
 export interface MainContainerProps {
   background: string
@@ -31,6 +32,8 @@ const App = () => {
   useUserManager(pendentUser, setIsLoading)
   useSetWindow()
   useInit()
+
+  console.log(auth.currentUser)
 
   return (
     <>

@@ -34,6 +34,8 @@ export const SignInWithoutAccountBtn = ({ inputsArray }: SignInWithoutAccountBtn
 }
 
 const Wrapper = styled.div`
+  position: relative;
+
   & .bi-arrow-right {
     font-size: 18px;
     color: var(--color-primary);
