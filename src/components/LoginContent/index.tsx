@@ -10,7 +10,7 @@ export const LoginContent = ({ setIsLoading }: LoginContentProps) => {
   return (
     <Wrapper>
       <FormProvider>
-        <Form setIsLoading={setIsLoading}/>
+        <Form setIsLoading={setIsLoading} />
       </FormProvider>
     </Wrapper>
   )

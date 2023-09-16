@@ -14,7 +14,7 @@ export interface UserContextType {
 export const UserContext = createContext<UserContextType | null>(null)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [userState, userDispatch] = useReducer(reducer, initialState) 
+  const [userState, userDispatch] = useReducer(reducer, initialState)
 
   return <UserContext.Provider value={{ userState, userDispatch }}>{children}</UserContext.Provider>
 }

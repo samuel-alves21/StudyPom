@@ -10,7 +10,6 @@ import { useTimeout } from '../hooks/useTimeout'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 
 export const PasswordReset = () => {
-
   window.document.title = 'StudyPom | Password reset'
 
   const [isLoading, setIsLoading] = useState(true)
@@ -46,12 +45,10 @@ export const PasswordReset = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
     if (!input.value) return
     if (isAllowed) {
-      console.log('email sent')
       setAttemptsData(attempts, firstAttemptState, 'password')
       sendPasswordResetEmail(auth, input.value)
-    }
-    else {
-      console.log('email not sent')
+    } else {
+      console.error('email not sent')
       return
     }
   }
@@ -67,7 +64,7 @@ export const PasswordReset = () => {
           <i className='bi bi-x' onClick={clearText}></i>
         </InputWrapper>
         <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
-        {isAllowed ? 'send Email' : `try again in: ${secondsToMinutes(timeLeft)}`}
+          {isAllowed ? 'send Email' : `try again in: ${secondsToMinutes(timeLeft)}`}
         </button>
         <p>If you didn't receive an email, please check your spam folder.</p>
       </ContentWrapper>

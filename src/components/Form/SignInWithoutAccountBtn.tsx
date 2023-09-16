@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { UserContext, UserContextType,  } from '../../contexts/UserContext'
+import { UserContext, UserContextType } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 

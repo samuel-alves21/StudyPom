@@ -1,17 +1,21 @@
-import { Unsubscribe } from "firebase/auth"
-import { useContext, useEffect, useState } from "react"
-import { getIp } from "../functions/getIp"
-import { onValue, ref } from "firebase/database"
-import { database } from "../firebase/config"
-import { getVerificationAndPasswordTimeout } from "../functions/getVerificationAndPasswordTimeout"
-import { AccessContext, AccessContextType } from "../contexts/AccessContext"
-import { getLoginTimeout } from "../functions/getLoginTimeout"
-import { currentDateInSeconds } from "../functions/currentDateInSeconds"
-import { setFirstAttemptDate } from "../firebase/setFirstAttemptDate"
-import { timeoutExpireTime } from "../utilities/timeoutExpireTime"
-import { removeAttemptsData } from "../firebase/removeAttemptsData"
+import { Unsubscribe } from 'firebase/auth'
+import { useContext, useEffect, useState } from 'react'
+import { getIp } from '../functions/getIp'
+import { onValue, ref } from 'firebase/database'
+import { database } from '../firebase/config'
+import { getVerificationAndPasswordTimeout } from '../functions/getVerificationAndPasswordTimeout'
+import { AccessContext, AccessContextType } from '../contexts/AccessContext'
+import { getLoginTimeout } from '../functions/getLoginTimeout'
+import { currentDateInSeconds } from '../functions/currentDateInSeconds'
+import { setFirstAttemptDate } from '../firebase/setFirstAttemptDate'
+import { timeoutExpireTime } from '../utilities/timeoutExpireTime'
+import { removeAttemptsData } from '../firebase/removeAttemptsData'
 
-export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verification', setIsLoading: (isLoading: boolean) => void) => {
+export const useTimeout = (
+  isLogin: boolean,
+  type: 'login' | 'password' | 'verification',
+  setIsLoading: (isLoading: boolean) => void
+) => {
   const [attempts, setAttempts] = useState(0)
   const [lastAttemptDate, setLastAttemptDate] = useState(0)
   const [timeLeft, setTimeLeft] = useState(0)
@@ -28,11 +32,9 @@ export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verif
         if (snapshot.exists()) {
           const values = snapshot.val()
           if (values.attempts === 1) {
-            await setFirstAttemptDate(type, ip, values) 
+            await setFirstAttemptDate(type, ip, values)
           }
-          if ((values.firstAttemptDate + timeoutExpireTime) < currentDateInSeconds()) {
-            console.log('timeout expire')
-            console.log(values.firstAttemptDate)
+          if (values.firstAttemptDate + timeoutExpireTime < currentDateInSeconds()) {
             await removeAttemptsData(type)
           }
           if (isLogin) {
@@ -40,7 +42,6 @@ export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verif
             accessDispatch({ type: 'SET_DATE', payload: values.date })
             accessDispatch({ type: 'SET_FIRST_ATTEMPT', payload: values.firstAttemptDate })
           } else {
-            console.log(values.attempts)
             setAttempts(values.attempts)
             setLastAttemptDate(values.date)
             setFirstAttemptState(values.firstAttemptDate)
@@ -62,7 +63,7 @@ export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verif
     }
 
     const myInterval = setInterval(() => {
-      setTimeLeft((waitTime - currentDateInSeconds()) <= 0 ? 0 : waitTime - currentDateInSeconds())
+      setTimeLeft(waitTime - currentDateInSeconds() <= 0 ? 0 : waitTime - currentDateInSeconds())
     }, 1000)
 
     setIsAllowed(waitTime <= currentDateInSeconds())

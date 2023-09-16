@@ -3,7 +3,9 @@ import { ButtonsContext, ButtonContextType } from '../../contexts/ButtonsContext
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 
 export const CurrentTimerOption = () => {
-  const { userState: { userName } } = useContext(UserContext) as UserContextType
+  const {
+    userState: { userName },
+  } = useContext(UserContext) as UserContextType
 
   const {
     buttonState: { short, pomodoro, wasClicked },

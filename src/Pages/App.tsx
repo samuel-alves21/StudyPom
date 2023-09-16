@@ -11,7 +11,6 @@ import { ColorStyle } from '../components/ColorStyle'
 import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
-import { auth } from '../firebase/config'
 
 export interface MainContainerProps {
   background: string
@@ -30,12 +29,10 @@ const App = () => {
   useSetWindow()
   useInit()
 
-  console.log(auth.currentUser)
-
   return (
     <>
       <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-      {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} /> }
+      {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
           <Logo />

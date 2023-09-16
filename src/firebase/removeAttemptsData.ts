@@ -1,6 +1,6 @@
-import { ref, remove } from "firebase/database"
-import { getIp } from "../functions/getIp"
-import { database } from "./config"
+import { ref, remove } from 'firebase/database'
+import { getIp } from '../functions/getIp'
+import { database } from './config'
 
 export const removeAttemptsData = async (type: 'login' | 'password' | 'verification') => {
   const ip = await getIp()

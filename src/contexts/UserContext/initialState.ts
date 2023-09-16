@@ -4,5 +4,5 @@ export const initialState = {
   pendentUser: false,
   userName: '',
   email: '',
-  id: ''
+  id: '',
 }

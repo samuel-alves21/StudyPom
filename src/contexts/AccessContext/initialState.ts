@@ -7,5 +7,5 @@ export interface AccessStateType {
 export const initialState: AccessStateType = {
   attempts: 0,
   date: 0,
-  firstAttemptDate: 0
+  firstAttemptDate: 0,
 }

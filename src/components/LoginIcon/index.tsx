@@ -4,7 +4,9 @@ import styled from 'styled-components'
 import { auth } from '../../firebase/config'
 
 export const LoginIcon = () => {
-  const { userState: { pendentUser } } = useContext(UserContext) as UserContextType
+  const {
+    userState: { pendentUser },
+  } = useContext(UserContext) as UserContextType
 
   return (
     <Wrapper>

@@ -35,7 +35,7 @@ export const SubmitButton = ({ inputsArray, setLoginError, setIsLoading }: Submi
 
   return (
     <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleClick}>
-      {isLogin ? isAllowed ? 'Access account' : `try again in: ${secondsToMinutes(timeLeft)}` : 'Create account'}
+      {isLogin ? (isAllowed ? 'Access account' : `try again in: ${secondsToMinutes(timeLeft)}`) : 'Create account'}
     </button>
   )
 }

@@ -20,10 +20,10 @@ export const Login = () => {
   return (
     <Bg>
       <Spinner displayOnFirstLoad={false} darkBackground={true} />
-      {isLoading && <Spinner displayOnFirstLoad={true} darkBackground={false} /> }
+      {isLoading && <Spinner displayOnFirstLoad={true} darkBackground={false} />}
       <Wrapper className='main-container flex-all-center'>
         <GlassBox>
-          <LoginContent setIsLoading={setIsLoading}/>
+          <LoginContent setIsLoading={setIsLoading} />
         </GlassBox>
       </Wrapper>
     </Bg>

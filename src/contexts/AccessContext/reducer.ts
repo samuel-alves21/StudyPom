@@ -22,12 +22,12 @@ export const reducer: AccessReducer = (state, action) => {
         ...state,
         date: action.payload,
       }
-      case 'SET_FIRST_ATTEMPT':
-        if (!action.payload) return state
-        return {
-          ...state,
-          firstAttemptDate: action.payload,
-        }
+    case 'SET_FIRST_ATTEMPT':
+      if (!action.payload) return state
+      return {
+        ...state,
+        firstAttemptDate: action.payload,
+      }
     default:
       return state
   }

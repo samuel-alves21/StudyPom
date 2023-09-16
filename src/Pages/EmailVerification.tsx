@@ -11,7 +11,6 @@ import { useTimeout } from '../hooks/useTimeout'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
 
 export const EmailVerification = () => {
-
   window.document.title = 'StudyPom | Email Verification'
 
   const [isLoading, setIsLoading] = useState(true)
@@ -25,11 +24,9 @@ export const EmailVerification = () => {
 
   const handleSubmit = () => {
     if (isAllowed) {
-      console.log('email sent')
       setAttemptsData(attempts, firstAttemptState, 'verification')
       sendEmailVerification(auth.currentUser as User)
-    }
-    else {
+    } else {
       console.error('email not sent')
       return
     }
