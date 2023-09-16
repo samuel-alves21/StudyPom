@@ -8,7 +8,6 @@ import { useSetWindow } from '../hooks/useSetWindow'
 import { useInit } from '../hooks/useInit'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 import { ColorStyle } from '../components/ColorStyle'
-import { UserContext, UserContextType } from '../contexts/UserContext'
 import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
@@ -27,9 +26,7 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const { pendentUser } = useContext(UserContext) as UserContextType
-
-  useUserManager(pendentUser, setIsLoading)
+  useUserManager(setIsLoading)
   useSetWindow()
   useInit()
 

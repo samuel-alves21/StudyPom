@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { UserContext, UserContextType } from '../../contexts/UserContext'
+import { UserContext, UserContextType,  } from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -8,7 +8,7 @@ interface SignInWithoutAccountBtnProps {
 }
 
 export const SignInWithoutAccountBtn = ({ inputsArray }: SignInWithoutAccountBtnProps) => {
-  const { setPendentUser } = useContext(UserContext) as UserContextType
+  const { userDispatch } = useContext(UserContext) as UserContextType
 
   const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ export const SignInWithoutAccountBtn = ({ inputsArray }: SignInWithoutAccountBtn
     inputsArray.forEach((input) => {
       input.value = ''
     })
-    setPendentUser(true)
+    userDispatch({ type: 'SET_IS_PENDENT', payload: true })
     navigate('/StudyPom')
   }
 

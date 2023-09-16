@@ -1,18 +1,20 @@
-import { createContext, useState } from 'react'
+import { createContext, useReducer } from 'react'
+import { UserState, initialState } from './initialState'
+import { UserAction, reducer } from './reducer'
 
 interface UserProviderProps {
   children: React.ReactNode
 }
 
 export interface UserContextType {
-  pendentUser: boolean
-  setPendentUser: (user: boolean) => void
+  userState: UserState
+  userDispatch: React.Dispatch<UserAction>
 }
 
 export const UserContext = createContext<UserContextType | null>(null)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [pendentUser, setPendentUser] = useState<boolean>(false)
+  const [userState, userDispatch] = useReducer(reducer, initialState) 
 
-  return <UserContext.Provider value={{ pendentUser, setPendentUser }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ userState, userDispatch }}>{children}</UserContext.Provider>
 }

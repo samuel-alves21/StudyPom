@@ -1,9 +1,12 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { auth, database } from '../firebase/config'
 import { ref, remove } from 'firebase/database'
+import { UserContext, UserContextType } from '../contexts/UserContext'
 
-export const useUserManager = (pendentUser: boolean, setIsLoading: (value: boolean) => void) => {
+export const useUserManager = (setIsLoading: (value: boolean) => void) => {
+  const { userState: { pendentUser }, userDispatch } = useContext(UserContext) as UserContextType
+
   useEffect(() => {
     if (pendentUser) {
       setIsLoading(false)
@@ -16,6 +19,9 @@ export const useUserManager = (pendentUser: boolean, setIsLoading: (value: boole
           window.location.replace('/StudyPom/emailVerification/login')
         } else {
           await remove(ref(database, 'users/' + firebaseUser.uid + '/register'))
+          userDispatch({ type: 'SET_EMAIL', payload: firebaseUser.email as string })
+          userDispatch({ type: 'SET_ID', payload: firebaseUser.uid })
+          userDispatch({ type: 'SET_USERNAME', payload: firebaseUser.displayName as string})
         }
         setIsLoading(false)
       } else {
@@ -28,5 +34,5 @@ export const useUserManager = (pendentUser: boolean, setIsLoading: (value: boole
       unsubscribe()
       window.location.replace('/StudyPom/register')
     }
-  }, [pendentUser, setIsLoading])
+  }, [pendentUser, setIsLoading, userDispatch])
 }
