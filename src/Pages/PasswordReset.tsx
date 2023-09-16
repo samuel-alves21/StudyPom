@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { breakpoints } from '../utilities/breakpoints'
 import { sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '../firebase/config'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Spinner } from '../components/Spinner'
 import { setAttemptsData } from '../firebase/setAttemptsData'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
@@ -14,10 +14,12 @@ export const PasswordReset = () => {
   window.document.title = 'StudyPom | Password reset'
 
   const [isLoading, setIsLoading] = useState(true)
+  const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
+  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'password', setIsLoading)
 
-  const { isLogin } = useContext(LoginContext) as LoginContextType
-
-  const { attempts, isAllowed, timeLeft } = useTimeout(isLogin, 'password', setIsLoading)
+  useEffect(() => {
+    setIsLogin(false)
+  }, [setIsLogin])
 
   const handleClick = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
@@ -45,7 +47,7 @@ export const PasswordReset = () => {
     if (!input.value) return
     if (isAllowed) {
       console.log('email sent')
-      setAttemptsData(attempts, 'password')
+      setAttemptsData(attempts, firstAttemptState, 'password')
       sendPasswordResetEmail(auth, input.value)
     }
     else {

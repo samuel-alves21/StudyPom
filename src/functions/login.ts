@@ -45,14 +45,14 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
         error.code === 'auth/wrong-password' ||
         error.code === 'auth/user-not-found'
       ) {
-        await setAttemptsData(access.attempts, 'login')
+        await setAttemptsData(access.attempts, access.firstAttemptDate, 'login')
         setLoginError(true)
       }
       spinner.style.display = 'none'
     }
   } else {
     try {
-      await setAttemptsData(access.attempts, 'login')
+      await setAttemptsData(access.attempts, access.firstAttemptDate, 'login')
       console.error('form not sent')
     } catch (error) {
       console.error(error)

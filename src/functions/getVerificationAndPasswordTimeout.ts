@@ -1,13 +1,13 @@
-import { registerTimeouts } from '../utilities/registerTimeouts'
+import { verificationAndPasswordTimeout } from '../utilities/verificationAndPasswordTimeout'
 
 export const getVerificationAndPasswordTimeout = (attempts: number) => {
   switch (attempts) {
     case 1:
-      return registerTimeouts.oneClick
+      return verificationAndPasswordTimeout.oneClick
     case 2:
-      return registerTimeouts.twoClicks
+      return verificationAndPasswordTimeout.twoClicks
     case 3:
-      return registerTimeouts.threeClicksOrMore
+      return verificationAndPasswordTimeout.threeClicksOrMore
     case 0:
       return 0
     default:

@@ -10,7 +10,7 @@ export type AccessReducer = (state: AccessStateType, action: AccessActionType) =
 
 export const reducer: AccessReducer = (state, action) => {
   switch (action.type) {
-    case 'INCREMENT_ATTEMPTS':
+    case 'SET_ATTEMPTS':
       if (!action.payload) return state
       return {
         ...state,
@@ -27,6 +27,12 @@ export const reducer: AccessReducer = (state, action) => {
         ...state,
         date: action.payload,
       }
+      case 'SET_FIRST_ATTEMPT':
+        if (!action.payload) return state
+        return {
+          ...state,
+          firstAttemptDate: action.payload,
+        }
     default:
       return state
   }

@@ -5,7 +5,7 @@ import { User, sendEmailVerification } from 'firebase/auth'
 import { MessagePopUp } from '../components/MessagePopUp'
 import { useParams } from 'react-router-dom'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { setAttemptsData } from '../firebase/setAttemptsData'
 import { useTimeout } from '../hooks/useTimeout'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
@@ -15,21 +15,22 @@ export const EmailVerification = () => {
   window.document.title = 'StudyPom | Email Verification'
 
   const [isLoading, setIsLoading] = useState(true)
-
-  const { isLogin } = useContext(LoginContext) as LoginContextType
-
+  const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
   const { origin } = useParams()
+  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'verification', setIsLoading)
 
-  const { attempts, isAllowed, timeLeft } = useTimeout(isLogin, 'verification', setIsLoading)
+  useEffect(() => {
+    setIsLogin(false)
+  }, [setIsLogin])
 
   const handleSubmit = () => {
     if (isAllowed) {
       console.log('email sent')
-      setAttemptsData(attempts, 'verification')
+      setAttemptsData(attempts, firstAttemptState, 'verification')
       sendEmailVerification(auth.currentUser as User)
     }
     else {
-      console.log('email not sent')
+      console.error('email not sent')
       return
     }
   }

@@ -1,12 +1,14 @@
 import { ref, set } from 'firebase/database'
 import { getIp } from '../functions/getIp'
 import { database } from './config'
+import { currentDateInSeconds } from '../functions/currentDateInSeconds'
 
-export const setAttemptsData = async (attempts: number, type: 'login' | 'password' | 'verification') => {
+export const setAttemptsData = async (attempts: number, firstAttemptDate: number, type: 'login' | 'password' | 'verification') => {
   const ip = await getIp()
-
+  console.log(attempts)
   await set(ref(database, `timeouts/${type}/ips/${ip}`), {
     attempts: attempts + 1,
-    date: Math.round(Date.now() / 1000),
+    date: currentDateInSeconds(),
+    firstAttemptDate: attempts === 0 ? currentDateInSeconds() : firstAttemptDate
   })
 }
