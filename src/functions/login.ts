@@ -39,6 +39,7 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
       } else {
         navigate('/StudyPom')
       }
+      //eslint-disable-next-line
     } catch (error: any) {
       if (
         error.code === 'auth/invalid-email' ||

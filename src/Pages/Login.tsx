@@ -5,6 +5,7 @@ import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { auth } from '../firebase/config'
 
 export const Login = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
@@ -15,6 +16,7 @@ export const Login = () => {
 
   useEffect(() => {
     setIsLogin(true)
+    console.log(auth.currentUser)
   }, [setIsLogin])
 
   return (

@@ -27,28 +27,32 @@ export const useTimeout = (
   useEffect(() => {
     let unsubscribe: Unsubscribe
     const asyncFn = async () => {
-      const ip = await getIp()
-      unsubscribe = onValue(ref(database, `timeouts/${type}/ips/${ip}`), async (snapshot) => {
-        if (snapshot.exists()) {
-          const values = snapshot.val()
-          if (values.attempts === 1) {
-            await setFirstAttemptDate(type, ip, values)
+      try {
+        const ip = await getIp()
+        unsubscribe = onValue(ref(database, `timeouts/${type}/ips/${ip}`), async (snapshot) => {
+          if (snapshot.exists()) {
+            const values = snapshot.val()
+            if (values.attempts === 1) {
+              await setFirstAttemptDate(type, ip, values)
+            }
+            if (values.firstAttemptDate + timeoutExpireTime < currentDateInSeconds()) {
+              await removeAttemptsData(type)
+            }
+            if (isLogin) {
+              accessDispatch({ type: 'SET_ATTEMPTS', payload: values.attempts })
+              accessDispatch({ type: 'SET_DATE', payload: values.date })
+              accessDispatch({ type: 'SET_FIRST_ATTEMPT', payload: values.firstAttemptDate })
+            } else {
+              setAttempts(values.attempts)
+              setLastAttemptDate(values.date)
+              setFirstAttemptState(values.firstAttemptDate)
+            }
           }
-          if (values.firstAttemptDate + timeoutExpireTime < currentDateInSeconds()) {
-            await removeAttemptsData(type)
-          }
-          if (isLogin) {
-            accessDispatch({ type: 'SET_ATTEMPTS', payload: values.attempts })
-            accessDispatch({ type: 'SET_DATE', payload: values.date })
-            accessDispatch({ type: 'SET_FIRST_ATTEMPT', payload: values.firstAttemptDate })
-          } else {
-            setAttempts(values.attempts)
-            setLastAttemptDate(values.date)
-            setFirstAttemptState(values.firstAttemptDate)
-          }
-        }
-        !!setIsLoading && setIsLoading(false)
-      })
+        })
+      } catch (error) {
+        console.error(error)
+      }
+      setIsLoading && setIsLoading(false)
     }
     asyncFn()
     return () => unsubscribe && unsubscribe()
@@ -69,6 +73,7 @@ export const useTimeout = (
     setIsAllowed(waitTime <= currentDateInSeconds())
 
     return () => clearInterval(myInterval)
+
   }, [attempts, lastAttemptDate, timeLeft, isLogin, accessState.attempts, accessState.date])
 
   return { isAllowed, timeLeft, attempts, firstAttemptState }

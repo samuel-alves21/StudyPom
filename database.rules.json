@@ -1,6 +1,19 @@
 {
   "rules": {
-    ".read": "",
-    ".write": ""
+    "username": {
+      "$uid": {
+        ".write": "true"
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": "$uid == auth.uid",
+        ".write": "$uid == auth.uid",
+        "contacts": {
+          ".read": "$uid == auth.uid",
+          ".write": "$uid == auth.uid"
+        }
+      }
+    }
   }
 }

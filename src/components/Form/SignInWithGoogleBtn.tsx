@@ -1,44 +1,49 @@
 import styled from 'styled-components'
 import googleLogo from '../../img/google-logo.png'
-import { signInWithPopup, updateProfile } from 'firebase/auth'
-import { auth, database, provider } from '../../firebase/config'
-import { get, ref, set } from 'firebase/database'
+import { getRedirectResult, signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { auth, provider } from '../../firebase/config'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { setUserLoggedWithGoogle } from '../../firebase/setUserLoggedWithGoogle'
+import { useMediaQuery } from 'react-responsive'
+import { breakpoints } from '../../utilities/breakpoints'
 
 export const SignInWithGoogleBtn = () => {
   const navigate = useNavigate()
+
+  const isTabletOrMobile = useMediaQuery({ query: `(max-width: ${breakpoints.tablet})` })
+  console.log(isTabletOrMobile)
+
+  useEffect(() => {
+    if (!isTabletOrMobile) return
+    const spinner = document.querySelector('.spinner') as HTMLDivElement
+    spinner.style.display = 'flex'
+    const asyncFn = async () => {
+      try {
+        const result = await getRedirectResult(auth)
+        await setUserLoggedWithGoogle(result)
+        spinner.style.display = 'none'
+        if (result) navigate('/StudyPom')
+      } catch (error) {
+        console.error(error)
+      }
+      spinner.style.display = 'none'
+    }
+    asyncFn()
+  }, [navigate, isTabletOrMobile])
 
   const handleClick = async () => {
     const spinner = document.querySelector('.spinner') as HTMLDivElement
     spinner.style.display = 'flex'
     try {
-      const result = await signInWithPopup(auth, provider)
-      const snapshot = await get(ref(database, `users/${result.user.uid}`))
-      if (snapshot.exists()) {
-        const username = (await get(ref(database, `users/${result.user.uid}/username`))).val()
-        await updateProfile(result.user, {
-          displayName: username,
-        })
-        await set(ref(database, 'users/' + result.user.uid), {
-          username: username,
-          email: result.user.email,
-          id: result.user.uid,
-        })
-        await set(ref(database, 'username/' + result.user.uid), {
-          username: username,
-        })
+      if (!isTabletOrMobile) {
+        const result = await signInWithPopup(auth, provider)
+        await setUserLoggedWithGoogle(result)
+        spinner.style.display = 'none'
+        navigate('/StudyPom')
       } else {
-        await set(ref(database, 'users/' + result.user.uid), {
-          username: result.user.displayName,
-          email: result.user.email,
-          id: result.user.uid,
-        })
-        await set(ref(database, 'username/' + result.user.uid), {
-          username: result.user.displayName,
-        })
+        await signInWithRedirect(auth, provider)
       }
-      spinner.style.display = 'none'
-      navigate('/StudyPom')
     } catch (error) {
       console.error(error)
     }

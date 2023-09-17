@@ -38,12 +38,13 @@ export const register: RegisterFn = async (hasError, inputsArray, formDispatch, 
         await sendEmailVerification(auth.currentUser as User)
         navigate('/StudyPom/emailVerification/register')
       }
-    } catch (error: any) {
+      //eslint-disable-next-line
+    } catch (error: any) { 
       if (error.code === 'auth/email-already-in-use') {
         formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
       }
       spinner.style.display = 'none'
     }
-    spinner.style.display = 'none'
   }
+  spinner.style.display = 'none'
 }
