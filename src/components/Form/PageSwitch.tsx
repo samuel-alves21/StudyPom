@@ -2,12 +2,19 @@ import { useContext } from 'react'
 import { LoginContext, LoginContextType } from '../../contexts/LoginContext'
 import { useNavigate } from 'react-router-dom'
 
-export const PageSwitch = () => {
+interface PageSwitchProps {
+  inputsArray: HTMLInputElement[]
+}
+
+export const PageSwitch = ({ inputsArray }: PageSwitchProps) => {
   const { isLogin } = useContext(LoginContext) as LoginContextType
 
   const navigate = useNavigate()
 
   const handleChangePage = () => {
+    inputsArray.forEach((input) => {
+      input.value = ''
+    })
     if (isLogin) {
       navigate('/StudyPom/register')
     } else {

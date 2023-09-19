@@ -12,7 +12,6 @@ export const SignInWithGoogleBtn = () => {
   const navigate = useNavigate()
 
   const isTabletOrMobile = useMediaQuery({ query: `(max-width: ${breakpoints.tablet})` })
-  console.log(isTabletOrMobile)
 
   useEffect(() => {
     if (!isTabletOrMobile) return

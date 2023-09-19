@@ -5,6 +5,7 @@ import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
 import { RegisterContent } from '../components/RegisterContent'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { useRedirectToAppOnLogged } from '../hooks/useRedirectToAppOnLogged'
 
 export const Register = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
@@ -12,6 +13,8 @@ export const Register = () => {
   useEffect(() => {
     setIsLogin(false)
   }, [setIsLogin])
+
+  useRedirectToAppOnLogged()
 
   window.document.title = 'StudyPom | Register'
 

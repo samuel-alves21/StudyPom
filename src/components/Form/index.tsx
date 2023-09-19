@@ -94,7 +94,7 @@ export const Form = ({ setIsLoading }: FormContentProps) => {
         <SignInWithGoogleBtn />
         <SubmitButton inputsArray={inputsArray} setLoginError={setLoginError} setIsLoading={setIsLoading as (isLoading: boolean) => void} />
         {isLogin && <PasswordRecover />}
-        <PageSwitch />
+        <PageSwitch inputsArray={inputsArray}/>
         {isLogin || <SignInWithoutAccountBtn inputsArray={inputsArray} />}
       </FormWrapper>
     </Wrapper>

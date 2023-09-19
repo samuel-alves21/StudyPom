@@ -22,10 +22,19 @@ export const EmailVerification = () => {
     setIsLogin(false)
   }, [setIsLogin])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isAllowed) {
-      setAttemptsData(attempts, firstAttemptState, 'verification')
-      sendEmailVerification(auth.currentUser as User)
+      try {
+        await sendEmailVerification(auth.currentUser as User)
+        await setAttemptsData(attempts, firstAttemptState, 'verification')
+        // eslint-disable-next-line
+      } catch (error: any) {
+        if (error.code === 'auth/too-many-requests') {
+          await setAttemptsData(attempts, firstAttemptState, 'verification')  
+        } else {
+          console.error(error)
+        }
+      }
     } else {
       console.error('email not sent')
       return
