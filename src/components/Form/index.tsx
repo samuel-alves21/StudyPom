@@ -127,6 +127,10 @@ const Wrapper = styled.div<LoginWrapper>`
         height: 100%;
         justify-content: center;
         gap: 100px;
+
+        @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+          height: ;
+        }
       `
     }
   }}

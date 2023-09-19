@@ -33,7 +33,8 @@ export const GlobalStyles = createGlobalStyle`
 
   .main-container {
     width: 100%;
-    max-width: 2000px
+    max-width: 2000px;
+    position: relative;
   }
 
   .flex-all-center {

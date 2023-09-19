@@ -45,4 +45,8 @@ const Wrapper = styled.div<{ error: boolean }>`
     width: 80%;
     padding: 5px;
   }
+
+  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+    padding: 5px;
+  }
 `

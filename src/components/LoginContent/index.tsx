@@ -18,5 +18,4 @@ export const LoginContent = ({ setIsLoading }: LoginContentProps) => {
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  height: 90%;
 `

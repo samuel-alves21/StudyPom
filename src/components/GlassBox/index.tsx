@@ -51,6 +51,6 @@ const Wrapper = styled.div<StyledGlassBoxProps>`
   }
 
   @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
-    padding: 30px;
+    padding: 15px;
   }
 `

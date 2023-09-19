@@ -46,7 +46,7 @@ export const SignInWithGoogleBtn = () => {
     } catch (error) {
       console.error(error)
     }
-    spinner.style.display = 'none'
+    // spinner.style.display = 'none'
   }
 
   return (

@@ -32,6 +32,7 @@ export const Register = () => {
 
 const Bg = styled.div`
   background: radial-gradient(circle, rgba(214, 78, 219, 1) 21%, rgba(176, 50, 233, 1) 97%);
+  position: relative;
 `
 
 const Wrapper = styled.div`

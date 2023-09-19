@@ -26,12 +26,12 @@ const SpinnerWrapper = styled.div<SpinnerProps>`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100%;
   z-index: 100;
 
   &::before {
     width: 100%;
-    height: 100vh;
+    min-height: 100%;
     z-index: 99;
     filter: blur(50px);
   }
