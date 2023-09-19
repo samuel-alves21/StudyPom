@@ -44,12 +44,6 @@ export const reducer: CustomizationReducer = (state, action) => {
         ...state,
         mainColor: action.payload,
       }
-    case 'CHANGE_SECUNDARY_COLOR':
-      if (typeof action.payload !== 'string') return state
-      return {
-        ...state,
-        secundaryColor: action.payload,
-      }
     default:
       return state
   }

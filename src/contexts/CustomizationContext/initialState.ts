@@ -12,7 +12,6 @@ export const initialState = {
   },
   volume: '1',
   mainColor: '#ae83ff',
-  secundaryColor: '#ae83ff61',
 }
 
 export type CustomizationState = typeof initialState
