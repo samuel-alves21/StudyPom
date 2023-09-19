@@ -73,7 +73,6 @@ export const useTimeout = (
     setIsAllowed(waitTime <= currentDateInSeconds())
 
     return () => clearInterval(myInterval)
-
   }, [attempts, lastAttemptDate, timeLeft, isLogin, accessState.attempts, accessState.date])
 
   return { isAllowed, timeLeft, attempts, firstAttemptState }

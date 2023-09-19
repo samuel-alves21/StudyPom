@@ -1,6 +1,6 @@
-import { UserCredential, updateProfile } from "firebase/auth"
-import { get, ref, set } from "firebase/database"
-import { database } from "./config"
+import { UserCredential, updateProfile } from 'firebase/auth'
+import { get, ref, set } from 'firebase/database'
+import { database } from './config'
 
 export const setUserLoggedWithGoogle = async (result: UserCredential | null) => {
   if (result) {

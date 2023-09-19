@@ -5,7 +5,6 @@ import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
 import { GlassBox } from '../components/GlassBox'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
-import { auth } from '../firebase/config'
 import { useRedirectToAppOnLogged } from '../hooks/useRedirectToAppOnLogged'
 
 export const Login = () => {
@@ -17,9 +16,8 @@ export const Login = () => {
 
   useEffect(() => {
     setIsLogin(true)
-    console.log(auth.currentUser)
   }, [setIsLogin])
-  
+
   useRedirectToAppOnLogged()
 
   return (

@@ -92,9 +92,13 @@ export const Form = ({ setIsLoading }: FormContentProps) => {
         {isLogin && loginError && <p className='error'>Invalid email or password</p>}
         {isLogin || <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />}
         <SignInWithGoogleBtn />
-        <SubmitButton inputsArray={inputsArray} setLoginError={setLoginError} setIsLoading={setIsLoading as (isLoading: boolean) => void} />
+        <SubmitButton
+          inputsArray={inputsArray}
+          setLoginError={setLoginError}
+          setIsLoading={setIsLoading as (isLoading: boolean) => void}
+        />
         {isLogin && <PasswordRecover />}
-        <PageSwitch inputsArray={inputsArray}/>
+        <PageSwitch inputsArray={inputsArray} />
         {isLogin || <SignInWithoutAccountBtn inputsArray={inputsArray} />}
       </FormWrapper>
     </Wrapper>

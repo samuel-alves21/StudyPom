@@ -7,8 +7,7 @@ import { DefaultToggleButton } from '../../../../DefaultToggleButton'
 
 export const SetTimer = () => {
   const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, isDefault },
-    timeDispatch,
+    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
   } = useContext(TimerContext) as TimerContextType
 
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
@@ -39,7 +38,6 @@ export const SetTimer = () => {
         <LimitValues id={'cycles'} />
       </InputContainer>
       <InputContainer>
-        <label onClick={() => timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })}>pomodoro default:</label>
         <DefaultToggleButton />
       </InputContainer>
     </Wrapper>
@@ -57,4 +55,10 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  & > span {
+    font-size: calc(1.6rem);
+    cursor: pointer;
+    font-weight: normal;
+  }
 `

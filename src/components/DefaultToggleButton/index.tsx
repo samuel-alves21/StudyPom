@@ -34,9 +34,12 @@ export const DefaultToggleButton = () => {
   }
 
   return (
-    <Wrapper onClick={handleClick} isDefault={isDefault}>
-      <Circle shouldAnimate={shouldAnimate} isDefault={isDefault}></Circle>
-    </Wrapper>
+    <>
+      <span onClick={handleClick}>pomodoro default:</span>
+      <Wrapper onClick={handleClick} isDefault={isDefault}>
+        <Circle shouldAnimate={shouldAnimate} isDefault={isDefault}></Circle>
+      </Wrapper>
+    </>
   )
 }
 

@@ -30,7 +30,7 @@ export const EmailVerification = () => {
         // eslint-disable-next-line
       } catch (error: any) {
         if (error.code === 'auth/too-many-requests') {
-          await setAttemptsData(attempts, firstAttemptState, 'verification')  
+          await setAttemptsData(attempts, firstAttemptState, 'verification')
         } else {
           console.error(error)
         }
