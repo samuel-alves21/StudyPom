@@ -121,15 +121,15 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-size: calc(3.2rem + 0.2vw);
+    font-size: calc(3.0rem + 0.2vw);
   }
 
   h2 {
-    font-size: calc(2.3rem + 0.2vw);
+    font-size: calc(2.1rem + 0.2vw);
   }
 
   h3 {
-    font-size: calc(1.6rem + 0.2vw);
+    font-size: calc(1.4rem + 0.2vw);
   }
 
   p, span {
