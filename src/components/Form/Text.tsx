@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${breakpoints.smallMobile}) {
-    & p {
+    & p, & h1 {
       display: none;
     }
   }
