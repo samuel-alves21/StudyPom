@@ -14,6 +14,7 @@ export const RangeInputs = () => {
     } else {
       customizationDispatch({ type: 'CHANGE_BRIGHT', payload: e.target.value })
     }
+    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
   }
 
   return (

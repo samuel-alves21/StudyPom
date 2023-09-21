@@ -7,6 +7,7 @@ import { SetBackground } from './SetBackgound'
 import { SetAudio } from './SetAudio'
 import { SetColor } from './SetColor'
 import { useDisplay } from '../../../../hooks/useDisplay'
+import { SaveConfigBtn } from './SaveConfigBtn'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -26,16 +27,19 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout 
     if (!shouldDisplay) {
-      setTimeout(() => setOption('timer'), 500)
+      timeout = setTimeout(() => setOption('timer'), 500)
     }
+
+    return () => clearTimeout(timeout)
   }, [shouldDisplay])
 
   return (
     <Wrapper shouldDisplay={shouldDisplay}>
       <Window ref={thisWindow} shouldDisplay={shouldDisplay}>
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
-        <CurrentOptionWindow>
+        <CurrentOptionWindow className='flex-all-center'>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
           <ConfigsWindows>
             {option === 'timer' && <SetTimer />}
@@ -43,6 +47,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
             {option === 'sounds' && <SetAudio />}
             {option === 'color' && <SetColor />}
           </ConfigsWindows>
+          <SaveConfigBtn />
         </CurrentOptionWindow>
       </Window>
     </Wrapper>
@@ -73,7 +78,7 @@ const Window = styled.div<StyledConfingWindow>`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: fit-content;
   min-height: 400px;
-  max-height: 70%;
+  max-height: 80%;
   min-width: 500px;
   transition: opacity
     ${({ shouldDisplay }) => (shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
@@ -85,19 +90,19 @@ const Window = styled.div<StyledConfingWindow>`
 
   @keyframes slide-in {
     0% {
-      transform: translateY(-15%);
+      transform: translateY(-20%);
     }
     100% {
-      transform: translateY(0%);
+      transform: translateY(-10%);
     }
   }
 
   @keyframes slide-out {
     0% {
-      transform: translateY(0%);
+      transform: translateY(-10%);
     }
     100% {
-      transform: translateY(-15%);
+      transform: translateY(-20%);
     }
   }
 
@@ -107,6 +112,7 @@ const Window = styled.div<StyledConfingWindow>`
 `
 
 const CurrentOptionWindow = styled.div`
+  flex-direction: column;
   width: 100%;
   padding: 20px;
 `

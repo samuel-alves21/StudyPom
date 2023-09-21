@@ -3,7 +3,7 @@ import { TimerConfigInput } from './TimerConfigInput'
 import { useState, useContext } from 'react'
 import { LimitValues } from './LimitValues'
 import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
-import { DefaultToggleButton } from '../../../../DefaultToggleButton'
+import { DefaultToggleButton } from './DefaultToggleButton'
 
 export const SetTimer = () => {
   const {

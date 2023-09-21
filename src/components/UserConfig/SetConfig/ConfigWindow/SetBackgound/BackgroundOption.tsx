@@ -15,6 +15,7 @@ export const BackgroundOption = ({ background }: BackgroundOptionProps) => {
 
   const handleClick = () => {
     customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: background.path })
+    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
   }
 
   return (

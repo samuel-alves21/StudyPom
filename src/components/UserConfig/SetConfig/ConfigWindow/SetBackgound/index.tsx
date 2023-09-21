@@ -27,6 +27,7 @@ const BackgroundsWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 30px;
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-1);

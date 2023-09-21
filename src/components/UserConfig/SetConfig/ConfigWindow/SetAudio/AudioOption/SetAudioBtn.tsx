@@ -23,10 +23,15 @@ export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) 
 
   const isSelected = name === sound.name
 
+  const handleClick = () => {
+    customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })
+    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
+  }
+
   return (
     <Button
       isSelected={isSelected}
-      onClick={() => customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })}
+      onClick={() => handleClick}
     >
       set sound
     </Button>

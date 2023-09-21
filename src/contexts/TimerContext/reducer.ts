@@ -5,7 +5,7 @@ export type TimerReducer = (state: TimerState, action: TimerReducerAction) => Ti
 
 export interface TimerReducerAction {
   type: TimerActionTypes
-  payload?: number | boolean
+  payload?: number | boolean 
 }
 
 export const reducer: TimerReducer = (state, action) => {
@@ -32,13 +32,13 @@ export const reducer: TimerReducer = (state, action) => {
       if (typeof action.payload !== 'number') return state
       return {
         ...state,
-        shortRestTime: action.payload,
+        shortRestTime: action.payload, 
       }
     case 'CONFIG_LONG_TIME':
       if (typeof action.payload !== 'number') return state
       return {
         ...state,
-        longRestTime: action.payload,
+        longRestTime: action.payload,        
       }
     case 'SET_POMODORO_TIME':
       return {
@@ -90,6 +90,12 @@ export const reducer: TimerReducer = (state, action) => {
       return {
         ...state,
         workedTime: state.workedTime + action.payload,
+      }
+    case 'SET_NEED_SAVE':
+      if (typeof action.payload !== 'boolean') return state
+      return {
+        ...state,
+        needSave: action.payload
       }
     case 'RESET_ALL':
       return {

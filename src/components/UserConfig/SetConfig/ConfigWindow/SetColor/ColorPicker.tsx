@@ -9,6 +9,7 @@ export const ColorPicker = () => {
 
   const handleChange = (color: ColorResult) => {
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
+    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
   }
 
   return <ChromePicker disableAlpha={true} color={mainColor.slice(0, 7)} onChange={(color) => handleChange(color)} />

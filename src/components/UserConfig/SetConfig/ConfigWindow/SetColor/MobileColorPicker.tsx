@@ -7,6 +7,8 @@ export const MobileColorPicker = () => {
 
   const handleOnChangeComplete = (color: ColorResult) => {
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
+    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
+
   }
 
   return <CirclePicker onChangeComplete={(color) => handleOnChangeComplete(color)} />

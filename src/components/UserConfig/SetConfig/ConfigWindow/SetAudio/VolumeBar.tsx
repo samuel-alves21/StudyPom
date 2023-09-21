@@ -8,6 +8,11 @@ export const VolumeBar = () => {
     customizationState: { volume },
   } = useContext(CustomizationContext) as CustomizationContextType
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    customizationDispatch({ type: 'CHANGE_VOLUME', payload: e.target.value })
+    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
+  }
+
   return (
     <Wrapper>
       <label htmlFor='volume'>Volume:</label>
@@ -18,11 +23,11 @@ export const VolumeBar = () => {
         min='0'
         max='1'
         step='0.01'
-        onChange={(e) => customizationDispatch({ type: 'CHANGE_VOLUME', payload: e.target.value })}
+        onChange={(e) => handleChange(e)}
       />
     </Wrapper>
   )
-}
+} 
 
 const Wrapper = styled.div`
   display: flex;

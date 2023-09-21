@@ -4,7 +4,7 @@ import { CustomizationActionTypes } from './types'
 
 export type CustomizationReducer = (
   state: CustomizationState,
-  action: { type: CustomizationActionTypes; payload: string | SoundObject }
+  action: { type: CustomizationActionTypes; payload: string | SoundObject | boolean }
 ) => CustomizationState
 
 export const reducer: CustomizationReducer = (state, action) => {
@@ -44,6 +44,12 @@ export const reducer: CustomizationReducer = (state, action) => {
         ...state,
         mainColor: action.payload,
       }
+      case 'SET_NEED_SAVE':
+        if (typeof action.payload !== 'boolean') return state
+        return {
+          ...state,
+          needSave: action.payload
+        }
     default:
       return state
   }

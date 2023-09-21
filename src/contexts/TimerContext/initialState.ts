@@ -13,4 +13,5 @@ export const initialState = {
   timeCounting: false,
   workedTime: 0,
   isDefault: false,
+  needSave: false
 }
