@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
+import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
 type UseDisplayProps = (
   gear: HTMLElement,
@@ -8,27 +9,47 @@ type UseDisplayProps = (
 ) => void
 
 export const useDisplay: UseDisplayProps = (gear, setShouldDisplay, shouldDisplay, optionsWindowRef) => {
+  const { isSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  
   useEffect(() => {
     window.addEventListener('keydown', (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setShouldDisplay(false)
+      if (event.key === 'Escape') {
+        if (shouldDisplay && !isSaved) {
+          alert('Please save your config before exiting')
+          return
+        }
+        setShouldDisplay(!shouldDisplay)
+      }
     })
 
     window.addEventListener('click', (event: MouseEvent) => {
       if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
       if (shouldDisplay === false) return
-      setShouldDisplay(false)
+      if (shouldDisplay && !isSaved) {
+        alert('Please save your config before exiting')
+        return
+      }
     })
 
     return () => {
       window.removeEventListener('click', (event: MouseEvent) => {
         if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
         if (shouldDisplay === false) return
-        setShouldDisplay(false)
+        if (shouldDisplay && !isSaved) {
+          alert('Please save your config before exiting')
+          return
+        }
       })
 
       window.removeEventListener('keydown', (event: KeyboardEvent) => {
-        if (event.key === 'Escape') setShouldDisplay(false)
+        if (event.key === 'Escape') {
+          if (shouldDisplay && !isSaved) {
+            alert('Please save your config before exiting')
+            return
+          }
+          setShouldDisplay(!shouldDisplay)
+        }
       })
     }
-  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef])
+  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef, isSaved])
 }

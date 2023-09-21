@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
 import { ConfigWindow } from './ConfigWindow'
 import { Filter } from './Filter'
-import { SaveConfigProvider } from '../../../contexts/SaveConfigContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../contexts/SaveConfigContext'
 
 interface GearIconProps {
   shouldRotate: boolean
@@ -15,7 +15,14 @@ export const ConfigHeading = () => {
   const [shouldDisplay, setShouldDisplay] = useState(false)
   const [animate, setAnimate] = useState(false)
 
+  const { isSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const handleClick = () => {
+    // if (shouldDisplay && !isSaved) {
+    //   alert('Please save your config before exiting')
+    //   return
+    // }
+    
     setShouldDisplay(!shouldDisplay)
     setAnimate(true)
   }
@@ -24,13 +31,11 @@ export const ConfigHeading = () => {
     <Wrapper className='config-wrapper' shouldRotate={shouldDisplay} animate={animate}>
       <h1 className='config-heading'> Your Config</h1>
       <i className='bi bi-gear-fill' ref={gear} onClick={handleClick}></i>
-      <SaveConfigProvider>
-        <ConfigWindow
-          gear={gear.current as HTMLElement}
-          shouldDisplay={shouldDisplay}
-          setShouldDisplay={setShouldDisplay}
-        />
-      </SaveConfigProvider>
+      <ConfigWindow
+        gear={gear.current as HTMLElement}
+        shouldDisplay={shouldDisplay}
+        setShouldDisplay={setShouldDisplay}
+      />
       <Filter className='filter' shouldDisplay={shouldDisplay}></Filter>
     </Wrapper>
   )
