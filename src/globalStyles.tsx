@@ -50,7 +50,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-backdrop-filter: blur(3.5px);
 
     border-radius: 20px;
-    padding: 60px 30px;
+    padding: 30px;
   }
 
   .error {
