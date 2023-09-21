@@ -6,6 +6,7 @@ import {
   CustomizationContextType,
   SoundObject,
 } from '../../../../../../contexts/CustomizationContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
 
 interface SetAudioBtnProps {
   sounds: SoundObject
@@ -21,11 +22,13 @@ export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) 
     customizationState: { sound },
   } = useContext(CustomizationContext) as CustomizationContextType
 
+  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const isSelected = name === sound.name
 
   const handleClick = () => {
     customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })
-    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
+    setIsSaved(false)
   }
 
   return (

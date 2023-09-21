@@ -44,12 +44,6 @@ export const reducer: CustomizationReducer = (state, action) => {
         ...state,
         mainColor: action.payload,
       }
-      case 'SET_NEED_SAVE':
-        if (typeof action.payload !== 'boolean') return state
-        return {
-          ...state,
-          needSave: action.payload
-        }
     default:
       return state
   }

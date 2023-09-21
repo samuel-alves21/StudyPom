@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const VolumeBar = () => {
   const {
@@ -8,9 +9,11 @@ export const VolumeBar = () => {
     customizationState: { volume },
   } = useContext(CustomizationContext) as CustomizationContextType
 
+  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     customizationDispatch({ type: 'CHANGE_VOLUME', payload: e.target.value })
-    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
+    setIsSaved(false)
   }
 
   return (

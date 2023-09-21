@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   background-color: var(--color-primary);
   border-radius: 10px 10px 0 0;
   padding: 1rem;
-
+  
   & .bi-x-lg {
     font-size: 1.75rem;
     color: white;

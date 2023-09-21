@@ -1,15 +1,15 @@
 import { useContext } from "react"
-import { CustomizationContext, CustomizationContextType } from "../../../../contexts/CustomizationContext"
+import { SaveConfigContext, SaveConfigContextType } from "../../../../contexts/SaveConfigContext"
 
 export const SaveConfigBtn = () => {
-  const { customizationDispatch, customizationState: { needSave } } = useContext(CustomizationContext) as CustomizationContextType
+  const { isSaved, setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
 
-  const handleSaveConfig = () => {
-    customizationDispatch({ type: 'SET_NEED_SAVE', payload: false })
+  const handleClick = () => {
+    setIsSaved(true)
   }
 
   return (
-    <button onClick={handleSaveConfig}  disabled={!needSave}>
+    <button disabled={isSaved} onClick={handleClick}>
       Save
     </button>
   )

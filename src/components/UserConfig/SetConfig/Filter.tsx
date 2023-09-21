@@ -11,7 +11,7 @@ export const Filter = styled.div<BackgroundFilterProps>`
   background-color: #0000006d;
   position: absolute;
   min-width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   z-index: 2;
   top: 0;
   left: 0;

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import styled from 'styled-components'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 interface BackgroundOptionProps {
   background: {
@@ -12,10 +13,11 @@ interface BackgroundOptionProps {
 
 export const BackgroundOption = ({ background }: BackgroundOptionProps) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
+  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleClick = () => {
     customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: background.path })
-    customizationDispatch({ type: 'SET_NEED_SAVE', payload: true })
+    setIsSaved(false)
   }
 
   return (

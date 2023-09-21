@@ -11,7 +11,7 @@ export interface SoundObject {
 
 export interface CustomizationContextType {
   customizationState: CustomizationState
-  customizationDispatch: React.Dispatch<{ type: CustomizationActionTypes; payload: string | SoundObject | boolean}>
+  customizationDispatch: React.Dispatch<{ type: CustomizationActionTypes; payload: string | SoundObject }>
 }
 
 interface CustomizationProviderProps {

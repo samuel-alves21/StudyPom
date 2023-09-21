@@ -12,6 +12,5 @@ export const initialState = {
   timeOnDisplay: 0,
   timeCounting: false,
   workedTime: 0,
-  isDefault: false,
-  needSave: false
+  isDefault: false
 }

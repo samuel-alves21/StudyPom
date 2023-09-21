@@ -5,4 +5,3 @@ export type CustomizationActionTypes =
   | 'CHANGE_SOUND'
   | 'CHANGE_VOLUME'
   | 'CHANGE_MAIN_COLOR'
-  | 'SET_NEED_SAVE'

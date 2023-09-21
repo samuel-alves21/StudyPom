@@ -91,12 +91,6 @@ export const reducer: TimerReducer = (state, action) => {
         ...state,
         workedTime: state.workedTime + action.payload,
       }
-    case 'SET_NEED_SAVE':
-      if (typeof action.payload !== 'boolean') return state
-      return {
-        ...state,
-        needSave: action.payload
-      }
     case 'RESET_ALL':
       return {
         ...state,

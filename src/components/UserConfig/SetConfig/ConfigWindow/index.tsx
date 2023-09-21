@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { SetTimer } from './SetTimer'
 import { ConfigNav } from './ConfigNav'
 import { breakpoints } from '../../../../utilities/breakpoints'
@@ -8,6 +8,7 @@ import { SetAudio } from './SetAudio'
 import { SetColor } from './SetColor'
 import { useDisplay } from '../../../../hooks/useDisplay'
 import { SaveConfigBtn } from './SaveConfigBtn'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../contexts/SaveConfigContext'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -20,11 +21,13 @@ interface StyledConfingWindow {
 }
 
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
+  const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
+
+  const { isSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const thisWindow = useRef<HTMLDivElement | null>(null)
 
   useDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
-
-  const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
   useEffect(() => {
     let timeout: NodeJS.Timeout 
@@ -35,19 +38,29 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
     return () => clearTimeout(timeout)
   }, [shouldDisplay])
 
+  useEffect(() => {
+    if (!shouldDisplay) {
+      if (isSaved) {
+        console.log('Saved')
+      } else {
+        console.log('Unsaved')
+      }
+    }
+  }, [shouldDisplay, isSaved])
+
   return (
     <Wrapper shouldDisplay={shouldDisplay}>
-      <Window ref={thisWindow} shouldDisplay={shouldDisplay}>
+      <Window ref={thisWindow} shouldDisplay={shouldDisplay} >
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow className='flex-all-center'>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
-          <ConfigsWindows>
-            {option === 'timer' && <SetTimer />}
-            {option === 'background' && <SetBackground />}
-            {option === 'sounds' && <SetAudio />}
-            {option === 'color' && <SetColor />}
-          </ConfigsWindows>
-          <SaveConfigBtn />
+            <ConfigsWindows>
+              {option === 'timer' && <SetTimer />}
+              {option === 'background' && <SetBackground />}
+              {option === 'sounds' && <SetAudio />}
+              {option === 'color' && <SetColor />}
+            </ConfigsWindows>
+            <SaveConfigBtn />
         </CurrentOptionWindow>
       </Window>
     </Wrapper>
@@ -67,7 +80,7 @@ const Wrapper = styled.div<StyledConfingWindow>`
 `
 
 const Window = styled.div<StyledConfingWindow>`
-  overflow-y: ${({ shouldDisplay }) => (shouldDisplay ? 'auto' : 'hidden')};
+  overflow-y: auto;
   margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
