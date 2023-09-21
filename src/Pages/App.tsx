@@ -20,7 +20,7 @@ export interface MainContainerProps {
 
 const App = () => {
   const {
-    customizationState: { background, blur, bright, mainColor, secundaryColor },
+    customizationState: { background, blur, bright, mainColor },
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const [isLoading, setIsLoading] = useState(true)
@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <>
-      <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
+      <ColorStyle colors={{ mainColor: mainColor }} />
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
