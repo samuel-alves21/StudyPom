@@ -17,7 +17,7 @@ export const LimitValues = ({ id }: LimitValuesProps) => {
       <p>
         Max:{' '}
         <strong>
-          {id === 'pomodoro' ? secondsToTime(limitValues.max[id]) : id === 'cycles' ? limitValues.max[id] : secondsToMinutes(limitValues.min[id])}
+          {id === 'pomodoro' ? secondsToTime(limitValues.max[id]) : id === 'cycles' ? limitValues.max[id] : secondsToMinutes(limitValues.max[id])}
         </strong>
       </p>
     </Wrapper>
