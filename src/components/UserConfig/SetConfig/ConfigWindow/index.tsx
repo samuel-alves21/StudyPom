@@ -1,13 +1,14 @@
 import styled from 'styled-components'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { SetTimer } from './SetTimer'
 import { ConfigNav } from './ConfigNav'
 import { breakpoints } from '../../../../utilities/breakpoints'
 import { SetBackground } from './SetBackgound'
 import { SetAudio } from './SetAudio'
 import { SetColor } from './SetColor'
-import { useDisplay } from '../../../../hooks/useDisplay'
+import { useConfigWindowDisplay } from '../../../../hooks/useConfigWindowDisplay'
 import { SaveConfigBtn } from './SaveConfigBtn'
+import { UserContext, UserContextType } from '../../../../contexts/UserContext'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -22,9 +23,11 @@ interface StyledConfingWindow {
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
+  const { userState } = useContext(UserContext) as UserContextType
+
   const thisWindow = useRef<HTMLDivElement | null>(null)
 
-  useDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
+  useConfigWindowDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
 
   useEffect(() => {
     let timeout: NodeJS.Timeout 
@@ -37,7 +40,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
 
   return (
     <Wrapper shouldDisplay={shouldDisplay}>
-      <Window ref={thisWindow} shouldDisplay={shouldDisplay} >
+      <Window ref={thisWindow} shouldDisplay={shouldDisplay} className='flex-all-center flex-column'>
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow className='flex-all-center'>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
@@ -47,7 +50,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
               {option === 'sounds' && <SetAudio />}
               {option === 'color' && <SetColor />}
             </ConfigsWindows>
-            <SaveConfigBtn />
+            { userState.pendentUser || <SaveConfigBtn />}
         </CurrentOptionWindow>
       </Window>
     </Wrapper>
@@ -67,6 +70,7 @@ const Wrapper = styled.div<StyledConfingWindow>`
 `
 
 const Window = styled.div<StyledConfingWindow>`
+  justify-content: stretch;
   overflow-y: auto;
   margin: 100px 10px 20px 10px;
   background: rgba(255, 255, 255, 0.25);
@@ -77,16 +81,19 @@ const Window = styled.div<StyledConfingWindow>`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: fit-content;
-  min-height: 400px;
+  min-height: 50vh;
   max-height: 80%;
-  min-width: 500px;
-  transition: opacity
-    ${({ shouldDisplay }) => (shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)')};
-  opacity: ${({ shouldDisplay }) => (shouldDisplay ? '1' : '0')};
-  pointer-events: ${({ shouldDisplay }) => (shouldDisplay ? 'all' : 'none')};
-  animation: ${({ shouldDisplay }) =>
-      shouldDisplay ? 'slide-in ease-in-out' : 'slide-out  cubic-bezier(0.39, 0.575, 0.565, 1)'}
-    0.5s forwards;
+  min-width: 30vw;
+  max-width: 80%;
+
+  ${({ shouldDisplay }) => {
+    return`
+    transition: opacity ${shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
+    opacity: ${shouldDisplay ? '1' : '0'};
+    pointer-events: ${shouldDisplay ? 'all' : 'none'};
+    animation: ${shouldDisplay ? 'slide-in ease-in-out' : 'slide-out cubic-bezier(0.39, 0.575, 0.565, 1)'} 0.5s forwards;
+    `
+  }}
 
   @keyframes slide-in {
     0% {
@@ -107,18 +114,20 @@ const Window = styled.div<StyledConfingWindow>`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    min-width: 320px;
+    min-width: 300px;
   }
 `
 
 const CurrentOptionWindow = styled.div`
   flex-direction: column;
-  width: 100%;
   padding: 20px;
+  margin: auto 0;
 `
 
 const SelectedConfig = styled.h1`
   font-size: 2.5rem;
+  flex-grow: 1;
+  margin-bottom: 20px;
 `
 
 const ConfigsWindows = styled.div`

@@ -11,6 +11,10 @@ interface ArrowsProps {
   id: Id
 }
 
+interface StyledArrows {
+  isDisabled: boolean
+}
+
 export const Arrows = ({ id, setState, state }: ArrowsProps) => {
   const {
     timeState: { isDefault },
@@ -29,18 +33,19 @@ export const Arrows = ({ id, setState, state }: ArrowsProps) => {
   }
 
   return (
-    <ArrowIcon className='flex-all-center'>
+    <ArrowIcon className='flex-all-center' isDisabled={isDefault}>
       <i id='acrement' onClick={(e) => handleClick(e)} className='bi bi-caret-up-fill'></i>
       <i id='decrement' onClick={(e) => handleClick(e)} className='bi bi-caret-down-fill'></i>
     </ArrowIcon>
   )
 }
 
-const ArrowIcon = styled.div`
+const ArrowIcon = styled.div<StyledArrows>`
   flex-direction: column;
   background-color: var(--color-primary);
   padding: 0 8px;
   font-size: 12px;
+  opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {

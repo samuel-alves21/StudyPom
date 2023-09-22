@@ -116,6 +116,14 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .disabled {
+    cursor: not-allowed;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
   h1, h2, h3, h4 {
     text-align: center;
   }

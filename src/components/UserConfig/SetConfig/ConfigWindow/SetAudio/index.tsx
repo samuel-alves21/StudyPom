@@ -26,11 +26,11 @@ const Wrapper = styled.div`
 
 const SoundsWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
   gap: 10px;
 
   @media (max-width: ${breakpoints.mobile}) {
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 `

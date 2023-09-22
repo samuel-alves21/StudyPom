@@ -108,6 +108,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
         readOnly={false}
         onWheel={(e) => handleWhell(e)}
         disabled={isDefault}
+        autoComplete='off'
       />
       <Arrows state={state} setState={setState} id={id} />
     </InputAndArrows>

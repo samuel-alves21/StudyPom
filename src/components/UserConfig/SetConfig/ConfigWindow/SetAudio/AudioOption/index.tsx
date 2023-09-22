@@ -4,6 +4,7 @@ import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
 import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
+import { breakpoints } from '../../../../../../utilities/breakpoints'
 
 export interface AudioOptionProps {
   sounds: {
@@ -73,6 +74,10 @@ const Wrapper = styled.div`
 
   & > h3 {
     margin-bottom: 15px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 120px;
   }
 `
 

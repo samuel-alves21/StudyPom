@@ -9,7 +9,7 @@ export const SaveConfigBtn = () => {
   }
 
   return (
-    <button disabled={isSaved} onClick={handleClick}>
+    <button disabled={isSaved} onClick={handleClick} className={isSaved ? "disabled" : "" }>
       Save
     </button>
   )

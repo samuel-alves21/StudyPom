@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useContext, useState } from 'react'
 import { TimerContext, TimerContextType } from '../../../contexts/TimerContext'
 import { ButtonsContext, ButtonContextType } from '../../../contexts/ButtonsContext'
-import { useSetWindow } from '../../../hooks/useSetWindow'
+import { useSetWindowTitle } from '../../../hooks/useSetWindowTitle'
 
 export interface CounterResetBtnProps {
   animate: boolean
@@ -21,7 +21,7 @@ export const CounterResetBtn = () => {
     setAnimate(true)
   }
 
-  useSetWindow(true)
+  useSetWindowTitle(true)
 
   return (
     <Wrapper className='counter-reset-btn' animate={animate} onAnimationEnd={() => setAnimate(false)}>

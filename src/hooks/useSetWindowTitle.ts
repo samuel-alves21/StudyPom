@@ -3,7 +3,7 @@ import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
 import { TimerContext, TimerContextType } from '../contexts/TimerContext'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
 
-export const useSetWindow = (wasReseted?: boolean) => {
+export const useSetWindowTitle = (wasReseted?: boolean) => {
   const {
     buttonState: { long, short, pomodoro, wasClicked },
   } = useContext(ButtonsContext) as ButtonContextType

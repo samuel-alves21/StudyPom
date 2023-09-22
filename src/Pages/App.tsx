@@ -4,8 +4,8 @@ import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
 import { Timer } from '../components/Timer'
-import { useSetWindow } from '../hooks/useSetWindow'
-import { useInit } from '../hooks/useInit'
+import { useSetWindowTitle } from '../hooks/useSetWindowTitle'
+import { useSetInitialTimer } from '../hooks/useSetInitialTimer'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 import { ColorStyle } from '../components/ColorStyle'
 import { LoginIcon } from '../components/LoginIcon'
@@ -26,8 +26,8 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useUserManager(setIsLoading)
-  useSetWindow()
-  useInit()
+  useSetWindowTitle()
+  useSetInitialTimer()
 
   return (
     <>
