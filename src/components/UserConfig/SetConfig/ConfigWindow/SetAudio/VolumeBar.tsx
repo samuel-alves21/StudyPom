@@ -19,18 +19,10 @@ export const VolumeBar = () => {
   return (
     <Wrapper>
       <label htmlFor='volume'>Volume:</label>
-      <input
-        type='range'
-        id='volume'
-        value={volume}
-        min='0'
-        max='1'
-        step='0.01'
-        onChange={(e) => handleChange(e)}
-      />
+      <input type='range' id='volume' value={volume} min='0' max='1' step='0.01' onChange={(e) => handleChange(e)} />
     </Wrapper>
   )
-} 
+}
 
 const Wrapper = styled.div`
   display: flex;

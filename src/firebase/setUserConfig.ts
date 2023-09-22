@@ -9,13 +9,7 @@ type SetUserConfigFn = (
   cycles: number
 ) => Promise<void>
 
-export const setUserConfig: SetUserConfigFn = async (
-  uid,
-  pomodoroTime,
-  shortRestTime,
-  longRestTime,
-  cycles
-) => {
+export const setUserConfig: SetUserConfigFn = async (uid, pomodoroTime, shortRestTime, longRestTime, cycles) => {
   await set(ref(database, `users/${uid}/config`), {
     pomodoroTime: pomodoroTime,
     shortBreakTime: shortRestTime,

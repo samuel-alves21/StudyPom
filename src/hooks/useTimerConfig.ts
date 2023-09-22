@@ -7,9 +7,7 @@ import { TimerActionTypes } from '../contexts/TimerContext/types'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
 export const useTimerConfig = (state: string, id: Id, isChanged: boolean) => {
-  const {
-    timeDispatch,
-  } = useContext(TimerContext) as TimerContextType
+  const { timeDispatch } = useContext(TimerContext) as TimerContextType
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType

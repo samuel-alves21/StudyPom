@@ -35,11 +35,11 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
-    if (!Number(state)) 
-    if (Number(state) < limitValues.min[id] && id === 'cycles') {
-      setState(limitValues.min[id].toString())
-      return
-    }
+    if (!Number(state))
+      if (Number(state) < limitValues.min[id] && id === 'cycles') {
+        setState(limitValues.min[id].toString())
+        return
+      }
     if (Number(state) > limitValues.max[id] && id === 'cycles') {
       setState(limitValues.max[id].toString())
       return

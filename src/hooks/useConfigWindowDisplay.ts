@@ -9,7 +9,12 @@ type useConfigWindowDisplayProps = (
   optionsWindowRef: HTMLDivElement | null
 ) => void
 
-export const useConfigWindowDisplay: useConfigWindowDisplayProps = (gear, setShouldDisplay, shouldDisplay, optionsWindowRef) => {
+export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
+  gear,
+  setShouldDisplay,
+  shouldDisplay,
+  optionsWindowRef
+) => {
   const { isSaved } = useContext(SaveConfigContext) as SaveConfigContextType
   const { userState } = useContext(UserContext) as UserContextType
 
@@ -23,7 +28,7 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (gear, setSho
         setShouldDisplay(!shouldDisplay)
       }
     }
-  
+
     const handleClick = (event: MouseEvent) => {
       if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
       if (shouldDisplay === false) return

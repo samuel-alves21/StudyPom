@@ -30,7 +30,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   useConfigWindowDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout 
+    let timeout: NodeJS.Timeout
     if (!shouldDisplay) {
       timeout = setTimeout(() => setOption('timer'), 500)
     }
@@ -44,13 +44,13 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow className='flex-all-center'>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
-            <ConfigsWindows>
-              {option === 'timer' && <SetTimer />}
-              {option === 'background' && <SetBackground />}
-              {option === 'sounds' && <SetAudio />}
-              {option === 'color' && <SetColor />}
-            </ConfigsWindows>
-            { userState.pendentUser || <SaveConfigBtn />}
+          <ConfigsWindows>
+            {option === 'timer' && <SetTimer />}
+            {option === 'background' && <SetBackground />}
+            {option === 'sounds' && <SetAudio />}
+            {option === 'color' && <SetColor />}
+          </ConfigsWindows>
+          {userState.pendentUser || <SaveConfigBtn />}
         </CurrentOptionWindow>
       </Window>
     </Wrapper>
@@ -87,11 +87,13 @@ const Window = styled.div<StyledConfingWindow>`
   max-width: 80%;
 
   ${({ shouldDisplay }) => {
-    return`
+    return `
     transition: opacity ${shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
     opacity: ${shouldDisplay ? '1' : '0'};
     pointer-events: ${shouldDisplay ? 'all' : 'none'};
-    animation: ${shouldDisplay ? 'slide-in ease-in-out' : 'slide-out cubic-bezier(0.39, 0.575, 0.565, 1)'} 0.5s forwards;
+    animation: ${
+      shouldDisplay ? 'slide-in ease-in-out' : 'slide-out cubic-bezier(0.39, 0.575, 0.565, 1)'
+    } 0.5s forwards;
     `
   }}
 

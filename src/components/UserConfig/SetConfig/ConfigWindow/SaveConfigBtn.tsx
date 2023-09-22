@@ -1,12 +1,14 @@
-import { useContext } from "react"
-import { SaveConfigContext, SaveConfigContextType } from "../../../../contexts/SaveConfigContext"
-import { setUserConfig } from "../../../../firebase/setUserConfig"
-import { TimerContext, TimerContextType } from "../../../../contexts/TimerContext"
-import { UserContext, UserContextType } from "../../../../contexts/UserContext"
+import { useContext } from 'react'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../contexts/SaveConfigContext'
+import { setUserConfig } from '../../../../firebase/setUserConfig'
+import { TimerContext, TimerContextType } from '../../../../contexts/TimerContext'
+import { UserContext, UserContextType } from '../../../../contexts/UserContext'
 
 export const SaveConfigBtn = () => {
   const { isSaved, setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
-  const { timeState: { cycles, pomodoroTime, shortRestTime, longRestTime } } = useContext(TimerContext) as TimerContextType
+  const {
+    timeState: { cycles, pomodoroTime, shortRestTime, longRestTime },
+  } = useContext(TimerContext) as TimerContextType
   const { userState } = useContext(UserContext) as UserContextType
 
   const handleClick = () => {
@@ -15,7 +17,7 @@ export const SaveConfigBtn = () => {
   }
 
   return (
-    <button disabled={isSaved} onClick={handleClick} className={isSaved ? "disabled" : "" }>
+    <button disabled={isSaved} onClick={handleClick} className={isSaved ? 'disabled' : ''}>
       Save
     </button>
   )

@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 
 export const useFormInputs = (id: string, isLogin: boolean) => {
+  //eslint-disable-next-line
   const inputsArray: HTMLInputElement[] = useMemo(() => [], [isLogin])
 
   useEffect(() => {

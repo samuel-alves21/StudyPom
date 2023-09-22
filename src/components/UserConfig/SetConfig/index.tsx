@@ -15,7 +15,6 @@ export const ConfigHeading = () => {
   const [animate, setAnimate] = useState(false)
 
   const handleClick = () => {
-    
     setShouldDisplay(true)
     setAnimate(true)
   }

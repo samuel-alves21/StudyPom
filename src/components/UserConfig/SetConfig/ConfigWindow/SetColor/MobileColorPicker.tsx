@@ -7,7 +7,6 @@ export const MobileColorPicker = () => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
   const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
 
-
   const handleOnChangeComplete = (color: ColorResult) => {
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
     setIsSaved(false)

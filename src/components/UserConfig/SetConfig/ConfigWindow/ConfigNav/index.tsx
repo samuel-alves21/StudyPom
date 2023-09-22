@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   border-radius: 10px 10px 0 0;
   padding: 1rem;
   width: 100%;
-  
+
   & .bi-x-lg {
     font-size: 1.75rem;
     color: white;
