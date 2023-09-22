@@ -18,8 +18,9 @@ interface TimerConfigInputProps {
 
 export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
+  const [isChanged, setIsChanged] = useState(false)
 
-  useTimerConfig(state, id)
+  useTimerConfig(state, id, isChanged)
 
   const {
     timeState: { isDefault },
@@ -34,6 +35,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
+    if (!Number(state)) 
     if (Number(state) < limitValues.min[id] && id === 'cycles') {
       setState(limitValues.min[id].toString())
       return
@@ -55,6 +57,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
       return
     }
     setState((Number(state) * 60).toString())
+    setIsChanged(true)
     thisElement.blur()
   }
 
@@ -66,6 +69,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
     } else {
       setState(decrementTime(Number(state), id).toString())
     }
+    setIsChanged(true)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -84,11 +88,13 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
     if (state.length === 1 && id === 'cycles') return
     if (!/^[0-9]+$/.test(e.key)) return
     setState(state + e.key)
+    setIsChanged(true)
   }
 
   const handleFocus = () => {
     setIsOnFocus(true)
     setState('')
+    setIsChanged(true)
   }
 
   const handleChange = () => {

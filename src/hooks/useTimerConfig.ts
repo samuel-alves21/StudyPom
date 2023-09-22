@@ -6,9 +6,8 @@ import { Id } from '../components/Timer/Counter/CounterOptionsBtn'
 import { TimerActionTypes } from '../contexts/TimerContext/types'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
-export const useTimerConfig = (state: string, id: Id) => {
+export const useTimerConfig = (state: string, id: Id, isChanged: boolean) => {
   const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
@@ -16,8 +15,8 @@ export const useTimerConfig = (state: string, id: Id) => {
   const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useEffect(() => {
-    const timerValues = [pomodoroTime, shortRestTime, longRestTime, cycles]
-    if (!timerValues.includes(Number(state))) {
+    if (isChanged) {
+      console.log('here')
       if (id !== 'cycles') {
         timeDispatch({
           type: `CONFIG_${id.toUpperCase()}_TIME` as TimerActionTypes,
@@ -35,5 +34,5 @@ export const useTimerConfig = (state: string, id: Id) => {
       buttonDispatch({ type: 'CLICKED', payload: false })
       buttonDispatch({ type: 'POMODORO' })
     }
-  }, [state, id, timeDispatch, buttonDispatch, pomodoroTime, shortRestTime, longRestTime, cycles, setIsSaved])
+  }, [state, id, timeDispatch, buttonDispatch, isChanged, setIsSaved])
 }

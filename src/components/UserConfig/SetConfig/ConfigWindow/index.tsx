@@ -81,7 +81,7 @@ const Window = styled.div<StyledConfingWindow>`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: fit-content;
-  min-height: 50vh;
+  min-height: max(50vh, 400px);
   max-height: 80%;
   min-width: 50vw;
   max-width: 80%;
