@@ -83,7 +83,7 @@ const Window = styled.div<StyledConfingWindow>`
   height: fit-content;
   min-height: 50vh;
   max-height: 80%;
-  min-width: 30vw;
+  min-width: 50vw;
   max-width: 80%;
 
   ${({ shouldDisplay }) => {

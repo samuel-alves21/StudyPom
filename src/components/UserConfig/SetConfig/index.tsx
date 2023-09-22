@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef } from 'react'
 import { ConfigWindow } from './ConfigWindow'
 import { Filter } from './Filter'
-import { SaveConfigContext, SaveConfigContextType } from '../../../contexts/SaveConfigContext'
 
 interface GearIconProps {
   shouldRotate: boolean
@@ -15,15 +14,9 @@ export const ConfigHeading = () => {
   const [shouldDisplay, setShouldDisplay] = useState(false)
   const [animate, setAnimate] = useState(false)
 
-  const { isSaved } = useContext(SaveConfigContext) as SaveConfigContextType
-
   const handleClick = () => {
-    // if (shouldDisplay && !isSaved) {
-    //   alert('Please save your config before exiting')
-    //   return
-    // }
     
-    setShouldDisplay(!shouldDisplay)
+    setShouldDisplay(true)
     setAnimate(true)
   }
 

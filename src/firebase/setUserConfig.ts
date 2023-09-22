@@ -1,9 +1,8 @@
 import { ref, set } from 'firebase/database'
 import { database } from './config'
-import { User } from 'firebase/auth'
 
 type SetUserConfigFn = (
-  firebaseUser: User,
+  firebaseUser: string,
   pomodoroTime: number,
   shortRestTime: number,
   longRestTime: number,
@@ -11,13 +10,13 @@ type SetUserConfigFn = (
 ) => Promise<void>
 
 export const setUserConfig: SetUserConfigFn = async (
-  firebaseUser,
+  uid,
   pomodoroTime,
   shortRestTime,
   longRestTime,
   cycles
 ) => {
-  await set(ref(database, `users/${firebaseUser.uid}/config`), {
+  await set(ref(database, `users/${uid}/config`), {
     pomodoroTime: pomodoroTime,
     shortBreakTime: shortRestTime,
     longBreakTime: longRestTime,
