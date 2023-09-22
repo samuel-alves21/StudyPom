@@ -34,5 +34,5 @@ const router = createBrowserRouter([
 ])
 
 export const Pages = () => {
-  return <RouterProvider router={router} fallbackElement />
+  return <RouterProvider router={router} />
 }
