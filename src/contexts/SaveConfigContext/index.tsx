@@ -1,18 +1,22 @@
-import { createContext, useState } from 'react'
+import { createContext, useReducer } from 'react'
+import { ReducerActionType, reducer } from './reducer'
+import { InitialState, initialState } from './initialState'
 
 interface SaveConfigProviderProps {
   children: React.ReactNode
 }
 
 export interface SaveConfigContextType {
-  isSaved: boolean
-  setIsSaved: (value: boolean) => void
+  SaveConfigState: InitialState
+  SaveConfigDispatch: React.Dispatch<ReducerActionType>
 }
 
 export const SaveConfigContext = createContext<SaveConfigContextType | null>(null)
 
 export const SaveConfigProvider = ({ children }: SaveConfigProviderProps) => {
-  const [isSaved, setIsSaved] = useState(true)
+  const [SaveConfigState, SaveConfigDispatch] = useReducer(reducer, initialState)
 
-  return <SaveConfigContext.Provider value={{ isSaved, setIsSaved }}>{children}</SaveConfigContext.Provider>
+  return (
+    <SaveConfigContext.Provider value={{ SaveConfigState, SaveConfigDispatch }}>{children}</SaveConfigContext.Provider>
+  )
 }

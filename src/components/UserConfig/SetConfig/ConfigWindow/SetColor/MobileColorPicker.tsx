@@ -5,11 +5,11 @@ import { SaveConfigContext, SaveConfigContextType } from '../../../../../context
 
 export const MobileColorPicker = () => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
-  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleOnChangeComplete = (color: ColorResult) => {
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
-    setIsSaved(false)
+    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return <CirclePicker onChangeComplete={(color) => handleOnChangeComplete(color)} />

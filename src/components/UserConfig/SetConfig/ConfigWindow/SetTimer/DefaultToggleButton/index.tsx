@@ -2,6 +2,9 @@ import { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
 import { standardValues } from '../../../../../../utilities/standardValues'
+import { ButtonContextType, ButtonsContext } from '../../../../../../contexts/ButtonsContext'
+import { getUserConfig } from '../../../../../../firebase/getUserConfig'
+import { UserContext, UserContextType } from '../../../../../../contexts/UserContext'
 
 interface CircleProps {
   shouldAnimate: boolean
@@ -19,14 +22,23 @@ export const DefaultToggleButton = () => {
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
+  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
+
+  const { userState } = useContext(UserContext) as UserContextType
+
   useEffect(() => {
     if (isDefault) {
       timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: standardValues.pomodoro })
       timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: standardValues.short })
       timeDispatch({ type: 'CONFIG_LONG_TIME', payload: standardValues.long })
       timeDispatch({ type: 'CONFIG_CYCLES', payload: standardValues.cycles })
+      timeDispatch({ type: 'RESET_ALL' })
+      buttonDispatch({ type: 'CLICKED', payload: false })
+      buttonDispatch({ type: 'POMODORO' })
+    } else {
+      if (!userState.pendentUser) getUserConfig(userState.id, timeDispatch)
     }
-  }, [isDefault, timeDispatch])
+  }, [isDefault, timeDispatch, buttonDispatch, userState.id, userState.pendentUser])
 
   const handleClick = () => {
     setShouldAnimate(true)

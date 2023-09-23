@@ -9,11 +9,11 @@ export const VolumeBar = () => {
     customizationState: { volume },
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     customizationDispatch({ type: 'CHANGE_VOLUME', payload: e.target.value })
-    setIsSaved(false)
+    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return (

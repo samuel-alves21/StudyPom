@@ -5,7 +5,7 @@ import { formatConfigInput } from '../../../../../../functions/formatConfigInput
 import { limitValues } from '../../../../../../utilities/limitValues'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
+import { useTimerStaged } from '../../../../../../hooks/useTimerStaged'
 import { Id } from '../../../../../Timer/Counter/CounterOptionsBtn'
 import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
 import { standardValues } from '../../../../../../utilities/standardValues'
@@ -20,7 +20,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   const [isOnFocus, setIsOnFocus] = useState(false)
   const [isChanged, setIsChanged] = useState(false)
 
-  useTimerConfig(state, id, isChanged)
+  useTimerStaged(state, id, isChanged)
 
   const {
     timeState: { isDefault },

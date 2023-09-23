@@ -13,11 +13,11 @@ interface BackgroundOptionProps {
 
 export const BackgroundOption = ({ background }: BackgroundOptionProps) => {
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
-  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleClick = () => {
     customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: background.path })
-    setIsSaved(false)
+    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return (

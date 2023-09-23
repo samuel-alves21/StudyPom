@@ -3,34 +3,31 @@ import { TimerContext, TimerContextType } from '../contexts/TimerContext'
 import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
 import { verifyLimit } from '../functions/verifyLimit'
 import { Id } from '../components/Timer/Counter/CounterOptionsBtn'
-import { TimerActionTypes } from '../contexts/TimerContext/types'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
+import { SaveConfigTypes } from '../contexts/SaveConfigContext/types'
 
-export const useTimerConfig = (state: string, id: Id, isChanged: boolean) => {
+export const useTimerStaged = (state: string, id: Id, isChanged: boolean) => {
   const { timeDispatch } = useContext(TimerContext) as TimerContextType
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
-  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useEffect(() => {
     if (isChanged) {
-      console.log('here')
       if (id !== 'cycles') {
-        timeDispatch({
-          type: `CONFIG_${id.toUpperCase()}_TIME` as TimerActionTypes,
+        SaveConfigDispatch({
+          type: `STAGE_${id.toUpperCase()}_TIME` as SaveConfigTypes,
           payload: verifyLimit(Number(state), id),
         })
-        setIsSaved(false)
+        console.log(id, state)
+        SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })  
       } else {
-        timeDispatch({
-          type: 'CONFIG_CYCLES',
+        SaveConfigDispatch({
+          type: 'STAGE_CYCLES',
           payload: verifyLimit(Number(state), id),
         })
-        setIsSaved(false)
+        SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
       }
-      timeDispatch({ type: 'RESET_ALL' })
-      buttonDispatch({ type: 'CLICKED', payload: false })
-      buttonDispatch({ type: 'POMODORO' })
     }
-  }, [state, id, timeDispatch, buttonDispatch, isChanged, setIsSaved])
+  }, [state, id, timeDispatch, buttonDispatch, isChanged, SaveConfigDispatch])
 }

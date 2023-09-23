@@ -9,7 +9,7 @@ export const RangeInputs = () => {
     customizationDispatch,
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const { setIsSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === 'blur') {
@@ -17,7 +17,7 @@ export const RangeInputs = () => {
     } else {
       customizationDispatch({ type: 'CHANGE_BRIGHT', payload: e.target.value })
     }
-    setIsSaved(false)
+    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return (

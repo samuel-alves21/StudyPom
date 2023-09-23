@@ -27,7 +27,7 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
         } else {
           try {
             await remove(ref(database, 'users/' + firebaseUser.uid + '/register'))
-            await getUserConfig(firebaseUser, timeDispatch)
+            await getUserConfig(firebaseUser.uid, timeDispatch)
           } catch (error) {
             console.error(error)
           }

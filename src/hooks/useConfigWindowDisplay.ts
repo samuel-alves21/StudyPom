@@ -15,13 +15,13 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
   shouldDisplay,
   optionsWindowRef
 ) => {
-  const { isSaved } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
   const { userState } = useContext(UserContext) as UserContextType
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        if (shouldDisplay && !isSaved && !userState.pendentUser) {
+        if (shouldDisplay && !SaveConfigState.isSaved && !userState.pendentUser) {
           alert('Please save your config before exiting')
           return
         }
@@ -32,7 +32,7 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
     const handleClick = (event: MouseEvent) => {
       if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
       if (shouldDisplay === false) return
-      if (!isSaved && !userState.pendentUser) {
+      if (!SaveConfigState.isSaved && !userState.pendentUser) {
         alert('Please save your config before exiting')
         return
       } else {
@@ -47,5 +47,5 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('click', handleClick)
     }
-  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef, isSaved, userState.pendentUser])
+  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef, SaveConfigState.isSaved, userState.pendentUser])
 }

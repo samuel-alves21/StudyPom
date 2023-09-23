@@ -1,19 +1,31 @@
 import styled from 'styled-components'
 import { TimerConfigInput } from './TimerConfigInput'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { LimitValues } from './LimitValues'
 import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
 import { DefaultToggleButton } from './DefaultToggleButton'
+import { UserContext, UserContextType } from '../../../../../contexts/UserContext'
 
 export const SetTimer = () => {
   const {
     timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
   } = useContext(TimerContext) as TimerContextType
 
+  const { userState } = useContext(UserContext) as UserContextType
+
   const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
   const [shortConfigTime, setShortConfigTime] = useState<string>(String(shortRestTime))
   const [longConfigTime, setLongConfigTime] = useState<string>(String(longRestTime))
   const [configCycles, setConfigCycles] = useState<string>(String(cycles))
+
+  useEffect(() => {
+    if(!userState.pendentUser) {
+      setPomodoroConfigTime(pomodoroTime.toString())
+      setShortConfigTime(shortRestTime.toString())
+      setLongConfigTime(longRestTime.toString())
+      setConfigCycles(cycles.toString())
+    }
+  }, [pomodoroTime, shortRestTime, longRestTime, cycles, userState.pendentUser])
 
   return (
     <Wrapper>
