@@ -18,8 +18,15 @@ export const SetTimer = () => {
   const [longConfigTime, setLongConfigTime] = useState<string>(String(longRestTime))
   const [configCycles, setConfigCycles] = useState<string>(String(cycles))
 
+  const [isChanged, setIsChanged] = useState(false)
+
+  const isChangedProps = {
+    isChanged: isChanged,
+    setIsChanged: setIsChanged,
+  }
+
   useEffect(() => {
-    if(!userState.pendentUser) {
+    if (!userState.pendentUser) {
       setPomodoroConfigTime(pomodoroTime.toString())
       setShortConfigTime(shortRestTime.toString())
       setLongConfigTime(longRestTime.toString())
@@ -31,26 +38,31 @@ export const SetTimer = () => {
     <Wrapper>
       <InputContainer>
         <label htmlFor='pomodoro'>Pomodoro Time:</label>
-        <TimerConfigInput id='pomodoro' state={pomodoroConfigTime} setState={setPomodoroConfigTime} />
+        <TimerConfigInput
+          id='pomodoro'
+          state={pomodoroConfigTime}
+          setState={setPomodoroConfigTime}
+          {...isChangedProps}
+        />
         <LimitValues id={'pomodoro'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='short'>Short Rest Time:</label>
-        <TimerConfigInput id='short' state={shortConfigTime} setState={setShortConfigTime} />
+        <TimerConfigInput id='short' state={shortConfigTime} setState={setShortConfigTime} {...isChangedProps} />
         <LimitValues id={'short'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='long'>Long Rest Time:</label>
-        <TimerConfigInput id='long' state={longConfigTime} setState={setLongConfigTime} />
+        <TimerConfigInput id='long' state={longConfigTime} setState={setLongConfigTime} {...isChangedProps} />
         <LimitValues id={'long'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='cycles'>Cycles:</label>
-        <TimerConfigInput id='cycles' state={configCycles} setState={setConfigCycles} />
+        <TimerConfigInput id='cycles' state={configCycles} setState={setConfigCycles} {...isChangedProps} />
         <LimitValues id={'cycles'} />
       </InputContainer>
       <InputContainer>
-        <DefaultToggleButton />
+        <DefaultToggleButton setIsChanged={setIsChanged} />
       </InputContainer>
     </Wrapper>
   )

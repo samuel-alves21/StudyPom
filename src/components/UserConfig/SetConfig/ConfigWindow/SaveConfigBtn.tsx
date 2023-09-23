@@ -10,7 +10,7 @@ export const SaveConfigBtn = () => {
     SaveConfigState: { StagedCycle, StagedLongRestTime, StagedPomodoroTime, StagedShortRestTime, isSaved },
     SaveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
-  
+
   const {
     timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
     timeDispatch,
@@ -21,10 +21,10 @@ export const SaveConfigBtn = () => {
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   useEffect(() => {
-    SaveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime})
-    SaveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime})
-    SaveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime})
-    SaveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles})
+    SaveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime })
+    SaveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
+    SaveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
+    SaveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
   }, [pomodoroTime, shortRestTime, longRestTime, cycles, SaveConfigDispatch])
 
   const handleClick = () => {

@@ -13,14 +13,14 @@ export const useTimerStaged = (state: string, id: Id, isChanged: boolean) => {
   const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useEffect(() => {
+    console.log(isChanged)
     if (isChanged) {
       if (id !== 'cycles') {
         SaveConfigDispatch({
           type: `STAGE_${id.toUpperCase()}_TIME` as SaveConfigTypes,
           payload: verifyLimit(Number(state), id),
         })
-        console.log(id, state)
-        SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })  
+        SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
       } else {
         SaveConfigDispatch({
           type: 'STAGE_CYCLES',

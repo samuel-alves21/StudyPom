@@ -15,7 +15,11 @@ interface WrapperProps {
   isDefault: boolean
 }
 
-export const DefaultToggleButton = () => {
+interface DefaultToggleButtonProps {
+  setIsChanged: (value: boolean) => void
+}
+
+export const DefaultToggleButton = ({ setIsChanged }: DefaultToggleButtonProps) => {
   const [shouldAnimate, setShouldAnimate] = useState(false)
   const {
     timeState: { isDefault },
@@ -41,6 +45,7 @@ export const DefaultToggleButton = () => {
   }, [isDefault, timeDispatch, buttonDispatch, userState.id, userState.pendentUser])
 
   const handleClick = () => {
+    setIsChanged(false)
     setShouldAnimate(true)
     timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
   }

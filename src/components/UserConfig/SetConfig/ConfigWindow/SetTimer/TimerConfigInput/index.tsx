@@ -14,11 +14,12 @@ interface TimerConfigInputProps {
   id: Id
   state: string
   setState: (value: string) => void
+  isChanged: boolean
+  setIsChanged: (value: boolean) => void
 }
 
-export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps) => {
+export const TimerConfigInput = ({ state, setState, id, isChanged, setIsChanged }: TimerConfigInputProps) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
-  const [isChanged, setIsChanged] = useState(false)
 
   useTimerStaged(state, id, isChanged)
 
@@ -33,6 +34,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   }, [id, isDefault, setState])
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    console.log('blur')
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
     if (!Number(state))
@@ -62,6 +64,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   }
 
   const handleWhell = (e: React.WheelEvent<HTMLInputElement>) => {
+    console.log('scroll')
     if (isDefault) return
     if (isOnFocus) return
     if (e.deltaY < 0) {
@@ -73,6 +76,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log('keyDown')
     const thisElement = e.target as HTMLElement
     if (e.key === 'Backspace') setState('')
     if (e.key === 'Enter') {
@@ -92,6 +96,7 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   }
 
   const handleFocus = () => {
+    console.log('focus')
     setIsOnFocus(true)
     setState('')
     setIsChanged(true)
