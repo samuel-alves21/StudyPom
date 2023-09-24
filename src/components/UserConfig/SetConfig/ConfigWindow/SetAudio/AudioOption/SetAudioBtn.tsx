@@ -32,7 +32,7 @@ export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) 
   }
 
   return (
-    <Button isSelected={isSelected} onClick={() => handleClick}>
+    <Button isSelected={isSelected} onClick={() => handleClick()}>
       set sound
     </Button>
   )
