@@ -1,4 +1,7 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { UserContext, UserContextType } from '../../../../../contexts/UserContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 interface ConfigNavProps {
   setOption: (option: 'timer' | 'background' | 'sounds' | 'color') => void
@@ -11,8 +14,21 @@ export interface ConfigNavStyledProps {
 }
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
+
+  const { userState } = useContext(UserContext) as UserContextType
+  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const handleClick = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     setOption(e.currentTarget.innerText.toLowerCase() as typeof option)
+  }
+
+  const handleCloseWindow = () => {
+    if (!SaveConfigState.isSaved && !userState.pendentUser) {
+      alert('Please save or reset your config before exiting')
+      return
+    }
+    
+    setShouldDisplay(false)      
   }
 
   return (
@@ -31,7 +47,7 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
           Background
         </Option>
       </Options>
-      <i className='bi bi-x-lg' onClick={() => setShouldDisplay(false)}></i>
+      <i className='bi bi-x-lg' onClick={handleCloseWindow}></i>
     </Wrapper>
   )
 }

@@ -22,7 +22,7 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         if (shouldDisplay && !SaveConfigState.isSaved && !userState.pendentUser) {
-          alert('Please save your config before exiting')
+          alert('Please save or reset your config before exiting')
           return
         }
         setShouldDisplay(!shouldDisplay)
@@ -33,7 +33,7 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
       if (shouldDisplay === false) return
       if (!SaveConfigState.isSaved && !userState.pendentUser) {
-        alert('Please save your config before exiting')
+        alert('Please save or reset your config before exiting')
         return
       } else {
         setShouldDisplay(!shouldDisplay)
