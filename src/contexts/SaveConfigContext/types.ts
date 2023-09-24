@@ -4,3 +4,4 @@ export type SaveConfigTypes =
   | 'STAGE_LONG_TIME'
   | 'STAGE_CYCLES'
   | 'SET_IS_SAVED'
+  | 'SET_SHOULD_UPDATE_INPUT_VALUE'

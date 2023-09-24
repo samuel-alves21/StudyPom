@@ -22,6 +22,9 @@ export const reducer: Reducer = (state, action) => {
     case 'STAGE_CYCLES':
       if (typeof action.payload !== 'number') return { ...state }
       return { ...state, StagedCycle: action.payload }
+    case 'SET_SHOULD_UPDATE_INPUT_VALUE':
+      if (typeof action.payload !== 'boolean') return { ...state }
+      return { ...state, shouldUpdateInputValue: action.payload }
     case 'SET_IS_SAVED':
       if (typeof action.payload !== 'boolean') return { ...state }
       return { ...state, isSaved: action.payload }

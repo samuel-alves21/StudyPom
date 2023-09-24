@@ -91,6 +91,36 @@ export const reducer: TimerReducer = (state, action) => {
         ...state,
         workedTime: state.workedTime + action.payload,
       }
+    case 'SET_POMODORO_CONFIG_VALUE_INPUT':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        pomodoroConfigValueInput: action.payload,
+      }
+    case 'SET_SHORT_CONFIG_VALUE_INPUT':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        shortConfigValueInput: action.payload,
+      }
+    case 'SET_LONG_CONFIG_VALUE_INPUT':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        longConfigValueInput: action.payload,
+      }
+    case 'SET_CYCLES_CONFIG_VALUE_INPUT':
+      if (typeof action.payload !== 'number') return state
+      return {
+        ...state,
+        cyclesConfigValueInput: action.payload,
+      }
+    case 'SET_IS_INPUT_VALUE_CHANGED':
+      if (typeof action.payload !== 'boolean') return state
+      return {
+        ...state,
+        isInputValueChanged: action.payload,
+      }
     case 'RESET_ALL':
       return {
         ...state,

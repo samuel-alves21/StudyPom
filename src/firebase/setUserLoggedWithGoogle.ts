@@ -4,7 +4,6 @@ import { database } from './config'
 
 export const setUserLoggedWithGoogle = async (result: UserCredential | null) => {
   if (result) {
-    console.log(result)
     const snapshot = await get(ref(database, `users/${result.user.uid}`))
     if (snapshot.exists()) {
       const username = (await get(ref(database, `users/${result.user.uid}/username`))).val()

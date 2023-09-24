@@ -6,15 +6,19 @@ import { Id } from '../components/Timer/Counter/CounterOptionsBtn'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 import { SaveConfigTypes } from '../contexts/SaveConfigContext/types'
 
-export const useTimerStaged = (state: string, id: Id, isChanged: boolean) => {
-  const { timeDispatch } = useContext(TimerContext) as TimerContextType
+export const useTimerStaged = (state: number, id: Id) => {
+  
+  const {
+    timeDispatch,
+    timeState: { isInputValueChanged },
+  } = useContext(TimerContext) as TimerContextType
+
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useEffect(() => {
-    console.log(isChanged)
-    if (isChanged) {
+    if (isInputValueChanged) {
       if (id !== 'cycles') {
         SaveConfigDispatch({
           type: `STAGE_${id.toUpperCase()}_TIME` as SaveConfigTypes,
@@ -29,5 +33,5 @@ export const useTimerStaged = (state: string, id: Id, isChanged: boolean) => {
         SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
       }
     }
-  }, [state, id, timeDispatch, buttonDispatch, isChanged, SaveConfigDispatch])
+  }, [state, id, timeDispatch, buttonDispatch, isInputValueChanged, SaveConfigDispatch])
 }

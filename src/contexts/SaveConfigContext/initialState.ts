@@ -5,5 +5,6 @@ export const initialState = {
   StagedShortRestTime: 0,
   StagedLongRestTime: 0,
   StagedCycle: 0,
+  shouldUpdateInputValue: true,
   isSaved: true,
 }

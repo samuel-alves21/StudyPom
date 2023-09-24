@@ -9,6 +9,7 @@ import { SetColor } from './SetColor'
 import { useConfigWindowDisplay } from '../../../../hooks/useConfigWindowDisplay'
 import { SaveConfigBtn } from './SaveConfigBtn'
 import { UserContext, UserContextType } from '../../../../contexts/UserContext'
+import { ResetConfig } from './ResetConfig'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -50,7 +51,10 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
             {option === 'sounds' && <SetAudio />}
             {option === 'color' && <SetColor />}
           </ConfigsWindows>
-          {userState.pendentUser || <SaveConfigBtn />}
+          <div style={{ display: 'flex', gap: 'var(--gap-1)', alignItems: 'center' }}>
+            {userState.pendentUser || <SaveConfigBtn />}
+            {userState.pendentUser || <ResetConfig />}
+          </div>
         </CurrentOptionWindow>
       </Window>
     </Wrapper>

@@ -6,8 +6,8 @@ import { TimerContext, TimerContextType } from '../../../../../../contexts/Timer
 import { useContext } from 'react'
 
 interface ArrowsProps {
-  state: string
-  setState: (value: string) => void
+  state: number
+  setState: (value: number) => void
   id: Id
 }
 
@@ -26,9 +26,9 @@ export const Arrows = ({ id, setState, state }: ArrowsProps) => {
     const thisElement = e.target as HTMLElement
 
     if (thisElement.id === 'acrement') {
-      setState(acrementTime(Number(state), id).toString())
+      setState(acrementTime(state, id))
     } else {
-      setState(decrementTime(Number(state), id).toString())
+      setState(decrementTime(state, id))
     }
   }
 

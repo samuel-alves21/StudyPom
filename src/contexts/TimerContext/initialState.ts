@@ -13,4 +13,9 @@ export const initialState = {
   timeCounting: false,
   workedTime: 0,
   isDefault: false,
+  pomodoroConfigValueInput: standardValues.pomodoro,
+  shortConfigValueInput: standardValues.short,
+  longConfigValueInput: standardValues.long,
+  cyclesConfigValueInput: standardValues.cycles,
+  isInputValueChanged: false,
 }
