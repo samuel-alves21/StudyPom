@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef } from 'react'
 import { ConfigWindow } from './ConfigWindow'
 import { Filter } from './Filter'
-import { SaveConfigContext, SaveConfigContextType } from '../../../contexts/SaveConfigContext'
 
 interface GearIconProps {
   shouldRotate: boolean
@@ -19,11 +18,6 @@ export const ConfigHeading = () => {
     setShouldDisplay(true)
     setAnimate(true)
   }
-
-  const {
-    SaveConfigState: { isSaved },
-  } = useContext(SaveConfigContext) as SaveConfigContextType
-  console.log(isSaved)
 
   return (
     <Wrapper className='config-wrapper' shouldRotate={shouldDisplay} animate={animate}>
