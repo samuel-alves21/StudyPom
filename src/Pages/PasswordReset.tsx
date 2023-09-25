@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { breakpoints } from '../utilities/breakpoints'
 import { sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '../firebase/config'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Spinner } from '../components/Spinner'
 import { setAttemptsData } from '../firebase/setAttemptsData'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
@@ -16,9 +16,8 @@ export const PasswordReset = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
   const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'password', setIsLoading)
 
-  useEffect(() => {
-    setIsLogin(false)
-  }, [setIsLogin])
+  setIsLogin(false)
+
 
   const handleClick = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement

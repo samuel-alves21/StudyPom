@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { LoginContent } from '../components/LoginContent'
 import { breakpoints } from '../utilities/breakpoints'
@@ -14,9 +14,7 @@ export const Login = () => {
 
   window.document.title = 'StudyPom | Login'
 
-  useEffect(() => {
-    setIsLogin(true)
-  }, [setIsLogin])
+  setIsLogin(true)
 
   useRedirectToAppOnLogged()
 

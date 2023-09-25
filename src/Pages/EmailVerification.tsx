@@ -5,7 +5,7 @@ import { User, sendEmailVerification } from 'firebase/auth'
 import { MessagePopUp } from '../components/MessagePopUp'
 import { useParams } from 'react-router-dom'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { setAttemptsData } from '../firebase/setAttemptsData'
 import { useTimeout } from '../hooks/useTimeout'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
@@ -18,9 +18,7 @@ export const EmailVerification = () => {
   const { origin } = useParams()
   const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'verification', setIsLoading)
 
-  useEffect(() => {
-    setIsLogin(false)
-  }, [setIsLogin])
+  setIsLogin(false)
 
   const handleSubmit = async () => {
     if (isAllowed) {
