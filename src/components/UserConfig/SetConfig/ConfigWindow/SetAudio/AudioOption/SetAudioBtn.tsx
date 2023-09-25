@@ -6,7 +6,10 @@ import {
   CustomizationContextType,
   SoundObject,
 } from '../../../../../../contexts/CustomizationContext'
-import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
+import {
+  SaveConfigContext,
+  SaveConfigContextType,
+} from '../../../../../../contexts/SaveConfigContext'
 
 interface SetAudioBtnProps {
   sounds: SoundObject
@@ -43,7 +46,8 @@ const Button = styled(StyledButton)`
   font-size: 1.25rem;
   display: block;
   margin: 0 auto;
-  background-color: ${({ isSelected }: StyledSoundButtonProps) => (isSelected ? 'white' : 'transparent')};
+  background-color: ${({ isSelected }: StyledSoundButtonProps) =>
+    isSelected ? 'white' : 'transparent'};
   color: ${({ isSelected }: StyledSoundButtonProps) => (isSelected ? 'black' : 'white')};
 
   @media (hover: hover) and (pointer: fine) {

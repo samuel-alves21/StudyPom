@@ -7,7 +7,13 @@ import { ButtonContextType, ButtonsContext } from '../../../../contexts/ButtonsC
 
 export const SaveConfigBtn = () => {
   const {
-    SaveConfigState: { StagedCycle, StagedLongRestTime, StagedPomodoroTime, StagedShortRestTime, isSaved },
+    SaveConfigState: {
+      StagedCycle,
+      StagedLongRestTime,
+      StagedPomodoroTime,
+      StagedShortRestTime,
+      isSaved,
+    },
     SaveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
@@ -36,7 +42,13 @@ export const SaveConfigBtn = () => {
     timeDispatch({ type: 'RESET_ALL' })
     buttonDispatch({ type: 'CLICKED', payload: false })
     buttonDispatch({ type: 'POMODORO' })
-    setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
+    setUserConfig(
+      userState.id,
+      StagedPomodoroTime,
+      StagedShortRestTime,
+      StagedLongRestTime,
+      StagedCycle
+    )
   }
 
   return (

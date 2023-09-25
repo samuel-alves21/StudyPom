@@ -41,7 +41,11 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
 
   return (
     <Wrapper shouldDisplay={shouldDisplay}>
-      <Window ref={thisWindow} shouldDisplay={shouldDisplay} className='flex-all-center flex-column'>
+      <Window
+        ref={thisWindow}
+        shouldDisplay={shouldDisplay}
+        className='flex-all-center flex-column'
+      >
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow className='flex-all-center'>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>
@@ -92,7 +96,9 @@ const Window = styled.div<StyledConfingWindow>`
 
   ${({ shouldDisplay }) => {
     return `
-    transition: opacity ${shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'};
+    transition: opacity ${
+      shouldDisplay ? '0.2s ease-in-out' : '0.4s cubic-bezier(0.39, 0.575, 0.565, 1)'
+    };
     opacity: ${shouldDisplay ? '1' : '0'};
     pointer-events: ${shouldDisplay ? 'all' : 'none'};
     animation: ${

@@ -62,7 +62,14 @@ export const Form = ({ setIsLoading }: FormContentProps) => {
             inputsArray[index + 1].focus()
           } else {
             if (isLogin) {
-              login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError, accessState)
+              login(
+                hasErrorOnSubmit(formState),
+                inputsArray,
+                formDispatch,
+                navigate,
+                setLoginError,
+                accessState
+              )
             } else {
               register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
             }
@@ -90,7 +97,14 @@ export const Form = ({ setIsLoading }: FormContentProps) => {
         <FormInput {...props} id='email' placeholder='email' type='email' />
         <FormInput {...props} id='password' placeholder='password' type='password' />
         {isLogin && loginError && <p className='error'>Invalid email or password</p>}
-        {isLogin || <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />}
+        {isLogin || (
+          <FormInput
+            {...props}
+            id='confirmedPassword'
+            placeholder='confirm password'
+            type='password'
+          />
+        )}
         <SignInWithGoogleBtn />
         <SubmitButton
           inputsArray={inputsArray}

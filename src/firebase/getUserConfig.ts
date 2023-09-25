@@ -2,7 +2,10 @@ import { get, ref } from 'firebase/database'
 import { database } from './config'
 import { TimerReducerAction } from '../contexts/TimerContext/reducer'
 
-type getUserConfigFn = (uid: string, timeDispatch: React.Dispatch<TimerReducerAction>) => Promise<void>
+type getUserConfigFn = (
+  uid: string,
+  timeDispatch: React.Dispatch<TimerReducerAction>
+) => Promise<void>
 
 export const getUserConfig: getUserConfigFn = async (uid, timeDispatch) => {
   const snapshot = await get(ref(database, `users/${uid}/config`))

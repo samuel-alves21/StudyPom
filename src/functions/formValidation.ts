@@ -199,11 +199,19 @@ export const formValidator = (
     }
     if (id === 'password') {
       const isPasswordInvalid = formValidation.passwordVerify(value, formDispatch)
-      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(
+        passwordValue,
+        value,
+        formDispatch
+      )
       if (isPasswordInvalid || isConfirmedPasswordInvalid) return
     }
     if (id === 'confirmedPassword') {
-      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(
+        passwordValue,
+        value,
+        formDispatch
+      )
       if (isConfirmedPasswordInvalid) return
     }
   }

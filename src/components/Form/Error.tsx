@@ -13,7 +13,11 @@ export const Error = ({ errorField, errorType }: FormErrorProps) => {
   const { formState } = useContext(FormContext) as FormContextType
   const obj = formState[errorField]
 
-  return <ErrorMsg>* {formState[errorField].errorTypes[errorType as keyof typeof obj.errorTypes]}</ErrorMsg>
+  return (
+    <ErrorMsg>
+      * {formState[errorField].errorTypes[errorType as keyof typeof obj.errorTypes]}
+    </ErrorMsg>
+  )
 }
 
 const ErrorMsg = styled.p`

@@ -14,10 +14,13 @@ export const PasswordReset = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
-  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'password', setIsLoading)
+  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(
+    isLogin,
+    'password',
+    setIsLoading
+  )
 
   setIsLogin(false)
-
 
   const handleClick = () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
@@ -62,7 +65,10 @@ export const PasswordReset = () => {
           <input type='text' id='password-recover-input' onKeyDown={(e) => handleKeyDown(e)} />
           <i className='bi bi-x' onClick={clearText}></i>
         </InputWrapper>
-        <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
+        <button
+          className={`form-button ${isAllowed || 'form-button-disabled'}`}
+          onClick={handleSubmit}
+        >
           {isAllowed ? 'send Email' : `try again in: ${secondsToMinutes(timeLeft)}`}
         </button>
         <p>If you didn't receive an email, please check your spam folder.</p>

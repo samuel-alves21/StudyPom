@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 import { CirclePicker, ColorResult } from 'react-color'
-import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import {
+  CustomizationContext,
+  CustomizationContextType,
+} from '../../../../../contexts/CustomizationContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const MobileColorPicker = () => {

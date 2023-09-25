@@ -15,5 +15,9 @@ export const ButtonsContext = createContext<ButtonContextType | null>(null)
 
 export const ButtonsProvider = (props: ButtonsProviderProps) => {
   const [buttonState, buttonDispatch] = useReducer(reducer, initialState)
-  return <ButtonsContext.Provider value={{ buttonState, buttonDispatch }}>{props.children}</ButtonsContext.Provider>
+  return (
+    <ButtonsContext.Provider value={{ buttonState, buttonDispatch }}>
+      {props.children}
+    </ButtonsContext.Provider>
+  )
 }

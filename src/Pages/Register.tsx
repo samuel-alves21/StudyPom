@@ -12,7 +12,6 @@ export const Register = () => {
 
   setIsLogin(false)
 
-
   useRedirectToAppOnLogged()
 
   window.document.title = 'StudyPom | Register'

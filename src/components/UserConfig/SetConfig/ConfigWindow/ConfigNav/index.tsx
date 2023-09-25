@@ -14,7 +14,6 @@ export interface ConfigNavStyledProps {
 }
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
-
   const { userState } = useContext(UserContext) as UserContextType
   const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
 
@@ -27,8 +26,8 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
       alert('Please save or reset your config before exiting')
       return
     }
-    
-    setShouldDisplay(false)      
+
+    setShouldDisplay(false)
   }
 
   return (

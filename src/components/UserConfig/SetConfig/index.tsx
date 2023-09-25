@@ -53,8 +53,9 @@ const Wrapper = styled.div<GearIconProps>`
     top: 4px;
     transition: transform 0.03s ease-in-out;
     transition: color 0.2s ease-in-out;
-    animation: ${({ animate, shouldRotate }) => (shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none')} 0.5s
-      forwards ease-in-out;
+    animation: ${({ animate, shouldRotate }) =>
+        shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none'}
+      0.5s forwards ease-in-out;
 
     @keyframes spin {
       0% {

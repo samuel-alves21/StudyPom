@@ -21,7 +21,10 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
 
   const setInputValue = useCallback(
     (payload: number) => {
-      timeDispatch({ type: `SET_${id.toUpperCase()}_CONFIG_VALUE_INPUT` as TimerActionTypes, payload: payload })
+      timeDispatch({
+        type: `SET_${id.toUpperCase()}_CONFIG_VALUE_INPUT` as TimerActionTypes,
+        payload: payload,
+      })
     },
     [id, timeDispatch]
   )

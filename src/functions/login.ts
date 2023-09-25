@@ -20,7 +20,14 @@ type LoginFn = (
   access: AccessStateType
 ) => void
 
-export const login: LoginFn = async (hasError, inputsArray, formDispatch, navigate, setLoginError, access) => {
+export const login: LoginFn = async (
+  hasError,
+  inputsArray,
+  formDispatch,
+  navigate,
+  setLoginError,
+  access
+) => {
   const spinner = document.getElementById('spinner') as HTMLDivElement
   spinner.style.display = 'flex'
 
