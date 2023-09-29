@@ -1,5 +1,8 @@
 import { useContext } from 'react'
-import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import {
+  CustomizationContext,
+  CustomizationContextType,
+} from '../../../../../contexts/CustomizationContext'
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import styled from 'styled-components'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'

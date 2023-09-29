@@ -17,6 +17,8 @@ export const SaveConfigProvider = ({ children }: SaveConfigProviderProps) => {
   const [SaveConfigState, SaveConfigDispatch] = useReducer(reducer, initialState)
 
   return (
-    <SaveConfigContext.Provider value={{ SaveConfigState, SaveConfigDispatch }}>{children}</SaveConfigContext.Provider>
+    <SaveConfigContext.Provider value={{ SaveConfigState, SaveConfigDispatch }}>
+      {children}
+    </SaveConfigContext.Provider>
   )
 }

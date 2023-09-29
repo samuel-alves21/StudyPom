@@ -31,7 +31,10 @@ export const register: RegisterFn = async (hasError, inputsArray, formDispatch, 
     try {
       const usernameExists = await usernameVerify(formData.username)
       if (usernameExists) {
-        formDispatch({ type: 'SET_USERNAME_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
+        formDispatch({
+          type: 'SET_USERNAME_ERROR',
+          payload: { setHasError: true, setCurrentError: 'exists' },
+        })
 
         spinner.style.display = 'none'
       } else {
@@ -42,7 +45,10 @@ export const register: RegisterFn = async (hasError, inputsArray, formDispatch, 
       //eslint-disable-next-line
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        formDispatch({ type: 'SET_EMAIL_ERROR', payload: { setHasError: true, setCurrentError: 'exists' } })
+        formDispatch({
+          type: 'SET_EMAIL_ERROR',
+          payload: { setHasError: true, setCurrentError: 'exists' },
+        })
       } else {
         console.error(error)
       }

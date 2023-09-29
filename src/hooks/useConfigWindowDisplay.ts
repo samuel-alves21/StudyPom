@@ -50,5 +50,12 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('click', handleClick)
     }
-  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef, SaveConfigState.isSaved, userState.pendentUser, SaveConfigDispatch])
+  }, [
+    setShouldDisplay,
+    gear,
+    shouldDisplay,
+    optionsWindowRef,
+    SaveConfigState.isSaved,
+    userState.pendentUser, SaveConfigDispatch,
+  ])
 }

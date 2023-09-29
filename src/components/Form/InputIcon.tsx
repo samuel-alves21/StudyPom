@@ -16,7 +16,9 @@ export const InputIcon = ({ id }: InputIconProps) => {
       {id === 'username' && <i className='bi bi-person-circle' onClick={(e) => handleClick(e)}></i>}
       {id === 'email' && <i className='bi bi-envelope-fill' onClick={(e) => handleClick(e)}></i>}
       {id === 'password' && <i className='bi bi-key-fill' onClick={(e) => handleClick(e)}></i>}
-      {id === 'confirmedPassword' && <i className='bi bi-key-fill' onClick={(e) => handleClick(e)}></i>}
+      {id === 'confirmedPassword' && (
+        <i className='bi bi-key-fill' onClick={(e) => handleClick(e)}></i>
+      )}
     </>
   )
 }

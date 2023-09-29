@@ -24,7 +24,11 @@ export const CounterResetBtn = () => {
   useSetWindowTitle(true)
 
   return (
-    <Wrapper className='counter-reset-btn' animate={animate} onAnimationEnd={() => setAnimate(false)}>
+    <Wrapper
+      className='counter-reset-btn'
+      animate={animate}
+      onAnimationEnd={() => setAnimate(false)}
+    >
       <i className='bi bi-arrow-clockwise' onClick={handleClick}></i>
     </Wrapper>
   )

@@ -15,7 +15,7 @@ export const ResetConfig = () => {
     timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
-  
+
   const {
     SaveConfigDispatch,
     SaveConfigState: { isSaved },
@@ -59,7 +59,7 @@ const Wrapper = styled.div<ResetConfigProps>`
     }
   }
 
-  animation: ${({ animate }) => animate ? 'full-rotate-animation 0.7s linear' : 'none'};
+  animation: ${({ animate }) => (animate ? 'full-rotate-animation 0.7s linear' : 'none')};
 
   @keyframes full-rotate-animation {
     0% {
@@ -83,7 +83,6 @@ const Wrapper = styled.div<ResetConfigProps>`
           }
         }
       `
-  }}}
+    }
+  }}
 `
-
-

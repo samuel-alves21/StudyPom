@@ -14,7 +14,6 @@ export interface ConfigNavStyledProps {
 }
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
-
   const { userState } = useContext(UserContext) as UserContextType
   const { SaveConfigState, SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
@@ -27,8 +26,8 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
       SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
       return
     }
-    
-    setShouldDisplay(false)      
+
+    setShouldDisplay(false)
   }
 
   return (

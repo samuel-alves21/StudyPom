@@ -7,7 +7,6 @@ import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfig
 import { SaveConfigTypes } from '../contexts/SaveConfigContext/types'
 
 export const useTimerStaged = (state: number, id: Id) => {
-  
   const {
     timeDispatch,
     timeState: { isInputValueChanged },

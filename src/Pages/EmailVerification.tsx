@@ -5,7 +5,7 @@ import { User, sendEmailVerification } from 'firebase/auth'
 import { MessagePopUp } from '../components/MessagePopUp'
 import { useParams } from 'react-router-dom'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { setAttemptsData } from '../firebase/setAttemptsData'
 import { useTimeout } from '../hooks/useTimeout'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
@@ -16,11 +16,13 @@ export const EmailVerification = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
   const { origin } = useParams()
-  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'verification', setIsLoading)
+  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(
+    isLogin,
+    'verification',
+    setIsLoading
+  )
 
-  useEffect(() => {
-    setIsLogin(false)
-  }, [setIsLogin])
+  setIsLogin(false)
 
   const handleSubmit = async () => {
     if (isAllowed) {
@@ -58,7 +60,10 @@ export const EmailVerification = () => {
           <h1>Email Verification</h1>
           <p>Please check your email and click on the link to verify your email to continue.</p>
           <p>If you don't receive an email, please check your spam folder.</p>
-          <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
+          <button
+            className={`form-button ${isAllowed || 'form-button-disabled'}`}
+            onClick={handleSubmit}
+          >
             {isAllowed ? 're-send email' : 'send another in: ' + secondsToMinutes(timeLeft)}
           </button>
         </ContentWrapper>

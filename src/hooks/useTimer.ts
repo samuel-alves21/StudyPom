@@ -14,7 +14,15 @@ export const useTimer = () => {
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const {
-    timeState: { cycles, cyclesTemp, timeOnDisplay, timeCounting, pomodoroTime, shortRestTime, longRestTime },
+    timeState: {
+      cycles,
+      cyclesTemp,
+      timeOnDisplay,
+      timeCounting,
+      pomodoroTime,
+      shortRestTime,
+      longRestTime,
+    },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 

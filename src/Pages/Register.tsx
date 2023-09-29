@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
@@ -10,9 +10,7 @@ import { useRedirectToAppOnLogged } from '../hooks/useRedirectToAppOnLogged'
 export const Register = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
 
-  useEffect(() => {
-    setIsLogin(false)
-  }, [setIsLogin])
+  setIsLogin(false)
 
   useRedirectToAppOnLogged()
 

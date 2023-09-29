@@ -3,6 +3,7 @@ import { backgroundArray } from '../../../../../utilities/backgroundArray'
 import { BackgroundOption } from './BackgroundOption'
 import { breakpoints } from '../../../../../utilities/breakpoints'
 import { RangeInputs } from './RangeInputs'
+import { UploadBackgroundBtn } from './UploadBackgroundBtn'
 
 export const SetBackground = () => {
   return (
@@ -13,6 +14,7 @@ export const SetBackground = () => {
           return <BackgroundOption background={background} key={index} />
         })}
       </BackgroundsWrapper>
+      <UploadBackgroundBtn />
     </Wrapper>
   )
 }

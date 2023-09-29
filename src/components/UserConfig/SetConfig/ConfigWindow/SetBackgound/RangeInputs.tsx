@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import {
+  CustomizationContext,
+  CustomizationContextType,
+} from '../../../../../contexts/CustomizationContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const RangeInputs = () => {
