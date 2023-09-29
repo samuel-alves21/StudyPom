@@ -7,4 +7,5 @@ export const initialState = {
   StagedCycle: 0,
   shouldUpdateInputValue: true,
   isSaved: true,
+  shouldShowSaveAlert: false,
 }

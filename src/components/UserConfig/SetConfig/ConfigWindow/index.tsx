@@ -10,6 +10,8 @@ import { useConfigWindowDisplay } from '../../../../hooks/useConfigWindowDisplay
 import { SaveConfigBtn } from './SaveConfigBtn'
 import { UserContext, UserContextType } from '../../../../contexts/UserContext'
 import { ResetConfig } from './ResetConfig'
+import { SaveAlert } from '../../../SaveAlert'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../contexts/SaveConfigContext'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -25,6 +27,7 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
   const { userState } = useContext(UserContext) as UserContextType
+  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const thisWindow = useRef<HTMLDivElement | null>(null)
 

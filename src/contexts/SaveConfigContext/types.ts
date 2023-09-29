@@ -5,3 +5,4 @@ export type SaveConfigTypes =
   | 'STAGE_CYCLES'
   | 'SET_IS_SAVED'
   | 'SET_SHOULD_UPDATE_INPUT_VALUE'
+  | 'SET_SHOULD_SHOW_SAVE_ALERT'

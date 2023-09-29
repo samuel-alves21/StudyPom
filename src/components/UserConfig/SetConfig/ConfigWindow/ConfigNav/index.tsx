@@ -16,7 +16,7 @@ export interface ConfigNavStyledProps {
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
 
   const { userState } = useContext(UserContext) as UserContextType
-  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigState, SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleClick = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     setOption(e.currentTarget.innerText.toLowerCase() as typeof option)
@@ -24,7 +24,7 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
 
   const handleCloseWindow = () => {
     if (!SaveConfigState.isSaved && !userState.pendentUser) {
-      alert('Please save or reset your config before exiting')
+      SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
       return
     }
     

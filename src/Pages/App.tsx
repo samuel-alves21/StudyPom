@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
@@ -11,6 +11,8 @@ import { ColorStyle } from '../components/ColorStyle'
 import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
+import { SaveAlert } from '../components/SaveAlert'
+import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
 export interface MainContainerProps {
   background: string
@@ -24,10 +26,22 @@ const App = () => {
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const [isLoading, setIsLoading] = useState(true)
+  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useUserManager(setIsLoading)
   useSetWindowTitle()
   useSetInitialTimer()
+
+  // useEffect(() => {
+  //   const handleReload = (event: BeforeUnloadEvent) => {
+  //     event.returnValue = 'Are you sure you want to leave this page?'
+  //     console.log('saving data...')
+  //   }
+
+  //   window.addEventListener('beforeunload', handleReload)
+
+  //   return () => window.removeEventListener('beforeunload', handleReload)
+  // }, [])
 
   return (
     <>
@@ -35,6 +49,7 @@ const App = () => {
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
+          { SaveConfigState.shouldShowSaveAlert && <SaveAlert /> }
           <Logo />
           <LoginIcon />
           <Timer />

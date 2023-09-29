@@ -28,6 +28,9 @@ export const reducer: Reducer = (state, action) => {
     case 'SET_IS_SAVED':
       if (typeof action.payload !== 'boolean') return { ...state }
       return { ...state, isSaved: action.payload }
+    case 'SET_SHOULD_SHOW_SAVE_ALERT':
+      if (typeof action.payload !== 'boolean') return { ...state }
+      return { ...state, shouldShowSaveAlert: action.payload }
     default:
       return { ...state }
   }

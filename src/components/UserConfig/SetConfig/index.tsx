@@ -17,11 +17,11 @@ export const ConfigHeading = () => {
   const [animate, setAnimate] = useState(false)
 
   const { userState } = useContext(UserContext) as UserContextType
-  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigState, SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleClick = () => {
     if (!SaveConfigState.isSaved && !userState.pendentUser) {
-      alert('Please save or reset your config before exiting')
+      SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
       return
     }
     setShouldDisplay(!shouldDisplay)

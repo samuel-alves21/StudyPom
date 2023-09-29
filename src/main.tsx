@@ -7,20 +7,23 @@ import { Pages } from './Pages/index.tsx'
 import { LoginProvider } from './contexts/LoginContext/index.tsx'
 import { UserProvider } from './contexts/UserContext/index.tsx'
 import { AccessProvider } from './contexts/AccessContext/index.tsx'
+import { SaveConfigProvider } from './contexts/SaveConfigContext/index.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <AccessProvider>
-    <UserProvider>
-      <ButtonsProvider>
-        <TimerProvider>
-          <CustomizationProvider>
-            <LoginProvider>
-              <GlobalStyles />
-              <Pages />
-            </LoginProvider>
-          </CustomizationProvider>
-        </TimerProvider>
-      </ButtonsProvider>
-    </UserProvider>
+    <SaveConfigProvider>
+      <UserProvider>
+        <ButtonsProvider>
+          <TimerProvider>
+            <CustomizationProvider>
+              <LoginProvider>
+                <GlobalStyles />
+                <Pages />
+              </LoginProvider>
+            </CustomizationProvider>
+          </TimerProvider>
+        </ButtonsProvider>
+      </UserProvider>
+    </SaveConfigProvider>
   </AccessProvider>
 )

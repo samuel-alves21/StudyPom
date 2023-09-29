@@ -15,14 +15,14 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
   shouldDisplay,
   optionsWindowRef
 ) => {
-  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigState, SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
   const { userState } = useContext(UserContext) as UserContextType
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         if (shouldDisplay && !SaveConfigState.isSaved && !userState.pendentUser) {
-          alert('Please save or reset your config before exiting')
+          SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
           return
         }
         setShouldDisplay(!shouldDisplay)
@@ -33,7 +33,10 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
       if (shouldDisplay === false) return
       if (!SaveConfigState.isSaved && !userState.pendentUser) {
-        alert('Please save or reset your config before exiting')
+        const target = event.target as HTMLElement
+        if (target.classList.contains('save-alert')) return 
+        console.log('here')
+        SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
         return
       } else {
         setShouldDisplay(!shouldDisplay)
@@ -47,5 +50,5 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('click', handleClick)
     }
-  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef, SaveConfigState.isSaved, userState.pendentUser])
+  }, [setShouldDisplay, gear, shouldDisplay, optionsWindowRef, SaveConfigState.isSaved, userState.pendentUser, SaveConfigDispatch])
 }
