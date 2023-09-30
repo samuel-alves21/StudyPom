@@ -8,3 +8,4 @@ export type SaveConfigTypes =
   | 'SET_NOT_SAVED_ALERT'
   | 'SET_TIMER_RUNNING_ALERT'
   | 'REMOVE_ALERT'
+  | 'STAGE_SOUND'
