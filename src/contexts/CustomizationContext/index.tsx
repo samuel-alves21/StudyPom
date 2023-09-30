@@ -1,7 +1,6 @@
 import { createContext, useReducer } from 'react'
-import { reducer } from './reducer'
+import { CustomizationAction, reducer } from './reducer'
 import { CustomizationState, initialState } from './initialState'
-import { CustomizationActionTypes } from './types'
 
 export interface SoundObject {
   name: string
@@ -11,10 +10,7 @@ export interface SoundObject {
 
 export interface CustomizationContextType {
   customizationState: CustomizationState
-  customizationDispatch: React.Dispatch<{
-    type: CustomizationActionTypes
-    payload: string | SoundObject
-  }>
+  customizationDispatch: React.Dispatch<CustomizationAction>
 }
 
 interface CustomizationProviderProps {

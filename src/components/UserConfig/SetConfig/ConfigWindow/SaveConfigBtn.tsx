@@ -4,10 +4,12 @@ import { setUserConfig } from '../../../../firebase/setUserConfig'
 import { TimerContext, TimerContextType } from '../../../../contexts/TimerContext'
 import { UserContext, UserContextType } from '../../../../contexts/UserContext'
 import { ButtonContextType, ButtonsContext } from '../../../../contexts/ButtonsContext'
+import { CustomizationContext, CustomizationContextType } from '../../../../contexts/CustomizationContext'
+import { setUserCustomization } from '../../../../firebase/setUserCustomization'
 
 export const SaveConfigBtn = () => {
   const {
-    SaveConfigState: { StagedCycle, StagedLongRestTime, StagedPomodoroTime, StagedShortRestTime, isSaved },
+    SaveConfigState: { StagedCycle, StagedLongRestTime, StagedPomodoroTime, StagedShortRestTime, isSaved, stagedSound },
     saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
@@ -15,6 +17,8 @@ export const SaveConfigBtn = () => {
     timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, timeCounting, isInputValueChanged },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
+
+  const { customizationDispatch, customizationState: { sound } } = useContext(CustomizationContext) as CustomizationContextType 
 
   const { userState } = useContext(UserContext) as UserContextType
 
@@ -25,7 +29,8 @@ export const SaveConfigBtn = () => {
     saveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
     saveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
     saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
-  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch])
+    saveConfigDispatch({ type:  'STAGE_SOUND', payload: sound})
+  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound])
 
   const handleClick = async () => {
     if (timeCounting && isInputValueChanged) {
@@ -43,10 +48,12 @@ export const SaveConfigBtn = () => {
       buttonDispatch({ type: 'POMODORO' })
       timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false})
     }
-
+    
+    customizationDispatch({ type: 'CHANGE_SOUND', payload: stagedSound })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
 
     await setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
+    await setUserCustomization(userState.id, stagedSound)
   }
 
   return (
