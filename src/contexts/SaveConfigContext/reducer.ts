@@ -1,9 +1,10 @@
+import { SoundObject } from '../CustomizationContext'
 import { InitialState } from './initialState'
 import { SaveConfigTypes } from './types'
 
 export interface ReducerActionType {
   type: SaveConfigTypes
-  payload?: number | boolean
+  payload?: number | boolean | SoundObject
 }
 
 type Reducer = (state: InitialState, action: ReducerActionType) => InitialState
@@ -28,6 +29,11 @@ export const reducer: Reducer = (state, action) => {
     case 'SET_IS_SAVED':
       if (typeof action.payload !== 'boolean') return { ...state }
       return { ...state, isSaved: action.payload }
+    case 'STAGE_SOUND':
+      return {
+        ...state,
+        stagedSound: action.payload as SoundObject,
+      }
     case 'SET_NOT_SAVED_ALERT':
       return {
         ...state,

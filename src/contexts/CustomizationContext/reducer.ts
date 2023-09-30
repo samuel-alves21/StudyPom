@@ -4,8 +4,12 @@ import { CustomizationActionTypes } from './types'
 
 export type CustomizationReducer = (
   state: CustomizationState,
-  action: { type: CustomizationActionTypes; payload: string | SoundObject | boolean }
+  action: CustomizationAction
 ) => CustomizationState
+
+export type CustomizationAction = { 
+  type: CustomizationActionTypes; payload: string | SoundObject | boolean 
+}
 
 export const reducer: CustomizationReducer = (state, action) => {
   switch (action.type) {
