@@ -28,9 +28,8 @@ export const SaveAlert = () => {
     saveConfigDispatch({ type: 'REMOVE_ALERT' })
   }
 
-  const handleSaveConfig = () => {
+  const handleSaveConfig = async () => {
     if (!isInputValueChanged) {
-      setShouldAnimate(true)
       timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
     } else {
       saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
@@ -41,9 +40,8 @@ export const SaveAlert = () => {
       timeDispatch({ type: 'RESET_ALL' })
       buttonDispatch({ type: 'CLICKED', payload: false })
       buttonDispatch({ type: 'POMODORO' })
-      setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
+      await setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
       saveConfigDispatch({ type: 'REMOVE_ALERT' })
-  
     }
   }
 

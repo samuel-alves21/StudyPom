@@ -27,7 +27,7 @@ export const SaveConfigBtn = () => {
     saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
   }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch])
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (timeCounting) {
       saveConfigDispatch({ type: 'SET_TIMER_RUNNING_ALERT' })
       return
@@ -40,7 +40,7 @@ export const SaveConfigBtn = () => {
     timeDispatch({ type: 'RESET_ALL' })
     buttonDispatch({ type: 'CLICKED', payload: false })
     buttonDispatch({ type: 'POMODORO' })
-    setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
+    await setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
   }
 
   return (
