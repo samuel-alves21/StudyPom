@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
@@ -12,11 +12,11 @@ interface WrapperProps {
 }
 
 export const DefaultToggleButton = () => {
+  const [shouldAnimate, setShouldAnimate] = useState(false)
 
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const { userState } = useContext(UserContext) as UserContextType
-
 
   const {
     timeState: { isDefault, timeCounting },
@@ -32,6 +32,7 @@ export const DefaultToggleButton = () => {
       return
     }
     if (!isDefault) {
+      setShouldAnimate(true)
       timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: standardValues.pomodoro })
       timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: standardValues.short })
       timeDispatch({ type: 'CONFIG_LONG_TIME', payload: standardValues.long })
@@ -41,6 +42,7 @@ export const DefaultToggleButton = () => {
       buttonDispatch({ type: 'POMODORO' })
       timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
     } else {
+      setShouldAnimate(true)
       if (!userState.pendentUser) {
         timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
         timeDispatch({ type: 'RESET_ALL' })
@@ -57,7 +59,7 @@ export const DefaultToggleButton = () => {
     <>
       <span onClick={handleClick}>pomodoro default:</span>
       <Wrapper onClick={handleClick} isDefault={isDefault}>
-        <Circle className={isDefault ? 'circle-slide-in' : 'circle-slide-out'}></Circle>
+        <Circle className={!shouldAnimate ? '' : isDefault ? 'circle-slide-in' : 'circle-slide-out'}></Circle>
       </Wrapper>
     </>
   )
