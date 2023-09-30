@@ -17,11 +17,11 @@ export const ConfigHeading = () => {
   const [animate, setAnimate] = useState(false)
 
   const { userState } = useContext(UserContext) as UserContextType
-  const { SaveConfigState, SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigState, saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleClick = () => {
     if (!SaveConfigState.isSaved && !userState.pendentUser) {
-      SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
+      saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
       return
     }
     setShouldDisplay(!shouldDisplay)
@@ -53,9 +53,8 @@ const Wrapper = styled.div<GearIconProps>`
     top: 4px;
     transition: transform 0.03s ease-in-out;
     transition: color 0.2s ease-in-out;
-    animation: ${({ animate, shouldRotate }) =>
-        shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none'}
-      0.5s forwards ease-in-out;
+    animation: ${({ animate, shouldRotate }) => (shouldRotate ? 'spin' : animate ? 'spin-reverse' : 'none')} 0.5s
+      forwards ease-in-out;
 
     @keyframes spin {
       0% {

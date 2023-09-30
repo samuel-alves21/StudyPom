@@ -7,18 +7,12 @@ import { ButtonContextType, ButtonsContext } from '../../../../contexts/ButtonsC
 
 export const SaveConfigBtn = () => {
   const {
-    SaveConfigState: {
-      StagedCycle,
-      StagedLongRestTime,
-      StagedPomodoroTime,
-      StagedShortRestTime,
-      isSaved,
-    },
-    SaveConfigDispatch,
+    SaveConfigState: { StagedCycle, StagedLongRestTime, StagedPomodoroTime, StagedShortRestTime, isSaved },
+    saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
+    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, timeCounting },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
@@ -27,14 +21,18 @@ export const SaveConfigBtn = () => {
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   useEffect(() => {
-    SaveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime })
-    SaveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
-    SaveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
-    SaveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
-  }, [pomodoroTime, shortRestTime, longRestTime, cycles, SaveConfigDispatch])
+    saveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime })
+    saveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
+    saveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
+    saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
+  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch])
 
   const handleClick = () => {
-    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
+    if (timeCounting) {
+      saveConfigDispatch({ type: 'SET_TIMER_RUNNING_ALERT' })
+      return
+    }
+    saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
     timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })
     timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: StagedShortRestTime })
     timeDispatch({ type: 'CONFIG_LONG_TIME', payload: StagedLongRestTime })
@@ -42,13 +40,7 @@ export const SaveConfigBtn = () => {
     timeDispatch({ type: 'RESET_ALL' })
     buttonDispatch({ type: 'CLICKED', payload: false })
     buttonDispatch({ type: 'POMODORO' })
-    setUserConfig(
-      userState.id,
-      StagedPomodoroTime,
-      StagedShortRestTime,
-      StagedLongRestTime,
-      StagedCycle
-    )
+    setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
   }
 
   return (

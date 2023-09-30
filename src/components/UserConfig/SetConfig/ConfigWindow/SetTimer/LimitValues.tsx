@@ -12,10 +12,7 @@ export const LimitValues = ({ id }: LimitValuesProps) => {
   return (
     <Wrapper>
       <p>
-        Min:{' '}
-        <strong>
-          {id === 'cycles' ? limitValues.min[id] : secondsToMinutes(limitValues.min[id])}
-        </strong>
+        Min: <strong>{id === 'cycles' ? limitValues.min[id] : secondsToMinutes(limitValues.min[id])}</strong>
       </p>
       <p>
         Max:{' '}

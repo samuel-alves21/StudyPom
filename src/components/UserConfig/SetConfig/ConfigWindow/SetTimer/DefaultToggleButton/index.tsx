@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
 import { useSetDefaultPomodoroValues } from '../../../../../../hooks/useSetDefaultPomodoroValues'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
 
 interface CircleProps {
   shouldAnimate: boolean
@@ -16,14 +17,20 @@ export const DefaultToggleButton = () => {
   const [shouldAnimate, setShouldAnimate] = useState(false)
 
   const {
-    timeState: { isDefault },
+    timeState: { isDefault, timeCounting },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
+
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useSetDefaultPomodoroValues()
 
   const handleClick = () => {
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })
+    if (timeCounting) {
+      saveConfigDispatch({ type: 'SET_TIMER_RUNNING_ALERT' })
+      return
+    }
     setShouldAnimate(true)
     timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
   }

@@ -11,8 +11,6 @@ import { ColorStyle } from '../components/ColorStyle'
 import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
-import { SaveAlert } from '../components/SaveAlert'
-import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
 export interface MainContainerProps {
   background: string
@@ -26,7 +24,6 @@ const App = () => {
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const [isLoading, setIsLoading] = useState(true)
-  const { SaveConfigState } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useUserManager(setIsLoading)
   useSetWindowTitle()
@@ -49,7 +46,6 @@ const App = () => {
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
-          { SaveConfigState.shouldShowSaveAlert && <SaveAlert /> }
           <Logo />
           <LoginIcon />
           <Timer />

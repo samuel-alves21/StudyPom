@@ -1,7 +1,7 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const UploadBackgroundBtn = () => {
-  return <Button className="form-button">upload background</Button>
+  return <Button className='form-button'>upload background</Button>
 }
 
 const Button = styled.button`
@@ -9,8 +9,8 @@ const Button = styled.button`
   margin: 20px auto 0px;
 
   @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        color: #fff;
-      }
+    &:hover {
+      color: #fff;
     }
+  }
 `

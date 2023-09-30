@@ -3,7 +3,7 @@ import { SaveConfigTypes } from './types'
 
 export interface ReducerActionType {
   type: SaveConfigTypes
-  payload: number | boolean
+  payload?: number | boolean
 }
 
 type Reducer = (state: InitialState, action: ReducerActionType) => InitialState
@@ -28,9 +28,18 @@ export const reducer: Reducer = (state, action) => {
     case 'SET_IS_SAVED':
       if (typeof action.payload !== 'boolean') return { ...state }
       return { ...state, isSaved: action.payload }
-    case 'SET_SHOULD_SHOW_SAVE_ALERT':
-      if (typeof action.payload !== 'boolean') return { ...state }
-      return { ...state, shouldShowSaveAlert: action.payload }
+    case 'SET_NOT_SAVED_ALERT':
+      return {
+        ...state,
+        saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'notSaved' },
+      }
+    case 'SET_TIMER_RUNNING_ALERT':
+      return {
+        ...state,
+        saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'timerRunning' },
+      }
+    case 'REMOVE_ALERT':
+      return { ...state, saveAlert: { ...state.saveAlert, shouldDisplay: false, alertType: '' } }
     default:
       return { ...state }
   }

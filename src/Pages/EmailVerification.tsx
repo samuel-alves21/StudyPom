@@ -16,11 +16,7 @@ export const EmailVerification = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
   const { origin } = useParams()
-  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(
-    isLogin,
-    'verification',
-    setIsLoading
-  )
+  const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'verification', setIsLoading)
 
   setIsLogin(false)
 
@@ -60,10 +56,7 @@ export const EmailVerification = () => {
           <h1>Email Verification</h1>
           <p>Please check your email and click on the link to verify your email to continue.</p>
           <p>If you don't receive an email, please check your spam folder.</p>
-          <button
-            className={`form-button ${isAllowed || 'form-button-disabled'}`}
-            onClick={handleSubmit}
-          >
+          <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
             {isAllowed ? 're-send email' : 'send another in: ' + secondsToMinutes(timeLeft)}
           </button>
         </ContentWrapper>

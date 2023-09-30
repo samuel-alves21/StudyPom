@@ -16,9 +16,5 @@ export const TimerContext = createContext<TimerContextType | null>(null)
 export const TimerProvider = (props: TimerProviderProps) => {
   const [timeState, timeDispatch] = useReducer(reducer, initialState)
 
-  return (
-    <TimerContext.Provider value={{ timeState, timeDispatch }}>
-      {props.children}
-    </TimerContext.Provider>
-  )
+  return <TimerContext.Provider value={{ timeState, timeDispatch }}>{props.children}</TimerContext.Provider>
 }

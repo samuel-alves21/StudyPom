@@ -8,17 +8,15 @@ interface SaveConfigProviderProps {
 
 export interface SaveConfigContextType {
   SaveConfigState: InitialState
-  SaveConfigDispatch: React.Dispatch<ReducerActionType>
+  saveConfigDispatch: React.Dispatch<ReducerActionType>
 }
 
 export const SaveConfigContext = createContext<SaveConfigContextType | null>(null)
 
 export const SaveConfigProvider = ({ children }: SaveConfigProviderProps) => {
-  const [SaveConfigState, SaveConfigDispatch] = useReducer(reducer, initialState)
+  const [SaveConfigState, saveConfigDispatch] = useReducer(reducer, initialState)
 
   return (
-    <SaveConfigContext.Provider value={{ SaveConfigState, SaveConfigDispatch }}>
-      {children}
-    </SaveConfigContext.Provider>
+    <SaveConfigContext.Provider value={{ SaveConfigState, saveConfigDispatch }}>{children}</SaveConfigContext.Provider>
   )
 }

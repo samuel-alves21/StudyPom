@@ -3,10 +3,7 @@ import { useMemo, useContext } from 'react'
 import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
-import {
-  CustomizationContext,
-  CustomizationContextType,
-} from '../../../../../../contexts/CustomizationContext'
+import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
 import { breakpoints } from '../../../../../../utilities/breakpoints'
 
 export interface AudioOptionProps {
@@ -32,8 +29,10 @@ export const AudioOption = ({
     customizationState: { volume },
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const { startSoundDuration, startSoundCurrentTime, endSoundDuration, endSoundCurrentTime } =
-    useSounds(endSound, startSound)
+  const { startSoundDuration, startSoundCurrentTime, endSoundDuration, endSoundCurrentTime } = useSounds(
+    endSound,
+    startSound
+  )
 
   startSound.volume = Number(volume)
   endSound.volume = Number(volume)

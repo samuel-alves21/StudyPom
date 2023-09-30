@@ -7,8 +7,7 @@ export const Text = () => {
       <h1>Boost Your Productivity!</h1>
       <p>
         Maximize your <strong>productivity</strong> with our <strong>Pomodoro</strong> app. Focus{' '}
-        <strong>better</strong>, work <strong>smarter</strong>, and achieve <strong>more</strong>.
-        Sign in to start now!
+        <strong>better</strong>, work <strong>smarter</strong>, and achieve <strong>more</strong>. Sign in to start now!
       </p>
     </Wrapper>
   )

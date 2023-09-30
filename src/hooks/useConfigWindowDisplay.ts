@@ -15,14 +15,14 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
   shouldDisplay,
   optionsWindowRef
 ) => {
-  const { SaveConfigState, SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { SaveConfigState, saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
   const { userState } = useContext(UserContext) as UserContextType
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         if (shouldDisplay && !SaveConfigState.isSaved && !userState.pendentUser) {
-          SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
+          saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
           return
         }
         setShouldDisplay(!shouldDisplay)
@@ -34,9 +34,9 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       if (shouldDisplay === false) return
       if (!SaveConfigState.isSaved && !userState.pendentUser) {
         const target = event.target as HTMLElement
-        if (target.classList.contains('save-alert')) return 
+        if (target.classList.contains('save-alert')) return
         console.log('here')
-        SaveConfigDispatch({ type: 'SET_SHOULD_SHOW_SAVE_ALERT', payload: true })
+        saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
         return
       } else {
         setShouldDisplay(!shouldDisplay)
@@ -56,6 +56,7 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
     shouldDisplay,
     optionsWindowRef,
     SaveConfigState.isSaved,
-    userState.pendentUser, SaveConfigDispatch,
+    userState.pendentUser,
+    saveConfigDispatch,
   ])
 }

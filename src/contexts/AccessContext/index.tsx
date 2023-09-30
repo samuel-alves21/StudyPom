@@ -16,9 +16,5 @@ export const AccessContext = createContext<AccessContextType | null>(null)
 export const AccessProvider = ({ children }: AccessProviderProps) => {
   const [accessState, accessDispatch] = useReducer(reducer, initialState)
 
-  return (
-    <AccessContext.Provider value={{ accessState, accessDispatch }}>
-      {children}
-    </AccessContext.Provider>
-  )
+  return <AccessContext.Provider value={{ accessState, accessDispatch }}>{children}</AccessContext.Provider>
 }

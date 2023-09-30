@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import {
-  CustomizationContext,
-  CustomizationContextType,
-} from '../../../../../contexts/CustomizationContext'
+import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const RangeInputs = () => {
@@ -12,7 +9,7 @@ export const RangeInputs = () => {
     customizationDispatch,
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === 'blur') {
@@ -20,7 +17,7 @@ export const RangeInputs = () => {
     } else {
       customizationDispatch({ type: 'CHANGE_BRIGHT', payload: e.target.value })
     }
-    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
+    saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return (

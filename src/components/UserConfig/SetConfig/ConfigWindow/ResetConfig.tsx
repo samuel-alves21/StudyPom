@@ -17,21 +17,21 @@ export const ResetConfig = () => {
   } = useContext(TimerContext) as TimerContextType
 
   const {
-    SaveConfigDispatch,
+    saveConfigDispatch,
     SaveConfigState: { isSaved },
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleClick = () => {
     if (isSaved) return
-    SaveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime })
+    saveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime })
     timeDispatch({ type: 'SET_POMODORO_CONFIG_VALUE_INPUT', payload: pomodoroTime })
-    SaveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
+    saveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
     timeDispatch({ type: 'SET_SHORT_CONFIG_VALUE_INPUT', payload: shortRestTime })
-    SaveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
+    saveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
     timeDispatch({ type: 'SET_LONG_CONFIG_VALUE_INPUT', payload: longRestTime })
-    SaveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
+    saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
     timeDispatch({ type: 'SET_CYCLES_CONFIG_VALUE_INPUT', payload: cycles })
-    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
+    saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })
     setShouldAnimate(true)
   }

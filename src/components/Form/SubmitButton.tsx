@@ -27,14 +27,7 @@ export const SubmitButton = ({ inputsArray, setLoginError, setIsLoading }: Submi
   const handleClick = () => {
     if (isLogin) {
       if (!isAllowed) return
-      login(
-        hasErrorOnSubmit(formState),
-        inputsArray,
-        formDispatch,
-        navigate,
-        setLoginError,
-        accessState
-      )
+      login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError, accessState)
     } else {
       register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
     }
@@ -42,11 +35,7 @@ export const SubmitButton = ({ inputsArray, setLoginError, setIsLoading }: Submi
 
   return (
     <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleClick}>
-      {isLogin
-        ? isAllowed
-          ? 'Access account'
-          : `try again in: ${secondsToMinutes(timeLeft)}`
-        : 'Create account'}
+      {isLogin ? (isAllowed ? 'Access account' : `try again in: ${secondsToMinutes(timeLeft)}`) : 'Create account'}
     </button>
   )
 }

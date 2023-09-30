@@ -1,4 +1,15 @@
-export type InitialState = typeof initialState
+export type InitialState = {
+  StagedPomodoroTime: number
+  StagedShortRestTime: number
+  StagedLongRestTime: number
+  StagedCycle: number
+  shouldUpdateInputValue: boolean
+  isSaved: boolean
+  saveAlert: {
+    shouldDisplay: boolean
+    alertType: '' | 'timerRunning' | 'notSaved'
+  }
+}
 
 export const initialState = {
   StagedPomodoroTime: 0,
@@ -7,5 +18,8 @@ export const initialState = {
   StagedCycle: 0,
   shouldUpdateInputValue: true,
   isSaved: true,
-  shouldShowSaveAlert: false,
+  saveAlert: {
+    shouldDisplay: false,
+    alertType: '',
+  },
 }

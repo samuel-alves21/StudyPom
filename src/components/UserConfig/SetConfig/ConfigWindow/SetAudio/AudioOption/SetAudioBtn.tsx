@@ -6,10 +6,7 @@ import {
   CustomizationContextType,
   SoundObject,
 } from '../../../../../../contexts/CustomizationContext'
-import {
-  SaveConfigContext,
-  SaveConfigContextType,
-} from '../../../../../../contexts/SaveConfigContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
 
 interface SetAudioBtnProps {
   sounds: SoundObject
@@ -25,13 +22,13 @@ export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) 
     customizationState: { sound },
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const { SaveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const isSelected = name === sound.name
 
   const handleClick = () => {
     customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })
-    SaveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
+    saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return (
@@ -46,8 +43,7 @@ const Button = styled(StyledButton)`
   font-size: 1.25rem;
   display: block;
   margin: 0 auto;
-  background-color: ${({ isSelected }: StyledSoundButtonProps) =>
-    isSelected ? 'white' : 'transparent'};
+  background-color: ${({ isSelected }: StyledSoundButtonProps) => (isSelected ? 'white' : 'transparent')};
   color: ${({ isSelected }: StyledSoundButtonProps) => (isSelected ? 'black' : 'white')};
 
   @media (hover: hover) and (pointer: fine) {
