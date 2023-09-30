@@ -34,7 +34,6 @@ export const SaveConfigBtn = () => {
     }
 
     if (isInputValueChanged) {
-      saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
       timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })
       timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: StagedShortRestTime })
       timeDispatch({ type: 'CONFIG_LONG_TIME', payload: StagedLongRestTime })
