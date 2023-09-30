@@ -25,11 +25,11 @@ interface StyledConfingWindow {
 export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
-  const { userState } = useContext(UserContext) as UserContextType
-
   const thisWindow = useRef<HTMLDivElement | null>(null)
 
   useConfigWindowDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
+
+  console.log(shouldDisplay)
 
   useEffect(() => {
     let timeout: NodeJS.Timeout
@@ -54,8 +54,8 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
             {option === 'color' && <SetColor />}
           </ConfigsWindows>
           <div style={{ display: 'flex', gap: 'var(--gap-1)', alignItems: 'center' }}>
-            {userState.pendentUser || <SaveConfigBtn />}
-            {userState.pendentUser || <ResetConfig />}
+            <SaveConfigBtn />
+            <ResetConfig />
           </div>
         </CurrentOptionWindow>
       </Window>

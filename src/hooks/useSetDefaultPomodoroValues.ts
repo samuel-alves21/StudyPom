@@ -6,9 +6,9 @@ import { standardValues } from '../utilities/standardValues'
 import { getUserConfig } from '../firebase/getUserConfig'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
-export const useSetDefaultPomodoroValues = () => {
+export const useSetDefaultPomodoroValues = (isDefaultButtonClicked: boolean) => {
   const {
-    timeState: { isDefault },
+    timeState: { isDefault, timeCounting },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
@@ -19,6 +19,9 @@ export const useSetDefaultPomodoroValues = () => {
   const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   useEffect(() => {
+    if (!isDefaultButtonClicked) return
+    if (timeCounting) return
+    if (!isDefault) return
     const asyncFn = async () => {
       if (isDefault) {
         timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: standardValues.pomodoro })
@@ -42,5 +45,5 @@ export const useSetDefaultPomodoroValues = () => {
 
     asyncFn()
 
-  }, [isDefault, timeDispatch, buttonDispatch, userState.id, userState.pendentUser, saveConfigDispatch])
+  }, [isDefault, timeDispatch, buttonDispatch, userState.id, userState.pendentUser, saveConfigDispatch, isDefaultButtonClicked, timeCounting])
 }

@@ -5,6 +5,8 @@ import { ButtonContextType, ButtonsContext } from '../../contexts/ButtonsContext
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import { TimerContext, TimerContextType } from '../../contexts/TimerContext'
 import { setUserConfig } from '../../firebase/setUserConfig'
+import { standardValues } from '../../utilities/standardValues'
+import { getUserConfig } from '../../firebase/getUserConfig'
 
 export const SaveAlert = () => {
   const {
@@ -30,7 +32,27 @@ export const SaveAlert = () => {
 
   const handleSaveConfig = async () => {
     if (!isInputValueChanged) {
-      timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
+      if (!isDefault) {
+        saveConfigDispatch({ type: 'REMOVE_ALERT' })
+        timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: standardValues.pomodoro })
+        timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: standardValues.short })
+        timeDispatch({ type: 'CONFIG_LONG_TIME', payload: standardValues.long })
+        timeDispatch({ type: 'CONFIG_CYCLES', payload: standardValues.cycles })
+        timeDispatch({ type: 'RESET_ALL' })
+        buttonDispatch({ type: 'CLICKED', payload: false })
+        buttonDispatch({ type: 'POMODORO' })
+        timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
+
+      } else {
+        saveConfigDispatch({ type: 'REMOVE_ALERT' })
+        timeDispatch({ type: 'RESET_ALL' })
+        buttonDispatch({ type: 'CLICKED', payload: false })
+        buttonDispatch({ type: 'POMODORO' })
+        timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
+        if (!userState.pendentUser) {
+          await getUserConfig(userState.id, timeDispatch)
+        }
+      }
     } else {
       saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
       timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })

@@ -1,14 +1,24 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
 import { useSetDefaultPomodoroValues } from '../../../../../../hooks/useSetDefaultPomodoroValues'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
+import { standardValues } from '../../../../../../utilities/standardValues'
+import { ButtonContextType, ButtonsContext } from '../../../../../../contexts/ButtonsContext'
+import { getUserConfig } from '../../../../../../firebase/getUserConfig'
+import { UserContext, UserContextType } from '../../../../../../contexts/UserContext'
 
 interface WrapperProps {
   isDefault: boolean
 }
 
 export const DefaultToggleButton = () => {
+  // const [isClicked, setIsClicked] = useState(false)
+
+  const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
+
+  const { userState } = useContext(UserContext) as UserContextType
+
 
   const {
     timeState: { isDefault, timeCounting },
@@ -17,15 +27,33 @@ export const DefaultToggleButton = () => {
 
   const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
-  useSetDefaultPomodoroValues()
+  // useSetDefaultPomodoroValues(isClicked)
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    // setIsClicked(true)
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })
     if (timeCounting) {
       saveConfigDispatch({ type: 'SET_TIMER_RUNNING_ALERT' })
       return
     }
-    timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
+    if (!isDefault) {
+      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: standardValues.pomodoro })
+      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: standardValues.short })
+      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: standardValues.long })
+      timeDispatch({ type: 'CONFIG_CYCLES', payload: standardValues.cycles })
+      timeDispatch({ type: 'RESET_ALL' })
+      buttonDispatch({ type: 'CLICKED', payload: false })
+      buttonDispatch({ type: 'POMODORO' })
+      timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
+    } else {
+      if (!userState.pendentUser) {
+        await getUserConfig(userState.id, timeDispatch)
+        timeDispatch({ type: 'RESET_ALL' })
+        buttonDispatch({ type: 'CLICKED', payload: false })
+        buttonDispatch({ type: 'POMODORO' })
+      }
+      timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
+    }
   }
 
   return (

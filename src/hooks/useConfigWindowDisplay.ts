@@ -21,7 +21,7 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        if (shouldDisplay && !SaveConfigState.isSaved && !userState.pendentUser) {
+        if (shouldDisplay && !SaveConfigState.isSaved) {
           saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
           return
         }
@@ -30,12 +30,11 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
     }
 
     const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (target.classList.contains('save-alert')) return
       if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
       if (shouldDisplay === false) return
-      if (!SaveConfigState.isSaved && !userState.pendentUser) {
-        const target = event.target as HTMLElement
-        if (target.classList.contains('save-alert')) return
-        console.log('here')
+      if (!SaveConfigState.isSaved) {
         saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
         return
       } else {

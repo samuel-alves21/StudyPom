@@ -12,7 +12,7 @@ export const SaveConfigBtn = () => {
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, timeCounting },
+    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles, timeCounting, isInputValueChanged },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
@@ -28,18 +28,25 @@ export const SaveConfigBtn = () => {
   }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch])
 
   const handleClick = async () => {
-    if (timeCounting) {
+    if (timeCounting && isInputValueChanged) {
       saveConfigDispatch({ type: 'SET_TIMER_RUNNING_ALERT' })
       return
     }
+
+    if (isInputValueChanged) {
+      saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
+      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })
+      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: StagedShortRestTime })
+      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: StagedLongRestTime })
+      timeDispatch({ type: 'CONFIG_CYCLES', payload: StagedCycle })
+      timeDispatch({ type: 'RESET_ALL' })
+      buttonDispatch({ type: 'CLICKED', payload: false })
+      buttonDispatch({ type: 'POMODORO' })
+      timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false})
+    }
+
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
-    timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })
-    timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: StagedShortRestTime })
-    timeDispatch({ type: 'CONFIG_LONG_TIME', payload: StagedLongRestTime })
-    timeDispatch({ type: 'CONFIG_CYCLES', payload: StagedCycle })
-    timeDispatch({ type: 'RESET_ALL' })
-    buttonDispatch({ type: 'CLICKED', payload: false })
-    buttonDispatch({ type: 'POMODORO' })
+
     await setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
   }
 
