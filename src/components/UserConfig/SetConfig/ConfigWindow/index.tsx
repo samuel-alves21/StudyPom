@@ -29,8 +29,6 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
 
   useConfigWindowDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
 
-  console.log(shouldDisplay)
-
   useEffect(() => {
     let timeout: NodeJS.Timeout
     if (!shouldDisplay) {

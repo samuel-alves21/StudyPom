@@ -18,6 +18,7 @@ interface StyledArrows {
 export const Arrows = ({ id, setState, state }: ArrowsProps) => {
   const {
     timeState: { isDefault },
+    timeDispatch
   } = useContext(TimerContext) as TimerContextType
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -30,6 +31,7 @@ export const Arrows = ({ id, setState, state }: ArrowsProps) => {
     } else {
       setState(decrementTime(state, id))
     }
+    timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
   }
 
   return (
