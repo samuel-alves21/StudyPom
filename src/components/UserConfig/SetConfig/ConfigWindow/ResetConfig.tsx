@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { TimerContext, TimerContextType } from '../../../../contexts/TimerContext'
 import { useContext, useState } from 'react'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../contexts/SaveConfigContext'
-import { CustomizationContext, CustomizationContextType } from '../../../../contexts/CustomizationContext'
 
 interface ResetConfigProps {
   animate: boolean
@@ -22,8 +21,6 @@ export const ResetConfig = () => {
     SaveConfigState: { isSaved },
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
-  const { customizationState: { sound } } = useContext(CustomizationContext) as CustomizationContextType
-
   const handleClick = () => {
     if (isSaved) return
     saveConfigDispatch({ type: 'STAGE_POMODORO_TIME', payload: pomodoroTime })
@@ -34,13 +31,8 @@ export const ResetConfig = () => {
     timeDispatch({ type: 'SET_LONG_CONFIG_VALUE_INPUT', payload: longRestTime })
     saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
     timeDispatch({ type: 'SET_CYCLES_CONFIG_VALUE_INPUT', payload: cycles })
-
-    saveConfigDispatch({ type: 'STAGE_SOUND', payload: sound })
-
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })
-
-
     setShouldAnimate(true)
   }
 

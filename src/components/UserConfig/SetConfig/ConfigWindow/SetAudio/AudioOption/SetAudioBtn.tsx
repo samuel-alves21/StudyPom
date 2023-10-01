@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
 import { StyledButton } from '../../../../../Timer/Counter/CounterOptionsBtn/OptionsBtn'
-import { SoundObject } from '../../../../../../contexts/CustomizationContext'
+import {
+  CustomizationContext,
+  CustomizationContextType,
+  SoundObject,
+} from '../../../../../../contexts/CustomizationContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../../contexts/SaveConfigContext'
 
 interface SetAudioBtnProps {
@@ -13,13 +17,17 @@ interface StyledSoundButtonProps {
 }
 
 export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) => {
-  const { saveConfigDispatch, SaveConfigState: { stagedSound } } = useContext(SaveConfigContext) as SaveConfigContextType
+  const {
+    customizationDispatch,
+    customizationState: { sound },
+  } = useContext(CustomizationContext) as CustomizationContextType
 
-  const isSelected = name === stagedSound.name
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+
+  const isSelected = name === sound.name
 
   const handleClick = () => {
-    // customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })
-    saveConfigDispatch({ type: 'STAGE_SOUND', payload: { start, end, name } })
+    customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
