@@ -5,8 +5,6 @@ import { ref, remove } from 'firebase/database'
 import { UserContext, UserContextType } from '../contexts/UserContext'
 import { TimerContext, TimerContextType } from '../contexts/TimerContext'
 import { getUserConfig } from '../firebase/getUserConfig'
-import { getUserCustomization } from '../firebase/getUserCustomization'
-import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 
 export const useUserManager = (setIsLoading: (value: boolean) => void) => {
   const {
@@ -15,7 +13,6 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
   } = useContext(UserContext) as UserContextType
 
   const { timeDispatch } = useContext(TimerContext) as TimerContextType
-  const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
 
   useEffect(() => {
     if (pendentUser) {
@@ -31,7 +28,6 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
           try {
             await remove(ref(database, 'users/' + firebaseUser.uid + '/register'))
             await getUserConfig(firebaseUser.uid, timeDispatch)
-            await getUserCustomization(firebaseUser.uid, customizationDispatch)
           } catch (error) {
             console.error(error)
           }
@@ -50,5 +46,5 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
       unsubscribe()
       window.location.replace('/StudyPom/register')
     }
-  }, [pendentUser, setIsLoading, userDispatch, timeDispatch, customizationDispatch])
+  }, [pendentUser, setIsLoading, userDispatch, timeDispatch])
 }
