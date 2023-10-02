@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
@@ -28,17 +28,6 @@ const App = () => {
   useUserManager(setIsLoading)
   useSetWindowTitle()
   useSetInitialTimer()
-
-  // useEffect(() => {
-  //   const handleReload = (event: BeforeUnloadEvent) => {
-  //     event.returnValue = 'Are you sure you want to leave this page?'
-  //     console.log('saving data...')
-  //   }
-
-  //   window.addEventListener('beforeunload', handleReload)
-
-  //   return () => window.removeEventListener('beforeunload', handleReload)
-  // }, [])
 
   return (
     <>

@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { UserContext, UserContextType } from '../../../../../contexts/UserContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 interface ConfigNavProps {
