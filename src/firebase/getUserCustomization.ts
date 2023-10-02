@@ -7,5 +7,6 @@ export const getUserCustomization = async (uid: string, customizationDispatch: R
   if (snapshot.exists()) {
     customizationDispatch({ type: 'CHANGE_SOUND', payload: snapshot.val().sound })
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: snapshot.val().color })
+    customizationDispatch({ type: 'CHANGE_VOLUME', payload: snapshot.val().volume })
   }
 }

@@ -9,4 +9,5 @@ export type SaveConfigTypes =
   | 'SET_TIMER_RUNNING_ALERT'
   | 'REMOVE_ALERT'
   | 'STAGE_SOUND'
+  | 'STAGE_VOLUME'
   | 'STAGE_COLOR'

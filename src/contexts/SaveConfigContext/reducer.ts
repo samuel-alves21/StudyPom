@@ -34,6 +34,11 @@ export const reducer: Reducer = (state, action) => {
         ...state,
         stagedSound: action.payload as SoundObject,
       }
+    case 'STAGE_VOLUME':
+      return {
+        ...state,
+        stagedVolume: action.payload as string,
+      }
     case 'STAGE_COLOR':
       return { ...state, stagedColor: action.payload as string }
     case 'SET_NOT_SAVED_ALERT':

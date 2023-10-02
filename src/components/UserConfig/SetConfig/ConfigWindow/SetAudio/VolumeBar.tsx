@@ -1,25 +1,19 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const VolumeBar = () => {
-  const {
-    customizationDispatch,
-    customizationState: { volume },
-  } = useContext(CustomizationContext) as CustomizationContextType
-
-  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { saveConfigDispatch, SaveConfigState: { stagedVolume } } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    customizationDispatch({ type: 'CHANGE_VOLUME', payload: e.target.value })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
+    saveConfigDispatch({ type: 'STAGE_VOLUME', payload: e.target.value })
   }
 
   return (
     <Wrapper>
       <label htmlFor='volume'>Volume:</label>
-      <input type='range' id='volume' value={volume} min='0' max='1' step='0.01' onChange={(e) => handleChange(e)} />
+      <input type='range' id='volume' value={stagedVolume} min='0' max='1' step='0.01' onChange={(e) => handleChange(e)} />
     </Wrapper>
   )
 }

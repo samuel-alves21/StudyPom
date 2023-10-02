@@ -12,6 +12,7 @@ export type InitialState = {
     alertType: '' | 'timerRunning' | 'notSaved'
   }
   stagedSound: SoundObject
+  stagedVolume: string
   stagedColor: string
 }
 
@@ -32,4 +33,5 @@ export const initialState: InitialState = {
     end: '',
   },
   stagedColor: '',
+  stagedVolume: '',
 }

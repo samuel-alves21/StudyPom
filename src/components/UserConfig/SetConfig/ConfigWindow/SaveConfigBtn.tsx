@@ -17,6 +17,7 @@ export const SaveConfigBtn = () => {
       isSaved,
       stagedSound,
       stagedColor,
+      stagedVolume
     },
     saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
@@ -28,7 +29,7 @@ export const SaveConfigBtn = () => {
 
   const {
     customizationDispatch,
-    customizationState: { sound, mainColor },
+    customizationState: { sound, mainColor, volume },
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const { userState } = useContext(UserContext) as UserContextType
@@ -42,7 +43,8 @@ export const SaveConfigBtn = () => {
     saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
     saveConfigDispatch({ type: 'STAGE_SOUND', payload: sound })
     saveConfigDispatch({ type: 'STAGE_COLOR', payload: mainColor })
-  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound, mainColor])
+    saveConfigDispatch({ type: 'STAGE_VOLUME', payload: volume })
+  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound, mainColor, volume])
 
   const handleClick = async () => {
     if (timeCounting && isInputValueChanged) {
@@ -63,10 +65,11 @@ export const SaveConfigBtn = () => {
 
     customizationDispatch({ type: 'CHANGE_SOUND', payload: stagedSound })
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: stagedColor })
+    customizationDispatch({ type: 'CHANGE_VOLUME', payload: stagedVolume })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
 
     await setUserConfig(userState.id, stagedPomodoroTime, stagedShortRestTime, stagedLongRestTime, stagedCycle)
-    await setUserCustomization(userState.id, stagedSound, stagedColor)
+    await setUserCustomization(userState.id, stagedSound, stagedColor, stagedVolume)
   }
 
   return (
