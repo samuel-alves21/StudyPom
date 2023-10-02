@@ -18,7 +18,7 @@ interface StyledArrows {
 export const Arrows = ({ id, setState, state }: ArrowsProps) => {
   const {
     timeState: { isDefault },
-    timeDispatch
+    timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {

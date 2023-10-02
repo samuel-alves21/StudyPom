@@ -9,7 +9,15 @@ import { setUserCustomization } from '../../../../firebase/setUserCustomization'
 
 export const SaveConfigBtn = () => {
   const {
-    SaveConfigState: { StagedCycle, StagedLongRestTime, StagedPomodoroTime, StagedShortRestTime, isSaved, stagedSound },
+    SaveConfigState: {
+      stagedCycle,
+      stagedLongRestTime,
+      stagedPomodoroTime,
+      stagedShortRestTime,
+      isSaved,
+      stagedSound,
+      stagedColor,
+    },
     saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
@@ -18,7 +26,10 @@ export const SaveConfigBtn = () => {
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
-  const { customizationDispatch, customizationState: { sound } } = useContext(CustomizationContext) as CustomizationContextType 
+  const {
+    customizationDispatch,
+    customizationState: { sound, mainColor },
+  } = useContext(CustomizationContext) as CustomizationContextType
 
   const { userState } = useContext(UserContext) as UserContextType
 
@@ -29,8 +40,9 @@ export const SaveConfigBtn = () => {
     saveConfigDispatch({ type: 'STAGE_SHORT_TIME', payload: shortRestTime })
     saveConfigDispatch({ type: 'STAGE_LONG_TIME', payload: longRestTime })
     saveConfigDispatch({ type: 'STAGE_CYCLES', payload: cycles })
-    saveConfigDispatch({ type:  'STAGE_SOUND', payload: sound})
-  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound])
+    saveConfigDispatch({ type: 'STAGE_SOUND', payload: sound })
+    saveConfigDispatch({ type: 'STAGE_COLOR', payload: mainColor })
+  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound, mainColor])
 
   const handleClick = async () => {
     if (timeCounting && isInputValueChanged) {
@@ -39,21 +51,22 @@ export const SaveConfigBtn = () => {
     }
 
     if (isInputValueChanged) {
-      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })
-      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: StagedShortRestTime })
-      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: StagedLongRestTime })
-      timeDispatch({ type: 'CONFIG_CYCLES', payload: StagedCycle })
+      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: stagedPomodoroTime })
+      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: stagedShortRestTime })
+      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: stagedLongRestTime })
+      timeDispatch({ type: 'CONFIG_CYCLES', payload: stagedCycle })
       timeDispatch({ type: 'RESET_ALL' })
       buttonDispatch({ type: 'CLICKED', payload: false })
       buttonDispatch({ type: 'POMODORO' })
-      timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false})
+      timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })
     }
-    
+
     customizationDispatch({ type: 'CHANGE_SOUND', payload: stagedSound })
+    customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: stagedColor })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
 
-    await setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
-    await setUserCustomization(userState.id, stagedSound)
+    await setUserConfig(userState.id, stagedPomodoroTime, stagedShortRestTime, stagedLongRestTime, stagedCycle)
+    await setUserCustomization(userState.id, stagedSound, stagedColor)
   }
 
   return (

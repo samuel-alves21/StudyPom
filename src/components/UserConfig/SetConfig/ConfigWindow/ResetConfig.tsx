@@ -22,7 +22,9 @@ export const ResetConfig = () => {
     SaveConfigState: { isSaved },
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
-  const { customizationState: { sound } } = useContext(CustomizationContext) as CustomizationContextType
+  const {
+    customizationState: { sound },
+  } = useContext(CustomizationContext) as CustomizationContextType
 
   const handleClick = () => {
     if (isSaved) return
@@ -39,7 +41,6 @@ export const ResetConfig = () => {
 
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })
-
 
     setShouldAnimate(true)
   }

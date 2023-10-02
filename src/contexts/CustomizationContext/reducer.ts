@@ -2,13 +2,11 @@ import { SoundObject } from '.'
 import { CustomizationState } from './initialState'
 import { CustomizationActionTypes } from './types'
 
-export type CustomizationReducer = (
-  state: CustomizationState,
-  action: CustomizationAction
-) => CustomizationState
+export type CustomizationReducer = (state: CustomizationState, action: CustomizationAction) => CustomizationState
 
-export type CustomizationAction = { 
-  type: CustomizationActionTypes; payload: string | SoundObject | boolean 
+export type CustomizationAction = {
+  type: CustomizationActionTypes
+  payload: string | SoundObject | boolean
 }
 
 export const reducer: CustomizationReducer = (state, action) => {

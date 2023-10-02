@@ -11,16 +11,19 @@ import { getUserConfig } from '../../firebase/getUserConfig'
 export const SaveAlert = () => {
   const {
     SaveConfigState: {
-      StagedCycle,
-      StagedLongRestTime,
-      StagedPomodoroTime,
-      StagedShortRestTime,
+      stagedCycle,
+      stagedLongRestTime,
+      stagedPomodoroTime,
+      stagedShortRestTime,
       saveAlert: { shouldDisplay, alertType },
     },
     saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
-  const { timeDispatch, timeState: { isInputValueChanged, isDefault } } = useContext(TimerContext) as TimerContextType
+  const {
+    timeDispatch,
+    timeState: { isInputValueChanged, isDefault },
+  } = useContext(TimerContext) as TimerContextType
 
   const { userState } = useContext(UserContext) as UserContextType
 
@@ -42,7 +45,6 @@ export const SaveAlert = () => {
         buttonDispatch({ type: 'CLICKED', payload: false })
         buttonDispatch({ type: 'POMODORO' })
         timeDispatch({ type: 'SET_DEFAULT', payload: !isDefault })
-
       } else {
         saveConfigDispatch({ type: 'REMOVE_ALERT' })
         timeDispatch({ type: 'RESET_ALL' })
@@ -55,14 +57,14 @@ export const SaveAlert = () => {
       }
     } else {
       saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
-      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: StagedPomodoroTime })
-      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: StagedShortRestTime })
-      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: StagedLongRestTime })
-      timeDispatch({ type: 'CONFIG_CYCLES', payload: StagedCycle })
+      timeDispatch({ type: 'CONFIG_POMODORO_TIME', payload: stagedPomodoroTime })
+      timeDispatch({ type: 'CONFIG_SHORT_TIME', payload: stagedShortRestTime })
+      timeDispatch({ type: 'CONFIG_LONG_TIME', payload: stagedLongRestTime })
+      timeDispatch({ type: 'CONFIG_CYCLES', payload: stagedCycle })
       timeDispatch({ type: 'RESET_ALL' })
       buttonDispatch({ type: 'CLICKED', payload: false })
       buttonDispatch({ type: 'POMODORO' })
-      await setUserConfig(userState.id, StagedPomodoroTime, StagedShortRestTime, StagedLongRestTime, StagedCycle)
+      await setUserConfig(userState.id, stagedPomodoroTime, stagedShortRestTime, stagedLongRestTime, stagedCycle)
       saveConfigDispatch({ type: 'REMOVE_ALERT' })
     }
   }

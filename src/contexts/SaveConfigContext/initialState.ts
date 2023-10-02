@@ -1,10 +1,10 @@
-import { SoundObject } from "../CustomizationContext"
+import { SoundObject } from '../CustomizationContext'
 
 export type InitialState = {
-  StagedPomodoroTime: number
-  StagedShortRestTime: number
-  StagedLongRestTime: number
-  StagedCycle: number
+  stagedPomodoroTime: number
+  stagedShortRestTime: number
+  stagedLongRestTime: number
+  stagedCycle: number
   shouldUpdateInputValue: boolean
   isSaved: boolean
   saveAlert: {
@@ -12,13 +12,14 @@ export type InitialState = {
     alertType: '' | 'timerRunning' | 'notSaved'
   }
   stagedSound: SoundObject
+  stagedColor: string
 }
 
-export const initialState = {
-  StagedPomodoroTime: 0,
-  StagedShortRestTime: 0,
-  StagedLongRestTime: 0,
-  StagedCycle: 0,
+export const initialState: InitialState = {
+  stagedPomodoroTime: 0,
+  stagedShortRestTime: 0,
+  stagedLongRestTime: 0,
+  stagedCycle: 0,
   shouldUpdateInputValue: true,
   isSaved: true,
   saveAlert: {
@@ -30,4 +31,5 @@ export const initialState = {
     start: '',
     end: '',
   },
+  stagedColor: '',
 }

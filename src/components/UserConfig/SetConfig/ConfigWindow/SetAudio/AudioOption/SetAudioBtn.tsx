@@ -13,7 +13,10 @@ interface StyledSoundButtonProps {
 }
 
 export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) => {
-  const { saveConfigDispatch, SaveConfigState: { stagedSound } } = useContext(SaveConfigContext) as SaveConfigContextType
+  const {
+    saveConfigDispatch,
+    SaveConfigState: { stagedSound },
+  } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const isSelected = name === stagedSound.name
 
