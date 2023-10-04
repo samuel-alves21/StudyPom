@@ -1,8 +1,7 @@
-import { backgroundArray } from '../../utilities/backgroundArray'
 import { soundsArray } from '../../utilities/soundsArray'
 
 export const initialState = {
-  background: backgroundArray[0].path,
+  background: '',
   blur: '1',
   bright: '1',
   sound: {

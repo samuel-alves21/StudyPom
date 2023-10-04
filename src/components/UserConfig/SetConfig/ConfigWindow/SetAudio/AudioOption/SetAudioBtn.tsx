@@ -21,7 +21,6 @@ export const SetAudioBtn = ({ sounds: { start, end, name } }: SetAudioBtnProps) 
   const isSelected = name === stagedSound.name
 
   const handleClick = () => {
-    // customizationDispatch({ type: 'CHANGE_SOUND', payload: { start, end, name } })
     saveConfigDispatch({ type: 'STAGE_SOUND', payload: { start, end, name } })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }

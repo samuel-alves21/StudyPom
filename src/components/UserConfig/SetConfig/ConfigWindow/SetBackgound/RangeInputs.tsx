@@ -57,7 +57,9 @@ export const RangeInputs = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px;  
+  width: 100%;
+
 `
 
 const RangeInputWrapper = styled.div`
