@@ -20,7 +20,7 @@ export const SignInWithGoogleBtn = () => {
     const asyncFn = async () => {
       try {
         const result = await getRedirectResult(auth)
-        await setUserLoggedWithGoogle(result)
+        // await setUserLoggedWithGoogle(result)
         spinner.style.display = 'none'
         if (result) navigate('/StudyPom')
       } catch (error) {

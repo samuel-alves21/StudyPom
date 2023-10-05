@@ -29,6 +29,7 @@ export const SubmitButton = ({ inputsArray, setLoginError, setIsLoading }: Submi
       if (!isAllowed) return
       login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError, accessState)
     } else {
+      console.log('here')
       register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
     }
   }

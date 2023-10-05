@@ -1,6 +1,5 @@
 import { NavigateFunction } from 'react-router-dom'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
-import { usernameVerify } from '../firebase/usernameVerify'
 import { isEmptyOnSubmit } from './formValidation'
 import { createUser } from '../firebase/createUser'
 import { auth } from '../firebase/config'
@@ -29,19 +28,9 @@ export const register: RegisterFn = async (hasError, inputsArray, formDispatch, 
   const isEmpty = isEmptyOnSubmit(inputsArray, formDispatch)
   if (!hasError && !isEmpty) {
     try {
-      const usernameExists = await usernameVerify(formData.username)
-      if (usernameExists) {
-        formDispatch({
-          type: 'SET_USERNAME_ERROR',
-          payload: { setHasError: true, setCurrentError: 'exists' },
-        })
-
-        spinner.style.display = 'none'
-      } else {
-        await createUser(formData.email, formData.password, formData.username)
-        await sendEmailVerification(auth.currentUser as User)
-        navigate('/StudyPom/emailVerification/register')
-      }
+      await createUser(formData.email, formData.password, formData.username)
+      await sendEmailVerification(auth.currentUser as User)
+      navigate('/StudyPom/emailVerification/register')
       //eslint-disable-next-line
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
