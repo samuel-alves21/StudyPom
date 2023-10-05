@@ -46,16 +46,16 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
-    if (!inputValue)
-      if (inputValue < limitValues.min[id] && id === 'cycles') {
+
+    if (id === 'cycles') {
+      if (inputValue < limitValues.min[id]) {
         setInputValue(limitValues.min[id])
         return
       }
-    if (inputValue > limitValues.max[id] && id === 'cycles') {
-      setInputValue(limitValues.max[id])
-      return
-    }
-    if (id === 'cycles') {
+      if (inputValue > limitValues.max[id]) {
+        setInputValue(limitValues.max[id])  
+        return
+      }
       setInputValue(inputValue)
       return
     }
@@ -88,6 +88,7 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
     if (e.key === 'Backspace') setInputValue(0)
     if (e.key === 'Enter') {
       thisElement.blur()
+      return
     }
     if (e.key === 'ArrowUp') {
       setInputValue(acrementTime(inputValue, id))
@@ -96,7 +97,12 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
       setInputValue(decrementTime(inputValue, id))
     }
     if (inputValue.toString().length === 2) return
-    if (inputValue.toString().length === 1 && id === 'cycles') return
+    
+    if (inputValue.toString().length === 1 && id === 'cycles') {
+      setInputValue(Number(inputValue.toString() + e.key))
+      return
+    }
+
     if (!/^[0-9]+$/.test(e.key)) return
     setInputValue(Number(inputValue.toString() + e.key))
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
@@ -115,9 +121,9 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
   return (
     <InputAndArrows>
       <InputField
-        onChange={() => handleChange}
+        onChange={handleChange}
         onKeyDown={(e) => handleKeyDown(e)}
-        onFocus={() => handleFocus()}
+        onFocus={handleFocus}
         onBlur={(e) => handleBlur(e)}
         type='text'
         value={isOnFocus ? inputValue || '' : formatConfigInput(inputValue, id)}
