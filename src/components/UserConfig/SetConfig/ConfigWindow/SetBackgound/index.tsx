@@ -15,6 +15,5 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: min(600px, 80vw)
+  width: min(600px, 80vw);
 `
-

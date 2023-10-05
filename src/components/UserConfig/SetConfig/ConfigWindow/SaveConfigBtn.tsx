@@ -17,7 +17,9 @@ export const SaveConfigBtn = () => {
       isSaved,
       stagedSound,
       stagedColor,
-      stagedVolume
+      stagedVolume,
+      stagedBlur,
+      stagedBright,
     },
     saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
@@ -29,7 +31,7 @@ export const SaveConfigBtn = () => {
 
   const {
     customizationDispatch,
-    customizationState: { sound, mainColor, volume },
+    customizationState: { sound, mainColor, volume, blur, bright },
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const { userState } = useContext(UserContext) as UserContextType
@@ -44,7 +46,9 @@ export const SaveConfigBtn = () => {
     saveConfigDispatch({ type: 'STAGE_SOUND', payload: sound })
     saveConfigDispatch({ type: 'STAGE_COLOR', payload: mainColor })
     saveConfigDispatch({ type: 'STAGE_VOLUME', payload: volume })
-  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound, mainColor, volume])
+    saveConfigDispatch({ type: 'STAGE_BLUR', payload: blur })
+    saveConfigDispatch({ type: 'STAGE_BRIGHT', payload: bright })
+  }, [pomodoroTime, shortRestTime, longRestTime, cycles, saveConfigDispatch, sound, mainColor, volume, bright, blur])
 
   const handleClick = async () => {
     if (timeCounting && isInputValueChanged) {
@@ -66,10 +70,12 @@ export const SaveConfigBtn = () => {
     customizationDispatch({ type: 'CHANGE_SOUND', payload: stagedSound })
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: stagedColor })
     customizationDispatch({ type: 'CHANGE_VOLUME', payload: stagedVolume })
+    customizationDispatch({ type: 'CHANGE_BRIGHT', payload: stagedBright })
+    customizationDispatch({ type: 'CHANGE_BLUR', payload: stagedBlur })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
 
     await setUserConfig(userState.id, stagedPomodoroTime, stagedShortRestTime, stagedLongRestTime, stagedCycle)
-    await setUserCustomization(userState.id, stagedSound, stagedColor, stagedVolume)
+    await setUserCustomization(userState.id, stagedSound, stagedColor, stagedVolume, stagedBlur, stagedBright)
   }
 
   return (

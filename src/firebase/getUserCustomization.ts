@@ -9,6 +9,8 @@ export const getUserCustomization = async (uid: string, customizationDispatch: R
     customizationDispatch({ type: 'CHANGE_SOUND', payload: snapshot.val().sound })
     customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: snapshot.val().color })
     customizationDispatch({ type: 'CHANGE_VOLUME', payload: snapshot.val().volume })
+    customizationDispatch({ type: 'CHANGE_BLUR', payload: snapshot.val().blur })
+    customizationDispatch({ type: 'CHANGE_BRIGHT', payload: snapshot.val().bright })
   }
 
   const url = await getBackground(uid)

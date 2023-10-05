@@ -1,5 +1,5 @@
-import { getDownloadURL, ref } from "firebase/storage"
-import { storage } from "./config"
+import { getDownloadURL, ref } from 'firebase/storage'
+import { storage } from './config'
 
 export const getBackground = async (id: string) => {
   try {
@@ -7,7 +7,7 @@ export const getBackground = async (id: string) => {
     return url
     //eslint-disable-next-line
   } catch (error: any) {
-    if (error.code === "storage/object-not-found") {
+    if (error.code === 'storage/object-not-found') {
       const url = await getDownloadURL(ref(storage, `background/default-bg.jpg`))
       return url
     } else {

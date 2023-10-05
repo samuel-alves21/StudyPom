@@ -23,7 +23,7 @@ export const ResetConfig = () => {
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const {
-    customizationState: { sound, volume, mainColor },
+    customizationState: { sound, volume, mainColor, blur, bright },
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const handleClick = () => {
@@ -40,6 +40,8 @@ export const ResetConfig = () => {
     saveConfigDispatch({ type: 'STAGE_SOUND', payload: sound })
     saveConfigDispatch({ type: 'STAGE_VOLUME', payload: volume })
     saveConfigDispatch({ type: 'STAGE_COLOR', payload: mainColor })
+    saveConfigDispatch({ type: 'STAGE_BRIGHT', payload: bright })
+    saveConfigDispatch({ type: 'STAGE_BLUR', payload: blur })
 
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: true })
     timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: false })

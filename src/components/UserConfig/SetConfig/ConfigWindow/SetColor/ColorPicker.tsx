@@ -9,6 +9,7 @@ export const ColorPicker = () => {
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (color: ColorResult) => {
+    console.log('color')
     saveConfigDispatch({ type: 'STAGE_COLOR', payload: color.hex })
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }

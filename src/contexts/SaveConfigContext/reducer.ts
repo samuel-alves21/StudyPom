@@ -41,6 +41,10 @@ export const reducer: Reducer = (state, action) => {
       }
     case 'STAGE_COLOR':
       return { ...state, stagedColor: action.payload as string }
+    case 'STAGE_BLUR':
+      return { ...state, stagedBlur: action.payload as string }
+    case 'STAGE_BRIGHT':
+      return { ...state, stagedBright: action.payload as string }
     case 'SET_NOT_SAVED_ALERT':
       return {
         ...state,

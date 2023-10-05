@@ -7,8 +7,13 @@ import { CustomizationContext, CustomizationContextType } from '../../../../../c
 import { UserContext, UserContextType } from '../../../../../contexts/UserContext'
 
 export const UploadBackgroundBtn = () => {
-  const { customizationState: { mainColor }, customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
-  const { userState: { id } } = useContext(UserContext) as UserContextType
+  const {
+    customizationState: { mainColor },
+    customizationDispatch,
+  } = useContext(CustomizationContext) as CustomizationContextType
+  const {
+    userState: { id },
+  } = useContext(UserContext) as UserContextType
 
   const [isUploading, setIsUploading] = useState(false)
 
@@ -16,25 +21,35 @@ export const UploadBackgroundBtn = () => {
     if (!e.target.files) return
     const reference = ref(storage, `background/users/${id}/selected.png`)
     const uploadTask = uploadBytesResumable(reference, e.target.files[0])
-    uploadTask.on('state_changed', () => {
-      console.log('uploading...')
-      setIsUploading(true)
-    }, (error) => {
-      console.log(error)
-    }, () => {
-      console.log('upload complete')
-      setIsUploading(false)
-      getDownloadURL(reference)
-      .then((url) => customizationDispatch({ type:'CHANGE_BACKGROUND', payload: url }))
-    })
+    uploadTask.on(
+      'state_changed',
+      () => {
+        console.log('uploading...')
+        setIsUploading(true)
+      },
+      (error) => {
+        console.log(error)
+      },
+      () => {
+        console.log('upload complete')
+        setIsUploading(false)
+        getDownloadURL(reference).then((url) => customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: url }))
+      }
+    )
   }
 
   return (
     <>
-      <Button className='form-button' as='label' htmlFor="file-upload-btn">
-        { isUploading ? <SpinnerCircular speed={150} color={`${mainColor}`} size={25} /> : 'upload background'}
+      <Button className='form-button' as='label' htmlFor='file-upload-btn'>
+        {isUploading ? <SpinnerCircular speed={150} color={`${mainColor}`} size={25} /> : 'upload background'}
       </Button>
-      <input type="file" accept="image/*" style={{ display: 'none' }} id="file-upload-btn" onChange={(e) => handleImageUpload(e)} />
+      <input
+        type='file'
+        accept='image/*'
+        style={{ display: 'none' }}
+        id='file-upload-btn'
+        onChange={(e) => handleImageUpload(e)}
+      />
     </>
   )
 }

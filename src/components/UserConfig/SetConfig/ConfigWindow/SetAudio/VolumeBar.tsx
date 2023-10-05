@@ -3,7 +3,10 @@ import { useContext } from 'react'
 import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const VolumeBar = () => {
-  const { saveConfigDispatch, SaveConfigState: { stagedVolume } } = useContext(SaveConfigContext) as SaveConfigContextType
+  const {
+    saveConfigDispatch,
+    SaveConfigState: { stagedVolume },
+  } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
@@ -13,7 +16,15 @@ export const VolumeBar = () => {
   return (
     <Wrapper>
       <label htmlFor='volume'>Volume:</label>
-      <input type='range' id='volume' value={stagedVolume} min='0' max='1' step='0.01' onChange={(e) => handleChange(e)} />
+      <input
+        type='range'
+        id='volume'
+        value={stagedVolume}
+        min='0'
+        max='1'
+        step='0.01'
+        onChange={(e) => handleChange(e)}
+      />
     </Wrapper>
   )
 }

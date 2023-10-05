@@ -11,3 +11,5 @@ export type SaveConfigTypes =
   | 'STAGE_SOUND'
   | 'STAGE_VOLUME'
   | 'STAGE_COLOR'
+  | 'STAGE_BLUR'
+  | 'STAGE_BRIGHT'

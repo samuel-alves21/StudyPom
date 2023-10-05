@@ -14,6 +14,8 @@ export type InitialState = {
   stagedSound: SoundObject
   stagedVolume: string
   stagedColor: string
+  stagedBright: string
+  stagedBlur: string
 }
 
 export const initialState: InitialState = {
@@ -34,4 +36,6 @@ export const initialState: InitialState = {
   },
   stagedColor: '',
   stagedVolume: '',
+  stagedBright: '1',
+  stagedBlur: '1',
 }
