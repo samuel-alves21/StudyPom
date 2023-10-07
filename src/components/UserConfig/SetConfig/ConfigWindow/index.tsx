@@ -9,7 +9,6 @@ import { SetColor } from './SetColor'
 import { useConfigWindowDisplay } from '../../../../hooks/useConfigWindowDisplay'
 import { SaveConfigBtn } from './SaveConfigBtn'
 import { ResetConfig } from './ResetConfig'
-import { SaveAlert } from '../../../SaveAlert'
 
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
@@ -40,7 +39,6 @@ export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWi
   return (
     <Wrapper shouldDisplay={shouldDisplay}>
       <Window ref={thisWindow} shouldDisplay={shouldDisplay} className='flex-all-center flex-column'>
-        <SaveAlert />
         <ConfigNav setOption={setOption} option={option} setShouldDisplay={setShouldDisplay} />
         <CurrentOptionWindow className='flex-all-center'>
           <SelectedConfig>{option.replace(option[0], option[0].toUpperCase())}</SelectedConfig>

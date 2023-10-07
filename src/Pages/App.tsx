@@ -11,6 +11,7 @@ import { ColorStyle } from '../components/ColorStyle'
 import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
+import { AlertBox } from '../components/AlertBox'
 
 export interface MainContainerProps {
   background: string
@@ -35,6 +36,7 @@ const App = () => {
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
+          <AlertBox />
           <Logo />
           <LoginIcon />
           <Timer />
