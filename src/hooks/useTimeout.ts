@@ -11,7 +11,7 @@ import { setFirstAttemptDate } from '../firebase/setFirstAttemptDate'
 import { timeoutExpireTime } from '../utilities/timeoutExpireTime'
 import { removeAttemptsData } from '../firebase/removeAttemptsData'
 
-export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verification') => {
+export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verification', setIsLoading?: (value: boolean) => void) => {
   const [attempts, setAttempts] = useState(0)
   const [lastAttemptDate, setLastAttemptDate] = useState(0)
   const [timeLeft, setTimeLeft] = useState(0)
@@ -48,10 +48,11 @@ export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verif
       } catch (error) {
         console.error(error)
       }
+      setIsLoading && setIsLoading(false)
     }
     asyncFn()
     return () => unsubscribe && unsubscribe()
-  }, [accessDispatch, isLogin, type])
+  }, [accessDispatch, isLogin, type, setIsLoading])
 
   useEffect(() => {
     let waitTime: number

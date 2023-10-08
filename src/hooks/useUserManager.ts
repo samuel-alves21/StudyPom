@@ -23,11 +23,11 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
     const asyncFn = async () => {
       const url = await getDefaultBackground()
       customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: url })
+      setIsLoading(false)
     }
 
     if (pendentUser) {
       asyncFn()
-      setIsLoading(false)
       return
     } else {
       unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
@@ -12,6 +12,7 @@ import { LoginIcon } from '../components/LoginIcon'
 import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
 import { AlertBox } from '../components/AlertBox'
+import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 
 export interface MainContainerProps {
   background: string
@@ -24,11 +25,25 @@ const App = () => {
     customizationState: { background, blur, bright, mainColor },
   } = useContext(CustomizationContext) as CustomizationContextType
 
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const [isLoading, setIsLoading] = useState(true)
 
   useUserManager(setIsLoading)
   useSetWindowTitle()
   useSetInitialTimer()
+
+  // useEffect(() => {
+  //   const handleReload = (event: BeforeUnloadEvent) => {
+  //     saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
+  //     console.log('saving data...')
+  //     event.returnValue = 'unsaved changes'
+  //   }
+
+  //   window.addEventListener('beforeunload', handleReload)
+
+  //   return () => window.removeEventListener('beforeunload', handleReload)
+  // }, [saveConfigDispatch])
 
   return (
     <>

@@ -9,7 +9,7 @@ export const createUser = async (email: string, password: string, username: stri
     displayName: username,
   })
 
-  await set(ref(database, 'users/' + userCredential.user.uid), {
+  await set(ref(database, 'users/' + userCredential.user.uid + '/credentials'), {
     username: username,
     email: email,
     id: userCredential.user.uid,

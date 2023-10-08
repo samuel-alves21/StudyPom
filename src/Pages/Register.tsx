@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { breakpoints } from '../utilities/breakpoints'
 import { Spinner } from '../components/Spinner'
@@ -9,16 +9,18 @@ import { useRedirectToAppOnLogged } from '../hooks/useRedirectToAppOnLogged'
 
 export const Register = () => {
   const { setIsLogin } = useContext(LoginContext) as LoginContextType
+  const [isLoading, setIsLoading] = useState(true)
 
   setIsLogin(false)
 
-  useRedirectToAppOnLogged()
+  useRedirectToAppOnLogged(setIsLoading)
 
   window.document.title = 'StudyPom | Register'
 
   return (
     <Bg>
       <Spinner darkBackground={true} displayOnFirstLoad={false} />
+      { isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} /> }
       <Wrapper className='main-container flex-all-center'>
         <GlassBox>
           <RegisterContent />
