@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { SaveConfigContext, SaveConfigContextType } from '../../contexts/SaveConfigContext'
 import { NotSavedAlert } from './NotSavedAlert'
 import { TimerRunningAlert } from './TimerRunningAlert'
+import { breakpoints } from '../../utilities/breakpoints'
 
 export const AlertBox = () => {
   const {
@@ -76,7 +77,13 @@ const Box = styled.div`
   align-items: center;
   gap: var(--gap-1);
   border-radius: 10px;
-  pointer-events: all;
+
+  min-width: 400px;
+  min-height: 120px;
+  
+  @media (max-width: ${breakpoints.mobile}) {
+    min-width: 280px;
+  }
 
   & button {
     @media (hover: hover) and (pointer: fine) {
