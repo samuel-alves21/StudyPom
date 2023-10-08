@@ -3,14 +3,12 @@ import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfig
 import { UserContext, UserContextType } from '../contexts/UserContext'
 
 type useConfigWindowDisplayProps = (
-  gear: HTMLElement,
   setShouldDisplay: (shouldDisplay: boolean) => void,
   shouldDisplay: boolean,
   optionsWindowRef: HTMLDivElement | null
 ) => void
 
 export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
-  gear,
   setShouldDisplay,
   shouldDisplay,
   optionsWindowRef
@@ -29,29 +27,24 @@ export const useConfigWindowDisplay: useConfigWindowDisplayProps = (
       }
     }
 
-    const handleClick = (event: MouseEvent) => {
-      const target = event.target as HTMLElement
-      if (target.classList.contains('save-alert')) return
-      if (optionsWindowRef?.contains(event.target as Node) || event.target === gear) return
-      if (shouldDisplay === false) return
+    const handleClick = () => {
       if (!SaveConfigState.isSaved) {
         saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
-        return
       } else {
         setShouldDisplay(!shouldDisplay)
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
+    const filterWindow = document.querySelector('.filter') as HTMLDivElement
 
-    window.addEventListener('click', handleClick)
+    filterWindow.addEventListener('click', handleClick)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('click', handleClick)
+      filterWindow.removeEventListener('click', handleClick)
     }
   }, [
     setShouldDisplay,
-    gear,
     shouldDisplay,
     optionsWindowRef,
     SaveConfigState.isSaved,

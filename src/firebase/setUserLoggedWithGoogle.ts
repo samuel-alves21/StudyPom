@@ -11,4 +11,3 @@ export const setUserLoggedWithGoogle = async (result: UserCredential | null) => 
     })
   }
 }
-

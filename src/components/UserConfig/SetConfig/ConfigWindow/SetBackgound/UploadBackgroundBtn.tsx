@@ -24,14 +24,12 @@ export const UploadBackgroundBtn = () => {
     uploadTask.on(
       'state_changed',
       () => {
-        console.log('uploading...')
         setIsUploading(true)
       },
       (error) => {
-        console.log(error)
+        console.dir(error)
       },
       () => {
-        console.log('upload complete')
         setIsUploading(false)
         getDownloadURL(reference).then((url) => customizationDispatch({ type: 'CHANGE_BACKGROUND', payload: url }))
       }

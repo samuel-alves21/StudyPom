@@ -16,7 +16,7 @@ export const Login = () => {
 
   setIsLogin(true)
 
-  useRedirectToAppOnLogged()
+  useRedirectToAppOnLogged(setIsLoading)
 
   return (
     <Bg>
@@ -24,7 +24,7 @@ export const Login = () => {
       {isLoading && <Spinner displayOnFirstLoad={true} darkBackground={false} />}
       <Wrapper className='main-container flex-all-center'>
         <GlassBox>
-          <LoginContent setIsLoading={setIsLoading} />
+          <LoginContent />
         </GlassBox>
       </Wrapper>
     </Bg>

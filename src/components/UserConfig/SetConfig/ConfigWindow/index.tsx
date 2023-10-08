@@ -13,19 +13,18 @@ import { ResetConfig } from './ResetConfig'
 interface ConfigWindowProps {
   setShouldDisplay: (shouldDisplay: boolean) => void
   shouldDisplay: boolean
-  gear: HTMLElement
 }
 
 interface StyledConfingWindow {
   shouldDisplay: boolean
 }
 
-export const ConfigWindow = ({ gear, setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
+export const ConfigWindow = ({ setShouldDisplay, shouldDisplay }: ConfigWindowProps) => {
   const [option, setOption] = useState<'timer' | 'background' | 'sounds' | 'color'>('timer')
 
   const thisWindow = useRef<HTMLDivElement | null>(null)
 
-  useConfigWindowDisplay(gear, setShouldDisplay, shouldDisplay, thisWindow.current)
+  useConfigWindowDisplay(setShouldDisplay, shouldDisplay, thisWindow.current)
 
   useEffect(() => {
     let timeout: NodeJS.Timeout

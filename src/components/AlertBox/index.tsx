@@ -5,13 +5,17 @@ import { NotSavedAlert } from './NotSavedAlert'
 import { TimerRunningAlert } from './TimerRunningAlert'
 
 export const AlertBox = () => {
-  const { SaveConfigState: { saveAlert: { shouldDisplay, alertType } } } = useContext(SaveConfigContext) as SaveConfigContextType
+  const {
+    SaveConfigState: {
+      saveAlert: { shouldDisplay, alertType },
+    },
+  } = useContext(SaveConfigContext) as SaveConfigContextType
 
   return (
     <Wrapper style={{ pointerEvents: shouldDisplay ? 'all' : 'none' }}>
       <Box className={shouldDisplay ? 'scale-pop-up' : 'reverse-scale-pop-up'}>
-      {alertType === 'notSaved' && <NotSavedAlert />}
-      {alertType === 'timerRunning' && <TimerRunningAlert />}
+        {alertType === 'notSaved' && <NotSavedAlert />}
+        {alertType === 'timerRunning' && <TimerRunningAlert />}
       </Box>
     </Wrapper>
   )

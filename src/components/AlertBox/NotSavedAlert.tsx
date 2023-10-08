@@ -1,5 +1,5 @@
-import { useContext } from "react"
-import { SaveConfigContext, SaveConfigContextType } from "../../contexts/SaveConfigContext"
+import { useContext } from 'react'
+import { SaveConfigContext, SaveConfigContextType } from '../../contexts/SaveConfigContext'
 
 export const NotSavedAlert = () => {
   const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
@@ -7,8 +7,9 @@ export const NotSavedAlert = () => {
   return (
     <>
       <h3>Please save or reset your config before exiting</h3>
-      <button className='save-alert' onClick={() => saveConfigDispatch({ type: 'REMOVE_ALERT' })}>ok</button>
+      <button className='save-alert' onClick={() => saveConfigDispatch({ type: 'REMOVE_ALERT' })}>
+        ok
+      </button>
     </>
-
   )
 }

@@ -12,8 +12,6 @@ export const RangeInputs = () => {
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(stagedBlur)
-    console.log(e.target.value)
     if (e.target.id === 'blur') {
       saveConfigDispatch({ type: 'STAGE_BLUR', payload: e.target.value })
     } else {

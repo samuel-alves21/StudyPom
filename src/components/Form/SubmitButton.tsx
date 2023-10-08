@@ -12,24 +12,22 @@ import { useTimeout } from '../../hooks/useTimeout'
 interface SubmitButtonProps {
   inputsArray: Array<HTMLInputElement>
   setLoginError: (error: boolean) => void
-  setIsLoading: (isLoading: boolean) => void
 }
 
-export const SubmitButton = ({ inputsArray, setLoginError, setIsLoading }: SubmitButtonProps) => {
+export const SubmitButton = ({ inputsArray, setLoginError }: SubmitButtonProps) => {
   const { accessState } = useContext(AccessContext) as AccessContextType
   const { isLogin } = useContext(LoginContext) as LoginContextType
   const { formDispatch, formState } = useContext(FormContext) as FormContextType
 
   const navigate = useNavigate()
 
-  const { isAllowed, timeLeft } = useTimeout(isLogin, 'login', setIsLoading)
+  const { isAllowed, timeLeft } = useTimeout(isLogin, 'login')
 
   const handleClick = () => {
     if (isLogin) {
       if (!isAllowed) return
       login(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate, setLoginError, accessState)
     } else {
-      console.log('here')
       register(hasErrorOnSubmit(formState), inputsArray, formDispatch, navigate)
     }
   }

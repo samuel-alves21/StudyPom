@@ -53,7 +53,7 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
         return
       }
       if (inputValue > limitValues.max[id]) {
-        setInputValue(limitValues.max[id])  
+        setInputValue(limitValues.max[id])
         return
       }
       setInputValue(inputValue)
@@ -97,7 +97,7 @@ export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
       setInputValue(decrementTime(inputValue, id))
     }
     if (inputValue.toString().length === 2) return
-    
+
     if (inputValue.toString().length === 1 && id === 'cycles') {
       setInputValue(Number(inputValue.toString() + e.key))
       return

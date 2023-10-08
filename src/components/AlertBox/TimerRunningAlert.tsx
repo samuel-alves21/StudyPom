@@ -1,20 +1,15 @@
-import { useContext } from "react"
-import { SaveConfigContext, SaveConfigContextType } from "../../contexts/SaveConfigContext"
-import { TimerContext, TimerContextType } from "../../contexts/TimerContext"
-import { UserContext, UserContextType } from "../../contexts/UserContext"
-import { ButtonContextType, ButtonsContext } from "../../contexts/ButtonsContext"
-import { standardValues } from "../../utilities/standardValues"
-import { getUserConfig } from "../../firebase/getUserConfig"
-import { setUserConfig } from "../../firebase/setUserConfig"
+import { useContext } from 'react'
+import { SaveConfigContext, SaveConfigContextType } from '../../contexts/SaveConfigContext'
+import { TimerContext, TimerContextType } from '../../contexts/TimerContext'
+import { UserContext, UserContextType } from '../../contexts/UserContext'
+import { ButtonContextType, ButtonsContext } from '../../contexts/ButtonsContext'
+import { standardValues } from '../../utilities/standardValues'
+import { getUserConfig } from '../../firebase/getUserConfig'
+import { setUserConfig } from '../../firebase/setUserConfig'
 
 export const TimerRunningAlert = () => {
   const {
-    SaveConfigState: {
-      stagedCycle,
-      stagedLongRestTime,
-      stagedPomodoroTime,
-      stagedShortRestTime,
-    },
+    SaveConfigState: { stagedCycle, stagedLongRestTime, stagedPomodoroTime, stagedShortRestTime },
     saveConfigDispatch,
   } = useContext(SaveConfigContext) as SaveConfigContextType
 
@@ -66,7 +61,7 @@ export const TimerRunningAlert = () => {
   return (
     <>
       <h3>Timer is running, saving now will reset the timer</h3>
-        <div style={{ display: 'flex', gap: '10px' }}>
+      <div style={{ display: 'flex', gap: '10px' }}>
         <button onClick={handleSaveConfig}>save</button>
         <button onClick={() => saveConfigDispatch({ type: 'REMOVE_ALERT' })}>cancel</button>
       </div>

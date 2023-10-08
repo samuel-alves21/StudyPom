@@ -2,15 +2,11 @@ import styled from 'styled-components'
 import { FormProvider } from '../../contexts/FormContext'
 import { Form } from '../Form'
 
-interface LoginContentProps {
-  setIsLoading: (isLoading: boolean) => void
-}
-
-export const LoginContent = ({ setIsLoading }: LoginContentProps) => {
+export const LoginContent = () => {
   return (
     <Wrapper>
       <FormProvider>
-        <Form setIsLoading={setIsLoading} />
+        <Form />
       </FormProvider>
     </Wrapper>
   )

@@ -26,13 +26,9 @@ interface LoginWrapper {
   isLogin: boolean
 }
 
-interface FormContentProps {
-  setIsLoading?: (isLoading: boolean) => void
-}
-
 export type FormInputType = 'email' | 'password' | 'confirmedPassword' | 'username'
 
-export const Form = ({ setIsLoading }: FormContentProps) => {
+export const Form = () => {
   const { formState, formDispatch } = useContext(FormContext) as FormContextType
   const { isLogin } = useContext(LoginContext) as LoginContextType
   const { accessState } = useContext(AccessContext) as AccessContextType
@@ -92,11 +88,7 @@ export const Form = ({ setIsLoading }: FormContentProps) => {
         {isLogin && loginError && <p className='error'>Invalid email or password</p>}
         {isLogin || <FormInput {...props} id='confirmedPassword' placeholder='confirm password' type='password' />}
         <SignInWithGoogleBtn />
-        <SubmitButton
-          inputsArray={inputsArray}
-          setLoginError={setLoginError}
-          setIsLoading={setIsLoading as (isLoading: boolean) => void}
-        />
+        <SubmitButton inputsArray={inputsArray} setLoginError={setLoginError} />
         {isLogin && <PasswordRecover />}
         <PageSwitch inputsArray={inputsArray} />
         {isLogin || <SignInWithoutAccountBtn inputsArray={inputsArray} />}

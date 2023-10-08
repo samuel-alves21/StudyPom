@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState, useRef, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { ConfigWindow } from './ConfigWindow'
 import { Filter } from './Filter'
 import { UserContext, UserContextType } from '../../../contexts/UserContext'
@@ -11,8 +11,6 @@ interface GearIconProps {
 }
 
 export const ConfigHeading = () => {
-  const gear = useRef<HTMLElement | null>(null)
-
   const [shouldDisplay, setShouldDisplay] = useState(false)
   const [animate, setAnimate] = useState(false)
 
@@ -31,12 +29,8 @@ export const ConfigHeading = () => {
   return (
     <Wrapper className='config-wrapper' shouldRotate={shouldDisplay} animate={animate}>
       <h1 className='config-heading'> Your Config</h1>
-      <i className='bi bi-gear-fill' ref={gear} onClick={handleClick}></i>
-      <ConfigWindow
-        gear={gear.current as HTMLElement}
-        shouldDisplay={shouldDisplay}
-        setShouldDisplay={setShouldDisplay}
-      />
+      <i className='bi bi-gear-fill' onClick={handleClick}></i>
+      <ConfigWindow shouldDisplay={shouldDisplay} setShouldDisplay={setShouldDisplay} />
       <Filter className='filter' shouldDisplay={shouldDisplay}></Filter>
     </Wrapper>
   )
