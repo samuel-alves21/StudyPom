@@ -25,7 +25,7 @@ export const OptionsBtn = ({ text }: OptionsBtnProps) => {
   const handleClick = (text: string) => {
     if (buttonState[text.toLowerCase()]) return
 
-    if (buttonState.pomodoro && timeOnDisplay < pomodoroTime  ) {
+    if (buttonState.pomodoro && timeOnDisplay < pomodoroTime) {
       saveConfigDispatch({ type:'SET_WORKING_ALERT', payload: text.toLowerCase() })
     } else {
       timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })

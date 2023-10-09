@@ -7,5 +7,6 @@ export const getUserProgress = async (id: string, timeDispatch: React.Dispatch<T
   if (snapshot.exists()) {
     timeDispatch({ type: "SET_CYCLES_FINISHED", payload: snapshot.val().cyclesFinished})
     timeDispatch({ type: "SET_WORKED_TIME", payload: snapshot.val().workedTime})
+    timeDispatch({ type: "RESET_STAGED_WORKED_TIME", payload: snapshot.val().stagedWorkedTime})
   }
 }

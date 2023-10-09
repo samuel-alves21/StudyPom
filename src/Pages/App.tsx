@@ -13,6 +13,8 @@ import { Spinner } from '../components/Spinner'
 import { useUserManager } from '../hooks/useUserManager'
 import { AlertBox } from '../components/AlertBox'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
+import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
+import { TimerContext, TimerContextType } from '../contexts/TimerContext'
 
 export interface MainContainerProps {
   background: string
@@ -26,6 +28,8 @@ const App = () => {
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { buttonState } = useContext(ButtonsContext) as ButtonContextType
+  const { timeState: { timeOnDisplay, pomodoroTime } } = useContext(TimerContext) as TimerContextType
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -33,17 +37,17 @@ const App = () => {
   useSetWindowTitle()
   useSetInitialTimer()
 
-  // useEffect(() => {
-  //   const handleReload = (event: BeforeUnloadEvent) => {
-  //     saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
-  //     console.log('saving data...')
-  //     event.returnValue = 'unsaved changes'
-  //   }
+  useEffect(() => {
+    const handleReload = (event: BeforeUnloadEvent) => {
+      if (buttonState.pomodoro && timeOnDisplay < pomodoroTime) {
+        event.returnValue = ''
+      }
+    }
 
-  //   window.addEventListener('beforeunload', handleReload)
+    window.addEventListener('beforeunload', handleReload)
 
-  //   return () => window.removeEventListener('beforeunload', handleReload)
-  // }, [saveConfigDispatch])
+    return () => window.removeEventListener('beforeunload', handleReload)
+  }, [saveConfigDispatch, buttonState.pomodoro, timeOnDisplay, pomodoroTime])
 
   return (
     <>
