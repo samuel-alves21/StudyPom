@@ -13,3 +13,4 @@ export type SaveConfigTypes =
   | 'STAGE_COLOR'
   | 'STAGE_BLUR'
   | 'STAGE_BRIGHT'
+  | 'SET_WORKING_ALERT'

@@ -1,5 +1,5 @@
 import { SoundObject } from '../CustomizationContext'
-import { InitialState } from './initialState'
+import { InitialState, buttonId } from './initialState'
 import { SaveConfigTypes } from './types'
 
 export interface ReducerActionType {
@@ -54,6 +54,11 @@ export const reducer: Reducer = (state, action) => {
       return {
         ...state,
         saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'timerRunning' },
+      }
+    case 'SET_WORKING_ALERT':
+      return {
+        ...state,
+        saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'working', buttonId: action.payload as buttonId },
       }
     case 'REMOVE_ALERT':
       return { ...state, saveAlert: { ...state.saveAlert, shouldDisplay: false, alertType: '' } }

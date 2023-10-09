@@ -14,7 +14,7 @@ export const reducer: TimerReducer = (state, action) => {
       if (typeof action.payload !== 'boolean') return state
       return {
         ...state,
-        isDefault: action.payload,
+        isDefault: action.payload,  
       }
     case 'CONFIG_CYCLES':
       if (typeof action.payload !== 'number') return state
@@ -91,6 +91,17 @@ export const reducer: TimerReducer = (state, action) => {
         ...state,
         workedTime: state.workedTime + action.payload,
       }
+    case 'RESET_STAGED_WORKED_TIME':
+      return {
+        ...state,
+        stagedWorkedTime: state.workedTime,
+      }
+    case 'INCREASE_STAGED_WORKED_TIME':
+      console.log('here')
+      return {
+        ...state,
+        stagedWorkedTime: state.stagedWorkedTime + 1,
+      }
     case 'SET_POMODORO_CONFIG_VALUE_INPUT':
       if (typeof action.payload !== 'number') return state
       return {
@@ -124,8 +135,7 @@ export const reducer: TimerReducer = (state, action) => {
     case 'RESET_ALL':
       return {
         ...state,
-        workedTime: 0,
-        cyclesFinished: 0,
+        stagedWorkedTime: state.workedTime,
         timeOnDisplay: state.pomodoroTime,
         timeCounting: false,
         cyclesTemp: 0,

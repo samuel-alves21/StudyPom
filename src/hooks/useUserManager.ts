@@ -8,6 +8,7 @@ import { getUserConfig } from '../firebase/getUserConfig'
 import { getUserCustomization } from '../firebase/getUserCustomization'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
 import { getDefaultBackground } from '../firebase/getDefaultBackground'
+import { getUserProgress } from './getUserProgress'
 
 export const useUserManager = (setIsLoading: (value: boolean) => void) => {
   const {
@@ -15,9 +16,9 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
     userDispatch,
   } = useContext(UserContext) as UserContextType
 
-  const { timeDispatch } = useContext(TimerContext) as TimerContextType
+  const { timeDispatch, timeState: {stagedWorkedTime} } = useContext(TimerContext) as TimerContextType
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
-
+  console.log(stagedWorkedTime)
   useEffect(() => {
     let unsubscribe: Unsubscribe
     const asyncFn = async () => {
@@ -39,6 +40,7 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
               await remove(ref(database, 'users/' + firebaseUser.uid + '/register'))
               await getUserConfig(firebaseUser.uid, timeDispatch)
               await getUserCustomization(firebaseUser.uid, customizationDispatch)
+              await getUserProgress(firebaseUser.uid, timeDispatch)
             } catch (error) {
               console.error(error)
             }

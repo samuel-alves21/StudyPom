@@ -9,12 +9,11 @@ export interface DetailsProps {
 
 export const Details = ({ text }: DetailsProps) => {
   const { timeState } = useContext(TimerContext) as TimerContextType
-
   return (
     <div className='details'>
       {text === 'time worked' ? (
         <P className='time-worked'>
-          Time worked: <span>{secondsToTime(timeState.workedTime)}</span>
+          Time worked: <span>{secondsToTime(timeState.stagedWorkedTime)}</span>
         </P>
       ) : (
         <P className='cycles-finished'>

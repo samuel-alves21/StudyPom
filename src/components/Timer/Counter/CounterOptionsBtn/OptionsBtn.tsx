@@ -6,6 +6,7 @@ import { breakpoints } from '../../../../utilities/breakpoints'
 import { TimerActionTypes } from '../../../../contexts/TimerContext/types'
 import { ButtonsActionTypes } from '../../../../contexts/ButtonsContext/types'
 import { Id } from '.'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../contexts/SaveConfigContext'
 
 interface OptionsBtnProps {
   text: Id
@@ -16,18 +17,23 @@ export interface StyledButtonProps {
 }
 
 export const OptionsBtn = ({ text }: OptionsBtnProps) => {
-  const { timeDispatch } = useContext(TimerContext) as TimerContextType
+  const { timeDispatch, timeState: { pomodoroTime, timeOnDisplay } } = useContext(TimerContext) as TimerContextType
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const handleClick = (text: string) => {
-    timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
+    if (buttonState[text.toLowerCase()]) return
 
-    timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })
-
-    buttonDispatch({
-      type: text.toUpperCase() as ButtonsActionTypes,
-    })
+    if (buttonState.pomodoro && timeOnDisplay < pomodoroTime  ) {
+      saveConfigDispatch({ type:'SET_WORKING_ALERT', payload: text.toLowerCase() })
+    } else {
+      timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
+      timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })
+      buttonDispatch({
+        type: text.toUpperCase() as ButtonsActionTypes,
+      })
+    }
   }
 
   return (

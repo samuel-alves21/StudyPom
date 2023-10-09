@@ -4,6 +4,7 @@ import { SaveConfigContext, SaveConfigContextType } from '../../contexts/SaveCon
 import { NotSavedAlert } from './NotSavedAlert'
 import { TimerRunningAlert } from './TimerRunningAlert'
 import { breakpoints } from '../../utilities/breakpoints'
+import { WorkingAlert } from './WorkingAlert'
 
 export const AlertBox = () => {
   const {
@@ -17,6 +18,7 @@ export const AlertBox = () => {
       <Box className={shouldDisplay ? 'scale-pop-up' : 'reverse-scale-pop-up'}>
         {alertType === 'notSaved' && <NotSavedAlert />}
         {alertType === 'timerRunning' && <TimerRunningAlert />}
+        {alertType === 'working' && <WorkingAlert />}
       </Box>
     </Wrapper>
   )
