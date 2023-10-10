@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints } from '../utilities/breakpoints'
+import { breakpoints } from '../../utilities/breakpoints'
 
 export const GithubRedirect = () => {
   return (
