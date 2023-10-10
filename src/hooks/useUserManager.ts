@@ -16,7 +16,10 @@ export const useUserManager = (setIsLoading: (value: boolean) => void) => {
     userDispatch,
   } = useContext(UserContext) as UserContextType
 
-  const { timeDispatch, timeState: {stagedWorkedTime} } = useContext(TimerContext) as TimerContextType
+  const {
+    timeDispatch,
+    timeState: { stagedWorkedTime },
+  } = useContext(TimerContext) as TimerContextType
   const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
   console.log(stagedWorkedTime)
   useEffect(() => {

@@ -55,10 +55,20 @@ export const reducer: Reducer = (state, action) => {
         ...state,
         saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'timerRunning' },
       }
+    case 'SET_SIGN_IN_ALERT':
+      return {
+        ...state,
+        saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'signIn' },
+      }
     case 'SET_WORKING_ALERT':
       return {
         ...state,
-        saveAlert: { ...state.saveAlert, shouldDisplay: true, alertType: 'working', buttonId: action.payload as buttonId },
+        saveAlert: {
+          ...state.saveAlert,
+          shouldDisplay: true,
+          alertType: 'working',
+          buttonId: action.payload as buttonId,
+        },
       }
     case 'REMOVE_ALERT':
       return { ...state, saveAlert: { ...state.saveAlert, shouldDisplay: false, alertType: '' } }

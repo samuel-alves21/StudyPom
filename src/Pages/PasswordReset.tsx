@@ -48,8 +48,7 @@ export const PasswordReset = () => {
       try {
         await setAttemptsData(attempts, firstAttemptState, 'password')
         await sendPasswordResetEmail(auth, input.value)
-      }
-      catch(error) {
+      } catch (error) {
         console.dir(error)
       }
     } else {
@@ -61,7 +60,7 @@ export const PasswordReset = () => {
   return (
     <Wrapper className='flex-all-center'>
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
-      <Spinner darkBackground={true} displayOnFirstLoad={false}/>
+      <Spinner darkBackground={true} displayOnFirstLoad={false} />
       <ContentWrapper className='styled-page-box flex-all-center'>
         <h1>Password Reset</h1>
         <span onClick={handleClick}>Enter with your email:</span>

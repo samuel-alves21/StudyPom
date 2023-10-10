@@ -1,7 +1,7 @@
 import { SoundObject } from '../CustomizationContext'
 
-type alertType = '' | 'timerRunning' | 'notSaved'| 'working'
-export type buttonId = '' | "pomodoro" | "short" | "long"
+type alertType = '' | 'timerRunning' | 'notSaved' | 'working' | 'signIn'
+export type buttonId = '' | 'pomodoro' | 'short' | 'long'
 
 export type InitialState = {
   stagedPomodoroTime: number
@@ -12,7 +12,7 @@ export type InitialState = {
   isSaved: boolean
   saveAlert: {
     shouldDisplay: boolean
-    alertType: alertType 
+    alertType: alertType
     buttonId: buttonId
   }
   stagedSound: SoundObject
@@ -32,7 +32,7 @@ export const initialState: InitialState = {
   saveAlert: {
     shouldDisplay: false,
     alertType: '' as alertType,
-    buttonId: '' as buttonId
+    buttonId: '' as buttonId,
   },
   stagedSound: {
     name: '',

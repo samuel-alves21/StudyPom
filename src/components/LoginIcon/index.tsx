@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { UserContext, UserContextType } from '../../contexts/UserContext'
 import styled from 'styled-components'
 import { auth } from '../../firebase/config'
+import { breakpoints } from '../../utilities/breakpoints'
 
 export const LoginIcon = () => {
   const {
@@ -31,12 +32,22 @@ const Wrapper = styled.div`
   }
 
   & .bi-box-arrow-right {
-    font-size: 4rem;
+    font-size: 3.5rem;
     transition: transform 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
 
     &:hover {
       color: var(--color-primary);
     }
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    position: initial;
+    bottom: 0;
+  }
+
+  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+    position: initial;
+    bottom: 0;
   }
 `

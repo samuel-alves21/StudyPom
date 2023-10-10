@@ -17,7 +17,10 @@ export interface StyledButtonProps {
 }
 
 export const OptionsBtn = ({ text }: OptionsBtnProps) => {
-  const { timeDispatch, timeState: { pomodoroTime, timeOnDisplay } } = useContext(TimerContext) as TimerContextType
+  const {
+    timeDispatch,
+    timeState: { pomodoroTime, timeOnDisplay },
+  } = useContext(TimerContext) as TimerContextType
   const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
@@ -26,7 +29,7 @@ export const OptionsBtn = ({ text }: OptionsBtnProps) => {
     if (buttonState[text.toLowerCase()]) return
 
     if (buttonState.pomodoro && timeOnDisplay < pomodoroTime) {
-      saveConfigDispatch({ type:'SET_WORKING_ALERT', payload: text.toLowerCase() })
+      saveConfigDispatch({ type: 'SET_WORKING_ALERT', payload: text.toLowerCase() })
     } else {
       timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
       timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })

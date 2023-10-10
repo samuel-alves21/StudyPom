@@ -5,7 +5,8 @@ interface BackgroundFilterProps {
 }
 
 export const Filter = styled.div<BackgroundFilterProps>`
-  transition: opacity 0.2s ease-in-out;  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
   display: ${({ shouldDisplay }) => (shouldDisplay ? 'block' : 'none')};
   background-color: #0000006d;
   position: absolute;

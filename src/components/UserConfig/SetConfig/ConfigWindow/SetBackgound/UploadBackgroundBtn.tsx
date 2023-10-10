@@ -5,19 +5,28 @@ import styled from 'styled-components'
 import { storage } from '../../../../../firebase/config'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
 import { UserContext, UserContextType } from '../../../../../contexts/UserContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const UploadBackgroundBtn = () => {
   const {
     customizationState: { mainColor },
     customizationDispatch,
   } = useContext(CustomizationContext) as CustomizationContextType
+
   const {
-    userState: { id },
+    userState: { id, pendentUser },
   } = useContext(UserContext) as UserContextType
+
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const [isUploading, setIsUploading] = useState(false)
 
+  const handleClick = () => {
+    if (pendentUser) saveConfigDispatch({ type: 'SET_SIGN_IN_ALERT' })
+  }
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (pendentUser) return
     if (!e.target.files) return
     const reference = ref(storage, `background/users/${id}/selected.png`)
     const uploadTask = uploadBytesResumable(reference, e.target.files[0])
@@ -38,11 +47,11 @@ export const UploadBackgroundBtn = () => {
 
   return (
     <>
-      <Button className='form-button' as='label' htmlFor='file-upload-btn'>
+      <Button className='form-button' as='label' htmlFor='file-upload-btn' onClick={handleClick}>
         {isUploading ? <SpinnerCircular speed={150} color={`${mainColor}`} size={25} /> : 'upload background'}
       </Button>
       <input
-        type='file'
+        type={pendentUser ? 'button' : 'file'}
         accept='image/*'
         style={{ display: 'none' }}
         id='file-upload-btn'

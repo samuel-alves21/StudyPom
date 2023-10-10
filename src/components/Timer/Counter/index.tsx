@@ -6,7 +6,6 @@ import { CounterResetBtn } from './CounterResetBtn'
 import { useTimer } from '../../../hooks/useTimer'
 
 export const Counter = () => {
-
   useTimer()
 
   return (

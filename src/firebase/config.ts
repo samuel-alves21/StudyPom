@@ -17,8 +17,8 @@ const firebaseConfig = {
 }
 
 export const emailVerificationConfig: ActionCodeSettings = {
-  url: 'http://localhost:5173/StudyPom/'
-} 
+  url: 'http://localhost:5173/StudyPom/',
+}
 
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)

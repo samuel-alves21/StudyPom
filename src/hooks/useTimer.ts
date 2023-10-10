@@ -9,7 +9,9 @@ import { UserContext, UserContextType } from '../contexts/UserContext'
 export const useTimer = () => {
   const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
-  const { userState: { id, pendentUser } } = useContext(UserContext) as UserContextType
+  const {
+    userState: { id, pendentUser },
+  } = useContext(UserContext) as UserContextType
 
   const {
     customizationState: {
@@ -19,7 +21,18 @@ export const useTimer = () => {
   } = useContext(CustomizationContext) as CustomizationContextType
 
   const {
-    timeState: { cycles, cyclesTemp, timeOnDisplay, timeCounting, pomodoroTime, shortRestTime, longRestTime, workedTime, cyclesFinished, stagedWorkedTime },
+    timeState: {
+      cycles,
+      cyclesTemp,
+      timeOnDisplay,
+      timeCounting,
+      pomodoroTime,
+      shortRestTime,
+      longRestTime,
+      workedTime,
+      cyclesFinished,
+      stagedWorkedTime,
+    },
     timeDispatch,
   } = useContext(TimerContext) as TimerContextType
 
@@ -32,18 +45,18 @@ export const useTimer = () => {
   useEffect(() => {
     if (timeOnDisplay === 0) {
       if (buttonState.pomodoro) {
-        timeDispatch({ type: 'SET_CYCLES_FINISHED', payload: 1})
-        timeDispatch({ type: 'SET_WORKED_TIME', payload: pomodoroTime})
+        timeDispatch({ type: 'SET_CYCLES_FINISHED', payload: 1 })
+        timeDispatch({ type: 'SET_WORKED_TIME', payload: pomodoroTime })
         if (!pendentUser) {
           set(ref(database, `users/${id}/progress`), {
             workedTime: stagedWorkedTime,
-            cyclesFinished: cyclesFinished + 1 
+            cyclesFinished: cyclesFinished + 1,
           })
         }
         if (cyclesTemp + 1 < cycles) {
           timeDispatch({
             type: 'SET_TIME_ON_DISPLAY',
-            payload: shortRestTime
+            payload: shortRestTime,
           })
 
           buttonDispatch({ type: 'SHORT' })
@@ -100,6 +113,6 @@ export const useTimer = () => {
     workedTime,
     id,
     pendentUser,
-    stagedWorkedTime
+    stagedWorkedTime,
   ])
 }

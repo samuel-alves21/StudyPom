@@ -20,7 +20,7 @@ export const Register = () => {
   return (
     <Bg>
       <Spinner darkBackground={true} displayOnFirstLoad={false} />
-      { isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} /> }
+      {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <Wrapper className='main-container flex-all-center'>
         <GlassBox>
           <RegisterContent />

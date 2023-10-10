@@ -33,7 +33,6 @@ export const GlobalStyles = createGlobalStyle`
 
   .main-container {
     width: 100%;
-    max-width: 2000px;
     position: relative;
   }
 
@@ -244,5 +243,11 @@ export const GlobalStyles = createGlobalStyle`
     height: 7px;
     background-color: var(--color-primary);
     border-radius: 5px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    h1 {
+      font-size: calc(2.5rem + 0.2vw);
+    }
   }
 `

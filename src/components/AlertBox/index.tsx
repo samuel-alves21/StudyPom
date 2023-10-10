@@ -5,6 +5,7 @@ import { NotSavedAlert } from './NotSavedAlert'
 import { TimerRunningAlert } from './TimerRunningAlert'
 import { breakpoints } from '../../utilities/breakpoints'
 import { WorkingAlert } from './WorkingAlert'
+import { SignInAlert } from './SignInAlert'
 
 export const AlertBox = () => {
   const {
@@ -19,6 +20,7 @@ export const AlertBox = () => {
         {alertType === 'notSaved' && <NotSavedAlert />}
         {alertType === 'timerRunning' && <TimerRunningAlert />}
         {alertType === 'working' && <WorkingAlert />}
+        {alertType === 'signIn' && <SignInAlert />}
       </Box>
     </Wrapper>
   )
@@ -82,7 +84,7 @@ const Box = styled.div`
 
   min-width: 400px;
   min-height: 120px;
-  
+
   @media (max-width: ${breakpoints.mobile}) {
     min-width: 280px;
   }

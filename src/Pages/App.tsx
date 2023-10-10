@@ -15,6 +15,9 @@ import { AlertBox } from '../components/AlertBox'
 import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
 import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
 import { TimerContext, TimerContextType } from '../contexts/TimerContext'
+import { GithubRedirect } from '../components/GithubRedirect'
+import { MobileLogoAndLoginBtn } from '../components/MobileLogoAndLoginBtn'
+import { useMediaQuery } from 'react-responsive'
 
 export interface MainContainerProps {
   background: string
@@ -29,13 +32,19 @@ const App = () => {
 
   const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
   const { buttonState } = useContext(ButtonsContext) as ButtonContextType
-  const { timeState: { timeOnDisplay, pomodoroTime } } = useContext(TimerContext) as TimerContextType
+  const {
+    timeState: { timeOnDisplay, pomodoroTime },
+  } = useContext(TimerContext) as TimerContextType
 
   const [isLoading, setIsLoading] = useState(true)
+
+  const isMobile = useMediaQuery({ query: `(max-width: ${breakpoints.mobile})` })
 
   useUserManager(setIsLoading)
   useSetWindowTitle()
   useSetInitialTimer()
+
+  console.log(isMobile)
 
   useEffect(() => {
     const handleReload = (event: BeforeUnloadEvent) => {
@@ -55,11 +64,13 @@ const App = () => {
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
         <Wrapper>
+          {isMobile && <MobileLogoAndLoginBtn />}
           <AlertBox />
-          <Logo />
-          <LoginIcon />
+          {!isMobile && <Logo />}
+          {!isMobile && <LoginIcon />}
           <Timer />
           <UserConfig />
+          <GithubRedirect />
         </Wrapper>
       </MainContainer>
     </>
@@ -74,6 +85,8 @@ const MainContainer = styled.div<MainContainerProps>`
   padding: 30px 0;
 
   overflow-x: hidden;
+
+  padding: 20px 0;
 
   &::before {
     content: '';

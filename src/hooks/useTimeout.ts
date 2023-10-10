@@ -11,7 +11,11 @@ import { setFirstAttemptDate } from '../firebase/setFirstAttemptDate'
 import { timeoutExpireTime } from '../utilities/timeoutExpireTime'
 import { removeAttemptsData } from '../firebase/removeAttemptsData'
 
-export const useTimeout = (isLogin: boolean, type: 'login' | 'password' | 'verification', setIsLoading?: (value: boolean) => void) => {
+export const useTimeout = (
+  isLogin: boolean,
+  type: 'login' | 'password' | 'verification',
+  setIsLoading?: (value: boolean) => void
+) => {
   const [attempts, setAttempts] = useState(0)
   const [lastAttemptDate, setLastAttemptDate] = useState(0)
   const [timeLeft, setTimeLeft] = useState(0)
