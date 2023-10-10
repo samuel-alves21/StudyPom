@@ -14,7 +14,6 @@ export const WorkingAlert = () => {
   } = useContext(SaveConfigContext) as SaveConfigContextType
   const {
     timeDispatch,
-    timeState: { workedTime },
   } = useContext(TimerContext) as TimerContextType
   const { buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
