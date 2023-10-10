@@ -97,7 +97,6 @@ export const reducer: TimerReducer = (state, action) => {
         stagedWorkedTime: state.workedTime,
       }
     case 'INCREASE_STAGED_WORKED_TIME':
-      console.log('here')
       return {
         ...state,
         stagedWorkedTime: state.stagedWorkedTime + 1,

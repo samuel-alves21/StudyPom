@@ -44,10 +44,14 @@ export const PasswordReset = () => {
     if (!input.value) return
     const spinner = document.getElementById('spinner') as HTMLDivElement
     spinner.style.display = 'flex'
-    console.log(spinner)
     if (isAllowed) {
-      await setAttemptsData(attempts, firstAttemptState, 'password')
-      await sendPasswordResetEmail(auth, input.value)
+      try {
+        await setAttemptsData(attempts, firstAttemptState, 'password')
+        await sendPasswordResetEmail(auth, input.value)
+      }
+      catch(error) {
+        console.dir(error)
+      }
     } else {
       console.error('email not sent')
     }

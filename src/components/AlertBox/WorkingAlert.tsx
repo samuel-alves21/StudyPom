@@ -18,9 +18,7 @@ export const WorkingAlert = () => {
     })
     timeDispatch({ type: 'RESET_STAGED_WORKED_TIME' })
     saveConfigDispatch({ type: 'REMOVE_ALERT' })
-  } 
-
-  console.log(workedTime)
+  }
 
   return (
     <>
