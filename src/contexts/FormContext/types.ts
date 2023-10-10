@@ -3,3 +3,4 @@ export type FormContextTypes =
   | 'SET_USERNAME_ERROR'
   | 'SET_PASSWORD_ERROR'
   | 'SET_CONFIRMED_PASSWORD_ERROR'
+  | 'RESET'

@@ -1,15 +1,23 @@
 import styled from 'styled-components'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserConfig } from '../components/UserConfig'
 import { breakpoints } from '../utilities/breakpoints'
 import { Logo } from '../components/Logo'
 import { Timer } from '../components/Timer'
-import { useSetWindow } from '../hooks/useSetWindow'
-import { useInit } from '../hooks/useInit'
+import { useSetWindowTitle } from '../hooks/useSetWindowTitle'
+import { useSetInitialTimer } from '../hooks/useSetInitialTimer'
 import { CustomizationContext, CustomizationContextType } from '../contexts/CustomizationContext'
-import { useNavigate } from 'react-router-dom'
-import { Spinner } from '../components/Spinner'
 import { ColorStyle } from '../components/ColorStyle'
+import { LoginIcon } from '../components/LoginIcon'
+import { Spinner } from '../components/Spinner'
+import { useUserManager } from '../hooks/useUserManager'
+import { AlertBox } from '../components/AlertBox'
+import { SaveConfigContext, SaveConfigContextType } from '../contexts/SaveConfigContext'
+import { ButtonContextType, ButtonsContext } from '../contexts/ButtonsContext'
+import { TimerContext, TimerContextType } from '../contexts/TimerContext'
+import { GithubRedirect } from '../components/GithubRedirect'
+import { MobileLogoAndLoginBtn } from '../components/MobileLogoAndLoginBtn'
+import { useMediaQuery } from 'react-responsive'
 
 export interface MainContainerProps {
   background: string
@@ -17,45 +25,54 @@ export interface MainContainerProps {
   bright: string
 }
 
-const user = false
-
 const App = () => {
   const {
-    customizationState: { background, blur, bright, mainColor, secundaryColor },
+    customizationState: { background, blur, bright, mainColor },
   } = useContext(CustomizationContext) as CustomizationContextType
 
-  const navigate = useNavigate()
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+  const { buttonState } = useContext(ButtonsContext) as ButtonContextType
+  const {
+    timeState: { timeOnDisplay, pomodoroTime },
+  } = useContext(TimerContext) as TimerContextType
 
-  const myTimer = useRef<number>()
+  const [isLoading, setIsLoading] = useState(true)
+
+  const isMobile = useMediaQuery({ query: `(max-width: ${breakpoints.mobile})` })
+
+  useUserManager(setIsLoading)
+  useSetWindowTitle()
+  useSetInitialTimer()
+
+  console.log(isMobile)
 
   useEffect(() => {
-    if (!user) {
-      myTimer.current = setTimeout(() => {
-        navigate('/login')
-      }, 2000)
+    const handleReload = (event: BeforeUnloadEvent) => {
+      if (buttonState.pomodoro && timeOnDisplay < pomodoroTime) {
+        event.returnValue = ''
+      }
     }
-    return () => clearTimeout(myTimer.current)
-  }, [navigate])
 
-  useSetWindow()
-  useInit()
+    window.addEventListener('beforeunload', handleReload)
+
+    return () => window.removeEventListener('beforeunload', handleReload)
+  }, [saveConfigDispatch, buttonState.pomodoro, timeOnDisplay, pomodoroTime])
 
   return (
     <>
-      {!user ? (
-        <Spinner mainColor={mainColor} />
-      ) : (
-        <>
-          <ColorStyle colors={{ mainColor: mainColor, secundaryColor: secundaryColor }} />
-          <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
-            <Wrapper>
-              <Logo />
-              <Timer />
-              <UserConfig />
-            </Wrapper>
-          </MainContainer>
-        </>
-      )}
+      <ColorStyle colors={{ mainColor: mainColor }} />
+      {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
+      <MainContainer background={background} blur={blur} bright={bright} className='main-container'>
+        <Wrapper>
+          {isMobile && <MobileLogoAndLoginBtn />}
+          <AlertBox />
+          {!isMobile && <Logo />}
+          {!isMobile && <LoginIcon />}
+          <Timer />
+          <UserConfig />
+          <GithubRedirect />
+        </Wrapper>
+      </MainContainer>
     </>
   )
 }
@@ -68,6 +85,8 @@ const MainContainer = styled.div<MainContainerProps>`
   padding: 30px 0;
 
   overflow-x: hidden;
+
+  padding: 20px 0;
 
   &::before {
     content: '';

@@ -1,8 +1,7 @@
-import { backgroundArray } from '../../utilities/backgroundArray'
 import { soundsArray } from '../../utilities/soundsArray'
 
 export const initialState = {
-  background: backgroundArray[0].path,
+  background: '',
   blur: '1',
   bright: '1',
   sound: {
@@ -12,7 +11,7 @@ export const initialState = {
   },
   volume: '1',
   mainColor: '#ae83ff',
-  secundaryColor: '#ae83ff61',
+  needSave: false,
 }
 
 export type CustomizationState = typeof initialState

@@ -1,24 +1,28 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
 import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 export const RangeInputs = () => {
+  useContext(CustomizationContext) as CustomizationContextType
+
   const {
-    customizationState: { blur, bright },
-    customizationDispatch,
-  } = useContext(CustomizationContext) as CustomizationContextType
+    saveConfigDispatch,
+    SaveConfigState: { stagedBlur, stagedBright },
+  } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === 'blur') {
-      customizationDispatch({ type: 'CHANGE_BLUR', payload: e.target.value })
+      saveConfigDispatch({ type: 'STAGE_BLUR', payload: e.target.value })
     } else {
-      customizationDispatch({ type: 'CHANGE_BRIGHT', payload: e.target.value })
+      saveConfigDispatch({ type: 'STAGE_BRIGHT', payload: e.target.value })
     }
+    saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return (
     <Wrapper>
-      <RangeInputWrapper>
+      <RangeInputWrapper className='flex-all-center'>
         <label htmlFor='blur'>Blur</label>
         <input
           type='range'
@@ -27,12 +31,12 @@ export const RangeInputs = () => {
           min={0}
           max={3}
           step={0.1}
-          value={blur}
+          value={stagedBlur}
           onChange={(e) => handleChange(e)}
         />
-        <span>{Number(blur).toFixed(1)}</span>
+        <span>{Number(stagedBlur).toFixed(1)}</span>
       </RangeInputWrapper>
-      <RangeInputWrapper>
+      <RangeInputWrapper className='flex-all-center'>
         <label htmlFor='bright'>Bright</label>
         <input
           type='range'
@@ -41,10 +45,10 @@ export const RangeInputs = () => {
           min={0}
           max={1}
           step={0.05}
-          value={bright}
+          value={stagedBright}
           onChange={(e) => handleChange(e)}
         />
-        <span>{Number(bright).toFixed(2)}</span>
+        <span>{Number(stagedBright).toFixed(2)}</span>
       </RangeInputWrapper>
     </Wrapper>
   )
@@ -54,13 +58,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 `
 
 const RangeInputWrapper = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   & > input[type='range'] {
     margin: 0 10px;

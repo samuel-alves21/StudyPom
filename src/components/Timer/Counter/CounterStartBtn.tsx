@@ -15,7 +15,7 @@ export const CounterStartBtn = () => {
   useInterval(
     () => {
       timeDispatch({ type: 'DECREASE_TIME', payload: 1 })
-      if (buttonState.pomodoro) timeDispatch({ type: 'SET_WORKED_TIME', payload: 1 })
+      if (buttonState.pomodoro) timeDispatch({ type: 'INCREASE_STAGED_WORKED_TIME' })
     },
     timeCounting ? 1000 : null
   )
@@ -38,8 +38,10 @@ export const ToggleButton = styled.button`
   transition: background-color 5s;
   transition: color 0.05s;
 
-  &:hover {
-    background-color: transparent;
-    color: white;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: transparent;
+      color: white;
+    }
   }
 `

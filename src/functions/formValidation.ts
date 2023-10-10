@@ -1,4 +1,5 @@
-import { FormInputType } from '../components/LoginContent/Form'
+import { FormInputType } from '../components/Form'
+import { FormState } from '../contexts/FormContext/initialState'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
 import { FormContextTypes } from '../contexts/FormContext/types'
 
@@ -13,25 +14,63 @@ export const idParser = (id: FormInputType) => {
   }
   return parsedId
 }
+
+export const hasErrorOnSubmit = (formState: FormState) => {
+  const hasError =
+    formState.email.hasError ||
+    formState.password.hasError ||
+    formState.username.hasError ||
+    formState.confirmedPassword.hasError
+
+  return hasError
+}
+
+export const isEmptyOnSubmit = (
+  inputsArray: Array<HTMLInputElement>,
+  formDispatch: (value: FormReducerAction) => void
+) => {
+  let isEmpty = false
+  inputsArray.forEach((input) => {
+    if (!input.value) {
+      formValidation.EmptyVerify(input.value, formDispatch, input.id as FormInputType)
+      isEmpty = true
+    }
+  })
+  return isEmpty
+}
+
+export const getPasswordField = (id: FormInputType) => {
+  let password = ''
+  if (id === 'password') {
+    const field = document.getElementById('confirmedPassword') as HTMLInputElement
+    password = field?.value
+  }
+  if (id === 'confirmedPassword') {
+    const field = document.getElementById('password') as HTMLInputElement
+    password = field?.value
+  }
+  return password
+}
+
 export const formValidation = {
   usernameVerify(username: string, formDispatch: (value: FormReducerAction) => void) {
     if (username.length < 3) {
       formDispatch({
         type: 'SET_USERNAME_ERROR',
-        payload: { setHasError: true, setCurrentError: 'minLength', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'minLength' },
       })
       return true
     }
     if (username.length > 15) {
       formDispatch({
         type: 'SET_USERNAME_ERROR',
-        payload: { setHasError: true, setCurrentError: 'maxLength', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'maxLength' },
       })
       return true
     }
     formDispatch({
       type: 'SET_USERNAME_ERROR',
-      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+      payload: { setHasError: false, setCurrentError: 'none' },
     })
     return false
   },
@@ -41,20 +80,20 @@ export const formValidation = {
     if (!emailRegex.test(email)) {
       formDispatch({
         type: 'SET_EMAIL_ERROR',
-        payload: { setHasError: true, setCurrentError: 'invalid', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'invalid' },
       })
       return true
     }
     if (email.length > 100) {
       formDispatch({
         type: `SET_EMAIL_ERROR` as FormContextTypes,
-        payload: { setHasError: true, setCurrentError: 'maxLength', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'maxLength' },
       })
       return true
     }
     formDispatch({
       type: 'SET_EMAIL_ERROR',
-      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+      payload: { setHasError: false, setCurrentError: 'none' },
     })
     return false
   },
@@ -64,13 +103,13 @@ export const formValidation = {
     if (value === '') {
       formDispatch({
         type: `SET_${parsedId.toUpperCase()}_ERROR` as FormContextTypes,
-        payload: { setHasError: true, setCurrentError: 'empty', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'empty' },
       })
       return true
     }
     formDispatch({
       type: `SET_${parsedId.toUpperCase()}_ERROR` as FormContextTypes,
-      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+      payload: { setHasError: false, setCurrentError: 'none' },
     })
     return false
   },
@@ -79,41 +118,41 @@ export const formValidation = {
     if (password.length < 8) {
       formDispatch({
         type: 'SET_PASSWORD_ERROR',
-        payload: { setHasError: true, setCurrentError: 'invalidLength', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'invalidLength' },
       })
       return true
     }
     if (!/^(?=.*[A-Z]).+$/.test(password)) {
       formDispatch({
         type: 'SET_PASSWORD_ERROR',
-        payload: { setHasError: true, setCurrentError: 'uppercaseRequired', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'uppercaseRequired' },
       })
       return true
     }
     if (!/^(?=.*[a-z]).+$/.test(password)) {
       formDispatch({
         type: 'SET_PASSWORD_ERROR',
-        payload: { setHasError: true, setCurrentError: 'lowercaseRequired', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'lowercaseRequired' },
       })
       return true
     }
     if (/(.)\1{3}/.test(password)) {
       formDispatch({
         type: 'SET_PASSWORD_ERROR',
-        payload: { setHasError: true, setCurrentError: 'hasSequentialChars', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'hasSequentialChars' },
       })
       return true
     }
     if (!/[!@#$%^&*()/+,.?":{}|<>]/.test(password)) {
       formDispatch({
         type: 'SET_PASSWORD_ERROR',
-        payload: { setHasError: true, setCurrentError: 'specialCharRequired', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'specialCharRequired' },
       })
       return true
     }
     formDispatch({
       type: 'SET_PASSWORD_ERROR',
-      payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+      payload: { setHasError: false, setCurrentError: 'none' },
     })
     return false
   },
@@ -126,14 +165,14 @@ export const formValidation = {
     if (password !== confirmePassword) {
       formDispatch({
         type: 'SET_CONFIRMED_PASSWORD_ERROR',
-        payload: { setHasError: true, setCurrentError: 'mismatch', shouldValidate: true },
+        payload: { setHasError: true, setCurrentError: 'mismatch' },
       })
 
       return true
     } else {
       formDispatch({
         type: 'SET_CONFIRMED_PASSWORD_ERROR',
-        payload: { setHasError: false, setCurrentError: 'none', shouldValidate: true },
+        payload: { setHasError: false, setCurrentError: 'none' },
       })
       return false
     }
@@ -144,24 +183,28 @@ export const formValidator = (
   value: string,
   id: FormInputType,
   passwordValue: string,
-  formDispatch: (value: FormReducerAction) => void
+  formDispatch: (value: FormReducerAction) => void,
+  isLogin: boolean
 ) => {
-  const isEmpty = formValidation.EmptyVerify(value, formDispatch, id)
-  if (isEmpty) return
-  if (id === 'username') {
-    const isUsernameInvalid = formValidation.usernameVerify(value, formDispatch)
-    if (isUsernameInvalid) return
-  }
-  if (id === 'email') {
-    const isEmailInvalid = formValidation.emailVerify(value, formDispatch)
-    if (isEmailInvalid) return
-  }
-  if (id === 'password') {
-    const isPasswordInvalid = formValidation.passwordVerify(value, formDispatch)
-    if (isPasswordInvalid) return
-  }
-  if (id === 'confirmedPassword') {
-    const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
-    if (isConfirmedPasswordInvalid) return
+  if (!isLogin) {
+    const isEmpty = formValidation.EmptyVerify(value, formDispatch, id)
+    if (isEmpty) return
+    if (id === 'username') {
+      const isUsernameInvalid = formValidation.usernameVerify(value, formDispatch)
+      if (isUsernameInvalid) return
+    }
+    if (id === 'email') {
+      const isEmailInvalid = formValidation.emailVerify(value, formDispatch)
+      if (isEmailInvalid) return
+    }
+    if (id === 'password') {
+      const isPasswordInvalid = formValidation.passwordVerify(value, formDispatch)
+      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+      if (isPasswordInvalid || isConfirmedPasswordInvalid) return
+    }
+    if (id === 'confirmedPassword') {
+      const isConfirmedPasswordInvalid = formValidation.confirmedPasswordVerify(passwordValue, value, formDispatch)
+      if (isConfirmedPasswordInvalid) return
+    }
   }
 }

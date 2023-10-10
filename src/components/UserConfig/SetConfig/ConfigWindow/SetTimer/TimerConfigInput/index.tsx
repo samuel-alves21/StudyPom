@@ -1,81 +1,117 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react'
 import { Arrows } from './Arrows'
 import { formatConfigInput } from '../../../../../../functions/formatConfigInput'
 import { limitValues } from '../../../../../../utilities/limitValues'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
-import { useTimerConfig } from '../../../../../../hooks/useTimerConfig'
+import { useTimerStaged } from '../../../../../../hooks/useTimerStaged'
 import { Id } from '../../../../../Timer/Counter/CounterOptionsBtn'
+import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
+import { standardValues } from '../../../../../../utilities/standardValues'
+import { TimerActionTypes } from '../../../../../../contexts/TimerContext/types'
 
 interface TimerConfigInputProps {
   id: Id
-  state: string
-  setState: (value: string) => void
 }
 
-export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps) => {
+export const TimerConfigInput = ({ id }: TimerConfigInputProps) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
+  const { timeDispatch, timeState } = useContext(TimerContext) as TimerContextType
 
-  useTimerConfig(state, id)
+  const setInputValue = useCallback(
+    (payload: number) => {
+      timeDispatch({
+        type: `SET_${id.toUpperCase()}_CONFIG_VALUE_INPUT` as TimerActionTypes,
+        payload: payload,
+      })
+    },
+    [id, timeDispatch]
+  )
+
+  const inputValue = timeState[`${id}ConfigValueInput`]
+
+  useTimerStaged(inputValue, id)
+
+  const {
+    timeState: { isDefault },
+  } = useContext(TimerContext) as TimerContextType
+
+  useEffect(() => {
+    if (isDefault) {
+      setInputValue(standardValues[id])
+    }
+  }, [id, isDefault, setInputValue])
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const thisElement = e.target as HTMLElement
     setIsOnFocus(false)
-    if (Number(state) < limitValues.min[id] && id === 'cycles') {
-      setState(limitValues.min[id].toString())
-      return
-    }
-    if (Number(state) > limitValues.max[id] && id === 'cycles') {
-      setState(limitValues.max[id].toString())
-      return
-    }
+
     if (id === 'cycles') {
-      setState(Number(state).toString())
+      if (inputValue < limitValues.min[id]) {
+        setInputValue(limitValues.min[id])
+        return
+      }
+      if (inputValue > limitValues.max[id]) {
+        setInputValue(limitValues.max[id])
+        return
+      }
+      setInputValue(inputValue)
       return
     }
-    if (Number(state) * 60 < limitValues.min[id]) {
-      setState(limitValues.min[id].toString())
+    if (inputValue * 60 < limitValues.min[id]) {
+      setInputValue(limitValues.min[id])
       return
     }
-    if (Number(state) * 60 > limitValues.max[id]) {
-      setState(limitValues.max[id].toString())
+    if (inputValue * 60 > limitValues.max[id]) {
+      setInputValue(limitValues.max[id])
       return
     }
-    setState((Number(state) * 60).toString())
+    setInputValue(inputValue * 60)
+    timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
     thisElement.blur()
   }
 
   const handleWhell = (e: React.WheelEvent<HTMLInputElement>) => {
+    if (isDefault) return
     if (isOnFocus) return
     if (e.deltaY < 0) {
-      setState(acrementTime(Number(state), id).toString())
+      setInputValue(acrementTime(inputValue, id))
     } else {
-      setState(decrementTime(Number(state), id).toString())
+      setInputValue(decrementTime(inputValue, id))
     }
+    timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const thisElement = e.target as HTMLElement
-    if (e.key === 'Backspace') setState('')
+    if (e.key === 'Backspace') setInputValue(0)
     if (e.key === 'Enter') {
       thisElement.blur()
+      return
     }
     if (e.key === 'ArrowUp') {
-      setState(acrementTime(Number(state), id).toString())
+      setInputValue(acrementTime(inputValue, id))
     }
     if (e.key === 'ArrowDown') {
-      setState(decrementTime(Number(state), id).toString())
+      setInputValue(decrementTime(inputValue, id))
     }
-    if (state.length === 2) return
-    if (state.length === 1 && id === 'cycles') return
+    if (inputValue.toString().length === 2) return
+
+    if (inputValue.toString().length === 1 && id === 'cycles') {
+      setInputValue(Number(inputValue.toString() + e.key))
+      return
+    }
+
     if (!/^[0-9]+$/.test(e.key)) return
-    setState(state + e.key)
+    setInputValue(Number(inputValue.toString() + e.key))
+    timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
   }
 
   const handleFocus = () => {
     setIsOnFocus(true)
-    setState('')
+    setInputValue(0)
+    timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
   }
 
   const handleChange = () => {
@@ -85,17 +121,19 @@ export const TimerConfigInput = ({ state, setState, id }: TimerConfigInputProps)
   return (
     <InputAndArrows>
       <InputField
-        onChange={() => handleChange}
+        onChange={handleChange}
         onKeyDown={(e) => handleKeyDown(e)}
-        onFocus={() => handleFocus()}
+        onFocus={handleFocus}
         onBlur={(e) => handleBlur(e)}
         type='text'
-        value={isOnFocus ? state : formatConfigInput(Number(state), id)}
+        value={isOnFocus ? inputValue || '' : formatConfigInput(inputValue, id)}
         id={id}
         readOnly={false}
         onWheel={(e) => handleWhell(e)}
+        disabled={isDefault}
+        autoComplete='off'
       />
-      <Arrows state={state} setState={setState} id={id} />
+      <Arrows state={inputValue} setState={setInputValue} id={id} />
     </InputAndArrows>
   )
 }

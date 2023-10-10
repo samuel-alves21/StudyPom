@@ -1,18 +1,13 @@
 import { useContext } from 'react'
 import { CirclePicker, ColorResult } from 'react-color'
-import { CustomizationContext, CustomizationContextType } from '../../../../../contexts/CustomizationContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
-export interface MobileColorPickerProps {
-  mainColorIsChecked: boolean
-  secundaryColorIsChecked: boolean
-}
-
-export const MobileColorPicker = ({ mainColorIsChecked, secundaryColorIsChecked }: MobileColorPickerProps) => {
-  const { customizationDispatch } = useContext(CustomizationContext) as CustomizationContextType
+export const MobileColorPicker = () => {
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const handleOnChangeComplete = (color: ColorResult) => {
-    mainColorIsChecked && customizationDispatch({ type: 'CHANGE_MAIN_COLOR', payload: color.hex })
-    secundaryColorIsChecked && customizationDispatch({ type: 'CHANGE_SECUNDARY_COLOR', payload: color.hex + '61' })
+    saveConfigDispatch({ type: 'STAGE_COLOR', payload: color.hex })
+    saveConfigDispatch({ type: 'SET_IS_SAVED', payload: false })
   }
 
   return <CirclePicker onChangeComplete={(color) => handleOnChangeComplete(color)} />

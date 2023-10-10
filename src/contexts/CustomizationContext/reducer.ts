@@ -2,10 +2,12 @@ import { SoundObject } from '.'
 import { CustomizationState } from './initialState'
 import { CustomizationActionTypes } from './types'
 
-export type CustomizationReducer = (
-  state: CustomizationState,
-  action: { type: CustomizationActionTypes; payload: string | SoundObject }
-) => CustomizationState
+export type CustomizationReducer = (state: CustomizationState, action: CustomizationAction) => CustomizationState
+
+export type CustomizationAction = {
+  type: CustomizationActionTypes
+  payload: string | SoundObject | boolean
+}
 
 export const reducer: CustomizationReducer = (state, action) => {
   switch (action.type) {
@@ -43,12 +45,6 @@ export const reducer: CustomizationReducer = (state, action) => {
       return {
         ...state,
         mainColor: action.payload,
-      }
-    case 'CHANGE_SECUNDARY_COLOR':
-      if (typeof action.payload !== 'string') return state
-      return {
-        ...state,
-        secundaryColor: action.payload,
       }
     default:
       return state

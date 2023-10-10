@@ -1,7 +1,9 @@
 import styled from 'styled-components'
-import { useState, useRef } from 'react'
+import { useState, useContext } from 'react'
 import { ConfigWindow } from './ConfigWindow'
 import { Filter } from './Filter'
+import { UserContext, UserContextType } from '../../../contexts/UserContext'
+import { SaveConfigContext, SaveConfigContextType } from '../../../contexts/SaveConfigContext'
 
 interface GearIconProps {
   shouldRotate: boolean
@@ -9,12 +11,17 @@ interface GearIconProps {
 }
 
 export const ConfigHeading = () => {
-  const gear = useRef<HTMLElement | null>(null)
-
   const [shouldDisplay, setShouldDisplay] = useState(false)
   const [animate, setAnimate] = useState(false)
 
+  const { userState } = useContext(UserContext) as UserContextType
+  const { SaveConfigState, saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const handleClick = () => {
+    if (!SaveConfigState.isSaved && !userState.pendentUser) {
+      saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
+      return
+    }
     setShouldDisplay(!shouldDisplay)
     setAnimate(true)
   }
@@ -22,12 +29,8 @@ export const ConfigHeading = () => {
   return (
     <Wrapper className='config-wrapper' shouldRotate={shouldDisplay} animate={animate}>
       <h1 className='config-heading'> Your Config</h1>
-      <i className='bi bi-gear-fill' ref={gear} onClick={handleClick}></i>
-      <ConfigWindow
-        gear={gear.current as HTMLElement}
-        shouldDisplay={shouldDisplay}
-        setShouldDisplay={setShouldDisplay}
-      />
+      <i className='bi bi-gear-fill' onClick={handleClick}></i>
+      <ConfigWindow shouldDisplay={shouldDisplay} setShouldDisplay={setShouldDisplay} />
       <Filter className='filter' shouldDisplay={shouldDisplay}></Filter>
     </Wrapper>
   )
@@ -68,8 +71,10 @@ const Wrapper = styled.div<GearIconProps>`
     }
   }
 
-  & .bi-gear-fill:hover {
-    color: var(--color-primary);
-    cursor: pointer;
+  @media (hover: hover) and (pointer: fine) {
+    & .bi-gear-fill:hover {
+      color: var(--color-primary);
+      cursor: pointer;
+    }
   }
 `

@@ -1,16 +1,28 @@
-import { useEffect } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { LoginContent } from '../components/LoginContent'
 import { breakpoints } from '../utilities/breakpoints'
+import { Spinner } from '../components/Spinner'
+import { GlassBox } from '../components/GlassBox'
+import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { useRedirectToAppOnLogged } from '../hooks/useRedirectToAppOnLogged'
 
 export const Login = () => {
-  useEffect(() => {
-    window.document.title = 'StudyPom | Login'
-  }, [])
+  const { setIsLogin } = useContext(LoginContext) as LoginContextType
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  window.document.title = 'StudyPom | Login'
+
+  setIsLogin(true)
+
+  useRedirectToAppOnLogged(setIsLoading)
 
   return (
     <Bg>
-      <Wrapper className='main-container'>
+      <Spinner displayOnFirstLoad={false} darkBackground={true} />
+      {isLoading && <Spinner displayOnFirstLoad={true} darkBackground={false} />}
+      <Wrapper className='main-container flex-all-center'>
         <GlassBox>
           <LoginContent />
         </GlassBox>
@@ -20,52 +32,16 @@ export const Login = () => {
 }
 
 const Bg = styled.div`
+  position: relative;
   background: radial-gradient(circle, rgba(214, 78, 219, 1) 21%, rgba(176, 50, 233, 1) 97%);
 `
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  padding: 30px;
   min-height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   @media (max-width: ${breakpoints.mobile}) {
     padding: 10px;
-  }
-`
-
-const GlassBox = styled.div`
-  display: flex;
-  align-items: center;
-  max-height: 900px;
-  height: 100%;
-  min-height: fit-content;
-  min-width: 80%;
-
-  background: rgba(17, 17, 17, 0.65);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(3.5px);
-  -webkit-backdrop-filter: blur(3.5px);
-
-  border-radius: 50px;
-  padding: 5% 20px;
-
-  @media (max-width: ${breakpoints.laptop}) {
-    flex-direction: column;
-    justify-content: space-evenly;
-    max-height: 800px;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    height: 100%;
-    border-radius: 15px;
-    padding: 20px 10px;
-  }
-
-  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
-    padding: 30px;
   }
 `

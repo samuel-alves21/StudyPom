@@ -1,40 +1,33 @@
 import styled from 'styled-components'
 import { TimerConfigInput } from './TimerConfigInput'
-import { useState, useContext } from 'react'
 import { LimitValues } from './LimitValues'
-import { TimerContext, TimerContextType } from '../../../../../contexts/TimerContext'
+import { DefaultToggleButton } from './DefaultToggleButton'
 
 export const SetTimer = () => {
-  const {
-    timeState: { pomodoroTime, shortRestTime, longRestTime, cycles },
-  } = useContext(TimerContext) as TimerContextType
-
-  const [pomodoroConfigTime, setPomodoroConfigTime] = useState<string>(String(pomodoroTime))
-  const [shortConfigTime, setShortConfigTime] = useState<string>(String(shortRestTime))
-  const [longConfigTime, setLongConfigTime] = useState<string>(String(longRestTime))
-  const [configCycles, setConfigCycles] = useState<string>(String(cycles))
-
   return (
     <Wrapper>
       <InputContainer>
         <label htmlFor='pomodoro'>Pomodoro Time:</label>
-        <TimerConfigInput id='pomodoro' state={pomodoroConfigTime} setState={setPomodoroConfigTime} />
+        <TimerConfigInput id='pomodoro' />
         <LimitValues id={'pomodoro'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='short'>Short Rest Time:</label>
-        <TimerConfigInput id='short' state={shortConfigTime} setState={setShortConfigTime} />
+        <TimerConfigInput id='short' />
         <LimitValues id={'short'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='long'>Long Rest Time:</label>
-        <TimerConfigInput id='long' state={longConfigTime} setState={setLongConfigTime} />
+        <TimerConfigInput id='long' />
         <LimitValues id={'long'} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='cycles'>Cycles:</label>
-        <TimerConfigInput id='cycles' state={configCycles} setState={setConfigCycles} />
+        <TimerConfigInput id='cycles' />
         <LimitValues id={'cycles'} />
+      </InputContainer>
+      <InputContainer>
+        <DefaultToggleButton />
       </InputContainer>
     </Wrapper>
   )
@@ -51,4 +44,10 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  & > span {
+    font-size: calc(1.6rem);
+    cursor: pointer;
+    font-weight: normal;
+  }
 `

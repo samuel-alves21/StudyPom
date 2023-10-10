@@ -2,47 +2,61 @@ import styled from 'styled-components'
 import { acrementTime } from '../../../../../../functions/acrementTime'
 import { decrementTime } from '../../../../../../functions/decrementTime'
 import { Id } from '../../../../../Timer/Counter/CounterOptionsBtn'
+import { TimerContext, TimerContextType } from '../../../../../../contexts/TimerContext'
+import { useContext } from 'react'
 
 interface ArrowsProps {
-  state: string
-  setState: (value: string) => void
+  state: number
+  setState: (value: number) => void
   id: Id
 }
 
+interface StyledArrows {
+  isDisabled: boolean
+}
+
 export const Arrows = ({ id, setState, state }: ArrowsProps) => {
+  const {
+    timeState: { isDefault },
+    timeDispatch,
+  } = useContext(TimerContext) as TimerContextType
+
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (isDefault) return
+
     const thisElement = e.target as HTMLElement
 
     if (thisElement.id === 'acrement') {
-      setState(acrementTime(Number(state), id).toString())
+      setState(acrementTime(state, id))
     } else {
-      setState(decrementTime(Number(state), id).toString())
+      setState(decrementTime(state, id))
     }
+    timeDispatch({ type: 'SET_IS_INPUT_VALUE_CHANGED', payload: true })
   }
 
   return (
-    <ArrowIcon>
+    <ArrowIcon className='flex-all-center' isDisabled={isDefault}>
       <i id='acrement' onClick={(e) => handleClick(e)} className='bi bi-caret-up-fill'></i>
       <i id='decrement' onClick={(e) => handleClick(e)} className='bi bi-caret-down-fill'></i>
     </ArrowIcon>
   )
 }
 
-const ArrowIcon = styled.div`
-  display: flex;
+const ArrowIcon = styled.div<StyledArrows>`
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--color-primary);
   padding: 0 8px;
   font-size: 12px;
+  opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
 
-  &:hover {
-    cursor: pointer;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+    }
 
-  & .bi-caret-up-fill:hover,
-  & .bi-caret-down-fill:hover {
-    transform: scale(1.3) !important;
+    & .bi-caret-up-fill:hover,
+    & .bi-caret-down-fill:hover {
+      transform: scale(1.3) !important;
+    }
   }
 `

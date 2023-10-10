@@ -13,7 +13,8 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
-    color: #fff; 
+    color: #fff;
+
     --color-error: #ff3939;
     --color-primary: #cc66fc;
 
@@ -32,64 +33,38 @@ export const GlobalStyles = createGlobalStyle`
 
   .main-container {
     width: 100%;
-    max-width: 2000px
+    position: relative;
   }
 
-  h1, h2, h3, h4 {
-    text-align: center;
+  .flex-all-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  h1 {
-    font-size: calc(3.2rem + 0.2vw);
-  }
+  .styled-page-box {
+    background: rgba(17, 17, 17, 0.65);
+    box-shadow: 0 8px 32px 0 rgba(165, 34, 128, 0.37);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
 
-  h2 {
-    font-size: calc(2.3rem + 0.2vw);
-  }
-
-  h3 {
-    font-size: calc(1.6rem + 0.2vw);
-  }
-
-  p, span {
-    font-size: calc(1.4rem + 0.2vw);
-  }
-
-  label {
-    font-size: calc(1.6rem);
-  }
-
-  span {
-    font-weight: bold;
-  }
-
-  a {
-    text-decoration: none;
-    color: #b032e9;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  input {
-    outline: none;
-    border: none;
-    font-size: 1.3rem;
-    padding: 0 0.5rem;
-    font-family: 'montserrat', sans-serif;
-  }
-
-  button {
-    outline: none;
-    border: none;
-    padding: 10px 40px;
-    border: white solid 1px;
     border-radius: 20px;
+    padding: 30px;
+  }
+
+  .error {
+    color: var( --color-error);
+  }
+
+  .navigation-span {
+    text-decoration: none;
+    color: var( --color-primary);
+    font-weight: normal;
     cursor: pointer;
-    transition: background-color 5s;
-    transition: color 0.5s;
-    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .form-input {
@@ -109,19 +84,107 @@ export const GlobalStyles = createGlobalStyle`
     padding: 10px;
     border-radius: 5px;
     border: none;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
+    transition: background-color 0.2s ease;
     font-size: 14px;
     color: #3b3b3b;
     cursor: pointer;
 
-    &:hover {
-      background-color: #af32e9;
-      color: #fff;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var( --color-primary);
+        color: #3b3b3b;
+      }
     }
 
     @media (max-width: ${breakpoints.mobile}) {
       width: 80%;
     }
+  }
+
+  .form-button-disabled {
+    opacity: 0.5;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        opacity: 0.5;
+        background-color: #fff;
+        color: #000;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .disabled {
+    cursor: not-allowed;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4 {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: calc(3.0rem + 0.2vw);
+  }
+
+  h2 {
+    font-size: calc(2.1rem + 0.2vw);
+  }
+
+  h3 {
+    font-size: calc(1.4rem + 0.2vw);
+  }
+
+  p, span {
+    font-size: calc(1.4rem + 0.2vw);
+  }
+
+  label {
+    font-size: calc(1.6rem);
+    cursor: pointer;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+    color: var( --color-primary);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  input {
+    outline: none;
+    border: none;
+    font-size: 1.3rem;
+    padding: 0 0.5rem;
+    font-family: 'montserrat', sans-serif;
+  }
+
+  input[type="text"]:disabled {
+    cursor: not-allowed;
+  }
+
+  button {
+    outline: none;
+    border: none;
+    padding: 10px 40px;
+    border: white solid 1px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 5s;
+    transition: color 0.5s;
+    font-weight: 500;
   }
 
   input[type="range"] {
@@ -180,5 +243,11 @@ export const GlobalStyles = createGlobalStyle`
     height: 7px;
     background-color: var(--color-primary);
     border-radius: 5px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    h1 {
+      font-size: calc(2.5rem + 0.2vw);
+    }
   }
 `

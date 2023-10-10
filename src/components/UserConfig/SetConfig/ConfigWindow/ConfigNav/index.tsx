@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../../contexts/SaveConfigContext'
 
 interface ConfigNavProps {
   setOption: (option: 'timer' | 'background' | 'sounds' | 'color') => void
@@ -11,8 +13,19 @@ export interface ConfigNavStyledProps {
 }
 
 export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProps) => {
+  const { SaveConfigState, saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
+
   const handleClick = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     setOption(e.currentTarget.innerText.toLowerCase() as typeof option)
+  }
+
+  const handleCloseWindow = () => {
+    if (!SaveConfigState.isSaved) {
+      saveConfigDispatch({ type: 'SET_NOT_SAVED_ALERT' })
+      return
+    }
+
+    setShouldDisplay(false)
   }
 
   return (
@@ -31,7 +44,7 @@ export const ConfigNav = ({ setOption, option, setShouldDisplay }: ConfigNavProp
           Background
         </Option>
       </Options>
-      <i className='bi bi-x-lg' onClick={() => setShouldDisplay(false)}></i>
+      <i className='bi bi-x-lg' onClick={handleCloseWindow}></i>
     </Wrapper>
   )
 }
@@ -43,16 +56,19 @@ const Wrapper = styled.div`
   background-color: var(--color-primary);
   border-radius: 10px 10px 0 0;
   padding: 1rem;
+  width: 100%;
 
   & .bi-x-lg {
     font-size: 1.75rem;
     color: white;
   }
 
-  & .bi-x-lg:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    color: #ffffff8f;
+  @media (hover: hover) and (pointer: fine) {
+    & .bi-x-lg:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      color: #ffffff8f;
+    }
   }
 `
 
@@ -65,9 +81,11 @@ const Options = styled.div`
 const Option = styled.p<ConfigNavStyledProps>`
   position: relative;
 
-  &:hover {
-    cursor: pointer;
-    color: #ffffff8f;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      color: #ffffff8f;
+    }
   }
 
   &::after {

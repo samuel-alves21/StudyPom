@@ -6,6 +6,7 @@ import { breakpoints } from '../../../../utilities/breakpoints'
 import { TimerActionTypes } from '../../../../contexts/TimerContext/types'
 import { ButtonsActionTypes } from '../../../../contexts/ButtonsContext/types'
 import { Id } from '.'
+import { SaveConfigContext, SaveConfigContextType } from '../../../../contexts/SaveConfigContext'
 
 interface OptionsBtnProps {
   text: Id
@@ -16,18 +17,26 @@ export interface StyledButtonProps {
 }
 
 export const OptionsBtn = ({ text }: OptionsBtnProps) => {
-  const { timeDispatch } = useContext(TimerContext) as TimerContextType
+  const {
+    timeDispatch,
+    timeState: { pomodoroTime, timeOnDisplay },
+  } = useContext(TimerContext) as TimerContextType
+  const { saveConfigDispatch } = useContext(SaveConfigContext) as SaveConfigContextType
 
   const { buttonState, buttonDispatch } = useContext(ButtonsContext) as ButtonContextType
 
   const handleClick = (text: string) => {
-    timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
+    if (buttonState[text.toLowerCase()]) return
 
-    timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })
-
-    buttonDispatch({
-      type: text.toUpperCase() as ButtonsActionTypes,
-    })
+    if (buttonState.pomodoro && timeOnDisplay < pomodoroTime) {
+      saveConfigDispatch({ type: 'SET_WORKING_ALERT', payload: text.toLowerCase() })
+    } else {
+      timeDispatch({ type: `SET_${text.toUpperCase()}_TIME` as TimerActionTypes })
+      timeDispatch({ type: 'SET_TIME_COUNTING', payload: false })
+      buttonDispatch({
+        type: text.toUpperCase() as ButtonsActionTypes,
+      })
+    }
   }
 
   return (
@@ -44,9 +53,12 @@ export const OptionsBtn = ({ text }: OptionsBtnProps) => {
 export const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ isSelected }) => (isSelected ? 'white' : 'transparent')};
   color: ${({ isSelected }) => (isSelected ? 'black' : 'white')};
-  &:hover {
-    background-color: white;
-    color: #1d1d1d;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: white;
+      color: #1d1d1d;
+    }
   }
 
   @media (max-width: ${breakpoints.mobile}) {

@@ -18,7 +18,6 @@ export interface FormState {
     hasError: boolean
     currentError: FormsError
     errorTypes: {
-      exists: string
       empty: string
       invalid: string
       maxLength: string
@@ -58,7 +57,7 @@ export const initialState: FormState = {
     hasError: false,
     currentError: 'none',
     errorTypes: {
-      exists: 'email already exists!',
+      exists: 'email already in-use!',
       empty: 'empty field!',
       invalid: 'email invalid!',
       maxLength: 'email too long',
@@ -70,7 +69,6 @@ export const initialState: FormState = {
     hasError: false,
     currentError: 'none',
     errorTypes: {
-      exists: 'username already exists!',
       empty: 'empty field!',
       invalid: 'email invalid!',
       maxLength: 'username too long',
