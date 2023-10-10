@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { auth } from '../firebase/config'
+import { auth, emailVerificationConfig } from '../firebase/config'
 import { Spinner } from '../components/Spinner'
 import { User, sendEmailVerification } from 'firebase/auth'
 import { MessagePopUp } from '../components/MessagePopUp'
@@ -23,14 +23,14 @@ export const EmailVerification = () => {
   const handleSubmit = async () => {
     if (isAllowed) {
       try {
-        await sendEmailVerification(auth.currentUser as User)
+        await sendEmailVerification(auth.currentUser as User, emailVerificationConfig)
         await setAttemptsData(attempts, firstAttemptState, 'verification')
         // eslint-disable-next-line
       } catch (error: any) {
         if (error.code === 'auth/too-many-requests') {
           await setAttemptsData(attempts, firstAttemptState, 'verification')
         } else {
-          console.error(error)
+          console.dir(error.message)
         }
       }
     } else {

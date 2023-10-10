@@ -56,7 +56,7 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
       await setAttemptsData(access.attempts, access.firstAttemptDate, 'login')
       console.error('form not sent')
     } catch (error) {
-      console.error(error)
+      console.dir(error)
       console.error('form not sent')
     }
   }

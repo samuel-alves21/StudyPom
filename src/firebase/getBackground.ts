@@ -8,7 +8,7 @@ export const getBackground = async (id: string) => {
     //eslint-disable-next-line
   } catch (error: any) {
     if (error.code === 'storage/object-not-found') {
-      const url = await getDownloadURL(ref(storage, `background/default-bg.jpg`))
+      const url = await getDownloadURL(ref(storage, `background/default/default-bg.jpg`))
       return url
     } else {
       console.error(error)

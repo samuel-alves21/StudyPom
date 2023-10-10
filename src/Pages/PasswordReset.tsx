@@ -39,21 +39,25 @@ export const PasswordReset = () => {
     input.focus()
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
     if (!input.value) return
+    const spinner = document.getElementById('spinner') as HTMLDivElement
+    spinner.style.display = 'flex'
+    console.log(spinner)
     if (isAllowed) {
-      setAttemptsData(attempts, firstAttemptState, 'password')
-      sendPasswordResetEmail(auth, input.value)
+      await setAttemptsData(attempts, firstAttemptState, 'password')
+      await sendPasswordResetEmail(auth, input.value)
     } else {
       console.error('email not sent')
-      return
     }
+    spinner.style.display = 'none'
   }
 
   return (
     <Wrapper className='flex-all-center'>
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
+      <Spinner darkBackground={true} displayOnFirstLoad={false}/>
       <ContentWrapper className='styled-page-box flex-all-center'>
         <h1>Password Reset</h1>
         <span onClick={handleClick}>Enter with your email:</span>

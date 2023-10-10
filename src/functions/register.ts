@@ -2,7 +2,7 @@ import { NavigateFunction } from 'react-router-dom'
 import { FormReducerAction } from '../contexts/FormContext/reducer'
 import { isEmptyOnSubmit } from './formValidation'
 import { createUser } from '../firebase/createUser'
-import { auth } from '../firebase/config'
+import { auth, emailVerificationConfig } from '../firebase/config'
 import { User, sendEmailVerification } from 'firebase/auth'
 
 interface FormData {
@@ -29,7 +29,7 @@ export const register: RegisterFn = async (hasError, inputsArray, formDispatch, 
   if (!hasError && !isEmpty) {
     try {
       await createUser(formData.email, formData.password, formData.username)
-      await sendEmailVerification(auth.currentUser as User)
+      await sendEmailVerification(auth.currentUser as User, emailVerificationConfig)
       navigate('/StudyPom/emailVerification/register')
       //eslint-disable-next-line
     } catch (error: any) {
