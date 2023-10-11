@@ -1,17 +1,16 @@
 {
   "rules": {
-    "username": {
-      "$uid": {
-        ".write": "true"
-      }
+    "timeouts": {
+      ".read": "true",
+      ".write": "true"
     },
     "users": {
       "$uid": {
-        ".read": "$uid == auth.uid",
-        ".write": "$uid == auth.uid",
+        ".read": "auth !== null && auth.uid === $uid",
+        ".write": "auth !== null && auth.uid === $uid",
         "contacts": {
-          ".read": "$uid == auth.uid",
-          ".write": "$uid == auth.uid"
+          ".read": "auth !== null && auth.uid === $uid",
+          ".write": "auth !== null && auth.uid === $uid"
         }
       }
     }

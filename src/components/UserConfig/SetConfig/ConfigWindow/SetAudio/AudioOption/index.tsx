@@ -3,15 +3,8 @@ import { useMemo, useContext } from 'react'
 import { useSounds } from '../../../../../../hooks/useSounds'
 import { ProgressBar } from './ProgressBar'
 import { SetAudioBtn } from './SetAudioBtn'
-<<<<<<< HEAD
-import {
-  CustomizationContext,
-  CustomizationContextType
-} from '../../../../../../contexts/CustomizationContext'
-=======
 import { CustomizationContext, CustomizationContextType } from '../../../../../../contexts/CustomizationContext'
 import { breakpoints } from '../../../../../../utilities/breakpoints'
->>>>>>> login-page
 
 export interface AudioOptionProps {
   sounds: {

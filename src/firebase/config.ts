@@ -17,7 +17,7 @@ const firebaseConfig = {
 }
 
 export const emailVerificationConfig: ActionCodeSettings = {
-  url: 'http://localhost:5173/StudyPom/',
+  url: 'https://pomodoro-app-cf8c3.web.app/StudyPom',
 }
 
 const app = initializeApp(firebaseConfig)
