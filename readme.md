@@ -4,7 +4,7 @@ StudyPom is a web-based pomodoro timer app built with TypeScript and React that 
 
 ## Access
 
-You can access the official version by clicking [here](https://samuel-alves21.github.io/StudyPom/). 
+You can access the official version by clicking [here](https://pomodoro-app-cf8c3.web.app/StudyPom). 
 
 ## Features
 
