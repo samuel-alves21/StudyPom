@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Login } from './Login.tsx'
 import App from './App.tsx'
 import { Register } from './Register.tsx'
-import { EmailVerification } from './EmailVerification.tsx'
 import { ErrorPage } from './ErrorPage.tsx'
 import { PasswordReset } from './PasswordReset.tsx'
 
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
   {
     path: '/StudyPom/register',
     element: <Register />,
-  },
-  {
-    path: '/StudyPom/emailVerification/:origin',
-    element: <EmailVerification />,
   },
   {
     path: '/StudyPom/passwordReset',

@@ -38,13 +38,11 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const isMobile = useMediaQuery({ query: `(max-width: ${breakpoints.mobile})` })
+  const isMobile = useMediaQuery({ query: `(max-width: ${breakpoints.laptop})` })
 
   useUserManager(setIsLoading)
   useSetWindowTitle()
   useSetInitialTimer()
-
-  console.log(isMobile)
 
   useEffect(() => {
     const handleReload = (event: BeforeUnloadEvent) => {

@@ -8,6 +8,15 @@ import { setAttemptsData } from '../firebase/setAttemptsData'
 import { secondsToMinutes } from '../functions/secondsToMinutes'
 import { useTimeout } from '../hooks/useTimeout'
 import { LoginContext, LoginContextType } from '../contexts/LoginContext'
+import { MessagePopUp } from '../components/MessagePopUp'
+
+interface ErrorProps {
+  error: boolean
+}
+
+interface ErrorMessage {
+  msg: string
+}
 
 export const PasswordReset = () => {
   window.document.title = 'StudyPom | Password reset'
@@ -15,6 +24,10 @@ export const PasswordReset = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { isLogin, setIsLogin } = useContext(LoginContext) as LoginContextType
   const { attempts, isAllowed, timeLeft, firstAttemptState } = useTimeout(isLogin, 'password', setIsLoading)
+  const [error, setError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [popUpMessage, setPopUpMessage] = useState('')
+  const [issSuccess, setIsSuccess] = useState(false)
 
   setIsLogin(false)
 
@@ -41,32 +54,60 @@ export const PasswordReset = () => {
 
   const handleSubmit = async () => {
     const input = document.getElementById('password-recover-input') as HTMLInputElement
-    if (!input.value) return
+    const messagePopUp = document.getElementById('message-pop-up') as HTMLDivElement
+    messagePopUp.style.display = 'none'
+    if (!isAllowed) return
+    if (!input.value) {
+      setError(true)
+      setErrorMsg('Empty Field')
+      return
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    if (!emailRegex.test(input.value)) {
+      setError(true)
+      setErrorMsg('Invalid Email')
+      return
+    }
     const spinner = document.getElementById('spinner') as HTMLDivElement
     spinner.style.display = 'flex'
-    if (isAllowed) {
-      try {
+
+    setError(false)
+    setErrorMsg('')
+    try {
+      await setAttemptsData(attempts, firstAttemptState, 'password')
+      await sendPasswordResetEmail(auth, input.value)
+      input.value = ''
+      setIsSuccess(true)
+      setPopUpMessage('Email sent successfully! Please check your inbox.')
+      //eslint-disable-next-line 
+    } catch (error: any) {
+      if (error.code === 'auth/user-not-found') {
         await setAttemptsData(attempts, firstAttemptState, 'password')
-        await sendPasswordResetEmail(auth, input.value)
-      } catch (error) {
+        setIsSuccess(true)
+        setPopUpMessage('Email sent successfully! Please check your inbox.')
+        input.value = ''
+      } else {
         console.dir(error)
+        setIsSuccess(false)
+        setPopUpMessage('Something went wrong, please try again later')
       }
-    } else {
-      console.error('email not sent')
     }
+    messagePopUp.style.display = 'initial'
     spinner.style.display = 'none'
   }
 
   return (
     <Wrapper className='flex-all-center'>
+      <MessagePopUp success={issSuccess} text={popUpMessage}/> 
       {isLoading && <Spinner darkBackground={false} displayOnFirstLoad={true} />}
       <Spinner darkBackground={true} displayOnFirstLoad={false} />
       <ContentWrapper className='styled-page-box flex-all-center'>
         <h1>Password Reset</h1>
         <span onClick={handleClick}>Enter with your email:</span>
-        <InputWrapper>
+        <InputWrapper error={error} msg={errorMsg}>
           <input type='text' id='password-recover-input' onKeyDown={(e) => handleKeyDown(e)} />
           <i className='bi bi-x' onClick={clearText}></i>
+          <Error error={error} className='error'>* {errorMsg}</Error>
         </InputWrapper>
         <button className={`form-button ${isAllowed || 'form-button-disabled'}`} onClick={handleSubmit}>
           {isAllowed ? 'send Email' : `try again in: ${secondsToMinutes(timeLeft)}`}
@@ -113,12 +154,14 @@ const ContentWrapper = styled.div`
   }
 `
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<ErrorProps & ErrorMessage>`
   display: flex;
   background-color: #fff;
   width: 250px;
   margin-top: -10px;
   padding: 2px;
+  position: relative;
+  margin-bottom: ${({ error }) => error ? '20px' : '0'} ;
 
   & .bi-x {
     font-size: 25px;
@@ -129,4 +172,11 @@ const InputWrapper = styled.div`
       transform: scale(1.1);
     }
   }
+`
+
+const Error = styled.p<ErrorProps>`
+  position: absolute;
+  bottom: -25px;
+  display: ${({ error }) => error ? 'inital' : 'none' };
+  font-size: 16px;
 `

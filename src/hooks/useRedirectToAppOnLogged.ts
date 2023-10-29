@@ -8,7 +8,7 @@ export const useRedirectToAppOnLogged = (setIsLoading: (isLoading: boolean) => v
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser && firebaseUser.emailVerified) {
+      if (firebaseUser) {
         navigate('/StudyPom')
       } else {
         setIsLoading(false)

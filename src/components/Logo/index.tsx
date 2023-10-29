@@ -17,10 +17,7 @@ const ImgContainer = styled.div`
   width: 200px;
 
   @media (max-width: ${breakpoints.laptop}) {
-    position: initial;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
     width: 150px;
+    position: initial;
   }
 `

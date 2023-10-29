@@ -11,7 +11,7 @@ interface StyledMessagePopUpProps {
 
 export const MessagePopUp = ({ success, text }: MessagePopUpProps) => {
   return (
-    <Wrapper success={success}>
+    <Wrapper success={success} id='message-pop-up'>
       <p>{text}</p>
     </Wrapper>
   )
@@ -38,6 +38,7 @@ const Wrapper = styled.div<StyledMessagePopUpProps>`
   padding: 10px;
   border-radius: 5px;
   user-select: none;
+  display: none;
 
   animation: popup-in 10s ease-in-out forwards;
 

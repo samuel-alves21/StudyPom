@@ -22,12 +22,7 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
 
-  @media (max-width: ${breakpoints.mobile}) {
-    position: initial;
-    bottom: 0;
-  }
-
-  @media (max-height: 650px) and (min-width: ${breakpoints.laptop}) {
+  @media (max-width: ${breakpoints.laptop}) {
     position: initial;
     bottom: 0;
   }

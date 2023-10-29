@@ -134,7 +134,7 @@ const TextWrapper = styled.div<TextWrapperProps>`
   align-items: center;
   gap: var(--gap-1);
 
-  #logo {
+  &:first-child {
     position: ${({ isLogin }) => (isLogin ? 'initial' : 'absolute')};
 
     @media (max-width: ${breakpoints.laptop}) {
@@ -147,7 +147,7 @@ const TextWrapper = styled.div<TextWrapperProps>`
     justify-content: space-around;
     flex-direction: column-reverse;
 
-    #logo {
+    &:first-child {
       position: initial;
     }
   }

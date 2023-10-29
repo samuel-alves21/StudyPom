@@ -34,11 +34,7 @@ export const login: LoginFn = async (hasError, inputsArray, formDispatch, naviga
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password)
       await removeAttemptsData('login')
-      if (!auth.currentUser?.emailVerified) {
-        navigate('/StudyPom/emailVerification/login')
-      } else {
-        navigate('/StudyPom')
-      }
+      navigate('/StudyPom')
       //eslint-disable-next-line
     } catch (error: any) {
       if (

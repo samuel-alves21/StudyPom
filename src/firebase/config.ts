@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { ActionCodeSettings, getAuth } from 'firebase/auth'
+import { getAuth } from 'firebase/auth'
 import { getDatabase } from 'firebase/database'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
@@ -13,10 +13,6 @@ const firebaseConfig = {
   appId: '1:1082552740889:web:497d12a602d2b54a458e88',
   measurementId: 'G-H196GVFDT4',
   databaseURL: 'https://pomodoro-app-cf8c3-default-rtdb.firebaseio.com/',
-}
-
-export const emailVerificationConfig: ActionCodeSettings = {
-  url: 'https://pomodoro-app-cf8c3.web.app/StudyPom',
 }
 
 const app = initializeApp(firebaseConfig)
